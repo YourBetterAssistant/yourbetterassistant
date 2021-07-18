@@ -2,6 +2,7 @@
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
 require('dotenv').config()
 const mongo=require('./botconfig/mongo')
+const mongoose=require('mongoose')
 let token=process.env.TOKEN
 const colors = require("colors"); //this Package is used, to change the colors of our Console! (optional and doesnt effect performance)
 const fs = require("fs"); //this package is for reading files and getting their inputs

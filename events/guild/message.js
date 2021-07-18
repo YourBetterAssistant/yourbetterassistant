@@ -2,6 +2,8 @@
   * @INFO
   * Loading all needed File Information Parameters
 */
+const prefixSchema=require('../../Schemas/prefixSchema')
+const mongo=require('../../botconfig/mongo')
 const config = require("../../botconfig/config.json"); //loading config file with token and prefix, and settings
 const ee = require("../../botconfig/embed.json"); //Loading all embed settings like color footertext and icon ...
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
@@ -18,7 +20,8 @@ module.exports = async (client, message) => {
     //if the message is on partial fetch it
     if (message.partial) await message.fetch();
     //get the current prefix from the botconfig/config.json
-    let prefix = config.prefix
+    let prefix=config.prefix
+  
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
     //if its not that then return
