@@ -1,6 +1,7 @@
 //here the event starts
 const config = require("../../botconfig/config.json")
-module.exports = client => {
+const mongo=require('../../botconfig/mongo')
+module.exports = async client => {
   try{
     const stringlength = 69;
     console.log("\n")
@@ -20,11 +21,20 @@ module.exports = client => {
   //Change status each 10 minutes
   setInterval(()=>{
     try{
-      client.user.setActivity(client.user.username, { type: "PLAYING" });
+      client.user.setActivity('People since 2021', { type: "WATCHING" });
     }catch (e) {
         console.log(String(e.stack).red);
     }
   }, 10*60*1000)
+  await mongo().then(mongoose=>{
+    try{
+      console.log('Connected!')
+
+    }finally{
+      mongoose.connection.close()
+    }
+
+  })
 }
 
 /** Template by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template */
