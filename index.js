@@ -1,7 +1,7 @@
 ﻿//Importing all needed Commands
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
 require('dotenv').config()
-let token=process.env.token
+let token=process.env.TOKEN
 const colors = require("colors"); //this Package is used, to change the colors of our Console! (optional and doesnt effect performance)
 const fs = require("fs"); //this package is for reading files and getting their inputs
 
@@ -27,6 +27,6 @@ client.cooldowns = new Discord.Collection(); //an collection for cooldown comman
     require(`./handlers/${handler}`)(client);
 });
 //login into the bot
-client.login(require("./botconfig/config.json").token);
+client.login(token);
 
 /** Template by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template */

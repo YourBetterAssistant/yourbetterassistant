@@ -3,7 +3,7 @@ const config = require("../../botconfig/config.json");
 const ee = require("../../botconfig/embed.json");
 module.exports = {
     name: "embed",
-    category: "Administration",
+    category: "Fun",
     aliases: ["say-embed"],
     cooldown: 2,
     usage: "embed <TITLE> ++ <DESCRIPTION>",

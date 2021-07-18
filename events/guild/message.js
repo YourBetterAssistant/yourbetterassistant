@@ -10,7 +10,7 @@ const { escapeRegex} = require("../../handlers/functions"); //Loading all needed
 module.exports = async (client, message) => {
   try {
     //if the message is not in a guild (aka in dms), return aka ignore the inputs
-    if (!message.guild) return;
+    if (!message.guild) return message,channel.send('My invitelink is https://www.dsc.gg/betterassistant');
     // if the message  author is a bot, return aka ignore the inputs
     if (message.author.bot) return;
     //if the channel is on partial fetch it
@@ -66,8 +66,6 @@ module.exports = async (client, message) => {
         timestamps.set(message.author.id, now); //if he is not on cooldown, set it to the cooldown
         setTimeout(() => timestamps.delete(message.author.id), cooldownAmount); //set a timeout function with the cooldown, so it gets deleted later on again
       try{
-        //try to delete the message of the user who ran the cmd
-        try{  message.delete();   }catch{}
         //if Command has specific permission return error
         if(command.memberpermissions && !message.member.hasPermission(command.memberpermissions, { checkAdmin: command.adminPermOverride, checkOwner: command.adminPermOverride })) {
           return message.channel.send(new Discord.MessageEmbed()
@@ -78,7 +76,7 @@ module.exports = async (client, message) => {
           ).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
         }
         //if the Bot has not enough permissions return error
-        let required_perms = ["ADD_REACTIONS","PRIORITY_SPEAKER","VIEW_CHANNEL","SEND_MESSAGES",
+        /*let required_perms = ["ADD_REACTIONS","PRIORITY_SPEAKER","VIEW_CHANNEL","SEND_MESSAGES",
         "EMBED_LINKS","CONNECT","SPEAK","DEAFEN_MEMBERS"]
         if(!message.guild.me.hasPermission(required_perms)){
           try{ message.react("❌"); }catch{}
@@ -88,7 +86,8 @@ module.exports = async (client, message) => {
             .setTitle("❌ Error | I don't have enough Permissions!")
             .setDescription("Please give me just `ADMINISTRATOR`, because I need it to delete Messages, Create Channel and execute all Admin Commands.\n If you don't want to give me them, then those are the exact Permissions which I need: \n> `" + required_perms.join("`, `") +"`")
           )
-        }
+        }*/
+
         //run the command with the parameters:  client, message, args, user, text, prefix,
         command.run(client, message, args, message.member, args.join(" "), prefix);
       }catch (e) {
@@ -110,7 +109,7 @@ module.exports = async (client, message) => {
     ).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
   }catch (e){
     return message.channel.send(
-    new MessageEmbed()
+    new Discord.MessageEmbed()
     .setColor("RED")
     .setTitle(`❌ ERROR | An error occurred`)
     .setDescription(`\`\`\`${e.stack}\`\`\``)

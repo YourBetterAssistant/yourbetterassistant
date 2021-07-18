@@ -3,8 +3,7 @@ const config = require("../../botconfig/config.json");
 const ee = require("../../botconfig/embed.json");
 module.exports = {
     name: "say",
-    category: "Administration",
-    aliases: [""],
+    category: "Fun",
     cooldown: 2,
     usage: "say <TEXT>",
     description: "Resends your Text",

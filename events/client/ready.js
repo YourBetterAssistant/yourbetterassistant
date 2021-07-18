@@ -13,7 +13,7 @@ module.exports = client => {
   }catch{ /* */ }
 
   try{
-    client.user.setActivity(client.user.username, { type: "PLAYING" });
+    client.user.setActivity('Made by yo-ooyo', { type: "PLAYING" });
   }catch (e) {
       console.log(String(e.stack).red);
   }

@@ -10,8 +10,13 @@
   "author": "Tomato#6966 (author of this template)",
   "license": "ISC",
   "dependencies": {
-    "ascii-table": "0.0.9",
-    "discord.js": "^12.5.1"
+    "discord.js": "^12.5.3",
+    "discord.sudo": "^1.0.7",
+    "dotenv": "^10.0.0",
+    "images-scraper": "^6.3.0",
+    "math": "0.0.3",
+    "minecraft-server-util": "^3.5.2",
+    "random-js": "^2.1.0"
   },
   "devDependencies": {
     "ascii-table": "0.0.9",
