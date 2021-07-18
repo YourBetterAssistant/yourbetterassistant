@@ -9,6 +9,7 @@ module.exports = {
     cooldown: 60*5,
     usage: "cp <prefix>",
     run:async(client, message, args)=>{
+        if (!args[0])return message.channel.send(':face_exhaling: What am I changing the prefix to?')
         await mongo().then(async mongoose=>{
              try{
                  let prefix=args[0]
