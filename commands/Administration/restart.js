@@ -12,7 +12,7 @@ module.exports = {
         message.channel.send('Are you sure?')
         client.on('message',(msg)=>{
             if(!msg.author.id===827388013062389761)return
-            if(msg.content.startsWith(no))return message.channel.send('Cancelled')
+            if(msg.content.startsWith('no'))return message.channel.send('Cancelled')
             else{
 
                  message.reply("Restarting")
