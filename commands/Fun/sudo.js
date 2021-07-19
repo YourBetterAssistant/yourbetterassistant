@@ -1,4 +1,4 @@
-const prefix=require('../../botconfig/config.json')
+const {prefix}=require('../../botconfig/config.json')
 module.exports = {
     name: "sudo",
     aliases: ["imitate"],
