@@ -1,7 +1,7 @@
 const {spawn}=require('child_process')
 module.exports = {
     name: "restart",
-    aliases:['reboot']
+    aliases:['reboot'],
     description: "exclusive command only for creator",
     category: "Administration",
     memberpermissions:"VIEW_CHANNEL",
