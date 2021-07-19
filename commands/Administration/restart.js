@@ -11,7 +11,7 @@ module.exports = {
         message.channel.send('Are you sure?')
         if(message.content.startsWith('no')) return
         else{ 
-            //Need to commit!
+            //Need to push!
             message.reply("Restarting")
             const process=spawn('python', ['../../python/restart.py'])
             process.stdout.on('data', data=>{
