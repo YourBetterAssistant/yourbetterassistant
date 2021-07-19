@@ -1,3 +1,4 @@
+const Discord=require('discord.js')
 module.exports = {
     name: "profilepic",
     category: "Fun",
@@ -6,12 +7,15 @@ module.exports = {
     usage: "profilepic <username>",
     description: "gets the profile pic of the person asked",
     run : async(client, message, args)=>{
+        let embed=new Discord.MessageEmbed().setColor('RANDOM')
         if (!args[0]){
-            message.channel.send(message.author.displayAvatarURL())
+            embed.setImage(message.author.displayAvatarURL())
+            message.channel.send(embed)
 
         }else if(args[0]){
             let user=message.mentions.users.first()
-            message.channel.send(user.displayAvatarURL())
+            embed.setImage(user.displayAvatarURL())
+            message.channel.send(embed)
         }
 
 
