@@ -14,7 +14,7 @@ module.exports = {
 
         }else if(args[0]){
             let user=message.mentions.users.first()
-            embed.setImage(user.displayAvatarURL()).setTitle(`${user}'s Profile Image`)
+            embed.setImage(user.displayAvatarURL()).setTitle(`Profile Image`)
             message.channel.send(embed)
         }
 
