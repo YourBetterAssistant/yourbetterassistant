@@ -13,7 +13,7 @@ module.exports = {
         client.on('message',(msg)=>{
             if(!msg.author.id===827388013062389761)return
             if(msg.content.includes('yes')){
-                  message.reply("Restarting")
+                  msg.reply("Restarting")
                  const process=spawn('python', ['../../python/restart.py'])
                  process.stdout.on('data', data=>{
                      console.log(data.toString())

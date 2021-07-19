@@ -3,7 +3,7 @@ module.exports = {
     name: "profilepic",
     category: "Fun",
     cooldown: 1,
-    aliases: ["picture"],
+    aliases: ["picture", "av", "avatar"],
     usage: "profilepic <username>",
     description: "gets the profile pic of the person asked",
     run : async(client, message, args)=>{
