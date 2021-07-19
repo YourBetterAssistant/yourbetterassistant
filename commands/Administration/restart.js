@@ -8,10 +8,17 @@ module.exports = {
     usage: "restart",
     run:async(client, message, args)=>{
         if(!message.author.id===827388013062389761)return message.channel.send("No, don't even try")
-        message.reply("Restarting")
-        const process=spawn('python', ['../../python/restart.py'])
-        process.stdout.on('data', data=>{
-        console.log(data.toString());
-    })
+        message.channel.send('Are you sure?')
+        if(message.content.startsWith('no')) return
+        else{ 
+            //Need to commit!
+            message.reply("Restarting")
+            const process=spawn('python', ['../../python/restart.py'])
+            process.stdout.on('data', data=>{
+            console.log(data.toString())
+    
+
+    })}
+
     },
 };
