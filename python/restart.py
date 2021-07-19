@@ -1,2 +1,2 @@
 import os
-os.system('sudo reboot')
+os.system('systemctl reboot -i')
