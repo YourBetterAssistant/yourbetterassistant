@@ -4,7 +4,9 @@
 */
 const prefixSchema=require('../../Schemas/prefixSchema')
 const mongo=require('../../botconfig/mongo')
+const guildPrefixes={}
 const config = require("../../botconfig/config.json"); //loading config file with token and prefix, and settings
+const {prefix:globalPrefix}=require('../../botconfig/config.json')
 const ee = require("../../botconfig/embed.json"); //Loading all embed settings like color footertext and icon ...
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
 const { escapeRegex} = require("../../handlers/functions"); //Loading all needed functions
@@ -20,7 +22,8 @@ module.exports = async (client, message) => {
     //if the message is on partial fetch it
     if (message.partial) await message.fetch();
     //get the current prefix from the botconfig/config.json
-    let prefix=config.prefix
+    const guildPrefixes={}
+    let prefix= guildPrefixes[message.guild.id]|| globalPrefix
   
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
@@ -128,3 +131,26 @@ module.exports = async (client, message) => {
     * @INFO
   */
 }
+module.exports.loadPrefixes=async(client)=>{
+    await mongo().then(async mongoose=>{
+      try{
+        for(const guild of client.guilds.cache){
+          const guildID=guild[1].id
+          const result=await prefixSchema.findOne({_id:guildID})
+          console.log(`Result:${result}`)
+          try {
+            guildPrefixes[guildID] = result[1].prefix
+        } catch (error) {
+            console.log(error)
+        }
+
+        }
+        console.log(guildPrefixes)
+
+
+      }finally{
+        mongoose.connection.close()
+      }
+    })
+
+ }

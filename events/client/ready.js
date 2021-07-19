@@ -1,5 +1,6 @@
 //here the event starts
 const config = require("../../botconfig/config.json")
+const commandBase=require('../guild/message')
 const mongo=require('../../botconfig/mongo')
 module.exports = async client => {
   try{
@@ -35,6 +36,7 @@ module.exports = async client => {
     }
 
   })
+  commandBase.loadPrefixes(client)
 }
 
 /** Template by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template */

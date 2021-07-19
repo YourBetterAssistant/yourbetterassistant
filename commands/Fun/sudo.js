@@ -1,4 +1,4 @@
-
+const prefix=require('../../botconfig/config.json')
 module.exports = {
     name: "sudo",
     aliases: ["imitate"],
@@ -22,9 +22,12 @@ module.exports = {
         })
         sudoMessage.start()
 
-        if (message.content.startsWith('b!sudo')){
+        if (message.content.startsWith(`${prefix}sudo`)){
               message.delete({timeout:1000})
           }
+          if (message.content.startsWith(`${prefix}imitate`)){
+            message.delete({timeout:1000})
+        }
 
     },
 };

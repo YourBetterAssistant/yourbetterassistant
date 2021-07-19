@@ -1,12 +1,14 @@
 const mongoose=require('mongoose');
-const reqString={
-    type: String,
-    required: true
-}
-const prefixSchema=mongoose.Schema({
-    _id: reqString,
-    prefix: reqString
+const commandPrefixSchema=mongoose.Schema({
+    _id:{
+        type:String,
+        required:true
+    },
+    prefix:{
+        type:String,
+        required:true
+    }
 }) 
 
 
-module.exports=mongoose.model('prefixes', prefixSchema)
+module.exports=mongoose.model('guild-prefix', commandPrefixSchema)

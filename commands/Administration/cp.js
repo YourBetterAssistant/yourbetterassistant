@@ -1,13 +1,13 @@
 const mongo=require('../../botconfig/mongo')
 const prefixSchema=require('../../Schemas/prefixSchema')
 module.exports = {
-    name: "cp",
-    aliases: ["changeprefix","prefix"],
+    name: "changeprefix",
+    aliases: ["cp","prefix"],
     description: "changes the prefix",
     category: "Administration",
     memberpermissions:"Administrator",
     cooldown: 60*5,
-    usage: "cp <prefix>",
+    usage: "changeprefix <prefix>",
     run:async(client, message, args)=>{
         if (!args[0])return message.channel.send(':face_exhaling: What am I changing the prefix to?')
         await mongo().then(async mongoose=>{
