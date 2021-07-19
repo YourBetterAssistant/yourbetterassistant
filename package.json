@@ -1,7 +1,7 @@
 {
   "name": "bba_revamp",
   "version": "1.0.0",
-  "private":"true",
+  "private": "true",
   "description": "revamp",
   "main": "index.js",
   "repository": {
@@ -15,6 +15,7 @@
   "author": "NotTimIsReal",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.21.1",
     "discord.js": "^12.5.3",
     "discord.sudo": "^1.0.7",
     "dotenv": "^10.0.0",
@@ -22,7 +23,9 @@
     "math": "0.0.3",
     "minecraft-server-util": "^3.5.2",
     "mongoose": "^5.13.3",
-    "random-js": "^2.1.0"
+    "random-js": "^2.1.0",
+    "weather-api-data": "^1.0.7",
+    "weather-js": "^2.0.0"
   },
   "devDependencies": {
     "ascii-table": "0.0.9",
