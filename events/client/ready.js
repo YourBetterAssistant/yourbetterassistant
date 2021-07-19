@@ -22,7 +22,7 @@ module.exports = async client => {
   //Change status each 10 minutes
   setInterval(()=>{
     try{
-      client.user.setActivity('People since 2021', { type: "WATCHING" });
+      client.user.setActivity('Mr Beast', { type: "WATCHING" });
     }catch (e) {
         console.log(String(e.stack).red);
     }
