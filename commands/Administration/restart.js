@@ -12,14 +12,14 @@ module.exports = {
         message.channel.send('Are you sure?')
         client.on('message',(msg)=>{
             if(!msg.author.id===827388013062389761)return
-            if(msg.content.startsWith('no'))return message.channel.send('Cancelled')
-            else{
-
-                 message.reply("Restarting")
+            if(msg.content.startsWith('yes')){
+                  message.reply("Restarting")
                  const process=spawn('python', ['../../python/restart.py'])
                  process.stdout.on('data', data=>{
                      console.log(data.toString())
-                      })}
+                      })
+            }
+            else return message.channel.send('Cancelled')
     
 
    
