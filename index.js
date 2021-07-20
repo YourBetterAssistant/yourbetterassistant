@@ -1,5 +1,6 @@
 ﻿//Importing all needed Commands
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
+require('discord-reply')
 require('dotenv').config()
 const commandBase=require('./events/guild/message')
 const mongo=require('./botconfig/mongo')
