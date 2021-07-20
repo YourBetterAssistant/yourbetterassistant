@@ -1,4 +1,5 @@
 const shell=require('shelljs')
+require('discord-reply')
 module.exports = {
     name: "pull",
     description: "pulls the latest version of this code from github",
