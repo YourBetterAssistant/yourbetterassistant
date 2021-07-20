@@ -11,7 +11,7 @@ module.exports = {
         message.reply("Pulling!")
         shell.exec('git pull')
         
-        message.lineReply('Do you want me to reboot')
+        message.reply('Do you want me to reboot')
         client.on('message', msg=>{
             if(!message.author.id==='827388013062389761')return
             if(msg.content.startsWith('no')) return message.channel.send('Cancelled')
