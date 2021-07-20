@@ -9,10 +9,8 @@ module.exports = {
     run:async(client, message, args)=>{
         if(!message.author.id==='827388013062389761')
         message.reply("Pulling!")
-        try{shell.exec('git pull')
-    }catch(err){
-        message.channel.send(err)
-    }
+        shell.exec('git pull')
+        
         message.lineReply('Do you want me to reboot')
         client.on('message', msg=>{
             if(!message.author.id==='827388013062389761')return
