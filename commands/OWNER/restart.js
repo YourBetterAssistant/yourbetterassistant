@@ -2,7 +2,6 @@ const shell = require("shelljs");
 
 module.exports = {
     name: "restart",
-    aliases: ["reboot"],
     description: "restarts bot",
     category: "OWNER",
     memberpermissions:"VIEW_CHANNEL",
