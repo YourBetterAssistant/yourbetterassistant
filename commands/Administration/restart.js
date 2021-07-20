@@ -1,4 +1,4 @@
-const {spawn}=require('child_process')
+const spawn=require('child_process').spawn()
 module.exports = {
     name: "restart",
     aliases:['reboot'],
@@ -14,10 +14,8 @@ module.exports = {
             if(!msg.author.id===827388013062389761)return
             if(msg.content.includes('yes')){
                   message.reply("Restarting")
-                 const process=spawn('python', ['../../python/restart.py'])
-                 process.stdout.on('data', data=>{
-                     console.log(data.toString())
-                      })
+                  shell.exec('sudo reboot')
+                  
             }
     
 
