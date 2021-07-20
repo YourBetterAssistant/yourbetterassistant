@@ -6,7 +6,7 @@ module.exports = {
     memberpermissions:"VIEW_CHANNEL",
     cooldown: 2,
     usage: "pull",
-    execute(message, args) {
+    run:async(client, message, args)=>{
         if(!message.author.id==='827388013062389761')
         message.reply("Pulling!")
         try{shell.exec('git pull&&sudo reboot')
