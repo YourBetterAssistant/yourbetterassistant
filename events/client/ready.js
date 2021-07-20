@@ -36,7 +36,7 @@ module.exports = async client => {
     }
 
   })
-  commandBase.loadPrefixes(client)
+  //commandBase.loadPrefixes(client)
 }
 
 /** Template by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template */
