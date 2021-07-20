@@ -20,6 +20,7 @@
     "discord-reply": "^0.1.2",
     "discord.js": "^12.5.3",
     "discord.sudo": "^1.0.7",
+    "djs-games": "^1.6.5",
     "dotenv": "^10.0.0",
     "images-scraper": "^6.3.0",
     "math": "0.0.3",
