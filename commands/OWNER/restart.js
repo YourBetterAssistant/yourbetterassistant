@@ -10,8 +10,7 @@ module.exports = {
     cooldown: 2,
     usage: "restart",
     run:async(client, message, args)=>{
-        console.log(ClientApplication.owner)
-        if(!ClientApplication.owner) return message.channel.send('No you are not owner')
+        if(!message.author.id==='827388013062389761') return message.channel.send('No you are not owner')
         message.linereply('Restarting =]')
         shell.exec('sudo reboot')
 
