@@ -131,7 +131,7 @@ module.exports = async (client, message) => {
     * @INFO
   */
 }
-module.exports.loadPrefixes=async(client)=>{
+/*module.exports.loadPrefixes=async(client)=>{
     await mongo().then(async mongoose=>{
       try{
         for(const guild of client.guilds.cache){
@@ -139,7 +139,7 @@ module.exports.loadPrefixes=async(client)=>{
           const result=await prefixSchema.findOne({_id:guildID})
           console.log(`Result:${result}`)
           try {
-            guildPrefixes[guildID] = result[1].prefix
+            guildPrefixes[guildID] = result.prefix
         } catch (error) {
             console.log(error)
         }
@@ -153,4 +153,4 @@ module.exports.loadPrefixes=async(client)=>{
       }
     })
 
- }
+ }*/

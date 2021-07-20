@@ -25,7 +25,6 @@
     "minecraft-server-util": "^3.5.2",
     "mongoose": "^5.13.3",
     "random-js": "^2.1.0",
-    "react-scripts": "^4.0.3",
     "shelljs": "^0.8.4",
     "weather-api-data": "^1.0.7",
     "weather-js": "^2.0.0"
