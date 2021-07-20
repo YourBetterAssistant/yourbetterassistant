@@ -7,7 +7,7 @@ module.exports = {
     cooldown: 2,
     usage: "pull",
     run:async(client, message, args)=>{
-        if(!message.author.id==='827388013062389761')
+        if(!message.author.id==='827388013062389761') return message.channel.send('You cannot pull')
         message.reply("Pulling!")
         shell.exec('git pull')
         
