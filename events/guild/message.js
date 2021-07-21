@@ -14,7 +14,7 @@ const { escapeRegex} = require("../../handlers/functions"); //Loading all needed
 module.exports = async (client, message) => {
   try {
     //if the message is not in a guild (aka in dms), return aka ignore the inputs
-    if (!message.guild) return message,channel.send('My invitelink is https://www.dsc.gg/betterassistant');
+    
     // if the message  author is a bot, return aka ignore the inputs
     if (message.author.bot) return;
     //if the channel is on partial fetch it
