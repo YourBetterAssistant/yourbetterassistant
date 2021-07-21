@@ -2,7 +2,7 @@
   * @INFO
   * Loading all needed File Information Parameters
 */
-const prefixSchema=require('../../Schemas/prefixSchema')
+const commandPrefixSchema=require('../../Schemas/prefixSchema')
 const mongo=require('../../botconfig/mongo')
 const guildPrefixes={}
 const config = require("../../botconfig/config.json"); //loading config file with token and prefix, and settings
@@ -10,8 +10,10 @@ const {prefix:globalPrefix}=require('../../botconfig/config.json')
 const ee = require("../../botconfig/embed.json"); //Loading all embed settings like color footertext and icon ...
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
 const { escapeRegex} = require("../../handlers/functions"); //Loading all needed functions
+const { Mongoose } = require('mongoose');
 //here the event starts
 module.exports = async (client, message) => {
+  console.log(guildPrefixes[message.guild.id])
   try {
     //if the message is not in a guild (aka in dms), return aka ignore the inputs
     
@@ -22,7 +24,7 @@ module.exports = async (client, message) => {
     //if the message is on partial fetch it
     if (message.partial) await message.fetch();
     //get the current prefix from the botconfig/config.json
-    let prefix= globalPrefix
+    let prefix= guildPrefixes[message.guild.id] || globalPrefix
   
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
@@ -129,27 +131,29 @@ module.exports = async (client, message) => {
     * Please mention Him / Milrato Development, when using this Code!
     * @INFO
   */
+   
 }
-/*module.exports.loadPrefixes=async(client)=>{
-    await mongo().then(async mongoose=>{
-      try{
-        for(const guild of client.guilds.cache){
-          const guildID=guild[1].id
-          const result=await prefixSchema.findOne({_id:guildID})
-          console.log(`Result:${result}`)
-          try {
-            guildPrefixes[guildID] = result.prefix
-        } catch (error) {
-            console.log(error)
-        }
-
-        }
-        console.log(guildPrefixes)
-
-
-      }finally{
-        mongoose.connection.close()
+module.exports.loadPrefixes=async(client)=>{
+  await mongo().then(async mongoose=>{
+    try{
+      for(const guild of client.guilds.cache){
+        let guildID= guild[1].id
+        const result= await commandPrefixSchema.findOne({_id:guildID})
+        if (result){
+          guildPrefixes[guildID] = result.prefix
+      } else {
+          guildPrefixes[guildID] = globalPrefix
       }
-    })
+      }
+      console.log(guildPrefixes)
+    
+    }finally{
+      mongoose.connection.close()
 
- }*/
+    }
+  })
+  
+
+}
+
+ 

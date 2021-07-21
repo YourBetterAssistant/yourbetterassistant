@@ -2,6 +2,7 @@ const fs = require("fs");
 const ascii = require("ascii-table");
 let table = new ascii("Events");
 table.setHeading("Events", "Load status");
+const commandBase=require('../events/guild/message')
 const allevents = [];
 module.exports = async (client) => {
   try{
