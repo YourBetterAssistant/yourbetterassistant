@@ -19,6 +19,8 @@ const client = new Discord.Client({
   disableEveryone: true,
   partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 });
+const disbut = require('discord-buttons');
+disbut(client);
 
 //Client variables to use everywhere
 client.commands = new Discord.Collection(); //an collection (like a digital map(database)) for all your commands

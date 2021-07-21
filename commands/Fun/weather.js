@@ -13,11 +13,10 @@ module.exports = {
         weather.find({search: place, degreeType: 'C'}, function(err, result) {
 
             if(err)return message.channel.send(err)
-            console.log(result[0].location.name);
-            console.log(result[0].current.imageURL)
+             
 
 
- 
+               try{
                 let embed = new Discord.MessageEmbed()
                 .setTitle(`Weather - ${result[0].location.name}`)
                 .setColor("RANDOM")
@@ -30,7 +29,11 @@ module.exports = {
                 .addField("Observation Time", result[0].current.observationtime, true)
                 .addField("Wind Display", result[0].current.winddisplay, true)
                 .setThumbnail(result[0].current.imageUrl);
+                
                 message.channel.send(embed)
+            }catch (err){
+                message.channel.send('error')}
+            
  
 
           });
