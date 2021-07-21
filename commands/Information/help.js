@@ -24,10 +24,12 @@ module.exports = {
           else embed.addField("**Cooldown**", `\`${config.defaultCommandCooldown}\``);
           if (cmd.usage) {
               embed.addField("**Usage**", `\`${config.prefix}${cmd.usage}\``);
+              embed.addField("Your prefix could have been changed, ping the bot to double check!")
               embed.setFooter("Syntax: <> = required, [] = optional");
           }
           if (cmd.useage) {
               embed.addField("**Usage**", `\`${config.prefix}${cmd.useage}\``);
+              embed.addField("Your prefix could have been changed, ping the bot to double check!")
               embed.setFooter("Syntax: <> = required, [] = optional");
           }
           return message.channel.send(embed.setColor(ee.color));
