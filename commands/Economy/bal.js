@@ -26,6 +26,7 @@ module.exports = {
         if(!user){
             mongoCurrency.createUser(message.author.id, message.guild.id)
             message.lineReply('A new account has been created for you with a balance of 1000YBCs')
+            mongoCurrency.giveCoins(message.author.id, message.guild.id, 1000)
             return}
         message.channel.send(embed)
         }
@@ -44,6 +45,7 @@ module.exports = {
         if(!user){
             mongoCurrency.createUser(member.id, message.guild.id)
             message.lineReply('A new account has been created for you with a balance of 1000YBCs')
+            mongoCurrency.giveCoins(member.id, message.guild.id, 1000)
             return}
 
         message.lineReply(embed)}
