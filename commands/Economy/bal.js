@@ -42,7 +42,7 @@ module.exports = {
             )
         .setColor('RANDOM')
         if(!user){
-            mongoCurrency.createUser(message.author.id, message.guild.id)
+            mongoCurrency.createUser(member.id, message.guild.id)
             message.lineReply('A new account has been created for you with a balance of 1000YBCs')
             return}
 
