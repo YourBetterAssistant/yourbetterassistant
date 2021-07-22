@@ -41,6 +41,10 @@ module.exports = {
             {name:'Total', value:user.coinsInBank + user.coinsInWallet}
             )
         .setColor('RANDOM')
+        if(!user){
+            mongoCurrency.createUser(message.author.id, message.guild.id)
+            message.lineReply('A new account has been created for you with a balance of 1000YBCs')
+            return}
 
         message.lineReply(embed)}
 
