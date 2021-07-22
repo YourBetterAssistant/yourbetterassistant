@@ -1,6 +1,9 @@
 //here the event starts
 const config = require("../../botconfig/config.json")
 const commandBase=require('../guild/message')
+require('dotenv').config()
+const mongoCurrency = require('discord-mongo-currency');
+const mongoose=require('mongoose')
 const mongo=require('../../botconfig/mongo')
 module.exports = async client => {
   try{
@@ -31,14 +34,30 @@ module.exports = async client => {
     try{
       console.log('Connected!')
 
+
     }finally{
       mongoose.connection.close()
     }
 
   })
-  client.on('message', msg=>{
-    commandBase.loadPrefixes(client)
+  mongoCurrency.connect(process.env.MONGOPATH).then(mongoCurrency=>{
+    try{console.log('CONNECTED')
+  }finally{
+    mongoCurrency.disconnect()
+  }
+  
   })
+  client.on('message',async (msg)=>{
+    try{
+        console.log('reconnecting')
+        commandBase.loadPrefixes(client)
+    }finally{
+      console.log('Connection Closed')
+    }
+  })
+  client.on('guildMemberRemove', (member, guild) => {
+    mongoCurrency.deleteUser(member.id, guild.id)
+  });
 }
 
 /** Template by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template */

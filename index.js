@@ -2,6 +2,7 @@
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
 require('discord-reply')
 require('dotenv').config()
+const mongoCurrency = require('discord-mongo-currency');
 const commandBase=require('./events/guild/message')
 const mongo=require('./botconfig/mongo')
 const mongoose=require('mongoose')
@@ -21,6 +22,7 @@ const client = new Discord.Client({
 });
 const disbut = require('discord-buttons');
 disbut(client);
+
 
 //Client variables to use everywhere
 client.commands = new Discord.Collection(); //an collection (like a digital map(database)) for all your commands

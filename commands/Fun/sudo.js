@@ -1,4 +1,7 @@
-const {prefix}=require('../../botconfig/config.json')
+const {guildPrefixes}=require('../../events/guild/message')
+
+  
+
 module.exports = {
     name: "sudo",
     aliases: ["imitate"],
@@ -9,6 +12,7 @@ module.exports = {
     cooldown: 10,
     usage: "sudo <user> <message>",
     run:async(client,message, args) =>{
+        let prefix= guildPrefixes[message.guild.id] || globalPrefix
         if(!args[0])return message.reply('Who is the user?')
         if(!args[1])return message.reply('What is the message?')
             

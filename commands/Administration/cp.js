@@ -6,7 +6,7 @@ module.exports = {
     description: "changes the prefix",
     category: "Administration",
     memberpermissions:"Administrator",
-    cooldown: 60*5,
+    cooldown: 60*2,
     usage: "changeprefix <prefix>",
     run:async(client, message, args)=>{
         if (!args[0])return message.channel.send(':face_exhaling: What am I changing the prefix to?')
@@ -30,22 +30,8 @@ module.exports = {
 
              }
         })
-        const onMessage= async msg=>{
-            let data=cache[guild.id]
-            if(!data){
-                console.log('FETCHING DATA ')
-                await mongo().then(async (mongoose)=>{
-                    try{
-                        const result= await prefixSchema.findOne({_id:message.guild.id})
-                        cache[message.guild.id]=data=[result.prefix]
 
-                    }finally{
-                        mongoose.connection.close()
 
-                    }
-                })  
-            }
-        }
 
 
 
