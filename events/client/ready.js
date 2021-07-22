@@ -55,9 +55,6 @@ module.exports = async client => {
       console.log('Connection Closed')
     }
   })
-  client.on('guildMemberRemove', (member, guild) => {
-    mongoCurrency.deleteUser(member.id, guild.id)
-  });
 }
 
 /** Template by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template */
