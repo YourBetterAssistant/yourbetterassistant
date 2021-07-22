@@ -9,14 +9,14 @@ module.exports = {
     cooldown: 5,
     usage: "richlist",
     run:async(client, message, args)=>{
-        const mongoCurrency = require('discord-mongo-currency');
+        const mongoCurrency = require('discord-mongo-currency-fork');
     const { MessageEmbed } = require('discord.js');
     
-    const leaderboard = await mongoCurrency.generateLeaderboard(message.guild.id, 10);
+    let leaderboard = await mongoCurrency.generateLeaderboard(message.guild.id, 10);
     
     if (leaderboard.length < 1) return message.channel.send("Nobody's on the leaderboard.");
     
-    const mappedLeaderboard = leaderboard.map(i => `${client.users.cache.get(i.userId).tag ? client.users.cache.get(u.userId).tag : "Nobody"} - ${i.coinsInWallet}`);
+    const mappedLeaderboard = leaderboard.map(i => `${client.users.cache.get(i.userId).tag ? client.users.cache.get(i.userId).tag : "Nobody"} - ${i.coinsInWallet}`);
     
     const embed = new MessageEmbed()
     .setTitle(`${message.guild.name}\'s Leaderboard`)

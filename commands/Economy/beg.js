@@ -1,4 +1,4 @@
-const mongoCurrency=require('discord-mongo-currency')
+const mongoCurrency=require('discord-mongo-currency-fork')
 module.exports = {
     name: "beg",
     description: "beg for YBCs",

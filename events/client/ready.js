@@ -2,7 +2,7 @@
 const config = require("../../botconfig/config.json")
 const commandBase=require('../guild/message')
 require('dotenv').config()
-const mongoCurrency = require('discord-mongo-currency');
+const mongoCurrency = require('discord-mongo-currency-fork');
 const mongoose=require('mongoose')
 const mongo=require('../../botconfig/mongo')
 module.exports = async client => {
