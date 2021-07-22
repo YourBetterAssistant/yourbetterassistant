@@ -2,7 +2,7 @@
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
 require('discord-reply')
 require('dotenv').config()
-const mongoCurrency = require('discord-mongo-currency');
+const mongoCurrency = require('discord-mongo-currency-fork');
 const commandBase=require('./events/guild/message')
 const mongo=require('./botconfig/mongo')
 const mongoose=require('mongoose')
