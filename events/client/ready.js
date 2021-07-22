@@ -4,6 +4,8 @@ const commandBase=require('../guild/message')
 require('dotenv').config()
 const mongoCurrency = require('discord-mongo-currency-fork');
 const mongoose=require('mongoose')
+const Levels = require("discord-xp");
+
 const mongo=require('../../botconfig/mongo')
 module.exports = async client => {
   try{
@@ -54,6 +56,7 @@ module.exports = async client => {
     }finally{
       console.log('Connection Closed')
     }
+
   })
 }
 

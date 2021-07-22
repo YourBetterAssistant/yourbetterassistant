@@ -3,6 +3,7 @@
   * Loading all needed File Information Parameters
 */
 const commandPrefixSchema=require('../../Schemas/prefixSchema')
+const Levels=require('discord-xp')
 const mongo=require('../../botconfig/mongo')
 const guildPrefixes={}
 const config = require("../../botconfig/config.json"); //loading config file with token and prefix, and settings
@@ -11,6 +12,7 @@ const ee = require("../../botconfig/embed.json"); //Loading all embed settings l
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
 const { escapeRegex} = require("../../handlers/functions"); //Loading all needed functions
 const { Mongoose } = require('mongoose');
+Levels.setURL(config.mongoPath);
 //here the event starts
 module.exports = async (client, message) => {
   console.log(guildPrefixes[message.guild.id])
@@ -151,6 +153,8 @@ module.exports.loadPrefixes=async(client)=>{
       mongoose.connection.close()
 
     }
+    
+
   })
   
 
