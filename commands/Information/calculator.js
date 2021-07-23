@@ -9,7 +9,7 @@ module.exports = {
     cooldown: 5,
     usage: "calculator",
     run:async(client, message, args)=>{
-        return message.lineReply('THIS IS IN PROGRESS')
+        //return message.lineReply('THIS IS IN PROGRESS')
         await Calculator({
             message: message,
             embed: {

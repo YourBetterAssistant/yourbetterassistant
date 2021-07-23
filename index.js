@@ -1,7 +1,8 @@
 ﻿//Importing all needed Commands
-const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
+const Discord = require("discord.js");//this is the official discord.js wrapper for the Discord Api, which we use!
 require('discord-reply')
 require('dotenv').config()
+require('@weky/inlinereply')
 const mongoCurrency = require('discord-mongo-currency-fork');
 const commandBase=require('./events/guild/message')
 const Levels=require('discord-xp')

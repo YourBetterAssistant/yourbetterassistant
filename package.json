@@ -15,6 +15,7 @@
   "author": "NotTimIsReal",
   "license": "MIT",
   "dependencies": {
+    "@weky/inlinereply": "0.0.0",
     "axios": "^0.21.1",
     "child_process": "^1.0.2",
     "discord-buttons": "^4.0.0",
