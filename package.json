@@ -17,6 +17,7 @@
   "dependencies": {
     "@weky/inlinereply": "0.0.0",
     "axios": "^0.21.1",
+    "canvacord": "^5.2.1",
     "child_process": "^1.0.2",
     "discord-buttons": "^4.0.0",
     "discord-mongo-currency-fork": "^1.0.1",

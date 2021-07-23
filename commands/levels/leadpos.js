@@ -11,7 +11,7 @@ module.exports = {
         const target = message.mentions.users.first() || message.author; // Grab the target.
 
         const user = await Levels.fetch(target.id, message.guild.id, true); // Selects the target from the database.
-        message.channel.send(user.position)
+        message.channel.send(`>*${user.position}*`)
 
 
 
