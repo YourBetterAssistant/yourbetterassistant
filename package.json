@@ -27,6 +27,7 @@
     "discord.sudo": "^1.0.7",
     "dj-games": "^3.0.0",
     "djs-games": "^1.6.5",
+    "djs-meme": "^1.2.8",
     "dotenv": "^10.0.0",
     "images-scraper": "^6.3.0",
     "math": "0.0.3",
