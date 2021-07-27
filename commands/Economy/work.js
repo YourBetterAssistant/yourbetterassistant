@@ -3,12 +3,12 @@ const mongoCurrency=require('discord-mongo-currency-fork')
 module.exports = {
     name: "work",
     description: "work ",
-    category: "category",
+    category: "Economy",
     guildOnly: true,
     memberpermissions:"VIEW_CHANNEL",
     adminPermOverride: true,
     cooldown: 60*60*1,
-    usage: "<usage>",
+    usage: "work",
     run:async(client, message, args)=>{
         message.lineReply("YOU HAVE BEEN AUTOMATICALLY ASSIGNED THE JOB `APPRENTICE COMMONER` MORE JOBS WILL BE ADDED LATER!")
         let job='APPRENTIC COMMONER'
