@@ -1,9 +1,11 @@
 //here the event starts
 const config = require("../../botconfig/config.json")
 const commandBase=require('../guild/message')
+const Discord=require('discord.js')
 require('dotenv').config()
 const mongoCurrency = require('discord-mongo-currency-fork');
 const mongoose=require('mongoose')
+const welcomeSchema=require('../../Schemas/welcomeSchema')
 const Levels = require("discord-xp");
 
 const mongo=require('../../botconfig/mongo')
@@ -56,6 +58,27 @@ module.exports = async client => {
     }finally{
       console.log('Connection Closed')
     }
+
+  })
+  client.on('guildMemberAdd', async(member)=>{
+    const welcomeSchema=require('../../Schemas/welcomeSchema')
+    const onJoin=async member=>{
+      await mongo().then(async mongoose=>{
+          try{
+              let info=await welcomeSchema.findOne({_id:member.guild.id})
+              let channelID=info.channelID
+              let text=info.text
+              const channel=member.guild.channels.cache.get(channelID)
+              channel.send(`>>> <@!${member.id}> ${text}`)
+              
+
+          }finally{
+              mongoose.connection.close()
+          }
+      })
+  }
+    await onJoin(member)
+
 
   })
 }
