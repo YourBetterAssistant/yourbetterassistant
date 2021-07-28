@@ -29,7 +29,7 @@ module.exports = {
                 )
  
                 //message confirmation
-                message.channel.send(`SUCESS!The new welcome message is now ${msg}`)
+                message.channel.send(`SUCESS!The new welcome message is now ${msg} Type simjoin to simulate a new member join!`)
    
 
             }finally{
