@@ -63,9 +63,20 @@ module.exports = async client => {
   client.on('guildMemberAdd', async(member)=>{
     const welcomeSchema=require('../../Schemas/welcomeSchema')
     const logSchema=require('../../Schemas/logSchema')
+    const countSchema=require('../../Schemas/countSchema')
     const onJoin=async member=>{
+      const guild = client.guilds.get(member.guild.id);
       await mongo().then(async mongoose=>{
           try{
+            //Look for vc
+            let countInfo=await countSchema.findOne({_id:member.guild.id})
+            const vc=countInfo.voiceChannelID
+            setInterval(function () {
+              var memberCount = guild.members.filter(member => !member.user.bot).size;  
+              var memberCountChannel = client.channels.get(vc);
+              memberCountChannel.setName(`${memberCount} members!`);
+           }, 1000);
+            //Member log
             let logInfo=await logSchema.findOne({_id:member.guild.id})
             let logChannelID=logInfo.channelID
             const logChannel=member.guild.channels.cache.get(logChannelID)
