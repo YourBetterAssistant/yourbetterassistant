@@ -71,7 +71,6 @@ module.exports = async client => {
             const logChannel=member.guild.channels.cache.get(logChannelID)
             let embed=new Discord.MessageEmbed().setTitle('New Member')
             .setDescription(`@${member.user.tag}`)
-            .addField('', member.displayAvatarURL())
             logChannel.send(embed)
             //Start the Welcome Message
 

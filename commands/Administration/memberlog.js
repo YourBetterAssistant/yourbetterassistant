@@ -2,7 +2,6 @@ const mongo=require('../../botconfig/mongo')
 const logSchema=require('../../Schemas/logSchema')
 module.exports = {
     name: "memberlog",
-    aliases: "log",
     description: "Sets up where the memebr log channel should be NOTE:NOT TYPING THE CHANNEL ID WILL MAKE THE MESSAGE SENT TO THE CHANNEL WHICH YOU SET THIS COMMAND UP!",
     category: "Administration",
     guildOnly: true,
