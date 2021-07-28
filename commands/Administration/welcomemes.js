@@ -29,7 +29,7 @@ module.exports = {
                 )
  
                 //message confirmation
-                message.channel.send(`SUCESS!The new welcome message is now ${msg} Type simjoin to simulate a new member join!`)
+                message.channel.send(`SUCESS!The new welcome message is now ${msg}`)
    
 
             }finally{
@@ -42,7 +42,7 @@ module.exports = {
                         let channelID=info.channelID
                         let text=info.text
                         const channel=member.guild.channels.cache.get(channelID)
-                        channel.send(text)
+                        channel.send(`${text}`)
                         
 
                     }finally{
