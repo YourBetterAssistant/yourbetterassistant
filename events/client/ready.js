@@ -62,9 +62,19 @@ module.exports = async client => {
   })
   client.on('guildMemberAdd', async(member)=>{
     const welcomeSchema=require('../../Schemas/welcomeSchema')
+    const logSchema=require('../../Schemas/logSchema')
     const onJoin=async member=>{
       await mongo().then(async mongoose=>{
           try{
+            let logInfo=await logSchema.findOne({_id:member.guild.id})
+            let logChannelID=logInfo.channelID
+            const logChannel=member.guild.channels.cache.get(logChannelID)
+            let embed=new Discord.MessageEmbed().setTitle('New Member')
+            .setDescription(`@${member.user.tag}`)
+            .addField('', member.displayAvatarURL())
+            logChannel.send(embed)
+            //Start the Welcome Message
+
               let info=await welcomeSchema.findOne({_id:member.guild.id})
               let channelID=info.channelID
               let text=info.text
