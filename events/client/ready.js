@@ -61,6 +61,7 @@ module.exports = async client => {
 
   })
   client.on('guildMemberRemove', async(member) => {
+    const countSchema=require('../../Schemas/countSchema')
     const guild = client.guilds.cache.get(member.guild.id);
     await mongo().then(async mongoose=>{
       try{
