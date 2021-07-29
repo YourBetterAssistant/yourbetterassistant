@@ -72,7 +72,7 @@ module.exports = async client => {
             let countInfo=await countSchema.findOne({_id:member.guild.id})
             const vc=countInfo.voiceChannelID
             setInterval(function () {
-              var memberCount = guild.members.filter(member => !member.user.bot).size;  
+              var memberCount = guild.members.cache.filter(member => !member.user.bot).size;  
               var memberCountChannel = client.channels.get(vc);
               memberCountChannel.setName(`${memberCount} members!`);
            }, 1000);
