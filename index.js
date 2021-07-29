@@ -6,7 +6,6 @@ require('@weky/inlinereply')
 const mongoCurrency = require('discord-mongo-currency-fork');
 const commandBase=require('./events/guild/message')
 const Levels=require('discord-xp')
-const lavacord=require('@lavacord/discord.js')
 const mongo=require('./botconfig/mongo')
 const mongoose=require('mongoose')
 let token=process.env.TOKEN
@@ -26,11 +25,6 @@ const client = new Discord.Client({
 });
 const disbut = require('discord-buttons');
 disbut(client);
-const lavacordManager=new lavacord.Manager(client, config.nodes)
-lavacordManager.on('error', (err, node)=>{
-  console.error(`An error occured on ${node.id}. The error is:-----${err}`)
-
-})
 
 
 
