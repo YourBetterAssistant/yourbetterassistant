@@ -25,21 +25,21 @@ module.exports = {
             max: 1,
             time: 30000,
             errors: ['time']
-          }).then(message=>{
-            message = message.first()
-            if (message.content.startsWith() == item) {
-              message.channel.send(`CORRECT YOU HAVE EARNT 1000YBCs`)
-              mongoCurrency.giveCoins(message.author.id, message.guild.id, 1000)
+          }).then(msg=>{
+            msg = msg.first()
+            if (msg.content.includes() == item) {
+              msg.channel.send(`CORRECT YOU HAVE EARNT 1000YBCs`)
+              mongoCurrency.giveCoins(msg.author.id, msg.guild.id, 1000)
               return
 
             } else {
-              message.channel.send(`WRONG! YOU HAVE EARNT ${randomCoins}YBCs`)}
-              mongoCurrency.giveCoins(message.author.id, message.guild.id, randomCoins)
+              msg.channel.send(`WRONG! YOU HAVE EARNT ${randomCoins}YBCs`)}
+              mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins)
               return
 
           }).catch(collected=>{
-            message.channel.send(`TIMES UP! YOU HAVE EARNT ${randomCoins}YBCs`)
-            mongoCurrency.giveCoins(message.author.id, message.guild.id, randomCoins)
+            msg.channel.send(`TIMES UP! YOU HAVE EARNT ${randomCoins}YBCs`)
+            mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins)
             return
 
           })

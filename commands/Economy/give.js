@@ -8,6 +8,7 @@ module.exports = {
     cooldown: 10,
     usage: "give <user>",
     run:async(client, message, args)=>{
+        if(!isNaN(args[1])) return message.channel.send('That is not a real number')
         const member=message.mentions.members.first()
         let guild=message.guild.id
         args[0]=member

@@ -9,6 +9,7 @@ module.exports = {
     cooldown: 10,
     usage: "withdraw <amount>",
     run:async(client, message, args)=>{
+        if(!isNaN(args[0])) return message.channel.send('That is not a real number')
         let coins=args[0]
         let user=message.author
         let guild=message.guild
