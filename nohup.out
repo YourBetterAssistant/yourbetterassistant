@@ -1,4 +1,0 @@
-bash: script.sh: No such file or directory
-index.js: line 1: ﻿//Importing: No such file or directory
-index.js: line 2: syntax error near unexpected token `('
-index.js: line 2: `const Discord = require("discord.js");//this is the official discord.js wrapper for the Discord Api, which we use!'
