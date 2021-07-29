@@ -52,7 +52,7 @@ module.exports = {
 
         //If the user has used the play command
         if (message.content.startsWith(`${prefix}play`)){
-            if (!args.length) return message.channel.send('You need to send the second argument!');
+            if (!args[0]) return message.channel.send('You need to send the second argument!');
             let song = {};
 
             //If the first argument is a link. Set the song object to have two keys. Title and URl.
