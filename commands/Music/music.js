@@ -146,9 +146,9 @@ const stop_song = (message, server_queue) => {
     server_queue.connection.dispatcher.end();
 }
 const pause_song=(message, server_queue)=>{
-    if(!server_queue.connection.dispatcher.paused) return message.channel.send("Song isn't paused!");//Checks if the song isn't paused.
-    server_queue.connection.dispatcher.resume();//If the song is paused this will unpause it.
-    message.channel.send("Unpaused the song!");//Sends a message to the channel the command was used in after it unpauses.
+    if(server_queue.connection.dispatcher.paused) return message.channel.send("Song is already paused");//Checks if the song isn't paused.
+    server_queue.connection.dispatcher.pause();//If the song is paused this will unpause it.
+    message.channel.send("paused the song!");//Sends a message to the channel the command was used in after it unpauses.
 }
 const resume_song=(message, server_queue)=>{
     if(!server_queue.connection.dispatcher.paused) return message.channel.send("Song isn't paused!");//Checks if the song isn't paused.
