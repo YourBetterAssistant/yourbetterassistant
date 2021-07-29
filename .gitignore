@@ -4,3 +4,4 @@ botconfig/config.json
 package-lock.json
 Schemas/countingSchema.js
 commands/Administration/coutning.js
+Schemas/muteSchema.js
