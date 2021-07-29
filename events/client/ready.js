@@ -65,7 +65,7 @@ module.exports = async client => {
     const logSchema=require('../../Schemas/logSchema')
     const countSchema=require('../../Schemas/countSchema')
     const onJoin=async member=>{
-      const guild = client.guilds.get(member.guild.id);
+      const guild = client.guilds.cache.get(member.guild.id);
       await mongo().then(async mongoose=>{
           try{
             //Look for vc
