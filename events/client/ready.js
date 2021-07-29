@@ -8,7 +8,8 @@ const mongoose=require('mongoose')
 const welcomeSchema=require('../../Schemas/welcomeSchema')
 const Levels = require("discord-xp");
 
-const mongo=require('../../botconfig/mongo')
+const mongo=require('../../botconfig/mongo');
+const { lavacordManager } = require("../..");
 module.exports = async client => {
   try{
     const stringlength = 69;
