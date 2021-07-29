@@ -12,7 +12,7 @@ const {prefix:globalPrefix}=require('../../botconfig/config.json')
 
 module.exports = {
     name: "play",
-    aliases: ["skip", "pause", "stop"],
+    aliases: ["skip", "pause", "stop", "unpause", "resume"],
     description: "Play music",
     category: "Music",
     guildOnly: true,
@@ -106,8 +106,8 @@ module.exports = {
 
         else if(message.content.startsWith(`${prefix}skip`)) skip_song(message, server_queue);
         else if(message.content.startsWith(`${prefix}stop`)) stop_song(message, server_queue);
-        else if(message.content.startsWith(`${prefix}pause`)) resume_song(message, server_queue)
-        else if(message.content.startsWith(`${prefix}resume`)) pause_song(message, server_queue)
+        else if(message.content.startsWith(`${prefix}resume`)) resume_song(message, server_queue)
+        else if(message.content.startsWith(`${prefix}pause`)) pause_song(message, server_queue)
         else if(message.content.startsWith(`${prefix}unpause`))resume_song(message, server_queue)
         
     }
