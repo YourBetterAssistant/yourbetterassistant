@@ -20,7 +20,6 @@ module.exports = {
     cooldown: 2,
     usage: "cmd [song]",
     run:async(client, message,args)=>{
-        const cmd = args.shift()
         async function dbFind(){
             await mongo().then(async (mongoose)=>{
                 try{
