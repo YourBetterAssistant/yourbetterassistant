@@ -42,7 +42,7 @@ module.exports = {
                         let channelID=info.channelID
                         let text=info.text
                         const channel=member.guild.channels.cache.get(channelID)
-                        channel.send(`${text}`)
+                        channel.send(text)
                         
 
                     }finally{
