@@ -59,7 +59,22 @@ module.exports = {
             if (ytdl.validateURL(args[0])) {
                 const song_info = await ytdl.getInfo(args[0]);
                 song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url }
-            } else {
+            }else if (args[0].includes('spotify')) {
+				const spotifyTrackInfo = await getPreview(args[0]);
+
+				const videoFinder = async (query) => {
+					const videoResult = await ytSearch(query);
+					return videoResult.videos.length > 1 ? videoResult.videos[0] : null;
+				};
+
+				const video = await videoFinder(`${spotifyTrackInfo.title} ${spotifyTrackInfo.artist}`);
+
+				if (video) {
+					song = { title: video.title, url: video.url };
+				} else {
+					message.reply('Error finding song.');
+				}
+			}else {
                 //If there was no link, we use keywords to search for a video. Set the song object to have two keys. Title and URl.
                 const video_finder = async (query) =>{
                     const video_result = await ytSearch(query);
