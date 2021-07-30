@@ -12,7 +12,7 @@ const {prefix:globalPrefix}=require('../../botconfig/config.json')
 
 module.exports = {
     name: "play",
-    aliases: ["skip", "pause", "stop", "unpause", "resume", "join", "leave", "clearqueue"],
+    aliases: ["skip", "pause", "stop", "unpause", "resume", "join", "leave", "clearqueue", "np", "nowplaying"],
     description: "Play music",
     category: "Music",
     guildOnly: true,
@@ -128,11 +128,14 @@ module.exports = {
         }
         else if(message.content.startsWith(`${prefix}join`)){
             voice_channel.join()
+            message.lineReply('I have joined')
         }
         else if(message.content.startsWith(`${prefix}clearqueue`)){
             queue.delete(message.guild.id)
+            message.lineReply('Queue Cleared')
         }
-        //join
+
+
         
     }
     
