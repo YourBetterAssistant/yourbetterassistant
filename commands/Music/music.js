@@ -135,7 +135,7 @@ module.exports = {
     
 }
 const video_player = async (guild, song) => {
-    const song_queue = queue.get(message.guild.id);
+    const song_queue = queue.get(guild.id);
 
     //If no song is left in the server queue. Leave the voice channel and delete the key and value pair from the global queue.
     if (!song) {
