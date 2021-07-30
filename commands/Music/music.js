@@ -12,7 +12,7 @@ const {prefix:globalPrefix}=require('../../botconfig/config.json')
 
 module.exports = {
     name: "play",
-    aliases: ["skip", "pause", "stop", "unpause", "resume"],
+    aliases: ["skip", "pause", "stop", "unpause", "resume", "join", "leave"],
     description: "Play music",
     category: "Music",
     guildOnly: true,
@@ -48,7 +48,12 @@ module.exports = {
 
         //This is our server queue. We are getting this server queue from the global queue.
         const server_queue = queue.get(message.guild.id);
-
+        if(message.content.startsWith(`${prefix}join`)){
+            voice_channel.join()
+        }
+        if(message.content.startsWith(`${prefix}leave`)){
+            voice_channel.leave()
+        }
         //If the user has used the play command
         if (message.content.startsWith(`${prefix}play`)){
             if (!args[0]) return message.channel.send('You need to send the second argument!');
