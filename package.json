@@ -16,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.5.3",
+    "@top-gg/sdk": "^3.1.2",
     "@weky/inlinereply": "0.0.0",
     "axios": "^0.21.1",
     "canvacord": "^5.2.1",
@@ -40,6 +41,7 @@
     "random-js": "^2.1.0",
     "shelljs": "^0.8.4",
     "spotify-url-info": "^2.2.3",
+    "topgg-autoposter": "^2.0.0",
     "weather-api-data": "^1.0.7",
     "weather-js": "^2.0.0",
     "weky": "^3.1.0",

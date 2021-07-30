@@ -5,6 +5,7 @@ require('dotenv').config()
 require('@weky/inlinereply')
 const mongoCurrency = require('discord-mongo-currency-fork');
 const commandBase=require('./events/guild/message')
+const { AutoPoster } = require('topgg-autoposter')
 const Levels=require('discord-xp')
 const mongo=require('./botconfig/mongo')
 const mongoose=require('mongoose')
@@ -25,6 +26,7 @@ const client = new Discord.Client({
 });
 const disbut = require('discord-buttons');
 disbut(client);
+const ap = AutoPoster(process.env.TOPGGTOKEN, client)
 
 
 
@@ -48,6 +50,11 @@ client.on('message', async(message)=>{
     const user = await Levels.fetch(message.author.id, message.guild.id);
     message.channel.send(`${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`);
   }
+})
+
+
+ap.on('posted', () => {
+  console.log('Posted stats to Top.gg!')
 })
 
 //login into the bot
