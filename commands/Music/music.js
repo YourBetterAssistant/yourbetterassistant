@@ -48,12 +48,6 @@ module.exports = {
 
         //This is our server queue. We are getting this server queue from the global queue.
         const server_queue = queue.get(message.guild.id);
-        if(message.content.startsWith(`${prefix}join`)){
-            voice_channel.join()
-        }
-        if(message.content.startsWith(`${prefix}leave`)){
-            voice_channel.leave()
-        }
         //If the user has used the play command
         if (message.content.startsWith(`${prefix}play`)){
             if (!args[0]) return message.channel.send('You need to send the second argument!');
@@ -128,6 +122,14 @@ module.exports = {
         else if(message.content.startsWith(`${prefix}resume`)) resume_song(message, server_queue)
         else if(message.content.startsWith(`${prefix}pause`)) pause_song(message, server_queue)
         else if(message.content.startsWith(`${prefix}unpause`))resume_song(message, server_queue)
+        else if(message.content.startsWith(`${prefix}leave`)){
+            song_queue.voice_channel.leave();
+            queue.delete(guild.id);
+        }
+        else if(message.content.startsWith(`${prefix}join`)){
+            voice_channel.join()
+        }
+        //join
         
     }
     
