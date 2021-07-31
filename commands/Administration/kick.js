@@ -1,3 +1,6 @@
+const mongo = require("../../botconfig/mongo");
+const serverConfSchema = require("../../Schemas/serverConfSchema");
+let cache={}
 module.exports = {
     name: "kick",
     description: "kicks people",
@@ -7,12 +10,22 @@ module.exports = {
     cooldown: 2,
     usage: "kick <member>",
     run:async(client,message, args)=>{
+      await mongo().then(async (mongoose)=>{
+        try{
+          let result=await serverConfSchema.findOne({_id:message.guild.id})
+          let admin=result.adminroleID
+          cache[message.guild.id]={admin}
+        }finally{
+          mongoose.connectionc.close()
+        }
+      })
         const user = message.mentions.users.first();
         // If we have a user mentioned
         if (user) {
           // Now we get the member from the user
           const member = message.guild.member(user);
           if(member.id===message.author.id)return message.channel.send("You can't kick yourself")
+          if(message.member.roles.cache.find(r=>r.id===cache[message.guild.id]))return message.lineReply('You cannot kick an admin+')
           // If the member is in the guild
           if (member) {
             /**

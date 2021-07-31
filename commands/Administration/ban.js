@@ -1,3 +1,6 @@
+const mongo = require('../../botconfig/mongo');
+const serverConfSchema = require('../../Schemas/serverConfSchema');
+
 module.exports = {
     name: "ban",
     description: "bans members",
@@ -7,12 +10,15 @@ module.exports = {
     cooldown: 2,
     usage: "ban <member>",
     run:async(client,message, args)=>{
+      const cache={}
+      await mongo().then(async (mongoose)=>{
+        try{
+          let result=await serverConfSchema.findOne({_id:message.guild.id})
+          let admin=result.adminroleID
+          cache[message.guild.id]={admin}
+        }finally{mongoose.connection.close()}
+      })
         const Discord=require('discord.js')
-module.exports={
-    name:'ban',
-    permission:['BAN_MEMBER','ADMINISTRATOR'],
-    description:'ban people',
-    execute(client, message,args){
 
             const user = message.mentions.users.first();
             // If we have a user mentioned
@@ -21,7 +27,9 @@ module.exports={
             if (user) {
               // Now we get the member from the user
               const member = message.guild.member(user);
+
               if(member.id===message.author.id)return message.channel.send("You can't ban yourself")
+              if(message.member.roles.cache.some(r=>r.id===cache[message.guild.id]))return message.lineReply('You cannot kick an admin+')
               // If the member is in the guild
               if (member) {
                 /**
@@ -57,5 +65,4 @@ module.exports={
 }
         
 
-    },
-};
+    
