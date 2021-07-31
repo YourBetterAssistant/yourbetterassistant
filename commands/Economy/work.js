@@ -23,11 +23,11 @@ module.exports = {
         let filter = m => m.author.id === message.author.id
         message.channel.awaitMessages(filter, {
             max: 1,
-            time: 30000,
+            time: 10000,
             errors: ['time']
           }).then(msg=>{
             msg = msg.first()
-            if (msg.content.includes() == item) {
+            if (msg.content.startsWith(item)) {
               msg.channel.send(`CORRECT YOU HAVE EARNT 1000YBCs`)
               mongoCurrency.giveCoins(msg.author.id, msg.guild.id, 1000)
               return
@@ -37,7 +37,8 @@ module.exports = {
               mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins)
               return
 
-          }).catch(collected=>{
+          }).catch((collected)=>{
+            let msg=message
             msg.channel.send(`TIMES UP! YOU HAVE EARNT ${randomCoins}YBCs`)
             mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins)
             return
