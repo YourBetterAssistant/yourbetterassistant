@@ -107,8 +107,12 @@ module.exports = async client => {
               let info=await welcomeSchema.findOne({_id:member.guild.id})
               let channelID=info.channelID
               let text=info.text
+              let option=info.DM
               const channel=member.guild.channels.cache.get(channelID)
-              channel.send(`>>> <@!${member.id}> ${text}`)
+              if(option==='true'){
+                member.send(`>>> <@!${member.id}> ${text}`)
+              }else{
+              channel.send(`>>> <@!${member.id}> ${text}`)}
               
 
           }finally{

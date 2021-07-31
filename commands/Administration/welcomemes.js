@@ -8,11 +8,12 @@ module.exports = {
     guildOnly: true,
     memberpermissions:"Administrator",
     cooldown: 5,
-    usage: "welcome <message>",
+    usage: "welcome <option to dm reply with true or false> <message>",
     run:async(client, message, args)=>{
         const cache={}
-        const msg = args.slice(0).join(" ")
-        if (!args[0])return message.lineReply('I need a message or else you are doing no good')
+        const option=args[0]
+        const msg = args.slice(1).join(" ")
+        if (!args[1])return message.lineReply('I need a message or else you are doing no good')
         await mongo().then(async (mongoose)=>{
             try{
                 await welcomeSchema.findOneAndUpdate({
@@ -21,6 +22,7 @@ module.exports = {
                 },
                 {
                 _id:message.guild.id,
+                DM:option,
                 text:msg,
                 channelID:message.channel.id},
                 {
@@ -41,8 +43,12 @@ module.exports = {
                         let info=await welcomeSchema.findOne({_id:message.guild.id})
                         let channelID=info.channelID
                         let text=info.text
+                        let option=info.DM
                         const channel=member.guild.channels.cache.get(channelID)
-                        channel.send(text)
+                        if(option==='true'){
+                            member.send('>>> '+text)
+                        }else{
+                        channel.send(text)}
                         
 
                     }finally{
@@ -50,12 +56,12 @@ module.exports = {
                     }
                 })
             }
-            client.on('message', async message=>{
+           /* client.on('message', async message=>{
                 if(message.content.startsWith('simjoin')){
                     await onJoin(message.member)
                     return
                 }
-            })
+            })*/
 
         
 

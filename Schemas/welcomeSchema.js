@@ -5,6 +5,10 @@ const welcomeSchema=mongoose.Schema({
         required:true,
         unique:true
     },
+    DM:{
+        type:String,
+        required:true
+    },
     text:{
         type:String,
         required:true,
