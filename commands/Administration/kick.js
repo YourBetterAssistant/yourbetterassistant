@@ -12,7 +12,7 @@ module.exports = {
         if (user) {
           // Now we get the member from the user
           const member = message.guild.member(user);
-          if(member.id===message.author.id)return("You can't kick yourself")
+          if(member.id===message.author.id)return message.channel.send("You can't kick yourself")
           // If the member is in the guild
           if (member) {
             /**
