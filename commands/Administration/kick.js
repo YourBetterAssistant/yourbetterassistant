@@ -16,7 +16,7 @@ module.exports = {
           let admin=result.adminroleID
           cache[message.guild.id]={admin}
         }finally{
-          mongoose.connectionc.close()
+          mongoose.connection.close()
         }
       })
         const user = message.mentions.users.first();
