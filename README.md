@@ -5,6 +5,9 @@ Really all you need to do is add a file called`.env` nothing in front of it just
 ## FAQs
 Can I invite the bot?
 > Yes you can the invitelink is right here:https://top.gg/bot/862143828920369172/invite/
+
+
+
 What DB does the real bot use?
 > The real bot uses MongoDB
 ##### More FAQs will be added if you add it with pull requests
