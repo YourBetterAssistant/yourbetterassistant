@@ -29,7 +29,8 @@ module.exports = {
               const member = message.guild.member(user);
 
               if(member.id===message.author.id)return message.channel.send("You can't ban yourself")
-              if(message.member.roles.cache.some(r=>r.id===cache[message.guild.id]))return message.lineReply('You cannot kick an admin+')
+              let admin=cache[message.guild.id].admin
+              if(message.member.roles.cache.some(r=>r.id===admin))return message.lineReply('You cannot kick an admin+')
               // If the member is in the guild
               if (member) {
                 /**
