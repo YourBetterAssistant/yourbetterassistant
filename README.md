@@ -13,3 +13,7 @@ What DB does the real bot use?
 > The real bot uses MongoDB
 ##### More FAQs will be added if you add it with pull requests
 
+
+
+[![Discord Bots](https://top.gg/api/widget/862143828920369172.svg)](https://top.gg/bot/862143828920369172)
+
