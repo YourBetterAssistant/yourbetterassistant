@@ -16,6 +16,14 @@ Levels.setURL(config.mongoPath);
 //here the event starts
 module.exports = async (client, message) => {
   console.log(guildPrefixes[message.guild.id])
+  if(message){
+    let countInfo=await countSchema.findOne({_id:message.guild.id})
+    const vc=countInfo.voiceChannelID
+    setInterval(function () {
+      var memberCount = message.guild.members.cache.filter(member => !member.user.bot).size;  
+      var memberCountChannel =  message.guild.channels.cache.get(vc);
+      memberCountChannel.setName(`${memberCount} members!`);
+   }, 1000);}
   try {
     //if the message is not in a guild (aka in dms), return aka ignore the inputs
     
@@ -133,13 +141,7 @@ module.exports = async (client, message) => {
     * Please mention Him / Milrato Development, when using this Code!
     * @INFO
   */
-   let countInfo=await countSchema.findOne({_id:message.guild.id})
-   const vc=countInfo.voiceChannelID
-   setInterval(function () {
-     var memberCount = message.guild.members.cache.filter(member => !member.user.bot).size;  
-     var memberCountChannel =  message.guild.channels.cache.get(vc);
-     memberCountChannel.setName(`${memberCount} members!`);
-  }, 1000);
+
    
 }
 module.exports.loadPrefixes=async(client)=>{
