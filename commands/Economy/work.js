@@ -17,7 +17,7 @@ module.exports = {
         let embed=new Discord.MessageEmbed()
         .setTitle(`JOB:${job}`)
         .setDescription('YOU MUST TYPE THIS WORD IN CHAT TO COMPLETER YOUR JOB!')
-        .addField(item)
+        .addField(item,'')
         message.channel.send(embed)
         const randomCoins = Math.floor(Math.random() * 500) + 1;
         let filter = m => m.author.id === message.author.id

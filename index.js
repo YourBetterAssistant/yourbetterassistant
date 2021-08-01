@@ -57,6 +57,7 @@ ap.on('posted', () => {
   console.log('Posted stats to Top.gg!')
 })
 
+
 //login into the bot
 client.login(token);
 
