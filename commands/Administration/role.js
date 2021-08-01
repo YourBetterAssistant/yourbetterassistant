@@ -1,7 +1,7 @@
 module.exports = {
     name: "roleadd",
     description: "give roles to users",
-    category: "Administartion",
+    category: "Administration",
     memberpermissions:"MANAGE_ROLES",
     adminPermOverride: true,
     cooldown: 2,

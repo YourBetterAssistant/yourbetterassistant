@@ -6,3 +6,4 @@ Schemas/countingSchema.js
 commands/Administration/coutning.js
 commands/Administration/reactionrole.js
 Schemas/rrSchema.js
+commands/Administration/rr.json
