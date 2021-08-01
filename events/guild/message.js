@@ -17,14 +17,6 @@ Levels.setURL(config.mongoPath);
 //here the event starts
 module.exports = async (client, message) => {
   console.log(guildPrefixes[message.guild.id])
-  if(message){
-    let countInfo=await countSchema.findOne({_id:message.guild.id})
-    const vc=countInfo.voiceChannelID
-    setInterval(function () {
-      var memberCount = message.guild.members.cache.filter(member => !member.user.bot).size;  
-      var memberCountChannel =  message.guild.channels.cache.get(vc);
-      memberCountChannel.setName(`${memberCount} members!`);
-   }, 1000);}
   try {
     //if the message is not in a guild (aka in dms), return aka ignore the inputs
     
@@ -125,6 +117,14 @@ module.exports = async (client, message) => {
       .setTitle(`❌ Unkown command, try: **\`${prefix}help\`**`)
       .setDescription(`To get help on a specific command, type \`${prefix}help [command name]\``)
     ).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
+    if(message){
+      let countInfo=await countSchema.findOne({_id:message.guild.id})
+      const vc=countInfo.voiceChannelID
+      setInterval(function () {
+        var memberCount = message.guild.members.cache.filter(member => !member.user.bot).size;  
+        var memberCountChannel =  message.guild.channels.cache.get(vc);
+        memberCountChannel.setName(`${memberCount} members!`);
+     }, 1000);}
   }catch (e){
     return message.channel.send(
     new Discord.MessageEmbed()
