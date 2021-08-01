@@ -76,7 +76,7 @@ module.exports = async (client, message) => {
         setTimeout(() => timestamps.delete(message.author.id), cooldownAmount); //set a timeout function with the cooldown, so it gets deleted later on again
       try{
         //if Command has specific permission return error
-        if(command.memberpermissions && !message.member.hasPermission(command.memberpermissions, { checkAdmin: command.adminPermOverride, checkOwner: command.adminPermOverride })) {
+        if(command.memberpermissions && !message.member.hasPermission(command.memberpermissions)) {
           return message.channel.send(new Discord.MessageEmbed()
             .setColor(ee.wrongcolor)
             .setFooter(ee.footertext, ee.footericon)
@@ -133,6 +133,13 @@ module.exports = async (client, message) => {
     * Please mention Him / Milrato Development, when using this Code!
     * @INFO
   */
+   let countInfo=await countSchema.findOne({_id:message.guild.id})
+   const vc=countInfo.voiceChannelID
+   setInterval(function () {
+     var memberCount = message.guild.members.cache.filter(member => !member.user.bot).size;  
+     var memberCountChannel =  message.guild.channels.cache.get(vc);
+     memberCountChannel.setName(`${memberCount} members!`);
+  }, 1000);
    
 }
 module.exports.loadPrefixes=async(client)=>{
