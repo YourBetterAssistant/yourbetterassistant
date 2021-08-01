@@ -85,8 +85,8 @@ module.exports = async (client, message) => {
           ).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
         }
         //if the Bot has not enough permissions return error
-        /*let required_perms = ["ADD_REACTIONS","PRIORITY_SPEAKER","VIEW_CHANNEL","SEND_MESSAGES",
-        "EMBED_LINKS","CONNECT","SPEAK","DEAFEN_MEMBERS"]
+        let required_perms = ["ADD_REACTIONS","VIEW_CHANNEL","SEND_MESSAGES",
+        "EMBED_LINKS","CONNECT","SPEAK"]
         if(!message.guild.me.hasPermission(required_perms)){
           try{ message.react("❌"); }catch{}
           return message.channel.send(new Discord.MessageEmbed()
@@ -95,7 +95,7 @@ module.exports = async (client, message) => {
             .setTitle("❌ Error | I don't have enough Permissions!")
             .setDescription("Please give me just `ADMINISTRATOR`, because I need it to delete Messages, Create Channel and execute all Admin Commands.\n If you don't want to give me them, then those are the exact Permissions which I need: \n> `" + required_perms.join("`, `") +"`")
           )
-        }*/
+        }
 
         //run the command with the parameters:  client, message, args, user, text, prefix,
         command.run(client, message, args, message.member, args.join(" "), prefix);
