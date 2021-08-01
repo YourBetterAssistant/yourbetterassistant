@@ -6,6 +6,7 @@ const commandPrefixSchema=require('../../Schemas/prefixSchema')
 const Levels=require('discord-xp')
 const mongo=require('../../botconfig/mongo')
 const guildPrefixes={}
+let countSchema=require('../../Schemas/countSchema')
 const config = require("../../botconfig/config.json"); //loading config file with token and prefix, and settings
 const {prefix:globalPrefix}=require('../../botconfig/config.json')
 const ee = require("../../botconfig/embed.json"); //Loading all embed settings like color footertext and icon ...
