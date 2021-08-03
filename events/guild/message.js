@@ -82,7 +82,7 @@ module.exports = async (client, message) => {
             .setColor(ee.wrongcolor)
             .setFooter(ee.footertext, ee.footericon)
             .setTitle("❌ Error | You are not allowed to run this command!")
-            .setDescription(`You need these Permissions: \`${command.memberpermissions.join("`, ``")}\``)
+            .setDescription('You Do Not Have The Required Perms!')
           ).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
         }
         //if the Bot has not enough permissions return error
