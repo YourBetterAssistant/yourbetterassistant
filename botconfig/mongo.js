@@ -6,7 +6,8 @@ module.exports= async()=>{
 
     await mongoose.connect(mongoPath,{
         useNewUrlParser:true,
-        useUnifiedTopology:true
+        useUnifiedTopology:true,
+        keepAlive:true,
 
     })
     return mongoose
