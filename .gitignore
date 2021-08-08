@@ -5,3 +5,5 @@ package-lock.json
 Schemas/countingSchema.js
 commands/Administration/coutning.js
 yarn.lock
+util.js
+yarn-error.log

@@ -25,8 +25,8 @@ const client = new Discord.Client({
   partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'],
   intents:["GUILDS","GUILD_MESSAGES"]
 });
-const disbut = require('discord-buttons');
-disbut(client);
+/*const disbut = require('discord-buttons');
+disbut(client);*/
 const ap = AutoPoster(process.env.TOPGGTOKEN, client)
 
 
