@@ -1,6 +1,7 @@
 const economy=require('../../handlers/economy')
 const Discord=require('discord.js')
 const mongoCurrency=require('discord-mongo-currency-fork')
+import {reply} from '../../index'
 module.exports = {
     name: "bal",
     aliases: ["balance"],
@@ -25,7 +26,7 @@ module.exports = {
         .setColor('RANDOM')
         if(!user){
             mongoCurrency.createUser(message.author.id, message.guild.id)
-            message.lineReply('A new account has been created for you with a balance of 1000YBCs')
+            reply('A new account has been created for you with a balance of 1000YBCs', true, message)
             mongoCurrency.giveCoins(message.author.id, message.guild.id, 1000)
             return}
         message.channel.send({embeds:[embed]})
@@ -44,11 +45,11 @@ module.exports = {
         .setColor('RANDOM')
         if(!user){
             mongoCurrency.createUser(member.id, message.guild.id)
-            message.lineReply('A new account has been created for you with a balance of 1000YBCs')
+            message.reply('A new account has been created for you with a balance of 1000YBCs', true, message)
             mongoCurrency.giveCoins(member.id, message.guild.id, 1000)
             return}
 
-        message.lineReply({embeds:[embed]})}
+        reply({embeds:[embed]}, true, message)}
 
     }
   

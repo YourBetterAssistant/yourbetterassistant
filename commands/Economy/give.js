@@ -1,4 +1,5 @@
 const mongoCurrency = require('discord-mongo-currency-fork');
+import {reply} from '../../index'
 module.exports = {
     name: "donate",
     aliases: ["give"],
@@ -16,8 +17,8 @@ module.exports = {
         if(!member)return message.channel.send('Who are you giving the coins to?')
         if(!coins)return message.channel.send('How many coins are you giving?')
         await mongoCurrency.giveCoins(member.id, guild, coins)
-        message.lineReply(`You have given ${member}, ${coins}YBCs`)
+        reply(`You have given ${member}, ${coins}YBCs`, true, message)
         await mongoCurrency.deductCoins(message.author.id, message.guild.id, coins)
-        message.lineReply(`${coins}YBCs have been deducted from you`)
+        reply(`${coins}YBCs have been deducted from you`, true, message)
     },
 };

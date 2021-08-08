@@ -1,6 +1,7 @@
 const Discord=require('discord.js');
 const mongo = require('../../botconfig/mongo');
 const welcomeSchema=require('../../Schemas/welcomeSchema')
+import {reply} from '../../index'
 module.exports = {
     name: "welcome",
     description: "Sends the welcome message to a new message NOTE:DO THIS COMMAND IN THE CHANNEL YOU WISH FOR THE MESSAGE TO BE SENT",
@@ -13,7 +14,7 @@ module.exports = {
         const cache={}
         const option=args[0]
         const msg = args.slice(1).join(" ")
-        if (!args[1])return message.lineReply('I need a message or else you are doing no good')
+        if (!args[1])return reply('I need a message or else you are doing no good', true, message)
         await mongo().then(async (mongoose)=>{
             try{
                 await welcomeSchema.findOneAndUpdate({

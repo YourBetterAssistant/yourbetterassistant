@@ -1,5 +1,6 @@
 const mongo = require('../../botconfig/mongo');
 const countSchema=require('../../Schemas/countSchema')
+import {reply} from '../../index'
 module.exports = {
     name: "membercount",
     description: "Set up member count NOTE: if no id is provided a new vc will be created",
@@ -41,7 +42,7 @@ module.exports = {
                   })
                 }
                   vc()
-                  message.lienReply('I have made you a channel called members get the id of that channel and then try the command again')
+                  reply('I have made you a channel called members get the id of that channel and then try the command again', true, message)
 
         }
         /*   

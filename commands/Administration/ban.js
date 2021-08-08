@@ -1,5 +1,6 @@
 const mongo = require('../../botconfig/mongo');
 const serverConfSchema = require('../../Schemas/serverConfSchema');
+import {reply} from '../../index'
 
 module.exports = {
     name: "ban",
@@ -30,7 +31,7 @@ module.exports = {
 
               if(member.id===message.author.id)return message.channel.send("You can't ban yourself")
               let admin=cache[message.guild.id].admin
-              if(message.member.roles.cache.some(r=>r.id===admin))return message.lineReply('You cannot kick an admin+')
+              if(message.member.roles.cache.some(r=>r.id===admin))return reply('You cannot kick an admin+', true, message)
               // If the member is in the guild
               if (member) {
                 /**
@@ -42,23 +43,23 @@ module.exports = {
                   .ban(reason)
                   .then(() => {
                     // We let the message author know we were able to kick the person
-                    message.reply(`Successfully Banned ${user.tag}`);
+                    reply(`Successfully Banned ${user.tag}`, true, message);
                   })
                   .catch(err => {
                     // An error happened
                     // This is generally due to the bot not being able to kick the member,
                     // either due to missing permissions or role hierarchy
-                    message.reply('I was unable to Ban the member');
+                   reply('I was unable to Ban the member', true, message);
                     // Log the error
                     console.error(err);
                   });
               } else {
                 // The mentioned user isn't in this guild
-                message.reply("That user isn't in this guild!");
+                reply("That user isn't in this guild!", true, message);
               }
               // Otherwise, if no user was mentioned
             } else {
-              message.reply("You didn't mention the user to Ban!");
+              reply("You didn't mention the user to Ban!", true, message);
             }
     
 

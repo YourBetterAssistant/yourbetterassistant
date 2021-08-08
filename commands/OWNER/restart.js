@@ -1,5 +1,6 @@
 const { ClientApplication } = require("discord.js");
 const shell = require("shelljs");
+import {reply} from '../../index'
 
 module.exports = {
     name: "restart",
@@ -11,7 +12,7 @@ module.exports = {
     usage: "restart",
     run:async(client, message, args)=>{
         if(!message.author.id==='827388013062389761') return message.channel.send('No you are not owner')
-        message.lineReply('Restarting =]')
+        reply('Restarting', true, message)
         shell.exec('sudo reboot')
 
     },

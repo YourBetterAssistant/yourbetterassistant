@@ -1,4 +1,5 @@
 const mongoCurrency=require('discord-mongo-currency-fork')
+import {reply} from '../../index'
 module.exports = {
     name: "withdraw",
     aliases: ["with"],
@@ -13,7 +14,7 @@ module.exports = {
         let coins=args[0]
         let user=message.author
         let guild=message.guild
-        message.lineReply(`Withdrawing ${coins}YMCs from the bank!`)
+        reply(`Withdrawing ${coins}YMCs from the bank!`, true, message)
         mongoCurrency.withdraw(user.id, guild.id, coins)
 
     },

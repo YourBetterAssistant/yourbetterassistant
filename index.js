@@ -51,6 +51,10 @@ ap.on('posted', () => {
   console.log('Posted stats to Top.gg!')
 })
 
+  function reply(content, mention, message){
+  message.reply({ content:content, allowedMentions: { repliedUser: mention }})
+}
+export{reply}
 
 //login into the bot
 client.login(token);

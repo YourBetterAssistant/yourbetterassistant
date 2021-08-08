@@ -1,5 +1,6 @@
 const djsGames = require('djs-games')
 const TicTacToe = new djsGames.TicTacToe()
+import {reply} from '../../index'
 module.exports = {
     name: "ttt",
     aliases: ["tictactoe"],
@@ -12,7 +13,7 @@ module.exports = {
         const opponent = message.mentions.users.first();
         if (!opponent) return message.channel.send('**Mention someone**')
         
-        message.lineReply('Starting')
+        reply('Starting', true, message)
         TicTacToe.startGame(message)
 
     },

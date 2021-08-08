@@ -1,6 +1,7 @@
 const mongo = require("../../botconfig/mongo");
 const serverConfSchema = require("../../Schemas/serverConfSchema");
 let cache={}
+import {reply} from '../../index'
 module.exports = {
     name: "kick",
     description: "kicks people",
@@ -26,7 +27,7 @@ module.exports = {
           const member = message.guild.member(user);
           if(member.id===message.author.id)return message.channel.send("You can't kick yourself")
           let admin=cache[message.guild.id].admin
-          if(member.roles.cache.find(r=>r.id===admin))return message.lineReply('You cannot kick an admin+')
+          if(member.roles.cache.find(r=>r.id===admin))return reply('You cannot kick an admin+', true, message)
           // If the member is in the guild
           if (member) {
             /**
@@ -44,17 +45,17 @@ module.exports = {
                 // An error happened
                 // This is generally due to the bot not being able to kick the member,
                 // either due to missing permissions or role hierarchy
-                message.reply('I was unable to kick the member');
+                reply('I was unable to kick the member', true, message);
                 // Log the error
                 console.error(err);
               });
           } else {
             // The mentioned user isn't in this guild
-            message.reply("That user isn't in this guild!");
+            reply("That user isn't in this guild!", true, message);
           }
           // Otherwise, if no user was mentioned
         } else {
-          message.reply("You didn't mention the user to kick!");
+          reply("You didn't mention the user to kick!", true, message);
         }
   
     },

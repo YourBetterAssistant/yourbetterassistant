@@ -1,3 +1,5 @@
+const { reply } = require('../..');
+
 module.exports = {
     name: "snake",
     description: "snake game",
@@ -6,7 +8,7 @@ module.exports = {
     cooldown: 5,
     usage: "snake",
     run:async(client, message, args)=>{
-        message.lineReply("Starting")
+        reply("Starting", true, message)
         const djsGames = require('djs-games')
         const SnakeGame = new djsGames.SnakeGame()
         SnakeGame.startGame(message)

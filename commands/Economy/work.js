@@ -1,5 +1,6 @@
 const Discord=require('discord.js')
 const mongoCurrency=require('discord-mongo-currency-fork')
+import {reply} from '../../index'
 module.exports = {
     name: "work",
     description: "work ",
@@ -10,7 +11,7 @@ module.exports = {
     cooldown: 60*60*1,
     usage: "work",
     run:async(client, message, args)=>{
-        message.lineReply("YOU HAVE BEEN AUTOMATICALLY ASSIGNED THE JOB `APPRENTICE COMMONER` MORE JOBS WILL BE ADDED LATER!")
+        reply("Currently You can only work as a 'Apprentice Commoner' later on you will be able to work as different porfessions", false, message)
         let job='APPRENTIC COMMONER'
         let possibleJobs=['FRIDGE', 'BUY', 'JOBS', 'TV', 'POLITICS', 'LIFE', 'CHILDREN']
         var item = possibleJobs[Math.floor(Math.random()*possibleJobs.length)];

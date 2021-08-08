@@ -1,5 +1,6 @@
 const djsGames = require('djs-games')
 const ConnectFour = new djsGames.ConnectFour()
+import {reply} from '../../index'
 module.exports = {
     name: "connect4",
     aliases: ["c4"],
@@ -9,7 +10,7 @@ module.exports = {
     cooldown: 10,
     usage: "connect4 <user>",
     run:async(client, message, args)=>{
-        message.lineReply("Starting Game")
+        reply("Starting Game", true, message)
         ConnectFour.startGame(message)
     },
 };

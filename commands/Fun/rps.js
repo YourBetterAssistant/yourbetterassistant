@@ -1,4 +1,5 @@
-const djsGames = require('djs-games')
+const djsGames = require('djs-games');
+const { reply } = require('../..');
 const RockPaperScissors = new djsGames.RockPaperScissors()
 module.exports = {
     name: "rps",
@@ -9,7 +10,7 @@ module.exports = {
     cooldown: 10,
     usage: "rps <opponent>",
     run:async(client, message, args) =>{
-        message.lineReply('Starting Game...')
+        reply('Starting Game...', true, message)
         RockPaperScissors.startGame(message)
 
     },

@@ -1,3 +1,4 @@
+import {reply} from '../../index'
 module.exports = {
     name: "fasttyper",
     aliases: ["typer"],
@@ -7,7 +8,7 @@ module.exports = {
     cooldown: 10,
     usage: "typer",
     run:async(client, message, args)=>{
-        message.lineReply("Starting")
+        reply("Starting", false, message)
         const djsGames = require('djs-games')
         const FastTyper = new djsGames.FastTyper()
         FastTyper.startGame(message)

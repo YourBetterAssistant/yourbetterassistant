@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const fs=require('fs');
 const mongo = require('../../botconfig/mongo');
 const rrSchema = require('../../Schemas/rrSchema');
+import {reply} from '../../index'
 module.exports = {
     name: "rr",
     aliases: ["reactionrole","reactionr"],
@@ -12,7 +13,7 @@ module.exports = {
     cooldown: 1,
     usage: "rr",
     run:async (client, message, args)=>{
-        message.lineReply('Reply with the channel ID? TIMEOUT:10s')
+        reply('Reply with the channel ID TIMEOUT:10s', true, message)
         let data={
             "GuildID":`${message.guild.id}`,
             "CID":null,
@@ -34,7 +35,7 @@ module.exports = {
             msg=msg.first()
             let file=require('./rr.json')
             if(msg){
-                if(isNaN(msg.content))return msg.lineReply('That is not a channel ID')
+                if(isNaN(msg.content))return reply('That is not a channel ID', true, msg)
                 console.log(msg.content)
                 file.CID=`${msg.content.toLowerCase()}`
                 let d=JSON.stringify(file)

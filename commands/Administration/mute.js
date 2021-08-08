@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const mongo = require('../../botconfig/mongo');
 const serverConfSchema=require('../../Schemas/serverConfSchema')
 let roles={}
+import {reply} from '../../index'
 const ms=require('ms')
 module.exports = {
     name: "mute",
@@ -15,7 +16,7 @@ module.exports = {
         let user= message.mentions.users.first()
         let duration=args[1]
         let reason=args.slice(2).join(" ")
-        if(!args[0])return message.lineReply('You need to mention a user!')
+        if(!args[0])return reply('You need to mention a user!', true, message)
         await mongo().then(async(mongoose)=>{
             try{
                 let result= await serverConfSchema.findOne({_id:message.guild.id})
@@ -44,7 +45,7 @@ module.exports = {
                     
             }
 
-            if(!memberrole)return message.lineReply('Member role is not added to serverconf please add it with {prefix}serverconf')
+            if(!memberrole)return reply('Member role is not added to serverconf please add it with {prefix}serverconf', true, message)
             let userID=message.guild.members.cache.get(user.id)
             userID.roles.set([muterole])
             if (!reason)reason='Not Given'

@@ -1,3 +1,5 @@
+import {reply} from '../../index'
+
 module.exports = {
     name: "gtn",
     aliases: ["guessthenumber"],
@@ -7,7 +9,7 @@ module.exports = {
     cooldown: 2,
     usage: "gtn",
     run:async(client, message, args)=>{
-        message.lineReply("Starting Game")
+        reply("Starting Game", true, message)
         const djsGames = require('djs-games')
         const guessTheNumber = new djsGames.GuessTheNumber()
          guessTheNumber.startGame(message)

@@ -1,4 +1,5 @@
 const shell=require('shelljs')
+import {reply} from '../../index'
 module.exports = {
     name: "pull",
     description: "pulls the latest version of this code from github",
@@ -8,7 +9,8 @@ module.exports = {
     usage: "pull",
     run:async(client, message, args)=>{
         if(!message.author.id==='827388013062389761') return message.channel.send('You cannot pull')
-        message.lineReply("Pulling!")
+        let link='https://www.github.com/NotTimIsReal/bbarevamp'
+        reply(`Pulling from ${link}`, true, message)
         shell.exec('git pull')
         
         message.reply('Do you want me to reboot')

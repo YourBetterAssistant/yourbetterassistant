@@ -3,6 +3,7 @@ const ytdl = require('ytdl-core');
 const ytSearch = require('yt-search');
 var { getData, getPreview } = require("spotify-url-info");
 let guildPrefixes={}
+import {reply} from '../../index'
 
 //Global queue for your bot. Every server will have a key and value pair in this map. { guild.id, queue_constructor{} }
 const queue = new Map();
@@ -128,11 +129,11 @@ module.exports = {
         }
         else if(message.content.startsWith(`${prefix}join`)){
             voice_channel.join()
-            message.lineReply('I have joined')
+            reply('I have joined', true, message)
         }
         else if(message.content.startsWith(`${prefix}clearqueue`)){
             queue.delete(message.guild.id)
-            message.lineReply('Queue Cleared')
+            reply('Queue Cleared!', false, message)
         }
 
 

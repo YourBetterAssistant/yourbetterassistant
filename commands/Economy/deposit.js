@@ -1,6 +1,7 @@
 
 const mongoCurrency=require('discord-mongo-currency-fork')
 const Discord=require('discord.js')
+import {reply} from '../../index'
 module.exports = {
     name: "deposit",
     aliases: ["dep"],
@@ -15,8 +16,8 @@ module.exports = {
         if(!isNaN(args[0])) return message.channel.send('That is not a real number')
         let coins=args[0]
         let user=message.author
-        let guild=message.guild
-        message.lineReply(`Depositing ${coins}YMCs right now!`)
+        let guild=message.guily
+        reply({content:`Depositing ${coins}YMCs right now!`, allowedMentions:{repliedUser:true}})
         mongoCurrency.deposit(user.id, guild.id, coins)
         
     },
