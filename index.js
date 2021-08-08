@@ -22,7 +22,8 @@ const client = new Discord.Client({
   restTimeOffset: 0,
   restWsBridgetimeout: 100,
   disableEveryone: true,
-  partials: ['MESSAGE', 'CHANNEL', 'REACTION']
+  partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'],
+  intents:Discord.Intents.ALL
 });
 const disbut = require('discord-buttons');
 disbut(client);
