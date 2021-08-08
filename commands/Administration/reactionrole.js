@@ -172,7 +172,7 @@ module.exports = {
                     .setTitle('Reaction Role!')
                     .addField('Role', `${r1}`)
                     .setDescription(`React with ${e1} for the role ${r1}`)
-                    let ME=await CH.send(embed)
+                    let ME=await CH.send({embeds:embed})
                     ME.react(e1)
                 }else{
                 let embed=new Discord.MessageEmbed()
@@ -180,7 +180,7 @@ module.exports = {
                 .addField('Role', `${r1}`)
                 .addField('Role', `${r2}`)
                 .setDescription(`React with ${e1} for the role ${r1}\n or react with ${e2} for ${r2}`)
-                let ME=await CH.send(embed)
+                let ME=await CH.send({embeds:embed})
                 ME.react(e1)
                 ME.react(e2)
             }}finally{mongoose.connection.close()}

@@ -10,21 +10,21 @@ module.exports = {
     run: async (client, message, args, user, text, prefix) => {
     try{
       if(!args[0])
-        return message.channel.send(new MessageEmbed()
+        return message.channel.send({embeds:new MessageEmbed()
             .setColor(ee.wrongcolor)
             .setFooter(ee.footertext, ee.footericon)
             .setTitle(`❌ ERROR | You didn't provided a Text`)
             .setDescription(`Usage: \`${prefix}${this.usage}\``)
-        );
+        });
       message.channel.send(text);
     } catch (e) {
         console.log(String(e.stack).bgRed)
-        return message.channel.send(new MessageEmbed()
+        return message.channel.send({embeds:new MessageEmbed()
             .setColor(ee.wrongcolor)
             .setFooter(ee.footertext, ee.footericon)
             .setTitle(`❌ ERROR | An error occurred`)
             .setDescription(`\`\`\`${e.stack}\`\`\``)
-        );
+        });
     }
   }
 }

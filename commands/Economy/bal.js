@@ -28,7 +28,7 @@ module.exports = {
             message.lineReply('A new account has been created for you with a balance of 1000YBCs')
             mongoCurrency.giveCoins(message.author.id, message.guild.id, 1000)
             return}
-        message.channel.send(embed)
+        message.channel.send({embeds:embed})
         }
         else{
 
@@ -48,7 +48,7 @@ module.exports = {
             mongoCurrency.giveCoins(member.id, message.guild.id, 1000)
             return}
 
-        message.lineReply(embed)}
+        message.lineReply({embeds:embed})}
 
     }
   

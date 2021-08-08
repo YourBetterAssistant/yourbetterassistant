@@ -18,7 +18,7 @@ module.exports = {
         .setTitle(`JOB:${job}`)
         .setDescription('YOU MUST TYPE THIS WORD IN CHAT TO COMPLETER YOUR JOB!')
         .addField('Word:',`${item}`, true)
-        message.channel.send(embed)
+        message.channel.send({embeds:embed})
         const randomCoins = Math.floor(Math.random() * 500) + 1;
         let filter = m => m.author.id === message.author.id
         message.channel.awaitMessages(filter, {

@@ -1,5 +1,6 @@
 //const {Calculator}=require('weky')
 //const bt=require('discord-buttons')
+const Discord=require('discord.js')
 module.exports = {
     name: "calculator",
     description: "Spawns Calaculator",

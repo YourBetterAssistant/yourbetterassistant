@@ -25,7 +25,7 @@ module.exports = {
         .setURL(image_results[0].url)
         .setImage(image_results[0].url)
 
-        message.channel.send(embed)
+        message.channel.send({embeds:embed})
 
     },
 };

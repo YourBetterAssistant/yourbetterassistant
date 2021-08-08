@@ -42,12 +42,12 @@ module.exports = async (client, message) => {
     //if no cmd added return error
      if (cmd.length === 0){
       if(matchedPrefix.includes(client.user.id))
-        return message.channel.send(new Discord.MessageEmbed()
+        return message.channel.send({embeds:new Discord.MessageEmbed()
           .setColor(ee.color)
           .setFooter(ee.footertext,ee.footericon)
           .setTitle(`Hugh? I got pinged? Imma give you some help`)
           .setDescription(`To see all Commands type: \`${prefix}help\``)
-        );
+        });
       return;
       }
     //get the command from the collection
@@ -66,11 +66,11 @@ module.exports = async (client, message) => {
           const expirationTime = timestamps.get(message.author.id) + cooldownAmount; //get the amount of time he needs to wait until he can run the cmd again
           if (now < expirationTime) { //if he is still on cooldonw
             const timeLeft = (expirationTime - now) / 1000; //get the lefttime
-            return message.channel.send(new Discord.MessageEmbed()
+            return message.channel.send({embeds:new Discord.MessageEmbed()
               .setColor(ee.wrongcolor)
               .setFooter(ee.footertext,ee.footericon)
               .setTitle(`❌ Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`)
-            ); //send an information message
+            }); //send an information message
           }
         }
         timestamps.set(message.author.id, now); //if he is not on cooldown, set it to the cooldown
@@ -78,45 +78,45 @@ module.exports = async (client, message) => {
       try{
         //if Command has specific permission return error
         if(command.memberpermissions && !message.member.hasPermission(command.memberpermissions)) {
-          return message.channel.send(new Discord.MessageEmbed()
+          return message.channel.send({embeds:new Discord.MessageEmbed()
             .setColor(ee.wrongcolor)
             .setFooter(ee.footertext, ee.footericon)
             .setTitle("❌ Error | You are not allowed to run this command!")
             .setDescription('You Do Not Have The Required Perms!')
-          ).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
+          }).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
         }
         //if the Bot has not enough permissions return error
         let required_perms = ["ADD_REACTIONS","VIEW_CHANNEL","SEND_MESSAGES",
         "EMBED_LINKS","CONNECT","SPEAK"]
-        if(!message.guild.me.hasPermission(required_perms)){
+        if(!message.guild.me.Permission.has(required_perms)){
           try{ message.react("❌"); }catch{}
-          return message.channel.send(new Discord.MessageEmbed()
+          return message.channel.send({embeds:new Discord.MessageEmbed()
             .setColor(ee.wrongcolor)
             .setFooter(ee.footertext, ee.footericon)
             .setTitle("❌ Error | I don't have enough Permissions!")
             .setDescription("Please give me just `ADMINISTRATOR`, because I need it to delete Messages, Create Channel and execute all Admin Commands.\n If you don't want to give me them, then those are the exact Permissions which I need: \n> `" + required_perms.join("`, `") +"`")
-          )
+          })
         }
 
         //run the command with the parameters:  client, message, args, user, text, prefix,
         command.run(client, message, args, message.member, args.join(" "), prefix);
       }catch (e) {
         console.log(String(e.stack).red)
-        return message.channel.send(new Discord.MessageEmbed()
+        return message.channel.send({embeds:new Discord.MessageEmbed()
           .setColor(ee.wrongcolor)
           .setFooter(ee.footertext, ee.footericon)
           .setTitle("❌ Something went wrong while, running the: `" + command.name + "` command")
           .setDescription(`\`\`\`${e.message}\`\`\``)
-        ).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
+        }).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
       }
     }
     else //if the command is not found send an info msg
-    return message.channel.send(new Discord.MessageEmbed()
+    return message.channel.send({embeds:new Discord.MessageEmbed()
       .setColor(ee.wrongcolor)
       .setFooter(ee.footertext, ee.footericon)
       .setTitle(`❌ Unkown command, try: **\`${prefix}help\`**`)
       .setDescription(`To get help on a specific command, type \`${prefix}help [command name]\``)
-    ).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
+    }).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
     let countInfo=await countSchema.findOne({_id:message.guild.id})
     if(countInfo){
       const vc=countInfo.voiceChannelID
@@ -127,12 +127,12 @@ module.exports = async (client, message) => {
      }, 1000);}
 
   }catch (e){
-    return message.channel.send(
+    return message.channel.send({embeds:
     new Discord.MessageEmbed()
     .setColor("RED")
     .setTitle(`❌ ERROR | An error occurred`)
     .setDescription(`\`\`\`${e.stack}\`\`\``)
-);
+    });
   }
   /**
     * @INFO

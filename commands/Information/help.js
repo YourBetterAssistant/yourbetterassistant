@@ -14,7 +14,7 @@ module.exports = {
           const embed = new MessageEmbed();
           const cmd = client.commands.get(args[0].toLowerCase()) || client.commands.get(client.aliases.get(args[0].toLowerCase()));
           if (!cmd) {
-              return message.channel.send(embed.setColor(ee.wrongcolor).setDescription(`No Information found for command **${args[0].toLowerCase()}**`));
+              return message.channel.send({embeds:embed.setColor(ee.wrongcolor).setDescription(`No Information found for command **${args[0].toLowerCase()}**`)});
           }
           if (cmd.name) embed.addField("**Command :**", `\`${cmd.name}\``);
           if (cmd.name) embed.setTitle(`Detailed Information about:\`${cmd.name}\``);
@@ -32,7 +32,7 @@ module.exports = {
               embed.addField("Your prefix could have been changed, ping the bot to double check!")
               embed.setFooter("Syntax: <> = required, [] = optional");
           }
-          return message.channel.send(embed.setColor(ee.color));
+          return message.channel.send({embeds:embed.setColor(ee.color)});
         } else {
           const embed = new MessageEmbed()
               .setColor(ee.color)
@@ -63,16 +63,16 @@ module.exports = {
           } catch (e) {
               console.log(String(e.stack).red);
           }
-          message.channel.send(embed);
+          message.channel.send({embeds:embed});
       }
     } catch (e) {
         console.log(String(e.stack).bgRed)
-        return message.channel.send(new MessageEmbed()
+        return message.channel.send({embeds:new MessageEmbed()
             .setColor(ee.wrongcolor)
             .setFooter(ee.footertext, ee.footericon)
             .setTitle(`❌ ERROR | An error occurred`)
             .setDescription(`\`\`\`${e.stack}\`\`\``)
-        );
+        });
     }
   }
 }

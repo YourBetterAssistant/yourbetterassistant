@@ -22,6 +22,6 @@ module.exports = {
     .setTitle(`${message.guild.name}\'s Leaderboard`)
     .setDescription(`${mappedLeaderboard.join('\n')}`);
     
-    message.channel.send(embed);
+    message.channel.send({embeds:embed});
     },
 };
