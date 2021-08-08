@@ -42,6 +42,7 @@
     "shelljs": "^0.8.4",
     "spotify-url-info": "^2.2.3",
     "topgg-autoposter": "^2.0.0",
+    "util": "^0.12.4",
     "weather-api-data": "^1.0.7",
     "weather-js": "^2.0.0",
     "weky": "^3.1.0",
