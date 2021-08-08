@@ -4,7 +4,7 @@ require('dotenv').config()
 require('@weky/inlinereply')
 require('discord-inline-reply'); 
 const mongoCurrency = require('discord-mongo-currency-fork');
-const commandBase=require('./events/guild/message')
+const commandBase=require('./events/guild/messageCreate')
 const { AutoPoster } = require('topgg-autoposter')
 const Levels=require('discord-xp')
 const mongo=require('./botconfig/mongo')
@@ -41,16 +41,9 @@ client.cooldowns = new Discord.Collection(); //an collection for cooldown comman
 ["command", "events"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
-client.on('message', async(message)=>{
-  if (!message.guild) return;
-  if (message.author.bot) return;
+client.on('messageCreate', async(message)=>{
+
   
-  const randomAmountOfXp = Math.floor(Math.random() * 29) + 1; // Min 1, Max 30
-  const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
-  if (hasLeveledUp) {
-    const user = await Levels.fetch(message.author.id, message.guild.id);
-    message.channel.send(`${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`);
-  }
 })
 
 
