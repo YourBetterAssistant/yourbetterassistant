@@ -1,4 +1,4 @@
-const {Sudo}=require('weky')
+//const {Sudo}=require('weky')
 
   
 
@@ -12,6 +12,7 @@ module.exports = {
     cooldown: 10,
     usage: "sudo <user> <message>",
     run:async(client,message, args) =>{
+        return message.lineReply('This command is currently disabled please check top.gg for more info')
         if(!args[0])return message.reply('Who is the user?')
         if(!args[1])return message.reply('What is the message?')
         const msg = args.slice(1).join(" ")

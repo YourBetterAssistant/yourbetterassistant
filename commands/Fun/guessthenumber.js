@@ -1,5 +1,5 @@
 const mongoCurrency=require('discord-mongo-currency-fork')
-const {GuessTheNumber}=require('weky')
+//const {GuessTheNumber}=require('weky')
 module.exports = {
     name: "guessthenumber",
     aliases: ["gtn"],
@@ -10,6 +10,7 @@ module.exports = {
     cooldown: 5,
     usage: "guessthenumber",
     run:async(client, message, args)=>{
+        return message.lineReply('This command is currently disabled please check top.gg for more info')
         await GuessTheNumber({
             message: message,
             embed: {
