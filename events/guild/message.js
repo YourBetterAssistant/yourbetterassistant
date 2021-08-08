@@ -77,7 +77,7 @@ module.exports = async (client, message) => {
         setTimeout(() => timestamps.delete(message.author.id), cooldownAmount); //set a timeout function with the cooldown, so it gets deleted later on again
       try{
         //if Command has specific permission return error
-        if(command.memberpermissions && !message.member.hasPermission(command.memberpermissions)) {
+        if(command.memberpermissions && !message.member.permissions.has(command.memberpermissions)) {
           return message.channel.send({embeds:new Discord.MessageEmbed()
             .setColor(ee.wrongcolor)
             .setFooter(ee.footertext, ee.footericon)
@@ -88,7 +88,7 @@ module.exports = async (client, message) => {
         //if the Bot has not enough permissions return error
         let required_perms = ["ADD_REACTIONS","VIEW_CHANNEL","SEND_MESSAGES",
         "EMBED_LINKS","CONNECT","SPEAK"]
-        if(!message.guild.me.Permission.has(required_perms)){
+        if(!message.guild.me.permissions.has(required_perms)){
           try{ message.react("❌"); }catch{}
           return message.channel.send({embeds:new Discord.MessageEmbed()
             .setColor(ee.wrongcolor)
