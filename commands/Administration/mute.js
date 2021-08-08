@@ -54,14 +54,14 @@ module.exports = {
             .addField('Reason:', reason,true)
             .addField('Duration:', duration+'ms',true)
             .setColor('RANDOM')
-            message.channel.send({embeds:embed})
+            message.channel.send({embeds:[embed]})
     if(duration){
         setTimeout(function(){
             userID.roles.set([memberrole])
             let embed= new Discord.MessageEmbed().setTitle('Unmute')
             .setDescription(`${userID}'s mute has ended. The mute lasted ${duration}ms`)
             .setColor('RANDOM')
-            message.channel.send({embeds:embed})
+            message.channel.send({embeds:[embed]})
             
         }, ms(duration))
     }

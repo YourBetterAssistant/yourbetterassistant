@@ -26,7 +26,7 @@ module.exports = {
                 
                 
             )
-            message.channel.send({embeds:embed})
+            message.channel.send({embeds:[embed]})
 
         }).catch((error)=>{
             message.channel.send('Something Happened')

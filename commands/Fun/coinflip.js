@@ -22,13 +22,13 @@ module.exports = {
             const embed=new Discord.MessageEmbed().setTitle('You Got Heads!')
             .setDescription('congrats you got heads!')
             .setImage('https://lh3.googleusercontent.com/SRJZryeljJHRxVt6b_nCT_XWDKwDqgViehnN6yc-KXGQgZEb7KbVMhc2dW7P69yvCcvnTA=s87')
-            message.channel.send({embeds:embed})
+            message.channel.send({embeds:[embed]})
         } 
         if(value===tails){
             const embed=new Discord.MessageEmbed().setTitle('You Got Tails!')
             .setDescription('congrats you got tails!')
             .setImage('https://lh3.googleusercontent.com/etXQadBecvemERl7DWSizrPRVHdrsHcNeAq_EYffM77UuAFbwLOWfJY1AqbkH9Z9U809_A=s85')
-            message.channel.send({embeds:embed})
+            message.channel.send({embeds:[embed]})
 
         }
 

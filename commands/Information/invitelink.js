@@ -14,6 +14,6 @@ module.exports = {
         .setColor('AQUA')
         
         
-    message.channel.send({embeds:embed});
+    message.channel.send({embeds:[embed]});
     },
 };

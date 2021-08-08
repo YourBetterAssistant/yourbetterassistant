@@ -30,7 +30,7 @@ module.exports = {
                 .addField("Wind Display", result[0].current.winddisplay, true)
                 .setThumbnail(result[0].current.imageUrl);
                 
-                message.channel.send({embeds:embed})
+                message.channel.send({embeds:[embed]})
             }catch (err){
                 message.channel.send('error')}
             

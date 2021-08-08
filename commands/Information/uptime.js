@@ -18,11 +18,12 @@ module.exports = {
       });
     } catch (e) {
         console.log(String(e.stack).bgRed)
-        return message.channel.send({embeds:new MessageEmbed()
+        let embed=new MessageEmbed()
             .setColor(ee.wrongcolor)
             .setFooter(ee.footertext, ee.footericon)
             .setTitle(`❌ ERROR | An error occurred`)
             .setDescription(`\`\`\`${e.stack}\`\`\``)
+        return message.channel.send({embeds:[embed]
         });
     }
   }

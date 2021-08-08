@@ -51,7 +51,7 @@ module.exports = {
             let embed= new Discord.MessageEmbed().setTitle('unmute')
             .setDescription(`${userID} was unmuted by ${message.author}`)
             .setColor('RANDOM')
-            message.channel.send({embeds:embed})
+            message.channel.send({embeds:[embed]})
 
             
         }
