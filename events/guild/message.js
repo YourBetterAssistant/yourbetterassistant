@@ -67,11 +67,12 @@ module.exports = async (client, message) => {
           const expirationTime = timestamps.get(message.author.id) + cooldownAmount; //get the amount of time he needs to wait until he can run the cmd again
           if (now < expirationTime) { //if he is still on cooldonw
             const timeLeft = (expirationTime - now) / 1000; //get the lefttime
-            return message.channel.send({embeds:new Discord.MessageEmbed()
-              .setColor(ee.wrongcolor)
-              .setFooter(ee.footertext,ee.footericon)
-              .setTitle(`❌ Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`)
-            }); //send an information message
+            let embed=new Discord.MessageEmbed()
+            .setColor(ee.wrongcolor)
+            .setFooter(ee.footertext,ee.footericon)
+            .setTitle(`❌ Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`)
+            return message.channel.send({embeds:[embed]});
+             //send an information message
           }
         }
         timestamps.set(message.author.id, now); //if he is not on cooldown, set it to the cooldown
