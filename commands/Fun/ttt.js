@@ -1,6 +1,6 @@
 const djsGames = require('djs-games')
 const TicTacToe = new djsGames.TicTacToe()
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 module.exports = {
     name: "ttt",
     aliases: ["tictactoe"],

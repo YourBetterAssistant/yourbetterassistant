@@ -1,7 +1,7 @@
 const { readdirSync } = require("fs");
 const ascii = require("ascii-table");
 let table = new ascii("Commands");
-const commandBase=require('../events/guild/messageCreate')
+const commandBase=require('../events/guild/message')
 table.setHeading("Command", "Load status");
 console.log("Welcome to SERVICE HANDLER /--/ By https://milrato.eu /--/ Discord: Tomato#6966".yellow);
 module.exports = (client) => {

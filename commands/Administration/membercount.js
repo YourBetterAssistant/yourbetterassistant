@@ -1,6 +1,6 @@
 const mongo = require('../../botconfig/mongo');
 const countSchema=require('../../Schemas/countSchema')
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 module.exports = {
     name: "membercount",
     description: "Set up member count NOTE: if no id is provided a new vc will be created",

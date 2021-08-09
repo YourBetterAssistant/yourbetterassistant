@@ -1,7 +1,7 @@
 
 const mongoCurrency=require('discord-mongo-currency-fork')
 const Discord=require('discord.js')
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 module.exports = {
     name: "deposit",
     aliases: ["dep"],

@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const mongo = require('../../botconfig/mongo');
 const serverConfSchema=require('../../Schemas/serverConfSchema')
 let roles={}
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 const ms=require('ms')
 module.exports = {
     name: "unmute",

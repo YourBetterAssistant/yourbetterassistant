@@ -1,5 +1,5 @@
 const {DiscordTogether}=require('discord-together')
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 module.exports = {
     name: "poker",
     description: "Play poker with your buds NOTE:This only works if you are 18+",

@@ -1,7 +1,7 @@
 const Discord=require('discord.js');
 const mongo = require('../../botconfig/mongo');
 const welcomeSchema=require('../../Schemas/welcomeSchema')
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 module.exports = {
     name: "welcome",
     description: "Sends the welcome message to a new message NOTE:DO THIS COMMAND IN THE CHANNEL YOU WISH FOR THE MESSAGE TO BE SENT",

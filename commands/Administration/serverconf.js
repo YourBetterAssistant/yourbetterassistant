@@ -1,6 +1,6 @@
 const mongo = require('../../botconfig/mongo');
 const serverConfSchema = require("../../Schemas/serverConfSchema");
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 module.exports = {
     name: "serverconf",
     description: "set up the server for the bot You also need to set up membercount,memberlog and welcome",

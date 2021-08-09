@@ -1,6 +1,6 @@
 const { ClientApplication } = require("discord.js");
 const shell = require("shelljs");
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 
 module.exports = {
     name: "restart",

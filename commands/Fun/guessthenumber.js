@@ -1,5 +1,5 @@
 const mongoCurrency=require('discord-mongo-currency-fork')
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 //const {GuessTheNumber}=require('weky')
 module.exports = {
     name: "guessthenumber",

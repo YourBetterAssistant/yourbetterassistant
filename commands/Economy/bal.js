@@ -1,7 +1,7 @@
 const economy=require('../../handlers/economy')
 const Discord=require('discord.js')
 const mongoCurrency=require('discord-mongo-currency-fork')
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 module.exports = {
     name: "bal",
     aliases: ["balance"],

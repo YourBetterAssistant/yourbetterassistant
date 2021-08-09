@@ -1,6 +1,6 @@
 const djsGames = require('djs-games')
 const ConnectFour = new djsGames.ConnectFour()
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 module.exports = {
     name: "connect4",
     aliases: ["c4"],

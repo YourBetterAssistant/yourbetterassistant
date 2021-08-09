@@ -1,4 +1,5 @@
 const {DiscordTogether}=require('discord-together')
+const {reply}=require('../../exports')
 module.exports = {
     name: "fishing",
     description: "Play fishing with your buds",

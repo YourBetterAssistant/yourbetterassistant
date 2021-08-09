@@ -1,6 +1,6 @@
 const mongo = require('../../botconfig/mongo');
 const serverConfSchema = require('../../Schemas/serverConfSchema');
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 
 module.exports = {
     name: "ban",

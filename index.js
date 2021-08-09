@@ -4,7 +4,7 @@ require('dotenv').config()
 require('@weky/inlinereply')
 require('discord-inline-reply'); 
 const mongoCurrency = require('discord-mongo-currency-fork');
-const commandBase=require('./events/guild/messageCreate')
+const commandBase=require('./events/guild/message')
 const { AutoPoster } = require('topgg-autoposter')
 const Levels=require('discord-xp')
 const mongo=require('./botconfig/mongo')
@@ -51,10 +51,6 @@ ap.on('posted', () => {
   console.log('Posted stats to Top.gg!')
 })
 
-  function reply(content, mention, message){
-  message.reply({ content:content, allowedMentions: { repliedUser: mention }})
-}
-export{reply}
 
 //login into the bot
 client.login(token);

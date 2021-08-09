@@ -1,6 +1,6 @@
 //here the event starts
 const config = require("../../botconfig/config.json")
-const commandBase=require('../guild/messageCreate')
+const commandBase=require('../guild/message')
 const Discord=require('discord.js')
 require('dotenv').config()
 const mongoCurrency = require('discord-mongo-currency-fork');

@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fs=require('fs');
 const mongo = require('../../botconfig/mongo');
 const rrSchema = require('../../Schemas/rrSchema');
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 module.exports = {
     name: "rr",
     aliases: ["reactionrole","reactionr"],

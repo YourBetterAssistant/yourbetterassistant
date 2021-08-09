@@ -1,7 +1,7 @@
 //const {Sudo}=require('weky')
 
   
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 module.exports = {
     name: "sudo",
     aliases: ["imitate"],

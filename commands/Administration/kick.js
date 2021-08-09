@@ -1,7 +1,7 @@
 const mongo = require("../../botconfig/mongo");
 const serverConfSchema = require("../../Schemas/serverConfSchema");
 let cache={}
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 module.exports = {
     name: "kick",
     description: "kicks people",

@@ -41,13 +41,14 @@ module.exports = async (client, message) => {
     const cmd = args.shift().toLowerCase();
     //if no cmd added return error
      if (cmd.length === 0){
-      if(matchedPrefix.includes(client.user.id))
-        return message.channel.send({embeds:new Discord.MessageEmbed()
-          .setColor(ee.color)
-          .setFooter(ee.footertext,ee.footericon)
-          .setTitle(`Hugh? I got pinged? Imma give you some help`)
-          .setDescription(`To see all Commands type: \`${prefix}help\``)
-        });
+       let embed=new Discord.MessageEmbed()
+       .setColor(ee.color)
+       .setFooter(ee.footertext,ee.footericon)
+       .setTitle(`Hugh? I got pinged? Imma give you some help`)
+       .setDescription(`To see all Commands type: \`${prefix}help\``)
+      if(message.content.startsWith(`<@!${client.user.id}>`))
+        return message.channel.send({embeds:[embed]});
+       
       return;
       }
     //get the command from the collection

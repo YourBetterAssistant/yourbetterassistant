@@ -1,4 +1,4 @@
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 module.exports = {
     name: "fasttyper",
     aliases: ["typer"],

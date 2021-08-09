@@ -1,5 +1,5 @@
 const shell=require('shelljs')
-import {reply} from '../../index'
+const {reply}=require('../../exports')
 module.exports = {
     name: "pull",
     description: "pulls the latest version of this code from github",
