@@ -3,6 +3,8 @@ const mongoCurrency=require('discord-mongo-currency-fork')
 const {reply}=require('../../exports')
 const workSchema=require('../../Schemas/workSchema')
 const mongo=require('../../botconfig/mongo')
+const id=require('../../botconfig/id.json')
+const s=require('../../botconfig/salary.json')
 module.exports = {
     name: "work",
     description: "work ",
@@ -27,6 +29,10 @@ module.exports = {
           }
           job=j.job}catch(err){console.log(" erro smh")}
         })
+        let salary
+        if(job===id[1]) {salary===s[1]}
+        if(job===id[2]) {salary===s[2]}
+        if(job===id[3]) {salary===s[3]}
         let possibleJobs=['FRIDGE', 'BUY', 'JOBS', 'TV', 'POLITICS', 'LIFE', 'CHILDREN']
         var item = possibleJobs[Math.floor(Math.random()*possibleJobs.length)];
         let embed=new Discord.MessageEmbed()
@@ -46,8 +52,8 @@ module.exports = {
             console.log('Why ')
             if (msg.content.startsWith(item)) {
               console.log('k')
-              msg.channel.send(`CORRECT YOU HAVE EARNT 1000YBCs`)
-              mongoCurrency.giveCoins(msg.author.id, msg.guild.id, 1000)
+              msg.channel.send(`CORRECT YOU HAVE EARNT ${salary}YBCs`)
+              mongoCurrency.giveCoins(msg.author.id, msg.guild.id, salary)
               return
 
             } else {
