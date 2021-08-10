@@ -43,7 +43,7 @@ module.exports = {
             }
             if(msg.content.startsWith('2')){
                 let j=id[2]
-                await workSchema.findOneAndUpdate({
+                workSchema.findOneAndUpdate({
                     guildID:msg.guild.id,
                     userID:msg.author.id
                 },
