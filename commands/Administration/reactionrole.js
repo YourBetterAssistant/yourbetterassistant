@@ -27,7 +27,8 @@ module.exports = {
         })
         let filter = m => m.author.id === message.author.id
         //channelID
-        await message.channel.awaitMessages(filter, {
+        await message.channel.awaitMessages({
+            filter,
             max:1,
             time:100000,
             errors:['time']
@@ -49,7 +50,8 @@ module.exports = {
 
           })
           message.channel.send('Now type the emoji')
-          await message.channel.awaitMessages(filter, {
+          await message.channel.awaitMessages({
+            filter,
             max:1,
             time:100000,
             errors:['time']
@@ -69,7 +71,8 @@ module.exports = {
           //emoji2
           })
           message.channel.send('I need the second emoji. If you do not need one reply with null')
-          await message.channel.awaitMessages(filter, {
+          await message.channel.awaitMessages({
+            filter, 
             max:1,
             time:100000,
             errors:['time']
@@ -90,7 +93,8 @@ module.exports = {
           })
           //role1
           message.channel.send('Tell me the role like the name e.g Admin *case sensitive*\n This is for first Emoji')
-          await message.channel.awaitMessages(filter, {
+          await message.channel.awaitMessages({
+            filter, 
             max:1,
             time:100000,
             errors:['time']
@@ -111,7 +115,8 @@ module.exports = {
           })
           //role2
           message.channel.send('Tell me the role like the name e.g Admin *case sensitive*\n This is for second Emoji\nType null if you do not have a second emoji')
-          await message.channel.awaitMessages(filter, {
+          await message.channel.awaitMessages({
+            filter, 
             max:1,
             time:100000,
             errors:['time']

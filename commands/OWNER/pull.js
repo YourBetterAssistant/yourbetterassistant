@@ -15,7 +15,8 @@ module.exports = {
         
         message.reply('Do you want me to reboot')
         let filter=m=>m.author.id===message.author.id
-        message.channel.awaitMessages(filter, {
+        message.channel.awaitMessages({
+            filter, 
             max:1,
             time:10000,
             errors:['time'],

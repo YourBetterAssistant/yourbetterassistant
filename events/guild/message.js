@@ -139,14 +139,11 @@ module.exports = async (client, message) => {
        process.on('uncaughtException', function (err) {
         console.log('Caught exception: ', err);
       });
-      setTimeout(function () {
+      /*setTimeout(function () {
         console.log('This will still run.');
-      }, 500);
+      }, 500);*/
       
       // Intentionally cause an exception, but don't catch it.
-      nonexistentFunc();
-      console.log('This will not run.');
-      
 
   }catch (e){
     let embed=new Discord.MessageEmbed()
@@ -183,9 +180,11 @@ module.exports.loadPrefixes=async(client)=>{
       }
       console.log(guildPrefixes)
     
-    }finally{
-      mongoose.connection.close()
-
+    }
+    catch(err){
+      await mongoose.connection.close()
+      console.log(`An error occured`)
+      return
     }
     
 

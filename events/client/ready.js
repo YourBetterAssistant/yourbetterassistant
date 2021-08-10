@@ -9,7 +9,6 @@ const welcomeSchema=require('../../Schemas/welcomeSchema')
 const Levels = require("discord-xp");
 
 const mongo=require('../../botconfig/mongo');
-const { lavacordManager } = require("../..");
 module.exports = async client => {
   try{
     const stringlength = 69;
@@ -25,7 +24,7 @@ module.exports = async client => {
   try{
     client.user.setActivity(`${client.guilds.cache.size} servers`, { type: "WATCHING" });
   }catch (e) {
-      console.log(String(e.stack).red);
+      return console.log(String(e.stack).red);
   }
   //Change status each 10 minutes
   setInterval(()=>{
@@ -33,7 +32,7 @@ module.exports = async client => {
       client.user.setActivity('Ping me for help!', { type: "PLAYING" });
       
     }catch (e) {
-        console.log(String(e.stack).red);
+        return console.log(String(e.stack).red);
     }
   }, 10*60*1000)
   await mongo().then(mongoose=>{

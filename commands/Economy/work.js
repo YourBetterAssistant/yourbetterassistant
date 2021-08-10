@@ -17,18 +17,21 @@ module.exports = {
         var item = possibleJobs[Math.floor(Math.random()*possibleJobs.length)];
         let embed=new Discord.MessageEmbed()
         .setTitle(`JOB:${job}`)
-        .setDescription('YOU MUST TYPE THIS WORD IN CHAT TO COMPLETER YOUR JOB!')
+        .setDescription('Type the word in')
         .addField('Word:',`${item}`, true)
         message.channel.send({embeds:[embed]})
         const randomCoins = Math.floor(Math.random() * 500) + 1;
         let filter = m => m.author.id === message.author.id
-        message.channel.awaitMessages(filter, {
+        message.channel.awaitMessages({
+            filter,
             max: 1,
             time: 10000,
             errors: ['time']
           }).then(msg=>{
             msg = msg.first()
+            console.log('Why ')
             if (msg.content.startsWith(item)) {
+              console.log('k')
               msg.channel.send(`CORRECT YOU HAVE EARNT 1000YBCs`)
               mongoCurrency.giveCoins(msg.author.id, msg.guild.id, 1000)
               return
