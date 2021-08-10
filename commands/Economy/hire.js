@@ -55,7 +55,7 @@ module.exports = {
             }
             if(msg.content.startsWith('3')){
                 let j=id[3]
-                await workSchema.findOneAndUpdate({
+                workSchema.findOneAndUpdate({
                     guildID:msg.guild.id,
                     userID:msg.author.id
                 },
