@@ -139,7 +139,6 @@ module.exports = async (client, message) => {
        process.on('uncaughtException', function (err) {
         console.log('Caught exception: ', err);
       });
-      
       setTimeout(function () {
         console.log('This will still run.');
       }, 500);

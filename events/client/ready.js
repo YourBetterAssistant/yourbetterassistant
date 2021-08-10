@@ -23,14 +23,15 @@ module.exports = async client => {
   }catch{ /* */ }
 
   try{
-    client.user.setActivity('Made by yo-ooyo', { type: "PLAYING" });
+    client.user.setActivity(client.guilds.cache.size(), { type: "WATCHING" });
   }catch (e) {
       console.log(String(e.stack).red);
   }
   //Change status each 10 minutes
   setInterval(()=>{
     try{
-      client.user.setActivity('Mr Beast', { type: "WATCHING" });
+      client.user.setActivity('Ping me for help!', { type: "PLAYING" });
+      
     }catch (e) {
         console.log(String(e.stack).red);
     }
