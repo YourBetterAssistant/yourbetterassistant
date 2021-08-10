@@ -19,13 +19,13 @@ module.exports = {
             {name:'ID:3', value:'Walmart Employee - Salary - 4000YBCs', inline:true},
             )
         .setColor('RANDOM')
-       reply({embeds:[embed]}, true, message)
+       message.channel.send({embeds:[embed]})
         let filter=m=>m.author.id===message.author.id
         message.channel.awaitMessages({
             filter,
             max:1,
-            time:1000,
-            errors:[time]
+            time:10000,
+            errors:['time']
         }).then(msg=>{
             msg=msg.first()
             if(isNaN(msg.content))return reply('Not a number lost your chance try again in a couple of hours')
@@ -39,7 +39,8 @@ module.exports = {
                     guildID:msg.guild.id,
                     userID:msg.author.id,
                     job:j
-                })
+                },{upsert:true})
+                reply(`Your job is now ${id[1]}`)
             }
             if(msg.content.startsWith('2')){
                 let j=id[2]
@@ -51,7 +52,8 @@ module.exports = {
                     guildID:msg.guild.id,
                     userID:msg.author.id,
                     job:j
-                })
+                },{upsert:true})
+                reply(`Your job is now ${id[2]}`)
             }
             if(msg.content.startsWith('3')){
                 let j=id[3]
@@ -63,7 +65,8 @@ module.exports = {
                     guildID:msg.guild.id,
                     userID:msg.author.id,
                     job:j
-                })
+                },{upsert:true})
+                reply(`Your job is now ${id[3]}`)
             }
 
         }).catch(collected=>{
