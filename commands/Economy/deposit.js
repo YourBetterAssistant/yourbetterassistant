@@ -18,7 +18,7 @@ module.exports = {
         let user=message.author
         let guild=message.guily
         reply({content:`Depositing ${coins}YMCs right now!`, allowedMentions:{repliedUser:true}})
-        mongoCurrency.deposit(user.id, guild.id, coins)
+        await mongoCurrency.deposit(user.id, guild.id, coins)
         
     },
 };

@@ -15,7 +15,7 @@ module.exports = {
         let user=message.author
         let guild=message.guild
         reply(`Withdrawing ${coins}YMCs from the bank!`, true, message)
-        mongoCurrency.withdraw(user.id, guild.id, coins)
+        await mongoCurrency.withdraw(user.id, guild.id, coins)
 
     },
 };

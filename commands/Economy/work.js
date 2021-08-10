@@ -1,6 +1,8 @@
 const Discord=require('discord.js')
 const mongoCurrency=require('discord-mongo-currency-fork')
 const {reply}=require('../../exports')
+const workSchema=require('../../Schemas/workSchema')
+const mongo=require('../../botconfig/mongo')
 module.exports = {
     name: "work",
     description: "work ",
@@ -11,8 +13,20 @@ module.exports = {
     cooldown: 60*60*1,
     usage: "work",
     run:async(client, message, args)=>{
-        reply("Currently You can only work as a 'Apprentice Commoner' later on you will be able to work as different porfessions", false, message)
-        let job='APPRENTIC COMMONER'
+        let job
+        await mongo().then(mongoose=>{
+          try{
+          let j=await workSchema.findOne({
+            guildID:message.guild.id,
+            userID:message.author.id
+          })
+          if(!j){
+            reply('You do not have a job here is compensation, 1000YBCs I highly suggest getting one')
+            await mongoCurrency.giveCoins(msg.author.id, msg.guild.id, 1000)
+            return
+          }
+          job=j.job}catch(err){console.log(" erro smh")}
+        })
         let possibleJobs=['FRIDGE', 'BUY', 'JOBS', 'TV', 'POLITICS', 'LIFE', 'CHILDREN']
         var item = possibleJobs[Math.floor(Math.random()*possibleJobs.length)];
         let embed=new Discord.MessageEmbed()
@@ -33,18 +47,18 @@ module.exports = {
             if (msg.content.startsWith(item)) {
               console.log('k')
               msg.channel.send(`CORRECT YOU HAVE EARNT 1000YBCs`)
-              mongoCurrency.giveCoins(msg.author.id, msg.guild.id, 1000)
+              await mongoCurrency.giveCoins(msg.author.id, msg.guild.id, 1000)
               return
 
             } else {
               msg.channel.send(`WRONG! YOU HAVE EARNT ${randomCoins}YBCs`)}
-              mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins)
+              await mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins)
               return
 
           }).catch((collected)=>{
             let msg=message
             msg.channel.send(`TIMES UP! YOU HAVE EARNT ${randomCoins}YBCs`)
-            mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins)
+            await mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins)
             return
 
           })

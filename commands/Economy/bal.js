@@ -17,9 +17,9 @@ module.exports = {
             let member=message.author
             const user = await mongoCurrency.findUser(member.id, message.guild.id); // Get the user from the database.
             if(!user){
-                mongoCurrency.createUser(message.author.id, message.guild.id)
+                await mongoCurrency.createUser(message.author.id, message.guild.id)
                 reply('A new account has been created for you with a balance of 1000YBCs', true, message)
-                mongoCurrency.giveCoins(message.author.id, message.guild.id, 1000)
+                await mongoCurrency.giveCoins(message.author.id, message.guild.id, 1000)
                 return}
             const embed = new Discord.MessageEmbed()
             embed.setTitle(`Your Balance`)
@@ -44,9 +44,9 @@ module.exports = {
             )
         .setColor('RANDOM')
         if(!user){
-            mongoCurrency.createUser(member.id, message.guild.id)
+            await mongoCurrency.createUser(member.id, message.guild.id)
             message.reply('A new account has been created for you with a balance of 1000YBCs', true, message)
-            mongoCurrency.giveCoins(member.id, message.guild.id, 1000)
+            await mongoCurrency.giveCoins(member.id, message.guild.id, 1000)
             return}
 
         reply({embeds:[embed]}, true, message)}
