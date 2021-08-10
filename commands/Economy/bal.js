@@ -1,4 +1,4 @@
-const economy=require('../../handlers/economy')
+
 const Discord=require('discord.js')
 const mongoCurrency=require('discord-mongo-currency-fork')
 const {reply}=require('../../exports')
@@ -16,20 +16,20 @@ module.exports = {
 
             let member=message.author
             const user = await mongoCurrency.findUser(member.id, message.guild.id); // Get the user from the database.
+            if(!user){
+                mongoCurrency.createUser(message.author.id, message.guild.id)
+                reply('A new account has been created for you with a balance of 1000YBCs', true, message)
+                mongoCurrency.giveCoins(message.author.id, message.guild.id, 1000)
+                return}
             const embed = new Discord.MessageEmbed()
-        .setTitle(`Your Balance`)
-        .addFields(
-            {name:'Wallet', value:user.coinsInWallet},
+            embed.setTitle(`Your Balance`)
+            embed.addFields(
+            {name:'Wallet', value:`${user.coinsInWallet}`},
             {name:'Bank', value:`${user.coinsInBank}/${user.bankSpace}`},
-            {name:'Total', value:user.coinsInBank + user.coinsInWallet}
+            {name:'Total', value:`${user.coinsInBank+user.coinsInWallet}`}
             )
-        .setColor('RANDOM')
-        if(!user){
-            mongoCurrency.createUser(message.author.id, message.guild.id)
-            reply('A new account has been created for you with a balance of 1000YBCs', true, message)
-            mongoCurrency.giveCoins(message.author.id, message.guild.id, 1000)
-            return}
-        message.channel.send({embeds:[embed]})
+            embed.setColor('RANDOM')
+            message.channel.send({embeds:[embed]})
         }
         else{
 
@@ -38,9 +38,9 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
         .setTitle(`${member.user.username}'s Balance`)
         .addFields(
-            {name:'Wallet', value:user.coinsInWallet},
-            {name:'Bank', value:`${user.coinsInBank}/${user.bankSpace}`},
-            {name:'Total', value:user.coinsInBank + user.coinsInWallet}
+            {name:'Wallet', value:`${user.coinsInWallet}`, inline:true},
+            {name:'Bank', value:`${user.coinsInBank}/${user.bankSpace}`, inline:true},
+            {name:'Total', value:`${user.coinsInBank} + ${user.coinsInWallet}`, inline:true}
             )
         .setColor('RANDOM')
         if(!user){

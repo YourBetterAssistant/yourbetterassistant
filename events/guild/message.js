@@ -137,11 +137,12 @@ module.exports = async (client, message) => {
        message.channel.send(`${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`);}
 
   }catch (e){
-    return message.channel.send({embeds:
-    new Discord.MessageEmbed()
+    let embed=new Discord.MessageEmbed()
     .setColor("RED")
     .setTitle(`❌ ERROR | An error occurred`)
     .setDescription(`\`\`\`${e.stack}\`\`\``)
+    return message.channel.send({embeds:[embed]
+    
     });
   }
   /**

@@ -15,16 +15,14 @@ const colors = require("colors"); //this Package is used, to change the colors o
 const fs = require("fs"); //this package is for reading files and getting their inputs
 
 //Creating the Discord.js Client for This Bot with some default settings ;) and with partials, so you can fetch OLD messages
-const client = new Discord.Client({
-  messageCacheLifetime: 60,
-  fetchAllMembers: false,
-  messageCacheMaxSize: 10,
-  restTimeOffset: 0,
-  restWsBridgetimeout: 100,
-  disableEveryone: true,
-  partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'],
-  intents:["GUILDS","GUILD_MESSAGES"]
-});
+const client=new Discord.Client({fetchAllMembers: true, messageCacheMaxSize: 10, disableEveryone: false,partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'],intents:["GUILDS", "GUILD_MESSAGES"]})
+  
+ 
+ 
+  
+
+
+
 /*const disbut = require('discord-buttons');
 disbut(client);*/
 const ap = AutoPoster(process.env.TOPGGTOKEN, client)
