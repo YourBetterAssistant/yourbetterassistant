@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, MessageFlags } = require('discord.js');
 const {reply}=require('../../exports')
 const id=require('../../botconfig/id.json');
 const workSchema = require('../../Schemas/workSchema');
@@ -19,7 +19,7 @@ module.exports = {
             {name:'ID:3', value:'Walmart Employee - Salary - 4000YBCs', inline:true},
             )
         .setColor('RANDOM')
-        reply({embeds:embed}, true, message)
+        message.channel.send(embed)
         let filter=m=>m.author.id===message.author.id
         message.channel.awaitMessages({
             filter,
