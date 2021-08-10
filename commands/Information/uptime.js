@@ -11,10 +11,11 @@ module.exports = {
     description: "Returns the duration on how long the Bot is online",
     run: async (client, message, args, user, text, prefix) => {
     try{
-      message.channel.send({embeds:new MessageEmbed()
-        .setColor(ee.color)
-        .setFooter(ee.footertext, ee.footericon)
-        .setTitle(`:white_check_mark: **${client.user.username}** is since:\n ${duration(client.uptime)} online`)
+      let embed=new MessageEmbed()
+      .setColor(ee.color)
+      .setFooter(ee.footertext, ee.footericon)
+      .setTitle(`:white_check_mark: **${client.user.username}** is since:\n ${duration(client.uptime)} online`)
+      message.channel.send({embeds:[embed]
       });
     } catch (e) {
         console.log(String(e.stack).bgRed)
