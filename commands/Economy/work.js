@@ -14,7 +14,7 @@ module.exports = {
     usage: "work",
     run:async(client, message, args)=>{
         let job
-        await mongo().then(mongoose=>{
+        await mongo().then(async mongoose=>{
           try{
           let j=await workSchema.findOne({
             guildID:message.guild.id,
