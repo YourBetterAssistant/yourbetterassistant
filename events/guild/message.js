@@ -4,7 +4,7 @@
 */
 const commandPrefixSchema=require('../../Schemas/prefixSchema')
 const Levels=require('discord-xp')
-const process=require(process)
+let process=require('process')
 const mongo=require('../../botconfig/mongo')
 const guildPrefixes={}
 let countSchema=require('../../Schemas/countSchema')
