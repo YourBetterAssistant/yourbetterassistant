@@ -113,13 +113,14 @@ module.exports = async (client, message) => {
         }).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
       }
     }
-    else //if the command is not found send an info msg
-    return message.channel.send({embeds:new Discord.MessageEmbed()
-      .setColor(ee.wrongcolor)
-      .setFooter(ee.footertext, ee.footericon)
-      .setTitle(`❌ Unkown command, try: **\`${prefix}help\`**`)
-      .setDescription(`To get help on a specific command, type \`${prefix}help [command name]\``)
-    }).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
+    else{ //if the command is not found send an info msg
+    let embed=new Discord.MessageEmbed()
+    .setColor(ee.wrongcolor)
+    .setFooter(ee.footertext, ee.footericon)
+    .setTitle(`❌ Unkown command, try: **\`${prefix}help\`**`)
+    .setDescription(`To get help on a specific command, type \`${prefix}help [command name]\``)
+    return message.channel.send({embeds:[embed]
+    }).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));}
     let countInfo=await countSchema.findOne({_id:message.guild.id})
     if(countInfo){
       const vc=countInfo.voiceChannelID

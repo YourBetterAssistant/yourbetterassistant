@@ -19,7 +19,7 @@ module.exports = {
             {name:'ID:3', value:'Walmart Employee - Salary - 4000YBCs', inline:true},
             )
         .setColor('RANDOM')
-        message.channel.send(embed)
+       reply({embeds:[embed]}, true, message)
         let filter=m=>m.author.id===message.author.id
         message.channel.awaitMessages({
             filter,
