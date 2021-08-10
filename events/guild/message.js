@@ -4,6 +4,7 @@
 */
 const commandPrefixSchema=require('../../Schemas/prefixSchema')
 const Levels=require('discord-xp')
+const process=require(process)
 const mongo=require('../../botconfig/mongo')
 const guildPrefixes={}
 let countSchema=require('../../Schemas/countSchema')
@@ -135,6 +136,18 @@ module.exports = async (client, message) => {
      if (hasLeveledUp) {
        const user = await Levels.fetch(message.author.id, message.guild.id);
        message.channel.send(`${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`);}
+       process.on('uncaughtException', function (err) {
+        console.log('Caught exception: ', err);
+      });
+      
+      setTimeout(function () {
+        console.log('This will still run.');
+      }, 500);
+      
+      // Intentionally cause an exception, but don't catch it.
+      nonexistentFunc();
+      console.log('This will not run.');
+      
 
   }catch (e){
     let embed=new Discord.MessageEmbed()
