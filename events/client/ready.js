@@ -23,7 +23,7 @@ module.exports = async client => {
   }catch{ /* */ }
 
   try{
-    client.user.setActivity(client.guilds.cache.size(), { type: "WATCHING" });
+    client.user.setActivity(`${client.guilds.cache.size} servers`, { type: "WATCHING" });
   }catch (e) {
       console.log(String(e.stack).red);
   }
