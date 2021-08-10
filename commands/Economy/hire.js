@@ -1,5 +1,5 @@
 const { MessageEmbed, MessageFlags } = require('discord.js');
-const {reply}=require('../../exports')
+const {reply, hiremongo}=require('../../exports')
 const id=require('../../botconfig/id.json');
 const workSchema = require('../../Schemas/workSchema');
 module.exports = {
@@ -24,52 +24,31 @@ module.exports = {
         message.channel.awaitMessages({
             filter,
             max:1,
-            time:10000,
+            time:20000,
             errors:['time']
-        }).then(msg=>{
+        }).then(async (msg)=>{
             msg=msg.first()
             if(isNaN(msg.content))return reply('Not a number lost your chance try again in a couple of hours')
             if(msg.content.startsWith('1')){
                 let j=id[1]
-                workSchema.findOneAndUpdate({
-                    guildID:msg.guild.id,
-                    userID:msg.author.id
-                },
-                {
-                    guildID:msg.guild.id,
-                    userID:msg.author.id,
-                    job:j
-                },{upsert:true})
-                reply(`Your job is now ${id[1]}`)
-            }
+                hiremongo(msg, j, reply)
+      
+                }
+            
             if(msg.content.startsWith('2')){
                 let j=id[2]
-                workSchema.findOneAndUpdate({
-                    guildID:msg.guild.id,
-                    userID:msg.author.id
-                },
-                {
-                    guildID:msg.guild.id,
-                    userID:msg.author.id,
-                    job:j
-                },{upsert:true})
-                reply(`Your job is now ${id[2]}`)
-            }
+                hiremongo(msg, j, reply)
+                }
+        
+            
             if(msg.content.startsWith('3')){
                 let j=id[3]
-                workSchema.findOneAndUpdate({
-                    guildID:msg.guild.id,
-                    userID:msg.author.id
-                },
-                {
-                    guildID:msg.guild.id,
-                    userID:msg.author.id,
-                    job:j
-                },{upsert:true})
-                reply(`Your job is now ${id[3]}`)
+                hiremongo(msg, j, reply)
+         
             }
 
         }).catch(collected=>{
+            if(collected)return
             message.channel.send('Breh The Time Ended Try Again in a couple of hours')
         })
     },
