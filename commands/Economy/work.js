@@ -47,18 +47,18 @@ module.exports = {
             if (msg.content.startsWith(item)) {
               console.log('k')
               msg.channel.send(`CORRECT YOU HAVE EARNT 1000YBCs`)
-              await mongoCurrency.giveCoins(msg.author.id, msg.guild.id, 1000)
+              mongoCurrency.giveCoins(msg.author.id, msg.guild.id, 1000)
               return
 
             } else {
               msg.channel.send(`WRONG! YOU HAVE EARNT ${randomCoins}YBCs`)}
-              await mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins)
+              mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins)
               return
 
           }).catch((collected)=>{
             let msg=message
             msg.channel.send(`TIMES UP! YOU HAVE EARNT ${randomCoins}YBCs`)
-            await mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins)
+            mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins)
             return
 
           })
