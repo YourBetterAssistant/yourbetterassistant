@@ -31,7 +31,7 @@ module.exports = {
             if(isNaN(msg.content))return reply('Not a number lost your chance try again in a couple of hours')
             if(msg.content.startsWith('1')){
                 let j=id[1]
-                await workSchema.findOneAndUpdate({
+                workSchema.findOneAndUpdate({
                     guildID:msg.guild.id,
                     userID:msg.author.id
                 },
