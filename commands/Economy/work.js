@@ -19,8 +19,7 @@ module.exports = {
         await mongo().then(async mongoose=>{
           try{
           let j=await workSchema.findOne({
-            guildID:message.guild.id,
-            userID:message.author.id
+            userID:message.author.id,
           })
           if(!j){
             reply('You do not have a job here is compensation, 1000YBCs I highly suggest getting one')
