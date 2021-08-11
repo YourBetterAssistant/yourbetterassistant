@@ -16,13 +16,6 @@ const fs = require("fs"); //this package is for reading files and getting their 
 
 //Creating the Discord.js Client for This Bot with some default settings ;) and with partials, so you can fetch OLD messages
 const client=new Discord.Client({fetchAllMembers: true, messageCacheMaxSize: 10, disableEveryone: false,partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'],intents:["GUILDS", "GUILD_MESSAGES"]})
-  
- 
- 
-  
-
-
-
 /*const disbut = require('discord-buttons');
 disbut(client);*/
 const ap = AutoPoster(process.env.TOPGGTOKEN, client)
@@ -39,18 +32,9 @@ client.cooldowns = new Discord.Collection(); //an collection for cooldown comman
 ["command", "events"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
-client.on('messageCreate', async(message)=>{
-
-  
-})
-
-
 ap.on('posted', () => {
   console.log('Posted stats to Top.gg!')
 })
-
-
 //login into the bot
 client.login(token);
-
 /** Template by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template */

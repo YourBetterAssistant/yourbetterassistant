@@ -9,6 +9,8 @@ module.exports= async()=>{
         useUnifiedTopology:true,
         keepAlive:true,
 
+    }).catch(err=>{
+        console.log('error\n\n\n\n\n '+err)
     })
     return mongoose
 }

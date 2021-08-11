@@ -16,6 +16,8 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.5.3",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "@discordjs/voice": "^0.6.0",
     "@top-gg/sdk": "^3.1.2",
     "@weky/inlinereply": "0.0.0",
     "axios": "^0.21.1",
@@ -32,6 +34,7 @@
     "dotenv": "^10.0.0",
     "ffmpeg-static": "^4.4.0",
     "images-scraper": "^6.3.0",
+    "libsodium-wrappers": "^0.7.9",
     "math": "0.0.3",
     "minecraft-server-util": "^3.5.2",
     "mongoose": "^5.13.6",

@@ -13,14 +13,20 @@ const {prefix:globalPrefix}=require('../../botconfig/config.json')
 
 module.exports = {
     name: "play",
-    aliases: ["skip", "pause", "stop", "unpause", "resume", "join", "leave", "clearqueue", "np", "nowplaying"],
     description: "Play music",
+    aliases:['skip','stop','resume','pause','unpause', 'leave'],
     category: "Music",
     guildOnly: true,
     memberpermissions:["CONNECT", "SPEAK"],
     cooldown: 2,
     usage: "cmd [song]",
     run:async(client, message,args)=>{
+        return message.channel.send('This Command is now no longer supported.')
+        /*let filter=m=>m.author.id===message.author.id
+        message.channel.awaitMessages({filter, max:1, time:10000, errors:["time"]}).then(async(msg)=>{
+            msg = Array.from(msg.values())[0]
+            if(msg.content==='no')return
+        }).catch(err=>{return reply('Time ended process cancelled', false, message)})*/
         async function dbFind(){
             await mongo().then(async (mongoose)=>{
                 try{
@@ -104,7 +110,7 @@ module.exports = {
     
                 //Establish a connection and play the song with the vide_player function.
                 try {
-                    const connection = await voice_channel.join();
+                    const connection = await message.member.voice.channel.join();
                     queue_constructor.connection = connection;
                     video_player(message.guild, queue_constructor.songs[0]);
                 } catch (err) {

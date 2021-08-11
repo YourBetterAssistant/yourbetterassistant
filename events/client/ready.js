@@ -1,6 +1,7 @@
 //here the event starts
 const config = require("../../botconfig/config.json")
 const commandBase=require('../guild/message')
+const {lavacordManager}=require('../../index')
 const Discord=require('discord.js')
 require('dotenv').config()
 const mongoCurrency = require('discord-mongo-currency-fork');
@@ -40,15 +41,15 @@ module.exports = async client => {
       console.log('Connected!')
 
 
-    }finally{
-      mongoose.connection.close()
+    }catch(err){
+      console.log(`Breh error \n\n ${err.stack}`)
     }
 
   })
   mongoCurrency.connect(process.env.MONGOPATH).then(mongoCurrency=>{
     try{console.log('CONNECTED')
-  }finally{
-    mongoCurrency.disconnect()
+  }catch(err){
+    console.log(`Breh error\n\n${err.stack}`)
   }
   
   })
@@ -61,6 +62,8 @@ module.exports = async client => {
     }
 
   })
+
+
 
 }
 
