@@ -12,7 +12,7 @@ module.exports = {
     usage: "restart",
     run:async(client, message, args)=>{
         if(!message.author.id==='827388013062389761') return message.channel.send('No you are not owner')
-        reply('Restarting', true, message)
+        await reply('Restarting', true, message)
         shell.exec('sudo reboot')
 
     },
