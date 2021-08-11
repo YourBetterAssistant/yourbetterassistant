@@ -32,7 +32,6 @@ module.exports = {
         let salary1=s[1]
         let salary2=s[2]
         let salary3=s[3]
-        let s
         let possibleJobs=['FRIDGE', 'BUY', 'JOBS', 'TV', 'POLITICS', 'LIFE', 'CHILDREN']
         var item = possibleJobs[Math.floor(Math.random()*possibleJobs.length)];
         let embed=new Discord.MessageEmbed()
@@ -40,37 +39,38 @@ module.exports = {
         .setDescription('Type the word in')
         .addField('Word:',`${item}`, true)
         message.channel.send({embeds:[embed]})
-        if(job===id[1]){s=salary1}
+        let sal
+        if(job===id[1]){sal=salary1}
+        else if(job===id[2]){sal=salary2}
+        else if(job===id[3]){sal=salary3}
         const randomCoins = Math.floor(Math.random() * 500) + 1;
         let filter = m => m.author.id === message.author.id
         message.channel.awaitMessages({
-            filter,
-            max: 1,
-            time: 10000,
-            errors: ['time']
-          }).then(msg=>{
-            msg = msg.first()
-            console.log('Why ')
-            if (msg.content.startsWith(item)) {
+          filter,
+          max:1,
+          time:10000,
+          errors:['time']
+        }).then(async(msg)=>{
+          msg = Array.from(msg.values())[0]
+          if(msg.content===item){
               console.log('k')
-              msg.channel.send(`CORRECT YOU HAVE EARNT ${s}YBCs`)
-              mongoCurrency.giveCoins(msg.author.id, msg.guild.id, s)
+              msg.channel.send(`CORRECT YOU HAVE EARNT ${sal}YBCs`)
+              mongoCurrency.giveCoins(msg.author.id, msg.guild.id, sal)
               return
-
-            } else {
+  
+            }else {
               msg.channel.send(`WRONG! YOU HAVE EARNT ${randomCoins}YBCs`)}
               mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins)
               return
-
-          }).catch((collected)=>{
-            let msg=message
-            msg.channel.send(`TIMES UP! YOU HAVE EARNT ${randomCoins}YBCs`)
-            mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins)
-            return
-
+          }).catch(err=>{
+            if(err){
+              return console.log(err)
+              message.channel.send(`Sed time ran out here is ${randomCoins}YBCs`)
+              mongoCurrency.giveCoins(message.author.id, message.guild.id, randomCoins)
+            }
           })
         
-
+        
 
     },
 };
