@@ -11,7 +11,7 @@ module.exports = {
     run:async(client, message, args)=>{
         client.discordTogether = new DiscordTogether(client);
         if(!message.member.voice.channel)return reply('You need to be in a VC', true, message)
-        client.discordTogether.createTogetherCode(message.member.voice.channelID, 'fishing').then(async invite => {
+        client.discordTogether.createTogetherCode(message.member.voice.channel.id, 'fishing').then(async invite => {
             return message.channel.send(`${invite.code}`);
     })
 }}
