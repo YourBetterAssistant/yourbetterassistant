@@ -10,15 +10,17 @@ module.exports = {
     description: "Gives you information on how fast the Bot can respond to you",
     run: async (client, message, args, user, text, prefix) => {
     try{
-      message.channel.send({embeds:new MessageEmbed()
+      let e=new MessageEmbed()
+      .setColor(ee.color)
+      .setFooter(ee.footertext, ee.footericon)
+      .setTitle(`🏓 Pinging....`)
+      message.channel.send({embeds:[e]
+      }).then(msg=>{
+        let em=new MessageEmbed()
         .setColor(ee.color)
         .setFooter(ee.footertext, ee.footericon)
-        .setTitle(`🏓 Pinging....`)
-      }).then(msg=>{
-        msg.edit({embeds:new MessageEmbed()
-          .setColor(ee.color)
-          .setFooter(ee.footertext, ee.footericon)
-          .setTitle(`🏓 Ping is \`${Math.round(client.ws.ping)}ms\``)
+        .setTitle(`🏓 Ping is \`${Math.round(client.ws.ping)}ms\``)
+        msg.edit({embeds:[em]
         });
       })
     } catch (e) {

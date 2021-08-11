@@ -29,10 +29,10 @@ module.exports = {
           }
           job=j.job}catch(err){console.log(" erro smh")}
         })
-        let salary
-        if(job===id[1]) {salary===s[1]}
-        if(job===id[2]) {salary===s[2]}
-        if(job===id[3]) {salary===s[3]}
+        let salary1=s[1]
+        let salary2=s[2]
+        let salary3=s[3]
+        let s
         let possibleJobs=['FRIDGE', 'BUY', 'JOBS', 'TV', 'POLITICS', 'LIFE', 'CHILDREN']
         var item = possibleJobs[Math.floor(Math.random()*possibleJobs.length)];
         let embed=new Discord.MessageEmbed()
@@ -40,6 +40,7 @@ module.exports = {
         .setDescription('Type the word in')
         .addField('Word:',`${item}`, true)
         message.channel.send({embeds:[embed]})
+        if(job===id[1]){s=salary1}
         const randomCoins = Math.floor(Math.random() * 500) + 1;
         let filter = m => m.author.id === message.author.id
         message.channel.awaitMessages({
@@ -52,8 +53,8 @@ module.exports = {
             console.log('Why ')
             if (msg.content.startsWith(item)) {
               console.log('k')
-              msg.channel.send(`CORRECT YOU HAVE EARNT ${salary}YBCs`)
-              mongoCurrency.giveCoins(msg.author.id, msg.guild.id, salary)
+              msg.channel.send(`CORRECT YOU HAVE EARNT ${s}YBCs`)
+              mongoCurrency.giveCoins(msg.author.id, msg.guild.id, s)
               return
 
             } else {
