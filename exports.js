@@ -8,11 +8,9 @@ function reply(content, mention, message){
 async function hiremongo(msg, j, reply){
   await mongo().then(async()=>{
     try{await workSchema.findOneAndUpdate({
-        guildID:msg.guild.id,
         userID:msg.author.id
     },
     {
-        guildID:msg.guild.id,
         userID:msg.author.id,
         job:j
     },{upsert:true})
