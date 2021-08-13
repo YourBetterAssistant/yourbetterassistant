@@ -120,13 +120,14 @@ module.exports = async (client, message) => {
     .setTitle(`❌ Unkown command, try: **\`${prefix}help\`**`)
     .setDescription(`To get help on a specific command, type \`${prefix}help [command name]\``)
     return message.channel.send({embeds:[embed]
-    }).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));}
+    }).then(msg=>msg.delete({timeout: 10000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));}
     let countInfo=await countSchema.findOne({_id:message.guild.id})
     if(countInfo){
       const vc=countInfo.voiceChannelID
       setInterval(function () {
         var memberCount = message.guild.members.cache.filter(member => !member.user.bot).size;  
         var memberCountChannel =  message.guild.channels.cache.get(vc);
+        if(!memberCountChannel)return
         memberCountChannel.setName(`${memberCount} members!`);
      }, 1000);}
      if (!message.guild) return;
