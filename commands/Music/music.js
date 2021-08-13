@@ -8,25 +8,20 @@ const {reply}=require('../../exports')
 //Global queue for your bot. Every server will have a key and value pair in this map. { guild.id, queue_constructor{} }
 const queue = new Map();
 const mongo=require('../../botconfig/mongo');
+const voice=require('@discordjs/voice')
 const prefixSchema = require('../../Schemas/prefixSchema');
 const {prefix:globalPrefix}=require('../../botconfig/config.json')
-
 module.exports = {
     name: "play",
     description: "Play music",
-    aliases:['skip','stop','resume','pause','unpause', 'leave'],
+    aliases:['skip','stop','resume','pause','unpause', 'leave', 'join'],
     category: "Music",
     guildOnly: true,
     memberpermissions:["CONNECT", "SPEAK"],
     cooldown: 2,
     usage: "cmd [song]",
     run:async(client, message,args)=>{
-        return message.channel.send('This Command is now no longer supported.')
-        /*let filter=m=>m.author.id===message.author.id
-        message.channel.awaitMessages({filter, max:1, time:10000, errors:["time"]}).then(async(msg)=>{
-            msg = Array.from(msg.values())[0]
-            if(msg.content==='no')return
-        }).catch(err=>{return reply('Time ended process cancelled', false, message)})*/
+        if(!message.author.id==='875335997565571072')return message.channel.send('This Command is now no longer supported.')
         async function dbFind(){
             await mongo().then(async (mongoose)=>{
                 try{
@@ -49,9 +44,6 @@ module.exports = {
         //Checking for the voicechannel and permissions (you can add more permissions if you like).
         const voice_channel = message.member.voice.channel;
         if (!voice_channel) return message.channel.send('You need to be in a channel to execute this command!');
-        const permissions = voice_channel.permissionsFor(message.client.user);
-        if (!permissions.has('CONNECT')) return message.channel.send('You dont have the correct permissins');
-        if (!permissions.has('SPEAK')) return message.channel.send('You dont have the correct permissins');
 
         //This is our server queue. We are getting this server queue from the global queue.
         const server_queue = queue.get(message.guild.id);
@@ -110,7 +102,7 @@ module.exports = {
     
                 //Establish a connection and play the song with the vide_player function.
                 try {
-                    const connection = await message.member.voice.channel.join();
+                    const connection = await voice.connectTo
                     queue_constructor.connection = connection;
                     video_player(message.guild, queue_constructor.songs[0]);
                 } catch (err) {
@@ -134,7 +126,7 @@ module.exports = {
             queue.delete(guild.id);
         }
         else if(message.content.startsWith(`${prefix}join`)){
-            voice_channel.join()
+            connectToChannel(message.member.voice.channel, message.guild.id)
             reply('I have joined', true, message)
         }
         else if(message.content.startsWith(`${prefix}clearqueue`)){
@@ -187,4 +179,42 @@ const resume_song=(message, server_queue)=>{
     if(!server_queue.connection.dispatcher.paused) return message.channel.send("Song isn't paused!");//Checks if the song isn't paused.
     server_queue.connection.dispatcher.resume();//If the song is paused this will unpause it.
     message.channel.send("Unpaused the song!");//Sends a message to the channel the command was used in after it unpauses.
+}
+async function connectToChannel(channel, guildID) {
+	/*
+		Here, we try to establish a connection to a voice channel. If we're already connected
+		to this voice channel, @discordjs/voice will just return the existing connection for
+		us!
+	*/
+	const connection = voice.joinVoiceChannel({
+		channelId: channel.id,
+		guildId: guildID,
+	});
+
+	/*
+		If we're dealing with a connection that isn't yet Ready, we can set a reasonable
+		time limit before giving up. In this example, we give the voice connection 30 seconds
+		to enter the ready state before giving up.
+	*/
+	try {
+		/*
+			Allow ourselves 30 seconds to join the voice channel. If we do not join within then,
+			an error is thrown.
+		*/
+		await voice.entersState(connection, VoiceConnectionStatus.Ready, 30e3);
+		/*
+			At this point, the voice connection is ready within 30 seconds! This means we can
+			start playing audio in the voice channel. We return the connection so it can be
+			used by the caller.
+		*/
+		return connection;
+	} catch (error) {
+		/*
+			At this point, the voice connection has not entered the Ready state. We should make
+			sure to destroy it, and propagate the error by throwing it, so that the calling function
+			is aware that we failed to connect to the channel.
+		*/
+		connection.destroy();
+		throw error;
+	}
 }

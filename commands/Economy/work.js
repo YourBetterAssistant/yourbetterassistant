@@ -23,7 +23,7 @@ module.exports = {
           })
           if(!j){
             reply('You do not have a job here is compensation, 1000YBCs I highly suggest getting one')
-            await mongoCurrency.giveCoins(msg.author.id, msg.guild.id, 1000)
+            await mongoCurrency.giveCoins(message.author.id, message.guild.id, 1000)
             return
           }
           job=j.job}catch(err){console.log(" erro smh")}
