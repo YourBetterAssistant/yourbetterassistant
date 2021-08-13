@@ -121,19 +121,7 @@ module.exports = async (client, message) => {
     .setDescription(`To get help on a specific command, type \`${prefix}help [command name]\``)
     return message.channel.send({embeds:[embed]
     }).then(msg=>msg.delete({timeout: 10000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));}
-    let countInfo=await countSchema.findOne({_id:message.guild.id})
-    if(countInfo){
-      const vc=countInfo.voiceChannelID
-      setInterval(function () {
-        var memberCount = message.guild.members.cache.filter(member => !member.user.bot).size;  
-        var memberCountChannel =  message.guild.channels.cache.get(vc);
-        if(!memberCountChannel)return
-        memberCountChannel.setName(`${memberCount} members!`);
-     }, 1000);}
-     if (!message.guild) return;
-     if (message.author.bot) return;
-     
-     const randomAmountOfXp = Math.floor(Math.random() * 29) + 1; // Min 1, Max 30
+    const randomAmountOfXp = Math.floor(Math.random() * 29) + 1; // Min 1, Max 30
      const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
      if (hasLeveledUp) {
        const user = await Levels.fetch(message.author.id, message.guild.id);
@@ -141,6 +129,19 @@ module.exports = async (client, message) => {
        process.on('uncaughtException', function (err) {
         console.log('Caught exception: ', err);
       });
+    let countInfo=await countSchema.findOne({_id:message.guild.id})
+    if(countInfo){
+      const vc=countInfo.voiceChannelID
+      setInterval(function () {
+        var memberCount = message.guild.members.cache.filter(m => !m.user.bot).size;  
+        var memberCountChannel =  message.guild.channels.cache.get(vc);
+        if(!memberCountChannel)return
+        memberCountChannel.setName(`${memberCount} members!`);
+     }, 1000);}
+     if (!message.guild) return;
+     if (message.author.bot) return;
+     
+     
       /*setTimeout(function () {
         console.log('This will still run.');
       }, 500);*/
