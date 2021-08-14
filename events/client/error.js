@@ -1,6 +1,6 @@
 //here the event starts
-module.exports = client => {
-    return console.log('An error occured')
+module.exports = (client, error) => {
+    return console.log(`An error occured \n\n\n\n\n ${error.stack}`)
 }
 
 /** Template by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template */
