@@ -4,7 +4,7 @@ require('dotenv').config()
 require('@weky/inlinereply')
 require('discord-inline-reply'); 
 const mongoCurrency = require('discord-mongo-currency-fork');
-const commandBase=require('./events/guild/message')
+const commandBase=require('./events/guild/messageCreate')
 const { AutoPoster } = require('topgg-autoposter')
 const Levels=require('discord-xp')
 const mongo=require('./botconfig/mongo')
