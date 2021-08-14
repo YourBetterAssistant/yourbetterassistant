@@ -52,6 +52,7 @@ module.exports = async (client, message) => {
        
       return;
       }
+    require('../../Utils/count')
     //get the command from the collection
     let command = client.commands.get(cmd);
     //if the command does not exist, try to get it by his alias
@@ -129,24 +130,6 @@ module.exports = async (client, message) => {
        process.on('uncaughtException', function (err) {
         console.log('Caught exception: ', err);
       });
-    let countInfo=await countSchema.findOne({_id:message.guild.id})
-    if(countInfo){
-      const vc=countInfo.voiceChannelID
-      setInterval(function () {
-        var memberCount = message.guild.members.cache.filter(m => !m.user.bot).size;  
-        var memberCountChannel =  message.guild.channels.cache.get(vc);
-        if(!memberCountChannel)return
-        memberCountChannel.setName(`${memberCount} members!`);
-     }, 1000);}
-     if (!message.guild) return;
-     if (message.author.bot) return;
-     
-     
-      /*setTimeout(function () {
-        console.log('This will still run.');
-      }, 500);*/
-      
-      // Intentionally cause an exception, but don't catch it.
 
   }catch (e){
     let embed=new Discord.MessageEmbed()
