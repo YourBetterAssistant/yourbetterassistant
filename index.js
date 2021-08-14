@@ -13,9 +13,8 @@ let token=process.env.TOKEN
 const config=require('./botconfig/config.json')
 const colors = require("colors"); //this Package is used, to change the colors of our Console! (optional and doesnt effect performance)
 const fs = require("fs"); //this package is for reading files and getting their inputs
-
 //Creating the Discord.js Client for This Bot with some default settings ;) and with partials, so you can fetch OLD messages
-const client=new Discord.Client({fetchAllMembers: true, messageCacheMaxSize: 10, disableEveryone: false,partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'],intents:["GUILDS", "GUILD_MESSAGES"]})
+const client=new Discord.Client({fetchAllMembers: true, messageCacheMaxSize: 10, disableEveryone: false,partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'],intents:["GUILDS", "GUILD_MESSAGES",'GUILD_MESSAGE_REACTIONS', 'GUILD_VOICE_STATES', 'GUILD_PRESENCES']})
 /*const disbut = require('discord-buttons');
 disbut(client);*/
 const ap = AutoPoster(process.env.TOPGGTOKEN, client)

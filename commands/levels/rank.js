@@ -1,5 +1,6 @@
 const Levels=require('discord-xp')
 const Discord=require('discord.js')
+const fs=require('fs')
 module.exports = {
     name: "rank",
     description: "Shows the rank of the user",
@@ -21,15 +22,14 @@ module.exports = {
                 .setRequiredXP(Levels.xpFor(user.level + 1)) // We calculate the required Xp for the next level
                 .setRank(user.position) // Position of the user on the leaderboard
                 .setLevel(user.level) // Current Level of the user
-                .setStatus(target.presence.status)
                 .setProgressBar("#FFFFFF")
                 .setUsername(target.username)
                 .setDiscriminator(target.discriminator);
         
             rank.build()
                 .then(data => {
-                const attachment = new Discord.MessageAttachment(data, "RankCard.png");
-                message.channel.send(attachment);
+                    let attachement=new Discord.MessageAttachment(data, 'Rank.png')
+                    message.channel.send({files: [attachement]})
             });
         
     },
