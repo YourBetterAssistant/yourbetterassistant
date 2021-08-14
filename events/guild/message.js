@@ -4,6 +4,9 @@
 */
 const commandPrefixSchema=require('../../Schemas/prefixSchema')
 const Levels=require('discord-xp')
+const {count}=require('../../Utils/count')
+const {level}=require('../../Utils/level')
+const {prefixLoad}=require('../../Utils/prefix-load')
 let process=require('process')
 const mongo=require('../../botconfig/mongo')
 const guildPrefixes={}
@@ -28,8 +31,10 @@ module.exports = async (client, message) => {
     //if the message is on partial fetch it
     if (message.partial) await message.fetch();
     //get the current prefix from the botconfig/config.json
+    await prefixLoad(client, guildPrefixes)
+    await level(message)
+    await count(message)
     let prefix= guildPrefixes[message.guild.id] || globalPrefix
-  
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
     //if its not that then return
@@ -52,7 +57,9 @@ module.exports = async (client, message) => {
        
       return;
       }
-    require('../../Utils/count')
+ 
+    count(message)
+    level(message)
     //get the command from the collection
     let command = client.commands.get(cmd);
     //if the command does not exist, try to get it by his alias
@@ -152,31 +159,3 @@ module.exports = async (client, message) => {
 
    
 }
-module.exports.loadPrefixes=async(client)=>{
-  await mongo().then(async mongoose=>{
-    try{
-      for(const guild of client.guilds.cache){
-        let guildID= guild[1].id
-        const result= await commandPrefixSchema.findOne({_id:guildID})
-        if (result){
-          guildPrefixes[guildID] = result.prefix
-      } else {
-          guildPrefixes[guildID] = globalPrefix
-      }
-      }
-      console.log(guildPrefixes)
-    
-    }
-    catch(err){
-      await mongoose.connection.close()
-      console.log(`An error occured`)
-      return
-    }
-    
-
-  })
-  
-
-}
-
- 

@@ -1,10 +1,11 @@
-module.exports=async (client)=>{
-    client.on('guildMemberAdd', async(member)=>{
+module.exports=async (client, member)=>{
         const welcomeSchema=require('../../Schemas/welcomeSchema')
         const logSchema=require('../../Schemas/logSchema')
         const countSchema=require('../../Schemas/countSchema')
         const mongo=require('../../botconfig/mongo')
+        const Discord=require('discord.js')
         const onJoin=async member=>{
+          console.log('Join')
           const guild = client.guilds.cache.get(member.guild.id);
           await mongo().then(async mongoose=>{
               try{
@@ -17,12 +18,15 @@ module.exports=async (client)=>{
                   memberCountChannel.setName(`${memberCount} members!`);
                }, 1000);
                 //Member log
+                console.log('pls')
                 let logInfo=await logSchema.findOne({_id:member.guild.id})
                 let logChannelID=logInfo.channelID
                 const logChannel=member.guild.channels.cache.get(logChannelID)
                 let embed=new Discord.MessageEmbed().setTitle('New Member')
-                .setDescription(`@${member.user.tag}`)
-                logChannel.send(embed)
+                .setDescription(`Our Newest Member!`)
+                .addField('Member', `${member}`)
+                .setColor('RANDOM')
+                logChannel.send({embeds:[embed]})
                 //Start the Welcome Message
     
                   let info=await welcomeSchema.findOne({_id:member.guild.id})
@@ -36,13 +40,10 @@ module.exports=async (client)=>{
                   channel.send(`>>> <@!${member.id}> ${text}`)}
                   
     
-              }finally{
-                  mongoose.connection.close()
-              }
+              }catch(err){console.log(`Error \n\n\n\n\n ${err.stack}`)}
           })
       }
         await onJoin(member)
     
     
-      })
-}
+      }

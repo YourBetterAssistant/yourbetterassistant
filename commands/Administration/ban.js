@@ -21,25 +21,25 @@ module.exports = {
       })
         const Discord=require('discord.js')
 
-            const user = message.mentions.users.first();
+            const user = message.mentions.members.first();
             // If we have a user mentioned
             var reason
             args=reason
             if (user) {
               // Now we get the member from the user
-              const member = message.guild.member(user);
 
-              if(member.id===message.author.id)return message.channel.send("You can't ban yourself")
+              if(user.id===message.author.id)return message.channel.send("You can't ban yourself")
+              if(user.id===client.application.id)return message.channel.send('I cannot ban myself')
               let admin=cache[message.guild.id].admin
               if(message.member.roles.cache.some(r=>r.id===admin))return reply('You cannot kick an admin+', true, message)
               // If the member is in the guild
-              if (member) {
+              if (user) {
                 /**
                  * Kick the member
                  * Make sure you run this on a member, not a user!
                  * There are big differences between a user and a member
                  */
-                member
+                user
                   .ban(reason)
                   .then(() => {
                     // We let the message author know we were able to kick the person

@@ -20,26 +20,26 @@ module.exports = {
           mongoose.connection.close()
         }
       })
-        const user = message.mentions.users.first();
+        const user = message.mentions.members.first();
         // If we have a user mentioned
         if (user) {
           // Now we get the member from the user
-          const member = message.guild.member(user);
-          if(member.id===message.author.id)return message.channel.send("You can't kick yourself")
+          if(user.id===message.author.id)return message.channel.send("You can't kick yourself")
+          if(user.id===client.application.id) return message.channel.send('I cannot kick myself')
           let admin=cache[message.guild.id].admin
-          if(member.roles.cache.find(r=>r.id===admin))return reply('You cannot kick an admin+', true, message)
+          if(user.roles.cache.find(r=>r.id===admin))return reply('You cannot kick an admin+', true, message)
           // If the member is in the guild
-          if (member) {
+          if (user) {
             /**
              * Kick the member
              * Make sure you run this on a member, not a user!
              * There are big differences between a user and a member
              */
-            member
+            user
               .kick()
               .then(() => {
                 // We let the message author know we were able to kick the person
-                message.reply(`Successfully kicked ${user.tag}`);
+                reply(`Successfully kicked ${user}`, true, message);
               })
               .catch(err => {
                 // An error happened

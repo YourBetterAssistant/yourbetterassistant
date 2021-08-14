@@ -1,6 +1,6 @@
 //here the event starts
 const config = require("../../botconfig/config.json")
-const commandBase=require('../guild/message')
+const loadPrefix=require('../../Utils/prefix-load')
 const {lavacordManager}=require('../../index')
 const Discord=require('discord.js')
 require('dotenv').config()
@@ -52,15 +52,6 @@ module.exports = async client => {
     console.log(`Breh error\n\n${err.stack}`)
   }
   
-  })
-  client.on('message',async (msg)=>{
-    try{
-        console.log('reconnecting')
-        commandBase.loadPrefixes(client)
-    }finally{
-      console.log('Connection Closed')
-    }
-
   })
 
 

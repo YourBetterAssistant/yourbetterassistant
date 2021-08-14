@@ -1,8 +1,10 @@
-module.exports=async client=>{
-    client.on('guildMemberRemove', async(member) => {
+module.exports=async (client, member)=>{
+
         const countSchema=require('../../Schemas/countSchema')
         const guild = client.guilds.cache.get(member.guild.id);
+        const logSchema=require('../../Schemas/logSchema')
         const mongo=require('../../botconfig/mongo')
+        const Discord=require('discord.js')
         await mongo().then(async mongoose=>{
           try{
             let countInfo=await countSchema.findOne({_id:member.guild.id})
@@ -12,9 +14,15 @@ module.exports=async client=>{
                   var memberCountChannel = guild.channels.cache.get(vc);
                   memberCountChannel.setName(`${memberCount} members!`);
                 }, 1000)
-          }finally{
-            mongoose.connection.close()
-          }
+            let logInfo=await logSchema.findOne({_id:member.guild.id})
+            let logChannelID=logInfo.channelID
+            const logChannel=member.guild.channels.cache.get(logChannelID)
+            let embed=new Discord.MessageEmbed().setTitle('Member Left')
+                .setDescription('Goodbye person hope we see you again')
+                .addField('Member', `${member}`)
+                .setColor('RANDOM')
+                logChannel.send({embeds:[embed]})
+
+          }catch(err){console.log(err.stack)}
         })
-    });
 }
