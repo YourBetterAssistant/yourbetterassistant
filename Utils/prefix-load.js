@@ -21,7 +21,7 @@ async function prefixLoad(client, guildPrefixes){
       }
       catch(err){
         await mongoose.connection.close()
-        console.log(`An error occured`)
+        console.log(`An error occured \n\n\n\n\n\n\n ${err.stack}`)
         return
       }
       
