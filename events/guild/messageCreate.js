@@ -9,7 +9,6 @@ const {level}=require('../../Utils/level')
 const {prefixLoad}=require('../../Utils/prefix-load')
 let process=require('process')
 const mongo=require('../../botconfig/mongo')
-const guildPrefixes={}
 let countSchema=require('../../Schemas/countSchema')
 const config = require("../../botconfig/config.json"); //loading config file with token and prefix, and settings
 const {prefix:globalPrefix}=require('../../botconfig/config.json')
@@ -20,6 +19,7 @@ const { Mongoose } = require('mongoose');
 Levels.setURL(config.mongoPath);
 //here the event starts
 module.exports = async (client, message) => {
+  const guildPrefixes={}
   console.log(guildPrefixes[message.guild.id])
   try {
     //if the message is not in a guild (aka in dms), return aka ignore the inputs
@@ -57,9 +57,6 @@ module.exports = async (client, message) => {
        
       return;
       }
- 
-    count(message)
-    level(message)
     //get the command from the collection
     let command = client.commands.get(cmd);
     //if the command does not exist, try to get it by his alias
