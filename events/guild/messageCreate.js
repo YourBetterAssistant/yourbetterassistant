@@ -20,7 +20,6 @@ Levels.setURL(config.mongoPath);
 //here the event starts
 module.exports = async (client, message) => {
   const guildPrefixes={}
-  console.log(guildPrefixes[message.guild.id])
   try {
     //if the message is not in a guild (aka in dms), return aka ignore the inputs
     
