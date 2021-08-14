@@ -1,6 +1,6 @@
 const mongo=require('../botconfig/mongo')
 const commandPrefixSchema=require('../Schemas/prefixSchema')
-async function prefixLoad(client, guildPrefixes){
+async function prefixLoad(client, guildPrefixes, globalPrefix){
     await mongo().then(async mongoose=>{
       try{
           /**

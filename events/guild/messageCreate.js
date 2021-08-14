@@ -31,7 +31,7 @@ module.exports = async (client, message) => {
     //if the message is on partial fetch it
     if (message.partial) await message.fetch();
     //get the current prefix from the botconfig/config.json
-    await prefixLoad(client, guildPrefixes)
+    await prefixLoad(client, guildPrefixes, globalPrefix)
     await level(message)
     await count(message)
     let prefix= guildPrefixes[message.guild.id] || globalPrefix
