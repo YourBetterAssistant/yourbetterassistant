@@ -85,11 +85,12 @@ module.exports = async (client, message) => {
       try{
         //if Command has specific permission return error
         if(command.memberpermissions && !message.member.permissions.has(command.memberpermissions)) {
-          return message.channel.send({embeds:new Discord.MessageEmbed()
-            .setColor(ee.wrongcolor)
-            .setFooter(ee.footertext, ee.footericon)
-            .setTitle("❌ Error | You are not allowed to run this command!")
-            .setDescription('You Do Not Have The Required Perms!')
+          let e=new Discord.MessageEmbed()
+          .setColor(ee.wrongcolor)
+          .setFooter(ee.footertext, ee.footericon)
+          .setTitle("❌ Error | You are not allowed to run this command!")
+          .setDescription('You Do Not Have The Required Perms!')
+          return message.channel.send({embeds:[e]
           }).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
         }
         //if the Bot has not enough permissions return error
@@ -97,11 +98,12 @@ module.exports = async (client, message) => {
         "EMBED_LINKS","CONNECT","SPEAK"]
         if(!message.guild.me.permissions.has(required_perms)){
           try{ message.react("❌"); }catch{}
-          return message.channel.send({embeds:new Discord.MessageEmbed()
-            .setColor(ee.wrongcolor)
-            .setFooter(ee.footertext, ee.footericon)
-            .setTitle("❌ Error | I don't have enough Permissions!")
-            .setDescription("Please give me just `ADMINISTRATOR`, because I need it to delete Messages, Create Channel and execute all Admin Commands.\n If you don't want to give me them, then those are the exact Permissions which I need: \n> `" + required_perms.join("`, `") +"`")
+          let embed=new Discord.MessageEmbed()
+          .setColor(ee.wrongcolor)
+          .setFooter(ee.footertext, ee.footericon)
+          .setTitle("❌ Error | I don't have enough Permissions!")
+          .setDescription("Please give me just `ADMINISTRATOR`, because I need it to delete Messages, Create Channel and execute all Admin Commands.\n If you don't want to give me them, then those are the exact Permissions which I need: \n> `" + required_perms.join("`, `") +"`")
+          return message.channel.send({embeds:[embed]
           })
         }
 
@@ -109,11 +111,12 @@ module.exports = async (client, message) => {
         command.run(client, message, args, message.member, args.join(" "), prefix);
       }catch (e) {
         console.log(String(e.stack).red)
-        return message.channel.send({embeds:new Discord.MessageEmbed()
-          .setColor(ee.wrongcolor)
-          .setFooter(ee.footertext, ee.footericon)
-          .setTitle("❌ Something went wrong while, running the: `" + command.name + "` command")
-          .setDescription(`\`\`\`${e.message}\`\`\``)
+        let e=new Discord.MessageEmbed()
+        .setColor(ee.wrongcolor)
+        .setFooter(ee.footertext, ee.footericon)
+        .setTitle("❌ Something went wrong while, running the: `" + command.name + "` command")
+        .setDescription(`\`\`\`${e.message}\`\`\``)
+        return message.channel.send({embeds:[e]
         }).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
       }
     }
