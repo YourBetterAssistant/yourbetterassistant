@@ -11,7 +11,7 @@ module.exports = {
         if(!message.author.id==='827388013062389761') return message.channel.send('You cannot pull')
         let link='https://www.github.com/NotTimIsReal/bbarevamp'
         reply(`Pulling from **${link}**`, true, message)
-        shell.exec('git pull')
+        shell.exec(`git pull ${link}`)
         
         message.reply('Do you want me to reboot')
         let filter=m=>m.author.id===message.author.id
