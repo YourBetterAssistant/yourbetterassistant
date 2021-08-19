@@ -53,7 +53,7 @@ module.exports = async client => {
   }
   
   })
-  client.forEach(guild=>{
+  client.guilds.cache.forEach(guild=>{
     console.log(guild.name)
   })
 
