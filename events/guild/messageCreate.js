@@ -111,12 +111,12 @@ module.exports = async (client, message) => {
         command.run(client, message, args, message.member, args.join(" "), prefix);
       }catch (e) {
         console.log(String(e.stack).red)
-        let e=new Discord.MessageEmbed()
+        let em=new Discord.MessageEmbed()
         .setColor(ee.wrongcolor)
         .setFooter(ee.footertext, ee.footericon)
         .setTitle("❌ Something went wrong while, running the: `" + command.name + "` command")
         .setDescription(`\`\`\`${e.message}\`\`\``)
-        return message.channel.send({embeds:[e]
+        return message.channel.send({embeds:[em]
         }).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
       }
     }

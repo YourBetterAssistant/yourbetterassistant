@@ -18,11 +18,11 @@ module.exports = {
             .setColor('RANDOM')
             .setTitle('MC SERVER RESULTS!')
             .addFields(
-                {name:'Server IP', value: response.host},
-                {name:'Players Online', value:response.onlinePlayers},
-                {name:'Version Required', value:response.version},
-                {name:'Description', value:response.description},
-                {name:'Max Players', value:response.maxPlayers}
+                {name:'Server IP:', value: response.host, inline:true},
+                {name:'Players Online:', value:`${response.onlinePlayers}`, inline:true},
+                {name:'Version Required:', value:response.version, inline:true},
+                {name:'Description:', value:response.description.descriptionText, inline:true},
+                {name:'Max Players:', value:`${response.maxPlayers}` , inline:true}
                 
                 
             )
