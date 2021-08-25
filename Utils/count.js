@@ -1,7 +1,9 @@
 const countSchema=require('../Schemas/countSchema')
-
+const mongo=require('../botconfig/mongo')
 async function count(message){
-        let countInfo=await countSchema.findOne({_id:message.guild.id})
+        try{
+          await mongo().then(async()=>{
+          let countInfo=await countSchema.findOne({_id:message.guild.id})
         if(countInfo){
           const vc=countInfo.voiceChannelID
           setInterval(function () {
@@ -10,6 +12,11 @@ async function count(message){
             if(!memberCountChannel)return
             memberCountChannel.setName(`${memberCount} members!`);
          }, 1000)}}
+
+        }catch(err){require('../Handlers/errorHandler')}
+        
+        )
+        
 exports.count=count
 
     
