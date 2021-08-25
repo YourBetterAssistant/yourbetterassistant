@@ -10,7 +10,7 @@ module.exports = {
     cooldown: 5,
     usage: "screenie <link-needs to start with https:// or http://>",
     run:async(client, message, args)=>{
-        if(!message.content.includes('https://')||!message.content.includes('http://'))return message.channel.send('The link you sent does not start with https or http')
+        if(!args[0].search('https://')|!args[0].search('http://'))return message.channel.send('The link you sent does not start with https or http')
         if(message.content.includes('porn')||message.content.includes('xxx')||message.content.includes('nude'))return message.channel.send('The link you have provided is explicit or in our banned websites list')
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
