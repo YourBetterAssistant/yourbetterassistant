@@ -138,13 +138,9 @@ module.exports = async (client, message) => {
       });
 
   }catch (e){
-    let embed=new Discord.MessageEmbed()
-    .setColor("RED")
-    .setTitle(`❌ ERROR | An error occurred`)
-    .setDescription(`\`\`\`${e.stack}\`\`\``)
-    return message.channel.send({embeds:[embed]
-    
-    });
+    const {erroHandler:err}=require('../../handlers/errorHandler')
+    err(e, message)
+
   }
   /**
     * @INFO
