@@ -28,7 +28,11 @@ module.exports = {
         await page.screenshot({ path: './images/example.png' })
         await browser.close();
         let p= new Discord.MessageAttachment('./images/example.png', 'picture.png')
-        message.channel.send({files:[p]})
+        let embed=new Discord.MessageEmbed()
+        .setTitle(`Result For ${args[0]}`)
+        .setImage(p)
+        .setColor('GREEN')
+        message.channel.send({embeds:[embeds]})
         setTimeout(function(){fs.unlink('./images/example.png', (err)=>{if(err)return console.log(err)})}, 1000)
         
 }
