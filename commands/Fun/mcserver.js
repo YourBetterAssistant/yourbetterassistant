@@ -15,7 +15,7 @@ module.exports = {
 
         util.status(ip, {port: parseInt(port)}).then((response)=>{
             const embed= new Discord.MessageEmbed()
-            .setColor('RANDOM')
+            .setColor('#00F5D4')
             .setTitle('MC SERVER RESULTS!')
             .addFields(
                 {name:'Server IP:', value: response.host, inline:true},
