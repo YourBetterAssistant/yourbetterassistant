@@ -30,9 +30,9 @@ module.exports = {
         let p= new Discord.MessageAttachment('./images/example.png', 'picture.png')
         let embed=new Discord.MessageEmbed()
         .setTitle(`Result For ${args[0]}`)
-        .setImage(p)
+        .setImage('attachment://picture.png')
         .setColor('GREEN')
-        message.channel.send({embeds:[embeds]})
+        message.channel.send({embeds:[embed], files:[p]})
         setTimeout(function(){fs.unlink('./images/example.png', (err)=>{if(err)return console.log(err)})}, 1000)
         
 }
