@@ -1,5 +1,5 @@
 const djsGames = require('djs-games');
-const { reply } = require('../..');
+const { reply } = require('../../exports');
 const RockPaperScissors = new djsGames.RockPaperScissors()
 module.exports = {
     name: "rps",
