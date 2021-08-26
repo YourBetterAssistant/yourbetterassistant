@@ -23,7 +23,7 @@ module.exports = {
         }).then(msg=>{
             msg=msg.first()
             if(msg.content.startsWith('yes')){
-                shell.exec('sudo reboot')}else{
+                shell.exec('pm2 restart')}else{
                     return message.channel.send('Cancelled')
                 }
 
