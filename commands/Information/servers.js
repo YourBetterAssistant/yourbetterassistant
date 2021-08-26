@@ -14,7 +14,7 @@ module.exports = {
         let embed=new MessageEmbed()
         .setTitle('Servers')
         .setColor('RANDOM')
-        await client.guilds.cache.some(guild=>{
+        await client.guilds.cache.forEach(guild=>{
             embed.addField('Server:', `${guild.name}`, true)
         })
         reply("I have sent a DM as the server name may be explicit \n If you don't recieve the DM make sure your DMs are open", true, message)

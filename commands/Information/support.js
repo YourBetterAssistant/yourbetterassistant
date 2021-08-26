@@ -9,6 +9,8 @@ module.exports = {
     cooldown: 5,
     usage: "support",
     run:async(client, message, args)=>{
-        reply('https://discord.gg/jzWdzgg2q6', true, message)
+        const guild=await client.guilds.cache.get('879927834058043492')//Replace the id with the support server of your bot
+        const inv=await guild.invites.create(guild.rulesChannelId)//if the rules does not exist replace it with your rules channel id
+        reply(`${inv}`, true, message)
     },
 };
