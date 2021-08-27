@@ -4,10 +4,10 @@ module.exports=async client=>{
     const mongo=require('../../botconfig/mongo')
     client.on('messageReactionAdd', async(reaction, user) => {
       console.log(`someone reacted`)
+      if(reaction.message.channel.type==='DM'??reaction.message.channel.type==='GROUP_DM'??reaction.message.channel.type==='UNKNOWN')return
       if(!cache[reaction.message.guild.id]){
       await mongo().then(async(mongoose)=>{
         try{
-          if(reaction.message.channel.type==='DM'??reaction.message.channel.type==='GROUP_DM'??reaction.message.channel.type==='UNKNOWN')return
           let r=await rrSchema.findOne({_id:reaction.message.guild.id})
           let CH=r.channel
           let R1=r.role1
