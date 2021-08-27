@@ -1,17 +1,15 @@
-const djsGames = require('djs-games');
-const { reply } = require('../../exports');
-const RockPaperScissors = new djsGames.RockPaperScissors()
+const {reply}=require('../../exports')
 module.exports = {
     name: "rps",
-    aliases: ["rockpaperscissors"],
-    description: "Plays rock paper scissors with you",
+    description: "Rock paper Scissors",
     category: "Fun",
     memberpermissions:"VIEW_CHANNEL",
-    cooldown: 10,
-    usage: "rps <opponent>",
-    run:async(client, message, args) =>{
-        reply('Starting Game...', true, message)
+    cooldown: 5,
+    usage: "rps",
+    run:async(client, message, args)=>{
+        reply('Starting Game', true, message)
+        const djsGames = require('djs-games')
+        const RockPaperScissors = new djsGames.RockPaperScissors()
         RockPaperScissors.startGame(message)
-
     },
 };
