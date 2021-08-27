@@ -7,7 +7,7 @@ module.exports=async client=>{
       if(!cache[reaction.message.guild.id]){
       await mongo().then(async(mongoose)=>{
         try{
-          if(message.channel.type==='DM'??message.channel.type==='GROUP_DM'??message.channel.type==='UNKNOWN')return
+          if(reaction.message.channel.type==='DM'??reaction.message.channel.type==='GROUP_DM'??reaction.message.channel.type==='UNKNOWN')return
           let r=await rrSchema.findOne({_id:reaction.message.guild.id})
           let CH=r.channel
           let R1=r.role1
