@@ -28,7 +28,7 @@
     "discord-xp": "^1.1.16",
     "discord.js": "^13.0.1",
     "discord.sudo": "^1.0.7",
-    "djs-games": "^2.0.0",
+    "djs-games": "^2.0.11",
     "djs-meme": "^1.2.8",
     "dotenv": "^10.0.0",
     "ffmpeg-static": "^4.4.0",
