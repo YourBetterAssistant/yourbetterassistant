@@ -7,6 +7,7 @@ module.exports=async client=>{
       if(!cache[reaction.message.guild.id]){
       await mongo().then(async(mongoose)=>{
         try{
+          if(message.channel.type==='DM'??message.channel.type==='GROUP_DM'??message.channel.type==='UNKNOWN')return
           let r=await rrSchema.findOne({_id:reaction.message.guild.id})
           let CH=r.channel
           let R1=r.role1
@@ -28,12 +29,12 @@ module.exports=async client=>{
             console.log('Pls')
             let r1=reaction.message.guild.roles.cache.find(r=>r.name===c.R1)
            
-          await reaction.message.guild.members.cache.get(user.id).roles.remove(r1)
-          user.send(`The role ${c.R1} has been removed for un-reacting`)
-      }else if(reaction.emoji.name===c.E2){
-        let r2=reaction.message.guild.roles.cache.find(r=>r.name===c.R2)  
-          await reaction.message.guild.members.cache.get(user.id).roles.remove(r2)
-          user.send(`The role ${c.R2} has been removed for un-reacting`)
+            await reaction.message.guild.members.cache.get(user.id).roles.remove(r1)
+            await user.send(`The role ${c.R1} has been removed for un-reacting`)
+        } else if(reaction.emoji.name===c.E2){
+            let r2=reaction.message.guild.roles.cache.find(r=>r.name===c.R2)  
+            await reaction.message.guild.members.cache.get(user.id).roles.remove(r2)
+            await user.send(`The role ${c.R2} has been removed for un-reacting`)
       }
       }
   });
