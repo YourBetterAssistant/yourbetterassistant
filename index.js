@@ -15,8 +15,7 @@ const fs = require("fs"); //this package is for reading files and getting their 
 //Creating the Discord.js Client for This Bot with some default settings ;) and with partials, so you can fetch OLD messages
 const client=new Discord.Client({fetchAllMembers: true, messageCacheMaxSize: 10, disableEveryone: false,partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'],intents:["GUILDS", "GUILD_MESSAGES",'GUILD_MESSAGE_REACTIONS', 'GUILD_VOICE_STATES', 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_BANS', 'GUILD_INVITES']})
 const ap = AutoPoster(process.env.TOPGGTOKEN, client)
-const clientId = '858606774658924555';
-const testServerId = '879927834058043492';
+const clientId = '862143828920369172'
 
 
 //Client variables to use everywhere
@@ -33,7 +32,7 @@ ap.on('posted', () => {
   console.log('Posted stats to Top.gg!')
 })
 //slash
-client.api.applications(clientId).commands(testServerId).post({data: {
+client.api.applications(clientId).commands.post({data: {
   name: 'ping',
   description: 'ping pong!'
 }})
