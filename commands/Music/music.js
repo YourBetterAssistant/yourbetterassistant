@@ -1,27 +1,27 @@
-
 const ytdl = require('ytdl-core');
 const ytSearch = require('yt-search');
 var { getData, getPreview } = require("spotify-url-info");
 let guildPrefixes={}
 const {reply}=require('../../exports')
-
 //Global queue for your bot. Every server will have a key and value pair in this map. { guild.id, queue_constructor{} }
 const queue = new Map();
 const mongo=require('../../botconfig/mongo');
 const voice=require('@discordjs/voice')
 const prefixSchema = require('../../Schemas/prefixSchema');
-const {prefix:globalPrefix}=require('../../botconfig/config.json')
+const {prefix:globalPrefix}=require('../../botconfig/config.json');
+const { erroHandler } = require('../../handlers/errorHandler');
+const { MessageEmbed } = require('discord.js');
+const player=voice.createAudioPlayer()
 module.exports = {
     name: "play",
     description: "Play music",
-    aliases:['skip','stop','resume','pause','unpause', 'leave', 'join'],
+    aliases:['skip','stop','resume','pause','unpause', 'leave', 'join', 'clearqueue', 'queue'],
     category: "Music",
     guildOnly: true,
     memberpermissions:["CONNECT", "SPEAK"],
     cooldown: 2,
     usage: "cmd [song]",
     run:async(client, message,args)=>{
-        if(!message.author.id==='875335997565571072')return message.channel.send('This Command is now no longer supported.')
         async function dbFind(){
             await mongo().then(async (mongoose)=>{
                 try{
@@ -39,15 +39,10 @@ module.exports = {
         }
         await dbFind()
         let prefix= guildPrefixes[message.guild.id] || globalPrefix
-
-
         //Checking for the voicechannel and permissions (you can add more permissions if you like).
         const voice_channel = message.member.voice.channel;
         if (!voice_channel) return message.channel.send('You need to be in a channel to execute this command!');
-
-        //This is our server queue. We are getting this server queue from the global queue.
         const server_queue = queue.get(message.guild.id);
-        //If the user has used the play command
         if (message.content.startsWith(`${prefix}play`)){
             if (!args[0]) return message.channel.send('You need to send the second argument!');
             let song = {};
@@ -69,7 +64,7 @@ module.exports = {
 				if (video) {
 					song = { title: video.title, url: video.url };
 				} else {
-					message.reply('Error finding song.');
+					reply('That Song could not be found', true, message)
 				}
 			}else {
                 //If there was no link, we use keywords to search for a video. Set the song object to have two keys. Title and URl.
@@ -93,6 +88,7 @@ module.exports = {
                     voice_channel: voice_channel,
                     text_channel: message.channel,
                     connection: null,
+                    player:player,
                     songs: []
                 }
                 
@@ -102,9 +98,13 @@ module.exports = {
     
                 //Establish a connection and play the song with the vide_player function.
                 try {
-                    const connection = await voice.connectTo
+                    const connection = voice.joinVoiceChannel({
+                        channelId: message.member.voice.channelId,
+                        guildId: message.guild.id,
+                        adapterCreator: message.guild.voiceAdapterCreator,
+                    });
                     queue_constructor.connection = connection;
-                    video_player(message.guild, queue_constructor.songs[0]);
+                    await video_player(message.guild, queue_constructor.songs[0]);
                 } catch (err) {
                     queue.delete(message.guild.id);
                     message.channel.send('There was an error connecting!');
@@ -112,109 +112,97 @@ module.exports = {
                 }
             } else{
                 server_queue.songs.push(song);
+                console.log(server_queue.songs)
                 return message.channel.send(`👍 **${song.title}** added to queue!`);
             }
-        }
-
-        else if(message.content.startsWith(`${prefix}skip`)) skip_song(message, server_queue);
-        else if(message.content.startsWith(`${prefix}stop`)) stop_song(message, server_queue);
-        else if(message.content.startsWith(`${prefix}resume`)) resume_song(message, server_queue)
-        else if(message.content.startsWith(`${prefix}pause`)) pause_song(message, server_queue)
+        }else if(message.content.startsWith(`${prefix}skip`))skip_song(message, server_queue, player)
+        else if(message.content.startsWith(`${prefix}stop`))stop_song(message, server_queue)
+        else if(message.content.startsWith(`${prefix}pause`))pause_song(message, server_queue)
+        else if(message.content.startsWith(`${prefix}resume`))resume_song(message, server_queue)
         else if(message.content.startsWith(`${prefix}unpause`))resume_song(message, server_queue)
-        else if(message.content.startsWith(`${prefix}leave`)){
-            voice_channel.leave();
-            queue.delete(guild.id);
-        }
-        else if(message.content.startsWith(`${prefix}join`)){
-            connectToChannel(message.member.voice.channel, message.guild.id)
-            reply('I have joined', true, message)
-        }
-        else if(message.content.startsWith(`${prefix}clearqueue`)){
-            queue.delete(message.guild.id)
-            reply('Queue Cleared!', false, message)
-        }
+        else if(message.content.startsWith(`${prefix}continue`))resume_song(message, server_queue)
+        else if(message.content.startsWith(`${prefix}clearqueue`))queue.delete(message.guild.id)
+        else if(message.content.startsWith(`${prefix}queue`))get_queue(message, server_queue)
+        else if(message.content.startsWith(`${prefix}join`))join(message)
+        else if(message.content.startsWith(`${prefix}leave`))leave(server_queue, message)
 
-
-        
     }
-    
+
+
 }
 const video_player = async (guild, song) => {
-    const song_queue = queue.get(guild.id);
-
+    const song_queue = await queue.get(guild.id);
     //If no song is left in the server queue. Leave the voice channel and delete the key and value pair from the global queue.
     if (!song) {
-        song_queue.voice_channel.leave();
-        queue.delete(guild.id);
-        return;
+        try{
+        await player.stop()
+        await song_queue.connection.destroy()
+        
+       await queue.delete(guild.id)
+        return
+    }catch(err){
+            return
+        }
+        
     }
+    song_queue.connection.subscribe(player)
     const stream = ytdl(song.url, { filter: 'audioonly' });
-    song_queue.connection.play(stream, { seek: 0, volume: 0.5 })
-    .on('finish', () => {
+    const resource = voice.createAudioResource(stream)
+    await song_queue.player.play(resource)
+    song_queue.player.on(voice.AudioPlayerStatus.Idle, ()=>{song_queue.songs.shift();video_player(guild, song_queue.songs[0]);})
+    /*.on('finish', () => {
         song_queue.songs.shift();
         video_player(guild, song_queue.songs[0]);
-    });
+    });*/
     await song_queue.text_channel.send(`🎶 Now playing **${song.title}**`)
 }
-
-const skip_song = (message, server_queue) => {
+const skip_song = (message, server_queue, player) => {
     if (!message.member.voice.channel) return message.channel.send('You need to be in a channel to execute this command!');
     if(!server_queue){
         return message.channel.send(`There are no songs in queue 😔`);
     }
-    server_queue.connection.dispatcher.end();
+    player.stop();
 }
-
 const stop_song = (message, server_queue) => {
     if (!message.member.voice.channel) return message.channel.send('You need to be in a channel to execute this command!');
-    server_queue.songs = [];
-    server_queue.connection.dispatcher.end();
+    server_queue.songs = [];x
+    server_queue.connection.destroy();
 }
 const pause_song=(message, server_queue)=>{
-    if(server_queue.connection.dispatcher.paused) return message.channel.send("Song is already paused");//Checks if the song isn't paused.
-    server_queue.connection.dispatcher.pause();//If the song is paused this will unpause it.
+    server_queue.player.pause();//If the song is paused this will unpause it.
     message.channel.send("paused the song!");//Sends a message to the channel the command was used in after it unpauses.
 }
 const resume_song=(message, server_queue)=>{
-    if(!server_queue.connection.dispatcher.paused) return message.channel.send("Song isn't paused!");//Checks if the song isn't paused.
-    server_queue.connection.dispatcher.resume();//If the song is paused this will unpause it.
-    message.channel.send("Unpaused the song!");//Sends a message to the channel the command was used in after it unpauses.
+    server_queue.player.unpause();//If the song is paused this will unpause it.
+    message.channel.send("paused the song!");//Sends a message to the channel the command was used in after it unpauses.
 }
-async function connectToChannel(channel, guildID) {
-	/*
-		Here, we try to establish a connection to a voice channel. If we're already connected
-		to this voice channel, @discordjs/voice will just return the existing connection for
-		us!
-	*/
-	const connection = voice.joinVoiceChannel({
-		channelId: channel.id,
-		guildId: guildID,
-	});
+const get_queue=(message, server_queue)=>{
+    let embed=new MessageEmbed()
+    .setTitle('Queue');
+    if(!server_queue??server_queue===undefined)return message.channel.send('There is nothing in the queue or a song is already playing')
+    let first_song=server_queue.songs[0]
+    embed.setDescription(` **Now Playing:** ${first_song.title}`)
+    embed.setColor('GREEN')
+    let songs=server_queue.songs
+    let i=1
+    songs.forEach(s=>{
+        try{
+        
+        embed.addField(name=`Song ${i++}`, value=`${s.title}`)}catch(err){return}}
 
-	/*
-		If we're dealing with a connection that isn't yet Ready, we can set a reasonable
-		time limit before giving up. In this example, we give the voice connection 30 seconds
-		to enter the ready state before giving up.
-	*/
-	try {
-		/*
-			Allow ourselves 30 seconds to join the voice channel. If we do not join within then,
-			an error is thrown.
-		*/
-		await voice.entersState(connection, VoiceConnectionStatus.Ready, 30e3);
-		/*
-			At this point, the voice connection is ready within 30 seconds! This means we can
-			start playing audio in the voice channel. We return the connection so it can be
-			used by the caller.
-		*/
-		return connection;
-	} catch (error) {
-		/*
-			At this point, the voice connection has not entered the Ready state. We should make
-			sure to destroy it, and propagate the error by throwing it, so that the calling function
-			is aware that we failed to connect to the channel.
-		*/
-		connection.destroy();
-		throw error;
-	}
+    )
+    message.channel.send({embeds:[embed]})
+    
+}
+const join=async (message)=>{
+    await voice.joinVoiceChannel({
+        channelId: message.member.voice.channelId,
+        guildId: message.guild.id,
+        adapterCreator: message.guild.voiceAdapterCreator,
+    });
+}
+const leave=async (server_queue, message)=>{
+    if(!server_queue)return message.channel.send('I have not joined')
+    await server_queue.connection.destory()
+
 }
