@@ -204,5 +204,7 @@ const join=async (message)=>{
 const leave=async (server_queue, message)=>{
     if(!server_queue)return message.channel.send('I have not joined')
     await server_queue.connection.destory()
+    await queue.delete(message.guild.id)
+
 
 }

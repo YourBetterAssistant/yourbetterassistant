@@ -13,7 +13,7 @@ module.exports = {
     run:async(client, message, args)=>{
         if(!message.author.id==='827388013062389761') return message.channel.send('No you are not owner')
         await reply('Restarting', true, message)
-        await shell.exec('pm2 restart')
+        await shell.exec('pm2 restart 0')
 
     },
 };
