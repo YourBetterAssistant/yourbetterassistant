@@ -165,7 +165,7 @@ const skip_song = (message, server_queue, player) => {
 }
 const stop_song = (message, server_queue) => {
     if (!message.member.voice.channel) return message.channel.send('You need to be in a channel to execute this command!');
-    server_queue.songs = [];x
+    server_queue.songs = [];
     server_queue.connection.destroy();
 }
 const pause_song=(message, server_queue)=>{
