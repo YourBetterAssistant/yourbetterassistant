@@ -18,6 +18,7 @@ module.exports = {
         .addField(name='Shards', value=`${client.ws.shards.size} shards being used`, inline=true)
         .addField(name='Websocket Status', value=`${client.ws.status}`, inline=true)
         .addField(name='Uptime', value=`${duration(client.uptime)}`, inline=true)
+        .addField(name='Command Size', value=client.commands.size.toString(), inline=true)
         .addField(name='** **', value='** **')
         .setColor('BLUE');
         osInfo.cpu(cpu => {
