@@ -94,7 +94,7 @@ module.exports = async (client, message) => {
           .setTitle("❌ Error | You are not allowed to run this command!")
           .setDescription('You Do Not Have The Required Perms!')
           return message.channel.send({embeds:[e]
-          }).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
+          }).then(msg=>msg.delete({timeout: 10000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
         }
         //if the Bot has not enough permissions return error
         let required_perms = ["ADD_REACTIONS","VIEW_CHANNEL","SEND_MESSAGES",
@@ -120,7 +120,7 @@ module.exports = async (client, message) => {
         .setTitle("❌ Something went wrong while, running the: `" + command.name + "` command")
         .setDescription(`\`\`\`${e.message}\`\`\``)
         return message.channel.send({embeds:[em]
-        }).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
+        }).then(msg=>msg.delete({timeout: 10000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
       }
     }
     else{ //if the command is not found send an info msg
