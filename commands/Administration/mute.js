@@ -56,7 +56,7 @@ module.exports = {
             .addField('Duration:', duration+'ms',true)
             .setColor('RANDOM')
             message.channel.send({embeds:[embed]})
-    if(duration){
+    if(!duration==='Infinite'){
         setTimeout(function(){
             userID.roles.set([memberrole])
             let embed= new Discord.MessageEmbed().setTitle('Unmute')
