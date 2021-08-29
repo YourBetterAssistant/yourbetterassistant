@@ -30,14 +30,8 @@ module.exports = {
       message.channel.send({embeds:[embed]
       })
     } catch (e) {
-        console.log(String(e.stack).bgRed)
-        let embed=new MessageEmbed()
-        .setColor(ee.wrongcolor)
-        .setFooter(ee.footertext, ee.footericon)
-        .setTitle(`❌ ERROR | An error occurred`)
-        .setDescription(`\`\`\`${e.stack}\`\`\``)
-        return message.channel.send({embeds:[embed]
-        });
+        const errHandler=require('../../handlers/errorHandler')
+        errHandler.erroHandler(e, message)
     }
   }
 }
