@@ -5,7 +5,7 @@ module.exports = {
     name: "chatbot",
     description: "Choose to enable or diable chatbot and which channel",
     category: "Administration",
-    memberpermissions:"VIEW_CHANNEL",
+    memberpermissions:"ADMINISTRATOR",
     cooldown: 5,
     usage: "chatbot [channelID]",
     run:async(client, message, args)=>{
