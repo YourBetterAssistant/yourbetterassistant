@@ -18,6 +18,7 @@ const Discord = require("discord.js"); //this is the official discord.js wrapper
 const { escapeRegex} = require("../../handlers/functions"); //Loading all needed functions
 const { Mongoose } = require('mongoose');
 Levels.setURL(config.mongoPath);
+const {duration}=require('../../handlers/functions')
 //here the event starts
 module.exports = async (client, message) => {
   const guildPrefixes={}
@@ -73,11 +74,11 @@ module.exports = async (client, message) => {
         if (timestamps.has(message.author.id)) { //if the user is on cooldown
           const expirationTime = timestamps.get(message.author.id) + cooldownAmount; //get the amount of time he needs to wait until he can run the cmd again
           if (now < expirationTime) { //if he is still on cooldonw
-            const timeLeft = (expirationTime - now) / 1000; //get the lefttime
+            const timeLeft = (expirationTime - now); //get the lefttime
             let embed=new Discord.MessageEmbed()
             .setColor(ee.wrongcolor)
             .setFooter(ee.footertext,ee.footericon)
-            .setTitle(`❌ Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`)
+            .setTitle(`❌ Please wait ${duration(timeLeft)} before reusing the \`${command.name}\` command.`)
             return message.channel.send({embeds:[embed]});
              //send an information message
           }
