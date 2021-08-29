@@ -37,7 +37,7 @@ module.exports = {
                 return
     
               })
-
+            return
         }
         let channel=message.guild.channels.cache.get(args[0])
         if(!channel)return message.channel.send('The channel Id you have specified is invalid try b!chatbot by itself instead')
