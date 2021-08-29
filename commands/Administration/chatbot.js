@@ -10,10 +10,8 @@ module.exports = {
     usage: "chatbot [channelID]",
     run:async(client, message, args)=>{
         if(!args[0]){
-            let m=await message.channel.send('Intialising')
-            m.edit('Done!')
             message.channel.send('Tell me the channel name of the channel where the chatbot will stay (case sensitive)')
-            let filter=m=>m.author.id
+            let filter=m=>m.author.id===message.author.id
             await message.channel.awaitMessages({
                 filter, 
                 max:1,
@@ -21,17 +19,24 @@ module.exports = {
                 errors:['time']
             }).then(async (msg)=>{
                 msg=msg.first()
-                let c=message.guild.channels.cache.find(c=>c.name===msg)
+                if(msg){
+                let c=message.guild.channels.cache.find(c=>c.name===msg.content)
                 if(!c)return msg.channel.send('The channel name provided is invalid try again later')
                 await mongo().then(async ()=>{
                     await chatbot.findOneAndUpdate({guildID:message.guild.id}, {
                         guildID:message.guild.id,
-                        channelID:msg
+                        channelID:c.id
                     }, {upsert:true})
                 })
-                reply('Created chatbot for the channel', true, msg)
+                reply('Created chatbot for the channel', true, msg)}
+                return
 
-            })
+            }).catch(()=>{
+                let msg=message
+                msg.channel.send('The time is up')
+                return
+    
+              })
 
         }
         let channel=message.guild.channels.cache.get(args[0])
