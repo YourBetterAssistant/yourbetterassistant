@@ -6,6 +6,7 @@ const commandPrefixSchema=require('../../Schemas/prefixSchema')
 const Levels=require('discord-xp')
 const {count}=require('../../Utils/count')
 const {level}=require('../../Utils/level')
+const {check}=require('../../Utils/checkChatChannel')
 const {prefixLoad}=require('../../Utils/prefix-load')
 let process=require('process')
 const mongo=require('../../botconfig/mongo')
@@ -33,6 +34,7 @@ module.exports = async (client, message) => {
     await prefixLoad(client, guildPrefixes, globalPrefix)
     await level(message)
     await count(message)
+    await check(message)
     let prefix= guildPrefixes[message.guild.id] || globalPrefix
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
