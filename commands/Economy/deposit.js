@@ -1,7 +1,8 @@
-
-const mongoCurrency=require('discord-mongo-currency-fork')
-const Discord=require('discord.js')
-const {reply}=require('../../exports')
+const Discord=require('discord.js');
+const money=require('../../Constructors/economy')
+const currency =new money()
+const {reply}=require('../../exports');
+const economySchema = require('../../Schemas/economySchema');
 module.exports = {
     name: "deposit",
     aliases: ["dep"],
@@ -13,12 +14,13 @@ module.exports = {
     cooldown: 5,
     usage: "deposit <amount>",
     run:async(client, message, args)=>{
-        if(!isNaN(args[0])) return message.channel.send('That is not a real number')
         let coins=args[0]
         let user=message.author
-        let guild=message.guily
-        reply({content:`Depositing ${coins}YMCs right now!`, allowedMentions:{repliedUser:true}})
-        await mongoCurrency.deposit(user.id, guild.id, coins)
+        reply(`Withdrawing ${coins}YMCs from the bank!`, true, message)
+        if(coins==='all'??coins==='.'??coins==='*'??coins==='max'){await currency.deposit(user.id,coins, message);return}
+        if(isNaN(coins)){return reply('that is not a number')}
+        await currency.deposit(user.id,coins, message);return
+
         
     },
 };

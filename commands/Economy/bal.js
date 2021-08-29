@@ -1,7 +1,7 @@
-
+const money=require('../../Constructors/economy')
 const Discord=require('discord.js')
-const mongoCurrency=require('discord-mongo-currency-fork')
 const {reply}=require('../../exports')
+const currency= new money()
 module.exports = {
     name: "bal",
     aliases: ["balance"],
@@ -15,41 +15,40 @@ module.exports = {
         if(!args[0]){
 
             let member=message.author
-            const user = await mongoCurrency.findUser(member.id, message.guild.id); // Get the user from the database.
+            const user = await currency.findUser(member.id); // Get the user from the database.
             if(!user){
-                await mongoCurrency.createUser(message.author.id, message.guild.id)
+                await currency.createUser(member.id, 10000, 10000, 10000)
                 reply('A new account has been created for you with a balance of 1000YBCs', true, message)
-                await mongoCurrency.giveCoins(message.author.id, message.guild.id, 1000)
+                await currency.addCoins(member.id, 10000, message)
                 return}
             const embed = new Discord.MessageEmbed()
             embed.setTitle(`Your Balance`)
             embed.addFields(
-            {name:'Wallet', value:`${user.coinsInWallet}`},
-            {name:'Bank', value:`${user.coinsInBank}/${user.bankSpace}`},
-            {name:'Total', value:`${user.coinsInBank+user.coinsInWallet}`}
+            {name:'Wallet', value:`${user.coins}`},
+            {name:'Bank', value:`${user.bank}/${user.bankSpace}`},
+            {name:'Total', value:`${user.coins+user.bank}`}
             )
             embed.setColor('RANDOM')
             message.channel.send({embeds:[embed]})
         }
         else{
+            const user = await currency.findUser(member.id); // Get the user from the database.
+            if(!user){
+                await currency.createUser(member.id, 10000, 10000, 10000)
+                let mony='10,000'
+                message.reply(`A new account has been created for you with a balance of ${mony}YBCs`, true, message)
+                return}
 
-        const user = await mongoCurrency.findUser(member.id, message.guild.id); // Get the user from the database.
+            const embed = new Discord.MessageEmbed()
+            .setTitle(`${member.user.username}'s Balance`)
+            .addFields(
+                {name:'Wallet', value:`${user.coins}`, inline:true},
+                {name:'Bank', value:`${user.bank}/${user.bankSpace}`, inline:true},
+                {name:'Total', value:`${user.bank + user.coins}`, inline:true}
+                )
+            .setColor('RANDOM')
 
-        const embed = new Discord.MessageEmbed()
-        .setTitle(`${member.user.username}'s Balance`)
-        .addFields(
-            {name:'Wallet', value:`${user.coinsInWallet}`, inline:true},
-            {name:'Bank', value:`${user.coinsInBank}/${user.bankSpace}`, inline:true},
-            {name:'Total', value:`${user.coinsInBank} + ${user.coinsInWallet}`, inline:true}
-            )
-        .setColor('RANDOM')
-        if(!user){
-            await mongoCurrency.createUser(member.id, message.guild.id)
-            message.reply('A new account has been created for you with a balance of 1000YBCs', true, message)
-            await mongoCurrency.giveCoins(member.id, message.guild.id, 1000)
-            return}
-
-        reply({embeds:[embed]}, true, message)}
+            reply({embeds:[embed]}, true, message)}
 
     }
   

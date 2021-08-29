@@ -1,4 +1,5 @@
-const mongoCurrency=require('discord-mongo-currency-fork')
+const money=require('../../Constructors/economy')
+const economy=new money()
 const {reply}=require('../../exports')
 module.exports = {
     name: "beg",
@@ -10,7 +11,7 @@ module.exports = {
     usage: "beg",
     run:async(client, message, args)=>{
         const randomCoins = Math.floor(Math.random() * 99) + 1; // Random amount of coins.
-        await mongoCurrency.giveCoins(message.member.id, message.guild.id, randomCoins);
+        await economy.addCoins(message.member.id, randomCoins, message);
         reply(`You have gotten ${randomCoins}YBCs from begging!`, true, message)
         
         

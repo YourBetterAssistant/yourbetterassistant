@@ -1,10 +1,11 @@
 const Discord=require('discord.js')
-const mongoCurrency=require('discord-mongo-currency-fork')
 const {reply}=require('../../exports')
 const workSchema=require('../../Schemas/workSchema')
 const mongo=require('../../botconfig/mongo')
 const id=require('../../botconfig/id.json')
 const s=require('../../botconfig/salary.json')
+const money=require('../../Constructors/economy')
+const economy=new money()
 module.exports = {
     name: "work",
     description: "work ",
@@ -23,7 +24,7 @@ module.exports = {
           })
           if(!j){
             reply('You do not have a job here is compensation, 1000YBCs I highly suggest getting one')
-            await mongoCurrency.giveCoins(message.author.id, message.guild.id, 1000)
+            await economy.addCoins(message.author.id, message.guild.id, '1000')
             return
           }
           job=j.job}catch(err){console.log(" erro smh")}
@@ -54,18 +55,18 @@ module.exports = {
           if(msg.content===item){
               console.log('k')
               msg.channel.send(`CORRECT YOU HAVE EARNT ${sal}YBCs`)
-              mongoCurrency.giveCoins(msg.author.id, msg.guild.id, sal)
+              economy.addCoins(msg.author.id,parseInt(sal), msg)
               return
   
             }else {
               msg.channel.send(`WRONG! YOU HAVE EARNT ${randomCoins}YBCs`)}
-              mongoCurrency.giveCoins(msg.author.id, msg.guild.id, randomCoins)
+              mongoCurrency.giveCoins(msg.author.id,randomCoins, msg)
               return
           }).catch(err=>{
             if(err){
-              return console.log(err)
               message.channel.send(`Sed time ran out here is ${randomCoins}YBCs`)
-              mongoCurrency.giveCoins(message.author.id, message.guild.id, randomCoins)
+              mongoCurrency.giveCoins(msg.author.id,randomCoins, msg)
+              return console.log(err)
             }
           })
         

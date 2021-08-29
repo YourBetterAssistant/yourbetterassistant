@@ -4,7 +4,6 @@ const loadPrefix=require('../../Utils/prefix-load')
 const {lavacordManager}=require('../../index')
 const Discord=require('discord.js')
 require('dotenv').config()
-const mongoCurrency = require('discord-mongo-currency-fork');
 const mongoose=require('mongoose')
 const welcomeSchema=require('../../Schemas/welcomeSchema')
 const Levels = require("discord-xp");
@@ -46,13 +45,7 @@ module.exports = async client => {
     }
 
   })
-  mongoCurrency.connect(process.env.MONGOPATH).then(mongoCurrency=>{
-    try{console.log('CONNECTED')
-  }catch(err){
-    console.log(`Breh error\n\n${err.stack}`)
-  }
-  
-  })
+
   client.guilds.cache.forEach(guild=>{
     console.log(guild.name)
   })
