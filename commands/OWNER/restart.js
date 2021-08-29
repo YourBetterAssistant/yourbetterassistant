@@ -11,7 +11,12 @@ module.exports = {
     cooldown: 2,
     usage: "restart",
     run:async(client, message, args)=>{
-        if(!message.author.id==='827388013062389761') return message.channel.send('No you are not owner')
+        let ownerId='827388013062389761'
+        if(!message.author.id===ownerId){
+            message.channel.send('You cannot pull');
+            console.log('bruh')
+            return
+        }
         await reply('Restarting', true, message)
         await shell.exec('pm2 restart 0')
 

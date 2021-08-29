@@ -8,7 +8,13 @@ module.exports = {
     cooldown: 2,
     usage: "pull",
     run:async(client, message, args)=>{
-        if(!message.author.id==='827388013062389761') return message.channel.send('You cannot pull')
+        let ownerId='827388013062389761'
+        if(!message.author.id===ownerId){
+            message.channel.send('You cannot pull');
+            console.log('bruh')
+            return
+        }
+          
         let link='https://www.github.com/NotTimIsReal/bbarevamp'
         reply(`Pulling from **${link}**`, true, message)
         shell.exec(`git pull ${link}`)
