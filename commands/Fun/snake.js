@@ -1,4 +1,4 @@
-const { reply } = require('../..');
+const { reply } = require('../../exports');
 
 module.exports = {
     name: "snake",

@@ -1,4 +1,3 @@
-const mongoCurrency=require('discord-mongo-currency-fork')
 const {reply}=require('../../exports')
 //const {GuessTheNumber}=require('weky')
 module.exports = {

@@ -2,5 +2,12 @@
     "files.autoSave": "onWindowChange",
     "typescript.tsserver.log": "normal",
     "markdown.trace": "verbose",
-    "kite.loggingLevel": "verbose"
+    "kite.loggingLevel": "verbose",
+    "DockerRun.DisableDockerrc": true,
+    "DockerRun.Containers": [],
+    "cSpell.words": [
+        "cooldown",
+        "memberpermissions",
+        "serverconf"
+    ]
 }

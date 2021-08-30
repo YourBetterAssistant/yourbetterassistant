@@ -7,3 +7,5 @@ commands/Administration/coutning.js
 yarn.lock
 util.js
 yarn-error.log
+commands/Administration/betaTester.js
+/commands/.DS_Store
