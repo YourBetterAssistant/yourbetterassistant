@@ -339,7 +339,7 @@ message.delete()
       .setColor(options.embedColor || '#075FFF')
       .setFooter(foot)
 
-let supportRole = guild.roles.cache.get(options.role) || '***Support Team***'
+let supportRole = message.guild.roles.cache.get(options.role) || '***Support Team***'
 
     ch.send({ content: options.content || supportRole.toString() || '***Support Team***', embeds: [emb], components: [closerow] }).then((m) => {
 
