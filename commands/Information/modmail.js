@@ -14,7 +14,7 @@ module.exports = {
             dmToggle: true, // default: true
             //blacklistUser: ['userid'], // blacklisted user id's
             //blacklistGuild: ['guildid'], // server that disabled modmail
-            categoryID: 'id', // category id
+            categoryID: '882046261446967346', // category id
             //embedColor: 'hex code', // default: #075FFF
             
             //delColor: 'DANGER', // default: DANGER
