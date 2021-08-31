@@ -1,7 +1,7 @@
 const { ClientApplication } = require("discord.js");
 const shell = require("shelljs");
 const {reply}=require('../../exports')
-
+const { delay } = require("../../handlers/functions");
 module.exports = {
     name: "restart",
     aliases:'reboot',
@@ -18,6 +18,8 @@ module.exports = {
             return
         }
         await reply('Restarting', true, message)
+        await shell.exec('./bash/downtime.sh')
+        delay(100)
         await shell.exec('pm2 restart 0')
 
     },
