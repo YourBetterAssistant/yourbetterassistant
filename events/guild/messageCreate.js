@@ -20,8 +20,10 @@ const { Mongoose } = require('mongoose');
 Levels.setURL(config.mongoPath);
 const {duration}=require('../../handlers/functions')
 //here the event starts
+let prefix
 module.exports = async (client, message) => {
   const guildPrefixes={}
+  let cache={}
   try {
     //if the message is not in a guild (aka in dms), return aka ignore the inputs
     
@@ -32,11 +34,11 @@ module.exports = async (client, message) => {
     //if the message is on partial fetch it
     if (message.partial) await message.fetch();
     //get the current prefix from the botconfig/config.json
-    await prefixLoad(client, guildPrefixes, globalPrefix)
+    await prefixLoad(client, guildPrefixes, globalPrefix, cache, message)
     await level(message)
     await count(message)
     await check(message)
-    let prefix= guildPrefixes[message.guild.id] || globalPrefix
+    prefix=guildPrefixes[message.guild.id] || globalPrefix
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
     //if its not that then return
@@ -156,4 +158,5 @@ module.exports = async (client, message) => {
   */
 
    
-}
+}, prefix
+

@@ -1,7 +1,6 @@
 const ytdl = require('ytdl-core');
 const ytSearch = require('yt-search');
 var { getData, getPreview } = require("spotify-url-info");
-let guildPrefixes={}
 const {reply}=require('../../exports')
 //Global queue for your bot. Every server will have a key and value pair in this map. { guild.id, queue_constructor{} }
 const queue = new Map();
@@ -12,6 +11,8 @@ const {prefix:globalPrefix}=require('../../botconfig/config.json');
 const { erroHandler } = require('../../handlers/errorHandler');
 const { MessageEmbed } = require('discord.js');
 const player=voice.createAudioPlayer()
+const handler=require('../../events/guild/messageCreate')
+let tempCache={}
 module.exports = {
     name: "play",
     description: "Play music",
@@ -22,14 +23,19 @@ module.exports = {
     cooldown: 2,
     usage: "cmd [song]",
     run:async(client, message,args)=>{
+        //Checking for the voicechannel and permissions (you can add more permissions if you like).
+        const voice_channel = message.member.voice.channel;
+        if (!voice_channel) return message.channel.send('You need to be in a channel to execute this command!');
+        const server_queue = queue.get(message.guild.id);
+        if(!tempCache[message.guild.id]){
         async function dbFind(){
             await mongo().then(async (mongoose)=>{
                 try{
                     let result=await prefixSchema.findOne({_id:message.guild.id})
                     if(!result){
-                        guildPrefixes[message.guild.id]=globalPrefix
+                        tempCache[message.guild.id]=globalPrefix
                     }else{
-                        guildPrefixes[message.guild.id]=result.prefix
+                        tempCache[message.guild.id]=result.prefix
                     }
 
                 }finally{
@@ -37,12 +43,8 @@ module.exports = {
                 }
             })
         }
-        await dbFind()
-        let prefix= guildPrefixes[message.guild.id] || globalPrefix
-        //Checking for the voicechannel and permissions (you can add more permissions if you like).
-        const voice_channel = message.member.voice.channel;
-        if (!voice_channel) return message.channel.send('You need to be in a channel to execute this command!');
-        const server_queue = queue.get(message.guild.id);
+        await dbFind()}
+        let prefix= tempCache[message.guild.id] || globalPrefix
         if (message.content.startsWith(`${prefix}play`)){
             if (!args[0]) return message.channel.send('You need to send the second argument!');
             let song = {};
@@ -167,6 +169,7 @@ const stop_song = (message, server_queue) => {
     if (!message.member.voice.channel) return message.channel.send('You need to be in a channel to execute this command!');
     server_queue.songs = [];
     server_queue.connection.destroy();
+    tempCache[message.guild.id]=null
 }
 const pause_song=(message, server_queue)=>{
     server_queue.player.pause();//If the song is paused this will unpause it.

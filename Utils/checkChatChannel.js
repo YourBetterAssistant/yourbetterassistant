@@ -1,8 +1,15 @@
 const axios= require('axios').default
 const chatBot=require('../Schemas/chatbot')
+let cache={}
 async function check(message){
+    if(!cache[message.guild.id]){
     let check=await chatBot.findOne({guildID:message.guild.id})
-    if(check){
+    if(!check){
+      cache[message.guild.id]=null
+    }
+    cache[message.guild.id]={check}
+  }
+    if(!cache[message.guild.id]==null){
     let ch=check.channelID
     if(ch){
     if(message.channel.id===ch){

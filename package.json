@@ -23,6 +23,7 @@
     "add": "^2.0.6",
     "axios": "^0.21.1",
     "canvacord": "^5.2.3",
+    "canvas": "^2.8.0",
     "child_process": "^1.0.2",
     "discord-together": "^1.1.62",
     "discord-xp": "^1.1.16",

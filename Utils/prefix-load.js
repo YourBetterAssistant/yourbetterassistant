@@ -1,7 +1,7 @@
 const mongo=require('../botconfig/mongo')
 const commandPrefixSchema=require('../Schemas/prefixSchema')
-async function prefixLoad(client, guildPrefixes, globalPrefix){
-    await mongo().then(async mongoose=>{
+async function prefixLoad(client, guildPrefixes, globalPrefix, cache, message){
+    await mongo().then(async ()=>{
       try{
           /**
            * @param client
@@ -20,7 +20,6 @@ async function prefixLoad(client, guildPrefixes, globalPrefix){
       
       }
       catch(err){
-        await mongoose.connection.close()
         console.log(`An error occured \n\n\n\n\n\n\n ${err.stack}`)
         return
       }
