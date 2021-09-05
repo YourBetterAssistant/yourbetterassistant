@@ -23,7 +23,10 @@ module.exports = {
         if(!isValidHttpUrl(args[0]))return message.channel.send('The link you sent does not start with https or http')
         if(message.content.includes('porn')||message.content.includes('xxx')||message.content.includes('nude')||message.content.includes('boobs')||message.content.includes('dick')||message.content.includes('penis')||message.content.includes('pussy'))return message.channel.send('The link you have provided is explicit or in our banned websites list')
         message.channel.send('Searching ...')
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({
+          headless:true,
+          args:['--no-sandbox', '--disable-setuid-sandbox']
+        });
         const page = await browser.newPage();
         await page.goto(args[0]);
         await page.screenshot({ path: './images/example.png' })

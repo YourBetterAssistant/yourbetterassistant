@@ -6,6 +6,7 @@ const google = new Scraper({
       headless: true,
         //delete the bottom bit if ur not using ARM linux distos like raspian e
       executablePath: '/usr/bin/chromium-browser',
+      args:['--no-sandbox', '--disable-setuid-sandbox']
     },safe:true,
   })
 module.exports = {
