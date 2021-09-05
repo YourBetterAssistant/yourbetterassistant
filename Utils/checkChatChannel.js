@@ -1,15 +1,7 @@
 const axios= require('axios').default
 const chatBot=require('../Schemas/chatbot')
-let cache={}
 async function check(message){
-    if(!cache[message.guild.id]){
     let check=await chatBot.findOne({guildID:message.guild.id})
-    if(!check){
-      cache[message.guild.id]=null
-    }
-    cache[message.guild.id]={check}
-  }
-    if(!cache[message.guild.id]==null){
     let ch=check.channelID
     if(ch){
     if(message.channel.id===ch){
@@ -33,6 +25,6 @@ async function check(message){
         urlGet(`https://api.affiliateplus.xyz/api/chatbot?message=${message.content}&botname=YourBetterAssistant&ownername=SomeOneElse&user=1`)
         return
         
-    }}}
+    }}
 }
 exports.check=check
