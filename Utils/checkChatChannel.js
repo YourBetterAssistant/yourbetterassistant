@@ -3,7 +3,7 @@ const chatBot=require('../Schemas/chatbot')
 async function check(message){
     let check=await chatBot.findOne({guildID:message.guild.id})
     let ch=check.channelID
-    if(ch){
+    if(check){
     if(message.channel.id===ch){
         async function urlGet(url){
             let axios=require('axios').default
