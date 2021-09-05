@@ -5,7 +5,7 @@ const google = new Scraper({
     puppeteer: {
       headless: true,
         //delete the bottom bit if ur not using ARM linux distos like raspian e
-      executablePath: '/usr/bin/chromium-browser',
+      executablePath: '/usr/bin/chromium',
       args:['--no-sandbox', '--disable-setuid-sandbox']
     },safe:true,
   })
