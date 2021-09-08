@@ -22,7 +22,7 @@ async function check(message){
             });
               
           }
-          urlGet(`https://api.affiliateplus.xyz/api/chatbot?message=${message.content}&botname=YourBetterAssistant&ownername=SomeOneElse&user=1`)
+          urlGet(`https://api.affiliateplus.xyz/api/chatbot?message=${message.content}&botname=YourBetterAssistant&ownername=SomeonElsee&user=2`)
           return
           
       }}
