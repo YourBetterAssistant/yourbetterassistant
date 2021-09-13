@@ -10,7 +10,7 @@ async function count(message){
       var memberCount = message.guild.members.cache.filter(m => !m.user.bot).size;  
       var memberCountChannel =  message.guild.channels.cache.get(vc);
       if(!memberCountChannel)return
-      memberCountChannel.setName(`${memberCount} members!`);
+      memberCountChannel.setName(`${memberCount} members`);
    }, 1000)}}
 
   )}catch(err){require('../handlers/errorHandler')}}
