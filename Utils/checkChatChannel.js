@@ -4,7 +4,7 @@ async function check(message){
     let check=await chatBot.findOne({guildID:message.guild.id})
     if(check){
       let ch=check.channelID
-      if(!ch==null){
+      if(!ch=="null"){
       if(message.channel.id===ch){
           async function urlGet(url){
               let axios=require('axios').default
