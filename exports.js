@@ -11,6 +11,11 @@ function reply(content, mention, message){
     message.reply({ content:content, allowedMentions: { repliedUser: mention }})
   }
   exports.reply=reply
+/**
+ * @param msg message
+ * @param j job
+ * @param reply The message paramater
+ * */
 async function hiremongo(msg, j, reply){
   await mongo().then(async()=>{
     try{await workSchema.findOneAndUpdate({
