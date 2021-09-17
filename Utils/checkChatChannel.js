@@ -18,7 +18,6 @@ async function check(message){
               console.log(error);
             })
             .then(function () {
-              // always executed
             });
               
           }
