@@ -22,7 +22,7 @@ const lavalink = new Node({
     connection: info,
     sendGatewayPayload: (id, payload) => client.guilds.cache.get(id)?.shard?.send(payload)
     });
-lavalink.connect('858606774658924555')
+lavalink.connect(clientId)
 lavalink.once('connect', (c)=>{
     console.log('Connected to lavalink \n\n\n')
 })
