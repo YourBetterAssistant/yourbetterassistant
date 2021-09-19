@@ -4,7 +4,7 @@ const {reply}=require('../../exports')
 const { delay } = require("../../handlers/functions");
 module.exports = {
     name: "restart",
-    aliases:'reboot',
+    aliases:['reboot'],
     description: "restarts bot",
     category: "OWNER",
     memberpermissions:"VIEW_CHANNEL",
@@ -12,7 +12,7 @@ module.exports = {
     usage: "restart",
     run:async(client, message, args)=>{
         let ownerId='827388013062389761'
-        if(!message.author.id===ownerId){
+        if(message.author.id!==ownerId){
             message.channel.send('You cannot pull');
             console.log('bruh')
             return

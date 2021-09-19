@@ -4,6 +4,7 @@ const loadPrefix=require('../../Utils/prefix-load')
 const {lavacordManager}=require('../../index')
 const Discord=require('discord.js')
 require('dotenv').config()
+const fs=require('fs')
 const mongoose=require('mongoose')
 const welcomeSchema=require('../../Schemas/welcomeSchema')
 const Levels = require("discord-xp");
@@ -49,6 +50,17 @@ module.exports = async client => {
   client.guilds.cache.forEach(guild=>{
     console.log(guild.name)
   })
+  function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 
+ charactersLength));
+   }
+   return result;
+  }
+  fs.writeFile('./key.txt',`${makeid(20)}`, (err)=>{if(err)return})
 
 
 
