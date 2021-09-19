@@ -121,8 +121,13 @@ module.exports = async (client, message) => {
         .setFooter(ee.footertext, ee.footericon)
         .setTitle("❌ Something went wrong while, running the: `" + command.name + "` command")
         .setDescription(`\`\`\`${e.message}\`\`\``)
-        return message.channel.send({embeds:[em]
-        }).then(msg=>msg.delete({timeout: 10000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
+        .addField('Guild:', message.guild.id.toString())
+        .addField('GuildName', message.guild.name)
+        .setTimestamp(new Date())
+        const channel=client.channels.cache.get('889101477421912064')
+        message.channel.send(`Something happened while running \`${command.name}\`, This has been logged and reported to the developers`)
+        return channel.send({embeds:[em]
+        })
       }
     }
     else{ //if the command is not found send an info msg
