@@ -1,6 +1,5 @@
 const { MessageEmbed } = require("discord.js");
 const { duration } = require("../../handlers/functions");
-const daily = require("../../Schemas/daily");
 const economySchema = require("../../Schemas/economySchema");
 
 module.exports = {
