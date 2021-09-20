@@ -154,9 +154,27 @@ class economy{
         let results=await economySchema.findOne({userID:userID})
         return results
     }
-    async generateLeaderboard(amount) {
-        TypeError('But there id no leaderboard')
-
+    async generateLeaderboard(amount, message) {
+        const filter = {};
+        const allUsers=await economySchema.find(filter)
+        let similarUsers=[]
+        allUsers.forEach(result=>{
+            message.guild.members.cache.get(result.userID)?similarUsers.push({userID:result.userID, coins:result.coins}):null
+            
+        })
+        function compare( b, a ) {
+            if ( a.coins < b.coins ){
+              return -1;
+            }
+            if ( a.coins > b.coins ){
+              return 1;
+            }
+            return 0;
+          }
+          
+        let done=similarUsers.sort(compare);
+        console.log(done)
+        return done
     }
 }
 module.exports=economy

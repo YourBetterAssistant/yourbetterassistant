@@ -1,7 +1,7 @@
 const Levels = require("discord-xp");
 const { MessageEmbed } = require("discord.js");
 module.exports = {
-    name: "leaderboard",
+    name: "xpleaderboard",
     description: "Shows the leaderboard",
     category: "levels",
     guildOnly: true,

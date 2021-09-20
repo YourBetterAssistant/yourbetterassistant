@@ -128,7 +128,10 @@ module.exports = {
     var year = d.getFullYear();
     const time=day + " " + hr + ":" + min + ampm + " " + date + " " + month + " " + year;
     return time
-  }
+  },
+  numberWithCommas:function(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 }
 
 /** Template by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template */

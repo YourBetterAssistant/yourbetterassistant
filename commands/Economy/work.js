@@ -5,6 +5,7 @@ const mongo=require('../../botconfig/mongo')
 const id=require('../../botconfig/id.json')
 const s=require('../../botconfig/salary.json')
 const money=require('../../Constructors/economy')
+const { default: axios } = require('axios')
 const economy=new money()
 module.exports = {
     name: "work",
@@ -32,12 +33,13 @@ module.exports = {
         let salary1=s[1]
         let salary2=s[2]
         let salary3=s[3]
-        let possibleJobs=['FRIDGE', 'BUY', 'JOBS', 'TV', 'POLITICS', 'LIFE', 'CHILDREN']
-        var item = possibleJobs[Math.floor(Math.random()*possibleJobs.length)];
+        let possibleJobs=[]
+        await axios.get('https://random-word-api.herokuapp.com/word?number=1').then((val)=> possibleJobs.push(val.data.toString()))
+        console.log(possibleJobs[0])
         let embed=new Discord.MessageEmbed()
         .setTitle(`JOB:${job}`)
         .setDescription('Type the word in')
-        .addField('Word:',`${item}`, true)
+        .addField('Word:',`${possibleJobs[0]}`, true)
         message.channel.send({embeds:[embed]})
         let sal
         if(job===id[1]){sal=salary1}
@@ -52,7 +54,7 @@ module.exports = {
           errors:['time']
         }).then(async(msg)=>{
           msg = Array.from(msg.values())[0]
-          if(msg.content===item){
+          if(msg.content===possibleJobs[0]){
               console.log('k')
               msg.channel.send(`CORRECT YOU HAVE EARNT ${sal}YBCs`)
               economy.addCoins(msg.author.id,parseInt(sal), msg)
@@ -60,12 +62,12 @@ module.exports = {
   
             }else {
               msg.channel.send(`WRONG! YOU HAVE EARNT ${randomCoins}YBCs`)}
-              mongoCurrency.giveCoins(msg.author.id,randomCoins, msg)
+              economy.addCoins(msg.author.id,randomCoins, msg)
               return
           }).catch(err=>{
             if(err){
               message.channel.send(`Sed time ran out here is ${randomCoins}YBCs`)
-              mongoCurrency.giveCoins(msg.author.id,randomCoins, msg)
+              economy.addCoins(msg.author.id,randomCoins, message)
               return console.log(err)
             }
           })
