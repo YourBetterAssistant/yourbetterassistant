@@ -8,12 +8,7 @@ module.exports=async (client, member)=>{
         await mongo().then(async mongoose=>{
           try{
             let countInfo=await countSchema.findOne({_id:member.guild.id})
-                const vc=countInfo.voiceChannelID
-                setInterval(function () {
-                  var memberCount = guild.members.cache.filter(member => !member.user.bot).size;  
-                  var memberCountChannel = guild.channels.cache.get(vc);
-                  memberCountChannel.setName(`${memberCount} members!`);
-                }, 1000)
+            const vc=countInfo.voiceChannelID
             let logInfo=await logSchema.findOne({_id:member.guild.id})
             let logChannelID=logInfo.channelID
             const logChannel=member.guild.channels.cache.get(logChannelID)
@@ -22,6 +17,13 @@ module.exports=async (client, member)=>{
                 .addField('Member', `${member}`)
                 .setColor('RANDOM')
                 logChannel.send({embeds:[embed]})
+            setInterval(function () {
+              try{
+                var memberCount = guild.members.cache.filter(member => !member.user.bot).size;  
+                var memberCountChannel = guild.channels.cache.get(vc);
+                memberCountChannel.setName(`${memberCount} members!`);
+              }catch(err){return }
+            }, 1000)
 
           }catch(err){console.log(err.stack)}
         })
