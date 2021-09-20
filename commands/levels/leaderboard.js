@@ -1,7 +1,7 @@
 const Levels = require("discord-xp");
 const { MessageEmbed } = require("discord.js");
 module.exports = {
-    name: "xpleaderboard",
+    name: "leaderboard",
     description: "Shows the leaderboard",
     category: "levels",
     guildOnly: true,
@@ -18,7 +18,8 @@ module.exports = {
         const lb = leaderboard.map(e => `${e.position}. ${e.username}#${e.discriminator}\nLevel: ${e.level}\nXP: ${e.xp.toLocaleString()}`); // We map the outputs.
         let embed=new MessageEmbed().setTitle('Leaderboard')
         .setDescription(`**Leaderboard**:\n\n${lb.join("\n\n")}`)
+        .setColor('RANDOM')
 
-        message.channel.send({embeds:embed});
+        message.channel.send({embeds:[embed]});
     },
 };

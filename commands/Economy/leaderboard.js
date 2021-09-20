@@ -2,7 +2,7 @@ const money=require('../../Constructors/economy');
 const { numberWithCommas } = require('../../handlers/functions');
 const currency=new money()
 module.exports = {
-    name: "leaderboard",
+    name: "rich",
     description: "Currency Leaderboard first q0",
     category: "Economy",
     memberpermissions:"VIEW_CHANNEL",
