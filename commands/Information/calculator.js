@@ -1,5 +1,4 @@
-//const {Calculator}=require('weky')
-//const bt=require('discord-buttons')
+const {Calculator}=require('weky')
 const Discord=require('discord.js')
 const {reply}=require('../../exports')
 module.exports = {
@@ -11,7 +10,6 @@ module.exports = {
     cooldown: 5,
     usage: "calculator",
     run:async(client, message, args)=>{
-        return reply('This command is currently disabled please check top.gg for more info', true, message)
         await Calculator({
             message: message,
             embed: {

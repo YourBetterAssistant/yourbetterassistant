@@ -52,6 +52,7 @@
     "util": "^0.12.4",
     "weather-api-data": "^1.0.7",
     "weather-js": "^2.0.0",
+    "weky": "^3.1.6--dev0.5.0",
     "yarn": "^1.22.11",
     "yt-search": "^2.10.0",
     "ytdl-core": "^4.9.1"
