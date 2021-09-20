@@ -21,7 +21,7 @@ module.exports = {
         .setTitle(`Leaderboard`)
         .setColor('RANDOM');
         let i=1
-        leaderboard.forEach(item=>embed.addField(`${i++}`, `${fullUser(message.guild.members.cache.get(item.userID))}:${numberWithCommas(item.coins)}YBCs`))
+        leaderboard.forEach(item=>{if(i>=10){return}else{embed.addField(`${i++}`, `${fullUser(message.guild.members.cache.get(item.userID))}:${numberWithCommas(item.coins)}YBCs`)}})
         
         message.channel.send({embeds:[embed]});
     },
