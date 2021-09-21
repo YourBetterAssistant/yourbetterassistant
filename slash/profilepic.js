@@ -1,7 +1,6 @@
 module.exports={
     name:'profilepic',
     description:'Sends photo of profile pic',
-    guild:'879927834058043492',
     options:[{name:'user', description:'user', type:6}],
     run:async(client, interaction, Discord)=>{
         let embed=new Discord.MessageEmbed().setColor('RANDOM')
