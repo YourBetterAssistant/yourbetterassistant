@@ -8,6 +8,7 @@ const { AutoPoster } = require('topgg-autoposter')
 const Levels=require('discord-xp')
 const mongo=require('./botconfig/mongo')
 const mongoose=require('mongoose')
+const dbots = require('dbots');
 let token=process.env.TOKEN
 const config=require('./botconfig/config.json')
 const colors = require("colors"); //this Package is used, to change the colors of our Console! (optional and doesnt effect performance)
@@ -17,7 +18,7 @@ const fs = require("fs"); //this package is for reading files and getting their 
 const client=new Discord.Client({fetchAllMembers: true, messageCacheMaxSize: 10, disableEveryone: false,partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'],intents:["GUILDS", "GUILD_MESSAGES",'GUILD_MESSAGE_REACTIONS', 'GUILD_VOICE_STATES', 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_BANS', 'GUILD_INVITES']})
 const ap = AutoPoster(process.env.TOPGGTOKEN, client)
 const clientId = '862143828920369172'
-const info = { host: "localhost", port: 2333, password: "lavalink" }
+const info = { host: "192.168.86.200", port: 2333, password: "lavalink" }
 const lavalink = new Node({
     connection: info,
     sendGatewayPayload: (id, payload) => client.guilds.cache.get(id)?.shard?.send(payload)
@@ -26,7 +27,6 @@ lavalink.connect(clientId)
 lavalink.once('connect', (c)=>{
     console.log('Connected to lavalink \n\n\n')
 })
-
 //Client variables to use everywhere
 client.lavalink=lavalink
 client.queue=new Map()
@@ -49,8 +49,14 @@ client.api.applications(clientId).commands.post({data: {
   name: 'ping',
   description: 'ping pong!'
 }})
-
-
+const poster = new dbots.Poster({
+  client,
+  apiKeys: {
+      discordbotsgg: process.env.DISCORDBOT,
+  },
+  clientLibrary: 'discord.js'
+});
+poster.startInterval(); 
 
 //login into the bot
 client.login(token);
