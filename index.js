@@ -52,7 +52,7 @@ client.api.applications(clientId).commands.post({data: {
 const poster = new dbots.Poster({
   client,
   apiKeys: {
-      discordbotsgg: process.env.DISCORDBOT,
+    discordbotlist: process.env.DISCORDBOT,
   },
   clientLibrary: 'discord.js'
 });
