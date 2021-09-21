@@ -1,8 +1,10 @@
 const { readdirSync } = require("fs");
 const ascii = require("ascii-table");
 let table = new ascii("Commands");
+let otherTable=new ascii('Slash')
 const commandBase=require('../events/guild/messageCreate')
 table.setHeading("Command", "Load status");
+otherTable.setHeading('Slash', 'Load Status')
 console.log("Welcome to SERVICE HANDLER /--/ By https://milrato.eu /--/ Discord: Tomato#6966".yellow);
 module.exports = (client) => {
   try{
@@ -21,6 +23,19 @@ module.exports = (client) => {
         }
     });
     console.log(table.toString().cyan);
+    const slash=readdirSync('./slash').filter(file=>file.endsWith('.js'))
+    for (let file of slash){
+      let pull=require(`../slash/${file}`)
+      if(pull.name){
+        client.interactions.set(pull.name, pull)
+        otherTable.addRow(file, "Ready")
+      }else{
+        table.addRow(file, 'error->missing name')
+        continue;
+      }
+
+    }
+    console.log(otherTable.toString().red);
   }catch (e){
     console.log(String(e.stack).bgRed)
   }
