@@ -23,20 +23,17 @@ module.exports = async client => {
     console.log(`     ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛`.bold.brightGreen)
   }catch{ /* */ }
 
+  //Change status each 10 minutes
+  let change
   try{
-    client.user.setActivity(`${client.guilds.cache.size} servers`, { type: "WATCHING" });
+    change=false
+    client.user.setStatus('dnd');
+    client.user.setActivity(`Watching ${client.users.cache.size} users`, {type:'WATCHING'});
   }catch (e) {
       return console.log(String(e.stack).red);
   }
-  //Change status each 10 minutes
-  setInterval(()=>{
-    try{
-      client.user.setActivity('Ping me for help!', { type: "PLAYING" });
-      
-    }catch (e) {
-        return console.log(String(e.stack).red);
-    }
-  }, 10*60*1000)
+
+
   await mongo().then(mongoose=>{
     try{
       console.log('Connected!')
