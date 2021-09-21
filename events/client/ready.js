@@ -28,7 +28,7 @@ module.exports = async client => {
   try{
     change=false
     client.user.setStatus('dnd');
-    client.user.setActivity(`Watching ${client.users.cache.size} users`, {type:'WATCHING'});
+    client.user.setActivity(`${client.users.cache.size} users`, {type:'WATCHING'});
   }catch (e) {
       return console.log(String(e.stack).red);
   }
