@@ -4,7 +4,7 @@ module.exports=async client=>{
     const mongo=require('../../botconfig/mongo')
     client.on('messageReactionRemove', async(reaction, user) => {
       console.log(`someone reacted`)
-      if(reaction.message.channel.type==='DM'??reaction.message.channel.type==='GROUP_DM'??reaction.message.channel.type==='UNKNOWN')return
+      if(!reaction.message.channel.type==='DM'??!reaction.message.channel.type==='GROUP_DM'??!reaction.message.channel.type==='UNKNOWN'){
       if(!cache[reaction.message.guild.id]){
       await mongo().then(async(mongoose)=>{
         try{
@@ -37,6 +37,7 @@ module.exports=async client=>{
             await user.send(`The role ${c.R2} has been removed for un-reacting`)
       }
       }
+    }
   });
 
 }

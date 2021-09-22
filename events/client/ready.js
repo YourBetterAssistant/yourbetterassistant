@@ -96,6 +96,7 @@ module.exports = async client => {
   const commands=[]
   let i=1
   client.interactions.forEach(async(inter)=>{
+    //return client.api.applications(client.user.id).commands.set([])
     if(inter.guild &&!inter.options){
       client.api.applications(client.user.id).guilds(inter.guild).commands.post({data:{name:inter.name, description:inter.description}})
     

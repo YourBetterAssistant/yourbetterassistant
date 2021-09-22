@@ -12,3 +12,4 @@ commands/Administration/betaTester.js
 commands/Information/modmail.js
 commands/Administration/serverconfig.js
 pm2.txt
+commands/OWNER/removeslash.js
