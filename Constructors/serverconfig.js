@@ -149,6 +149,8 @@ async function awaitMemberLog(message){
 
 }
 async function awaitmemberCount(message){
+    const f=i=>i.user.id===message.author.id&&i.componentType=='SELECT_MENU'
+    const filter=m=>m.author.id==message.author.id
     let channels=[{label:'Disabled', description:'Use this to be disabled', value:'null'}]
                 message.guild.channels.cache.forEach(channel=>{
                     if(channel.type==='GUILD_VOICE'){
