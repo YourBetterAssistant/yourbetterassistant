@@ -181,7 +181,7 @@ async function awaitmemberCount(message){
                     } 
                     else{
                         click.deferReply()
-                        await countSchema.findOneAndUpdate({guildID:message.guild.id},{guildID:message.guild.id, channelID:click.values.toString()}, {upsert:true})
+                        await countSchema.findOneAndUpdate({_id:message.guild.id},{_id:message.guild.id, voiceChannelID:click.values.toString()}, {upsert:true})
                         click.followUp(`Added membercount to <#${click.values.toString()}>`)
                         click.deferUpdate()
                         click.followUp({content:'I suggest doing that command again but with the other sub-commands like member-log,etc as you may be missing out on a lot', ephemeral:true})
