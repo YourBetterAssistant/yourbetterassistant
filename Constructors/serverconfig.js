@@ -148,7 +148,7 @@ async function awaitMemberLog(message){
                 })
 
 }
-async function awaitmemberCount(){
+async function awaitmemberCount(message){
     let channels=[{label:'Disabled', description:'Use this to be disabled', value:'null'}]
                 message.guild.channels.cache.forEach(channel=>{
                     if(channel.type==='GUILD_VOICE'){
