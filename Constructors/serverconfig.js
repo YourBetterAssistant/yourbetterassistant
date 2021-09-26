@@ -28,7 +28,7 @@ const awaitWelcome=async(message)=>{
                     .setPlaceholder('none')
                     .addOptions(channels)
                 )
-                choose.reply({content:'Welcome Message', components: [Enablerow], ephemeral:false})
+                message.reply({content:'Welcome Message', components: [Enablerow], ephemeral:false})
                 await message.channel.awaitMessageComponent(f)
                 .then(async(click)=>{
                     if(click.values.toString()=='null'){
@@ -85,7 +85,7 @@ const awaitChatbot=async(message)=>{
                     .setPlaceholder('null')
                     .addOptions(channels)
                 )
-                choose.reply({content:'Chatbot', components: [Enablerow], ephemeral:false})
+                message.reply({content:'Chatbot', components: [Enablerow], ephemeral:false})
                 await message.channel.awaitMessageComponent(f)
                 .then(async(click)=>{
                     if(click.values.toString()=='null'){
@@ -128,7 +128,7 @@ async function awaitMemberLog(message){
                     .setPlaceholder('null')
                     .addOptions(channels)
                 )
-                choose.reply({content:'Member Log', components: [Enablerow], ephemeral:false})
+                message.reply({content:'Member Log', components: [Enablerow], ephemeral:false})
                 await message.channel.awaitMessageComponent(f)
                 .then(async(click)=>{
                     if(click.values.toString()=='null'){
@@ -168,7 +168,7 @@ async function awaitmemberCount(){
                     .setPlaceholder('null')
                     .addOptions(channels)
                 )
-                choose.reply({content:'Member-Count', components: [Enablerow], ephemeral:false})
+                message.reply({content:'Member-Count', components: [Enablerow], ephemeral:false})
                 await message.channel.awaitMessageComponent(f)
                 .then(async(click)=>{
                     if(click.values.toString()=='null'){
@@ -203,7 +203,7 @@ async function awaitRoles(message){
         .setPlaceholder('null')
         .addOptions(roles)
     )
-    message.reply({content:'Owner! Choose Owner Role', components: [Enablerow], ephemeral:false})
+    message.reply({content:'Owner! message Owner Role', components: [Enablerow], ephemeral:false})
     let fullRoles=[]
     await message.channel.awaitMessageComponent(f)
     .then(async(click)=>{
@@ -211,14 +211,14 @@ async function awaitRoles(message){
             fullRoles.push({owner:click.values.toString(), admin:null, member:null})
             click.followUp(`Added <@!${click.values.toString()}> as a Owner Role`)
     })
-    message.reply({content:'Admin! Choose Admin Role', components: [Enablerow], ephemeral:false})
+    message.reply({content:'Admin! message Admin Role', components: [Enablerow], ephemeral:false})
     await message.channel.awaitMessageComponent(f)
     .then(async(click)=>{
             click.deferReply()
             fullRoles[0].admin=click.values.toString()
             click.followUp(`Added <@!${click.values.toString()}> as a Admin Role`)
     })
-    message.reply({content:'Member! Choose Member Role', components: [Enablerow], ephemeral:false})
+    message.reply({content:'Member! message Member Role', components: [Enablerow], ephemeral:false})
     await message.channel.awaitMessageComponent(f)
     .then(async(click)=>{
             click.deferReply()
