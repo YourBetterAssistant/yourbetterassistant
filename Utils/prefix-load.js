@@ -11,7 +11,8 @@ async function prefixLoad(client, guildPrefixes, globalPrefix, message){
 
         for(const guild of client.guilds.cache){
           let guildID= guild[1].id
-          if(cache.length > 0){
+          console.log(cache.length)
+          if(!cache.length <= 0&&cache.length===client.guilds.cache.size){
             console.log('cache')
             let c=cache.find(c=>c.id==guildID)
             guildPrefixes[guildID]=c.prefix
