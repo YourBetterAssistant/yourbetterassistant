@@ -21,7 +21,9 @@ module.exports = {
         let em=new MessageEmbed()
         .setColor(ee.color)
         .setFooter(ee.footertext, ee.footericon)
-        .setTitle(`🏓 Ping is \`${Math.round(client.ws.ping)}ms\``)
+        .setTitle('Pong!')
+        .addField('Command Latency', `🏓 Command Latency is \`${Date.now()-message.createdTimestamp}ms\``)
+        .addField('API Latency', `🏓 API Latency is \`${Math.round(client.ws.ping)}ms\``)
         msg.edit({embeds:[em]
         });
       })
