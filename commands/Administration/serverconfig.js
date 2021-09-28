@@ -1,3 +1,5 @@
+'use strict';
+
 const { awaitChatbot, awaitWelcome, awaitmemberCount, awaitMemberLog, awaitRoles } = require("../../Constructors/serverconfig")
 const {MessageActionRow, MessageSelectMenu}=require('discord.js')
 module.exports = {

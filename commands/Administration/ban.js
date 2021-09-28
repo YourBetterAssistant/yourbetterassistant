@@ -1,3 +1,5 @@
+'use strict';
+
 const mongo = require('../../botconfig/mongo');
 const serverConfSchema = require('../../Schemas/serverConfSchema');
 const {reply}=require('../../exports')

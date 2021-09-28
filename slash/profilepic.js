@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports={
     name:'profilepic',
     description:'Sends photo of profile pic',

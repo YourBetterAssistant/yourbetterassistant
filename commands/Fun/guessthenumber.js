@@ -1,3 +1,5 @@
+'use strict';
+
 const {reply}=require('../../exports')
 //const {GuessTheNumber}=require('weky')
 module.exports = {

@@ -1,3 +1,5 @@
+'use strict';
+
 const mongoose=require('mongoose');
 const countSchema=mongoose.Schema({
     _id:{

@@ -1,3 +1,5 @@
+'use strict';
+
 const {DiscordTogether}=require('discord-together')
 const {reply}=require('../../exports')
 module.exports = {

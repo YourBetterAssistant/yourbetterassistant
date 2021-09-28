@@ -1,3 +1,5 @@
+'use strict';
+
 const money=require('../../Constructors/economy')
 const economy=new money()
 const {reply}=require('../../exports')

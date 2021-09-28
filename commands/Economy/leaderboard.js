@@ -1,3 +1,5 @@
+'use strict';
+
 const money=require('../../Constructors/economy');
 const { numberWithCommas } = require('../../handlers/functions');
 const currency=new money()

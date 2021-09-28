@@ -1,3 +1,5 @@
+'use strict';
+
 const Discord=require('discord.js');
 const money=require('../../Constructors/economy')
 const currency =new money()

@@ -14,9 +14,8 @@ function reply(content, mention, message){
 /**
  * @param msg message
  * @param j job
- * @param reply The message paramater
  * */
-async function hiremongo(msg, j, reply){
+async function hiremongo(msg, j){
   await mongo().then(async()=>{
     try{await workSchema.findOneAndUpdate({
         userID:msg.author.id

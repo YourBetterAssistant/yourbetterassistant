@@ -1,3 +1,5 @@
+'use strict';
+
 //Remember Download the stuff =)
 const { Random } = require("random-js");
 const Math=require('math')

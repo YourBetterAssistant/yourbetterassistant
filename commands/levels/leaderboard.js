@@ -1,3 +1,5 @@
+'use strict';
+
 const Levels = require("discord-xp");
 const { MessageEmbed } = require("discord.js");
 module.exports = {

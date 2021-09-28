@@ -1,3 +1,5 @@
+'use strict';
+
 require('@lavaclient/queue/register')
 const { decode } =require("@lavalink/encoding");
 const { MessageEmbed } = require('discord.js');

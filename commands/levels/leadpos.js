@@ -1,3 +1,5 @@
+'use strict';
+
 const Levels = require("discord-xp");
 module.exports = {
     name: "pos",

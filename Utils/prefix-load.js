@@ -1,22 +1,34 @@
 const mongo=require('../botconfig/mongo')
 const commandPrefixSchema=require('../Schemas/prefixSchema')
-async function prefixLoad(client, guildPrefixes, globalPrefix, cache, message){
-    await mongo().then(async ()=>{
+const cache=[]
+async function prefixLoad(client, guildPrefixes, globalPrefix, message){
+  client.cache=cache
       try{
           /**
            * @param client
            * The Client 
            * */
+
         for(const guild of client.guilds.cache){
           let guildID= guild[1].id
-          const result= await commandPrefixSchema.findOne({_id:guildID})
-          if (result){
-            guildPrefixes[guildID] = result.prefix
-        } else {
-            guildPrefixes[guildID] = globalPrefix
-        }
-        }
+          if(cache.length > 0){
+            console.log('cache')
+            let c=cache.find(c=>c.id==guildID)
+            guildPrefixes[guildID]=c.prefix
+          }else{
+            console.log('new info')
+            const result= await commandPrefixSchema.findOne({_id:guildID})
+            if (result){
+              guildPrefixes[guildID] = result.prefix
+              cache.push({id:guildID, prefix:result.prefix})
+          } else {
+              guildPrefixes[guildID] = globalPrefix
+              cache.push({id:guildID, prefix:globalPrefix})
+          }
+          }
         console.log(guildPrefixes)
+        }
+        
       
       }
       catch(err){
@@ -25,9 +37,13 @@ async function prefixLoad(client, guildPrefixes, globalPrefix, cache, message){
       }
       
   
-    })}
+    }
+  async function clearCache(){
+    cache.length=0
+  }
     
   exports.prefixLoad=prefixLoad
+  exports.newCache=clearCache
   
   
    

@@ -1,3 +1,5 @@
+'use strict';
+
 const akinator = require("discord.js-akinator");
 module.exports = {
     name: "akinator",

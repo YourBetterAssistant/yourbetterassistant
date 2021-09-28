@@ -1,3 +1,5 @@
+'use strict';
+
 const gottem=require('djs-meme')
 const Discord=require('discord.js')
 module.exports = {

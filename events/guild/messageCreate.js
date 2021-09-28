@@ -1,3 +1,4 @@
+"use strict";
 /**
   * @INFO
   * Loading all needed File Information Parameters
@@ -7,7 +8,7 @@ const Levels=require('discord-xp')
 const {count}=require('../../Utils/count')
 const {level}=require('../../Utils/level')
 const {check}=require('../../Utils/checkChatChannel')
-const {prefixLoad}=require('../../Utils/prefix-load')
+const {prefixLoad, newCache}=require('../../Utils/prefix-load')
 let process=require('process')
 const mongo=require('../../botconfig/mongo')
 let countSchema=require('../../Schemas/countSchema')
@@ -23,18 +24,17 @@ const {duration}=require('../../handlers/functions')
 let prefix
 module.exports = async (client, message) => {
   const guildPrefixes={}
-  let cache={}
   try {
     //if the message is not in a guild (aka in dms), return aka ignore the inputs
-    
     // if the message  author is a bot, return aka ignore the inputs
+    setInterval(newCache,  3600000)
     if (message.author.bot) return;
     //if the channel is on partial fetch it
     if (message.channel.partial) await message.channel.fetch();
     //if the message is on partial fetch it
     if (message.partial) await message.fetch();
     //get the current prefix from the botconfig/config.json
-    await prefixLoad(client, guildPrefixes, globalPrefix, cache, message)
+    await prefixLoad(client, guildPrefixes, globalPrefix, message)
     await level(message)
     await count(message)
     await check(message)

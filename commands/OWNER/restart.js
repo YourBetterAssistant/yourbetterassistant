@@ -1,3 +1,5 @@
+'use strict';
+
 const { ClientApplication } = require("discord.js");
 const shell = require("shelljs");
 const {reply}=require('../../exports')

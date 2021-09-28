@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     name: "leave",
     description: "Leaves a voice channel",

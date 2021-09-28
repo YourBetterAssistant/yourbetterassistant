@@ -1,3 +1,5 @@
+'use strict';
+
 const puppeteer = require('puppeteer');
 const Discord=require('discord.js');
 const fs = require('fs');

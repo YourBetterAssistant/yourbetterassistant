@@ -1,3 +1,5 @@
+'use strict';
+
 const Levels=require('discord-xp')
 const Discord=require('discord.js')
 const fs=require('fs')

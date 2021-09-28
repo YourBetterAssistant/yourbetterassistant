@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     name: "roleremove",
     description: "remove roles to users",

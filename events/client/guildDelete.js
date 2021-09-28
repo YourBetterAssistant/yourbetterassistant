@@ -1,3 +1,5 @@
+'use strict';
+
 const chatbot = require("../../Schemas/chatbot")
 const countSchema = require("../../Schemas/countSchema")
 const logSchema = require("../../Schemas/logSchema")

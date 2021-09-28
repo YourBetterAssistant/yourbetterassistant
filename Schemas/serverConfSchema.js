@@ -1,3 +1,5 @@
+'use strict';
+
 const mongoose=require('mongoose');
 const serverConfSchema=mongoose.Schema({
     _id:{

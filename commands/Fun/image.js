@@ -1,3 +1,5 @@
+'use strict';
+
 const Discord=require('discord.js')
 // npm i images-scraper
 var Scraper = require('images-scraper');

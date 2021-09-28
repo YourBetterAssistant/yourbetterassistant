@@ -1,3 +1,5 @@
+'use strict';
+
 const { duration, delay } = require("../handlers/functions")
 const osInfo = require("@felipebutcher/node-os-info");
 const {SlashCommandBuilder}=require('@discordjs/builders')

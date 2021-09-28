@@ -1,3 +1,5 @@
+'use strict';
+
 const Discord=require('discord.js')
 const { getPrettyDate } = require('../../handlers/functions')
 module.exports=async(client, guild)=>{

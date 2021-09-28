@@ -1,3 +1,5 @@
+'use strict';
+
 const Discord = require('discord.js');
 const mongo = require('../../botconfig/mongo');
 const serverConfSchema=require('../../Schemas/serverConfSchema')

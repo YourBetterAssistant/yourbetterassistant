@@ -1,3 +1,5 @@
+'use strict';
+
 const money=require('../../Constructors/economy')
 const Discord=require('discord.js')
 const {reply}=require('../../exports')

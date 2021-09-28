@@ -1,3 +1,5 @@
+'use strict';
+
 const { MessageEmbed, MessageFlags } = require('discord.js');
 const {reply, hiremongo}=require('../../exports')
 const id=require('../../botconfig/id.json');

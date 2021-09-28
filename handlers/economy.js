@@ -1,3 +1,5 @@
+'use strict';
+
 const mongo=require('../botconfig/mongo')
 const profileSchema=require('../Schemas/profileSchema')
 module.exports.getCoins=async(guildID, userID)=>{

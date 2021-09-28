@@ -1,3 +1,5 @@
+'use strict';
+
 const stealer=require('../../Constructors/stealEmoji')
 module.exports = {
     name: "stealemoji",

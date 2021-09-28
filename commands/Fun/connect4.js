@@ -1,3 +1,5 @@
+'use strict';
+
 const djsGames = require('djs-games')
 const ConnectFour = new djsGames.ConnectFour()
 const {reply}=require('../../exports')

@@ -1,3 +1,5 @@
+'use strict';
+
 const Discord=require('discord.js')
 const {reply}=require('../../exports')
 const workSchema=require('../../Schemas/workSchema')

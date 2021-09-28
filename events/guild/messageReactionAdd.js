@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports=async client=>{
   const cache={}
     const rrSchema=require('../../Schemas/rrSchema')

@@ -1,3 +1,5 @@
+'use strict';
+
 const { MessageEmbed } = require("discord.js");
 const { duration } = require("../../handlers/functions");
 const economySchema = require("../../Schemas/economySchema");

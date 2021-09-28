@@ -1,3 +1,4 @@
+"use strict";
 let cache=new Map()
 const { delay } = require('../handlers/functions')
 const {MessageActionRow, MessageSelectMenu, MessageButton}=require('discord.js')
@@ -10,7 +11,10 @@ const awaitWelcome=async(message)=>{
     const f=i=>i.user.id===message.author.id&&i.componentType=='SELECT_MENU'
     const filter=m=>m.author.id==message.author.id
     let channels=[{label:'Disabled', description:'Use this to be disabled', value:'null'}, {label:'DM', description:'use this so that I will dm the user when they join', value:'null'}]
+                let i=1
                 message.guild.channels.cache.forEach(channel=>{
+                    i++
+                    if(i>25)return
                     if(channel.type==='GUILD_TEXT'){
                         channels.push({
                             label:channel.name,
@@ -133,13 +137,13 @@ async function awaitMemberLog(message){
                 .then(async(click)=>{
                     if(click.values.toString()=='null'){
                         click.deferReply()
-                        await logSchema.deleteOne({guildID:message.guild.id})
+                        await logSchema.deleteOne({_id:message.guild.id})
                         click.reply('Disabled MemberLog')
                         return
                     } 
                     else{
                         click.deferReply()
-                        await logSchema.findOneAndUpdate({guildID:message.guild.id},{guildID:message.guild.id, channelID:click.values.toString()}, {upsert:true})
+                        await logSchema.findOneAndUpdate({_id:message.guild.id},{_id:message.guild.id, channelID:click.values.toString()}, {upsert:true})
                         click.followUp(`Added Memberlog to <#${click.values.toString()}>`)
                         click.deferUpdate()
                         click.followUp({content:'I suggest doing that command again but with the other sub-commands like member-log,etc as you may be missing out on a lot', ephemeral:true})
@@ -175,7 +179,7 @@ async function awaitmemberCount(message){
                 .then(async(click)=>{
                     if(click.values.toString()=='null'){
                         click.deferReply()
-                        await countSchema.deleteOne({guildID:message.guild.id})
+                        await countSchema.deleteOne({_id:message.guild.id})
                         click.reply('Disabled membercount')
                         return
                     } 
@@ -193,7 +197,10 @@ async function awaitRoles(message){
     const f=i=>i.user.id===message.author.id&&i.componentType=='SELECT_MENU'
     const filter=m=>m.author.id==message.author.id
     let roles=[]
+    let i=1
     message.guild.roles.cache.forEach(r=>{
+        i++
+        if(i>25)return
         roles.push({label:r.name, description:r.id.toString(), value:r.id.toString()})
     })
     const OwnerRoleId = new MessageActionRow()

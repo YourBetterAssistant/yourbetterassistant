@@ -1,3 +1,5 @@
+'use strict';
+
 const mongoose=require('mongoose');
 const commandPrefixSchema=mongoose.Schema({
     _id:{

@@ -1,3 +1,5 @@
+'use strict';
+
 const {Sudo}=require('weky')
 
   

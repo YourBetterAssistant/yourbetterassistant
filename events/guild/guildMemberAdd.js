@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports=async (client, member)=>{
         const welcomeSchema=require('../../Schemas/welcomeSchema')
         const logSchema=require('../../Schemas/logSchema')

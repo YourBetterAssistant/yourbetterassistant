@@ -1,3 +1,5 @@
+'use strict';
+
 const mongoose=require('mongoose');
 const logSchema=mongoose.Schema({
     _id:{

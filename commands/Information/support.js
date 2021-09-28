@@ -1,3 +1,5 @@
+'use strict';
+
 const {reply}=require('../../exports')
 module.exports = {
     name: "support",

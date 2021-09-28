@@ -1,3 +1,5 @@
+'use strict';
+
 const {Calculator}=require('weky')
 const Discord=require('discord.js')
 const {reply}=require('../../exports')

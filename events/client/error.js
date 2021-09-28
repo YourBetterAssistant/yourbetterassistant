@@ -1,3 +1,5 @@
+'use strict';
+
 //here the event starts
 module.exports = (client, error) => {
     return console.log(`An error occured \n\n\n\n\n ${error.stack}`)

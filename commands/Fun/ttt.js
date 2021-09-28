@@ -1,3 +1,5 @@
+'use strict';
+
 const djsGames = require('djs-games')
 const TicTacToe = new djsGames.TicTacToe()
 const {reply}=require('../../exports')

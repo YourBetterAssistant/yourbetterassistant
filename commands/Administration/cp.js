@@ -1,3 +1,7 @@
+
+
+"use strict";
+const {prefixLoad, newCache}=require('../../Utils/prefix-load')
 const mongo=require('../../botconfig/mongo')
 const prefixSchema=require('../../Schemas/prefixSchema')
 module.exports = {
@@ -10,8 +14,6 @@ module.exports = {
     usage: "changeprefix <prefix>",
     run:async(client, message, args)=>{
         if (!args[0])return message.channel.send(':face_exhaling: What am I changing the prefix to?')
-        await mongo().then(async mongoose=>{
-             try{
                  let prefix=args[0]
                  await prefixSchema.findOneAndUpdate({
                      _id:message.guild.id
@@ -22,14 +24,11 @@ module.exports = {
                      upsert:true
                  })
                  message.channel.send(`Changed Prefix to ${prefix}`)
+                 newCache()
+                 
 
 
-             }finally{
-                 mongoose.connection.close()
-      
 
-             }
-        })
 
 
 

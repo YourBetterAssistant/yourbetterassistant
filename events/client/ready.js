@@ -1,3 +1,5 @@
+'use strict';
+
 //here the event starts
 const config = require("../../botconfig/config.json")
 const loadPrefix=require('../../Utils/prefix-load')

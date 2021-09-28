@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports=async (client, member)=>{
 
         const countSchema=require('../../Schemas/countSchema')
