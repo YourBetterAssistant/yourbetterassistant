@@ -18,8 +18,8 @@ module.exports = {
         if(!message.guild.me.voice.channel){
             return message.channel.send('I am not in a voice channel do b!join or whatever my prefix is')
         }
+        if(message.member.voice.channel.id !== message.guild.me.voice.channel.id)return message.channel.send('You are not in the same voice channel as me, join this VC: '+ `<#${message.guild.me.voice.channel.id}>`)
         if(!args[0])return message.channel.send('What song do you want me to do?')
-        let song = {};
         const results=await client.lavalink.rest.loadTracks(`ytsearch:${args.join(" ")}`)
         let server_queue= client.queue.get(message.guild.id)
         if(!server_queue){

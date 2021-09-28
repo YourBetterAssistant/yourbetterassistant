@@ -13,22 +13,22 @@ module.exports = {
     run:async(client, message, args)=>{
         let embed=new MessageEmbed()
         .setTitle('Bot-Info')
-        .addField(name='Users', value=`**${client.users.cache.size}** users being watched`, inline=true)
-        .addField(name='Servers', value=`${client.guilds.cache.size} servers being watched`, inline=true)
-        .addField(name='Gateway', value=`${client.ws.gateway}`, inline=true)
-        .addField(name='Ping', value=`${client.ws.ping}ms`, inline=true)
-        .addField(name='Shards', value=`${client.ws.shards.size} shards being used`, inline=true)
-        .addField(name='Websocket Status', value=`${client.ws.status}`, inline=true)
-        .addField(name='Uptime', value=`${duration(client.uptime)}`, inline=true)
-        .addField(name='Command Size', value=client.commands.size.toString(), inline=true)
+        .addField('Users', `**${client.users.cache.size}** users being watched`, true)
+        .addField('Servers', `${client.guilds.cache.size} servers being watched`, true)
+        .addField('Gateway', `${client.ws.gateway}`, true)
+        .addField('Ping', `${client.ws.ping}ms`, true)
+        .addField('Shards', `${client.ws.shards.size} shards being used`, true)
+        .addField('Websocket Status', `${client.ws.status}`, true)
+        .addField('Uptime', `${duration(client.uptime)}`, true)
+        .addField('Command Size', client.commands.size.toString(), true)
         .addField('Slash Commands Size', client.interactions.size.toString())
-        .addField(name='** **', value='** **')
+        .addField('** **', '** **')
         .setColor('BLUE');
         osInfo.cpu(cpu => {
-            embed.addField(name='CPU-Load', value=`${Math.round(cpu * 100)}%`, inline=true)
+            embed.addField('CPU-Load', `${Math.round(cpu * 100)}%`, true)
         });
         osInfo.mem(memory => {
-            embed.addField(name='Memory Used', value=`${Math.round(memory * 100)}%`, inline=true)
+            embed.addField('Memory Used', `${Math.round(memory * 100)}%`, true)
         });
         setTimeout(function(){message.channel.send({embeds:[embed]})},2000)
         
