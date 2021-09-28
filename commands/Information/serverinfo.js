@@ -18,7 +18,7 @@ module.exports = {
         let embed=new MessageEmbed()
         .setTitle(`Server Info of ${message.guild.name}`)
         .setColor("DARK_BLUE")
-        .addFields({name:'Members', value:message.guild.memberCount.toString(), inline:true},
+        .addFields({name:'Members', value:message.guild.memberCount.toString(), inline:true },
                    {name:'Owner', value:`<@!${message.guild.ownerId}>`, inline:true},
                    {name:'Humans', value:message.guild.members.cache.filter(m=>!m.user.bot).size.toString(), inline:true},
                    {name:'Bots', value:message.guild.members.cache.filter(m=>m.user.bot).size.toString(), inline:true},
@@ -32,7 +32,7 @@ module.exports = {
 
                     )
         let e=1
-        message.guild.features.forEach(i=>embed.addField(`  Feature ${e++}`, `  <a:greentick:881473012162002984> ${i}`, inline=false))
+        message.guild.features.forEach(i=>embed.addField(`  Feature ${e++}`, `  <a:greentick:881473012162002984> ${i}`, false))
         msg.edit({embeds:[embed]})
     },
 };
