@@ -10,11 +10,8 @@ const serverConfSchema = require('../Schemas/serverConfSchema')
 const awaitWelcome=async(message)=>{
     const f=i=>i.user.id===message.author.id&&i.componentType=='SELECT_MENU'
     const filter=m=>m.author.id==message.author.id
-    let channels=[{label:'Disabled', description:'Use this to be disabled', value:'null'}, {label:'DM', description:'use this so that I will dm the user when they join', value:'null'}]
-                let i=1
+    let channels=[{label:'Disabled', description:'Use this to be disabled', value:'null'}, {label:'DM', description:'use this so that I will dm the user when they join', value:'DM'}]
                 message.guild.channels.cache.forEach(channel=>{
-                    i++
-                    if(i>25)return
                     if(channel.type==='GUILD_TEXT'){
                         channels.push({
                             label:channel.name,
@@ -44,9 +41,10 @@ const awaitWelcome=async(message)=>{
                     else if(click.values.toString()=='DM'){
                         click.deferReply()
                         click.followUp(`Tell me the message quick!`)
-                        click.deferUpdate()
-                        await message.channel.awaitMessages(filter)
+                        console.log('Waiting')
+                        await click.channel.awaitMessages({filter, max:1})
                         .then(async(msg)=>{
+                            console.log('collected')
                             msg=msg.first()
                             await welcomeSchema.findOneAndUpdate({_id:message.guild.id},{_id:message.guild.id, channelID:null, DM:'true', text:msg.content}, {upsert:true})
                         })
@@ -55,8 +53,7 @@ const awaitWelcome=async(message)=>{
                     }else{
                         click.deferReply()
                         click.followUp(`Tell me the message quick!`)
-                        click.deferUpdate()
-                        await message.channel.awaitMessages(filter)
+                        await message.channel.awaitMessages({filter, max:1})
                         .then(async(msg)=>{
                             msg=msg.first()
                             await welcomeSchema.findOneAndUpdate({_id:message.guild.id},{_id:message.guild.id, channelID:click.values.toString(), DM:'false', text:msg.content}, {upsert:true})
@@ -218,21 +215,21 @@ async function awaitRoles(message){
     .then(async(click)=>{
             click.deferReply()
             fullRoles.push({owner:click.values.toString(), admin:null, member:null})
-            click.followUp(`Added <@!${click.values.toString()}> as a Owner Role`)
+            click.followUp(`Added <@&${click.values.toString()}> as a Owner Role`)
     })
     message.reply({content:'Admin! message Admin Role', components: [Enablerow], ephemeral:false})
     await message.channel.awaitMessageComponent(f)
     .then(async(click)=>{
             click.deferReply()
             fullRoles[0].admin=click.values.toString()
-            click.followUp(`Added <@!${click.values.toString()}> as a Admin Role`)
+            click.followUp(`Added <@&${click.values.toString()}> as a Admin Role`)
     })
     message.reply({content:'Member! message Member Role', components: [Enablerow], ephemeral:false})
     await message.channel.awaitMessageComponent(f)
     .then(async(click)=>{
             click.deferReply()
             fullRoles[0].member=click.values.toString()
-            click.followUp(`Added <@!${click.values.toString()}> as a Member Role`)
+            click.followUp(`Added <@&${click.values.toString()}> as a Member Role`)
     })
     await serverConfSchema.findOneAndUpdate({_id:message.guild.id}, {
         _id:message.guild.id,
