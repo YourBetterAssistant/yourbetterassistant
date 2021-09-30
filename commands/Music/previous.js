@@ -14,6 +14,7 @@ module.exports = {
         if(!server_queue){
             server_queue=client.queue.get(message.guild.id)
         }
+        if(!server_queue.player.queue.previous[0])return message.channel.send('There Were No Previous Songs Playing')
         server_queue.player.queue.add([server_queue.player.queue.previous[0]],{ requester: message.author }); // you can pass the requester in the second parameter
         let embed=new MessageEmbed()
         .setTitle('Now Playing')
