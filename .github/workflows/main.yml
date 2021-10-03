@@ -26,4 +26,4 @@ jobs:
       - name: Run a multi-line script
         run: |
           git pull
-          pm2 restart
+          echo done
