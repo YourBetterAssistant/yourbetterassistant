@@ -2,6 +2,7 @@ const AntiSpam = require('discord-anti-spam');
 const automod=require('../Schemas/autoMod')
 const badwords = require('badwords/array')
 function isUpperCase(str) {
+    if(str.length < 5)return false
     return str === str.toUpperCase();
 }
 
@@ -11,11 +12,10 @@ class autoMod{
         this.client=message.client
     }
     async checkSpam(){
-        if(message.channel.name.includes('spam'))return
         const message=this.message
         const mode=await automod.findOne({guildId:message.guild.id})
         if(!mode)return
-        let antiSpam = new AntiSpam({
+        const antiSpam = new AntiSpam({
             warnThreshold: 3, // Amount of messages sent in a row that will cause a warning.
             muteThreshold: 4, // Amount of messages sent in a row that will cause a mute
             kickThreshold: 7, // Amount of messages sent in a row that will cause a kick.
@@ -29,16 +29,16 @@ class autoMod{
             maxDuplicatesKick: 10, // Amount of duplicate messages that trigger a warning.
             maxDuplicatesBan: 12, // Amount of duplicate messages that trigger a warning.
             maxDuplicatesMute: 8, // Ammount of duplicate message that trigger a mute.
-            ignoredPermissions: [ 'ADMINISTRATOR'], // Bypass users with any of these permissions.
             ignoreBots: true, // Ignore bot messages.
             verbose: true, // Extended Logs from module.
             ignoredMembers: [], // Array of User IDs that get ignored.
+            ignoredPermissions: [], // Bypass users with any of these permissions.
             muteRoleName: "muted", // Name of the role that will be given to muted users!
             removeMessages: true // If the bot should remove all the spam messages when taking action on a user!
             // And many more options... See the documentation.
         })
         if(mode.strictMode===false){
-            antiSpam=new AntiSpam({
+            const antiSpam=new AntiSpam({
                 warnThreshold: 5, // Amount of messages sent in a row that will cause a warning.
                 muteThreshold: 6, // Amount of messages sent in a row that will cause a mute
                 kickThreshold: 7, // Amount of messages sent in a row that will cause a kick.
@@ -52,7 +52,7 @@ class autoMod{
                 maxDuplicatesKick: 10, // Amount of duplicate messages that trigger a warning.
                 maxDuplicatesBan: 12, // Amount of duplicate messages that trigger a warning.
                 maxDuplicatesMute: 8, // Ammount of duplicate message that trigger a mute.
-                ignoredPermissions: [ 'ADMINISTRATOR'], // Bypass users with any of these permissions.
+                ignoredPermissions: [], // Bypass users with any of these permissions.
                 ignoreBots: true, // Ignore bot messages.
                 verbose: true, // Extended Logs from module.
                 ignoredMembers: [], // Array of User IDs that get ignored.
@@ -60,9 +60,9 @@ class autoMod{
                 removeMessages: true // If the bot should remove all the spam messages when taking action on a user!
                 // And many more options... See the documentation.
             })
-            antispam(message)
+            antiSpam.message(message)
         }else{
-            antispam(message)
+            antiSpam.message(message)
         }
         
 

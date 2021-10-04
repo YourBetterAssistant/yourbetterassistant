@@ -20,19 +20,19 @@ const { escapeRegex} = require("../../handlers/functions"); //Loading all needed
 const { Mongoose } = require('mongoose');
 Levels.setURL(config.mongoPath);
 const {duration}=require('../../handlers/functions');
-const { checkAutoMod } = require('../../Utils/checkAutoMod');
+const { checkAutoMod, forceAutoCacheMod } = require('../../Utils/checkAutoMod');
 const { autoMod } = require('../../Constructors/autoModUser');
 
 //here the event starts
 let prefix
 module.exports = async (client, message) => {
   const automod=new autoMod(message)
-  const autoModCache=[]
   const guildPrefixes={}
   try {
     //if the message is not in a guild (aka in dms), return aka ignore the inputs
     // if the message  author is a bot, return aka ignore the inputs
     setInterval(newCache,  3600000)
+    setInterval(forceAutoCacheMod,  3600000)
     if (message.author.bot) return;
     //if the channel is on partial fetch it
     if (message.channel.partial) await message.channel.fetch();
@@ -43,13 +43,15 @@ module.exports = async (client, message) => {
     await level(message)
     await count(message)
     await check(message)
-    let found=autoModCache.find(i=>i.id==message.guild.id)
-    if(!found){
-      let check=await checkAutoMod(message)
-      autoModCache.push(check)
-    }
-    found=autoModCache.find(i=>i.id==message.guild.id)
-    found.strictmode===true?await automod.checkProfanity():await automod.allCaps()&&await automod.checkSpam()
+    await checkAutoMod(message).then(async found=>{
+      if(found.strictmode===true){
+        await automod.checkProfanity()
+        await automod.allCaps()
+        await automod.checkSpam()
+      }else if(found.strictmode===false){
+        await automod.allCaps()
+        await automod.checkSpam()}
+    })
     prefix=guildPrefixes[message.guild.id] || globalPrefix
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);

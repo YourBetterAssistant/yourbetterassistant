@@ -7,12 +7,12 @@ function errorHandler(e, message, command){
     let embed=new Discord.MessageEmbed()
     .addField('Guild:', message.guild.id.toString())
     .addField('GuildName', message.guild.name)
-    .addField('Command', command.name.toString)
+    .addField('Command', command?command.name.toString():'null')
     .addField('Error', `\`${e.stack}\``)
     .setTimestamp(new Date())
-    const channel=client.channels.cache.get('889101477421912064')
-    message.channel.send(`Something happened while running \`${command.name}\`, This has been logged and reported to the developers`)
-    return channel.send({embeds:[em]
+    const channel=message.client.channels.cache.get('889101477421912064')
+    message.channel.send(`Something happened while running \`${command?command.name.toString():'null'}\`, This has been logged and reported to the developers`)
+    return channel.send({embeds:[embed]
     })
 
 
