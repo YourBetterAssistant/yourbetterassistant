@@ -20,8 +20,6 @@ module.exports = {
             return
         }
         await reply('Restarting', true, message)
-        await shell.exec('./bash/downtime.sh')
-        delay(100)
         await shell.exec('pm2 restart 0')
 
     },
