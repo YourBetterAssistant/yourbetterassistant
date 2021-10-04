@@ -2,6 +2,7 @@ const { MessageEmbed, Collection, Message } = require("discord.js")
 // const m=new Message()
 // m.mentions.users.sizr
 const messageUpdate=async(oldMessage, newMessage)=>{
+    if(oldMessage.author.bot)return
     const membermention=[]
     const rolemention=[]
     const usermention=[]
@@ -103,6 +104,7 @@ const messageUpdate=async(oldMessage, newMessage)=>{
 
 }
 const messageDelete=async(message)=>{
+    if(oldMessage.author.bot) return
     let userMentioned=false
     let roleMentioned=false
     const mentionedUsers=[]
