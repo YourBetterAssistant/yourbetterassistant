@@ -1,3 +1,3 @@
 
-curl -H "Content-Type: application/json" -X POST -d '{"content":">>> Uptime For YourBetterAssistant, Downtime:1 minute"}'  $URL
+curl -H "Content-Type: application/json" -X POST -d '{"content":">>> Uptime For YourBetterAssistant"}'  $URL
 echo 'Uptime Sent'
