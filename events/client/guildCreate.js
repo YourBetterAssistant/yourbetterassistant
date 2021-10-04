@@ -22,7 +22,7 @@ module.exports=async(client, guild)=>{
     const embed = new Discord.MessageEmbed()
         .setColor('ORANGE')
         .setTitle('Hello!')
-        .setDescription('Hi I am YourBetterAssistant I suggest setting me up with my amazing administration commands as without doing that I will be rather useless. My prefix is `b!` so I sugegst using b!help as you first command')
+        .setDescription('Hi I am YourBetterAssistant I suggest setting me up with my amazing administration commands as without doing that I will be rather useless. My prefix is `b!` so I suggest using b!help as you first command')
         .setTimestamp(new Date())
     
     channelRandom.send({embeds:[embed]})
