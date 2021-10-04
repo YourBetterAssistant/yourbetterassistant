@@ -7,7 +7,7 @@ module.exports = {
     aliases: ["conf"],
     description: "Set-up the server",
     category: "Administration",
-    memberpermissions:"ADMINISTRATOR",
+    memberpermissions:["ADMINISTRATOR"],
     cooldown: 10,
     usage: "serverconf",
     run:async(client, message, args)=>{
