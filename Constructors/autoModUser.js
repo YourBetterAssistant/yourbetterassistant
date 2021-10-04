@@ -2,6 +2,7 @@ const AntiSpam = require('discord-anti-spam');
 const automod=require('../Schemas/autoMod')
 const badwords = require('badwords/array')
 function isUpperCase(str) {
+    if(str.includes('@')||str.includes('<')||str.includes('>'||str.includes('!')||str.includes('%')||str.includes('#')||str.includes('&')))return false
     if(str.length < 5)return false
     else{
         return str === str.toUpperCase();
