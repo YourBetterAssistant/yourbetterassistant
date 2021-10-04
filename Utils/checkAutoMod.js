@@ -6,7 +6,7 @@ async function checkAutoMod(message){
     if(!result){
         let result=await autoMod.findOne({guildId:message.guild.id})
         console.log('new cache for automod')
-        if(!result.guildId){
+        if(!result){
             autoModCache.push({id:message.guild.id, strictmode:'none'})
         }else{
             autoModCache.push({id:message.guild.id, strictmode:result.strictMode})
