@@ -3,7 +3,9 @@ const automod=require('../Schemas/autoMod')
 const badwords = require('badwords/array')
 function isUpperCase(str) {
     if(str.length < 5)return false
-    return str === str.toUpperCase();
+    else{
+        return str === str.toUpperCase();
+    }   
 }
 
 class autoMod{
@@ -82,7 +84,7 @@ class autoMod{
     }
     async allCaps(){
         const message=this.message
-        if(isUpperCase(message.content)){
+        if(isUpperCase(message.content)===true){
             return message.channel.send('Stop Spamming Caps!')
         }
     }
