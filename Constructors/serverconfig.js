@@ -1,12 +1,13 @@
 "use strict";
 let cache=new Map()
 const { delay } = require('../handlers/functions')
-const {MessageActionRow, MessageSelectMenu, MessageButton}=require('discord.js')
+const {MessageActionRow, MessageSelectMenu, MessageButton, Message}=require('discord.js')
 const chatbot = require('../Schemas/chatbot')
 const countSchema = require('../Schemas/countSchema')
 const logSchema=require('../Schemas/logSchema')
 const welcomeSchema = require('../Schemas/welcomeSchema')
-const serverConfSchema = require('../Schemas/serverConfSchema')
+const serverConfSchema = require('../Schemas/serverConfSchema');
+const autoMod = require('../Schemas/autoMod');
 const awaitWelcome=async(message)=>{
     const f=i=>i.user.id===message.author.id&&i.componentType=='SELECT_MENU'
     const filter=m=>m.author.id==message.author.id
@@ -209,7 +210,7 @@ async function awaitRoles(message){
         .setPlaceholder('null')
         .addOptions(roles)
     )
-    message.reply({content:'Owner! message Owner Role', components: [Enablerow], ephemeral:false})
+    message.reply({content:'Owner! message Owner Role', components: [Enablerow]})
     let fullRoles=[]
     await message.channel.awaitMessageComponent(f)
     .then(async(click)=>{
@@ -217,14 +218,14 @@ async function awaitRoles(message){
             fullRoles.push({owner:click.values.toString(), admin:null, member:null})
             click.followUp(`Added <@&${click.values.toString()}> as a Owner Role`)
     })
-    message.reply({content:'Admin! message Admin Role', components: [Enablerow], ephemeral:false})
+    message.reply({content:'Admin! message Admin Role', components: [Enablerow]})
     await message.channel.awaitMessageComponent(f)
     .then(async(click)=>{
             click.deferReply()
             fullRoles[0].admin=click.values.toString()
             click.followUp(`Added <@&${click.values.toString()}> as a Admin Role`)
     })
-    message.reply({content:'Member! message Member Role', components: [Enablerow], ephemeral:false})
+    message.reply({content:'Member! message Member Role', components: [Enablerow]})
     await message.channel.awaitMessageComponent(f)
     .then(async(click)=>{
             click.deferReply()
@@ -238,11 +239,59 @@ async function awaitRoles(message){
         ownerroleID:roles[0].owner,
     }, {upsert:true})
 }
-
+async function allow(message, strict){
+    await autoMod
+    .findOneAndUpdate({guildId:message.guild.id}, {
+        guildId:message.guild.id,
+        strictMode:strict
+    }, {upsert:true})
+}
+async function disallow(message){
+    await autoMod
+    .deleteOne({guildId:message.guild.id})
+}
+async function awaitautoMod(message){
+    const f=i=>i.user.id===message.author.id
+    const EnableRow=new MessageActionRow()
+    .addComponents(
+        new MessageButton()
+        .setCustomId('allow')
+        .setLabel('Enable')
+        .setStyle('SUCCESS')
+        ,new MessageButton()
+        .setLabel('Disabled')
+        .setCustomId('disallow')
+        .setStyle('DANGER')
+    )
+    message.channel.send({content:'Allow Or Disable AutoMod?', components:[EnableRow]})
+    await message.channel.awaitMessageComponent(f)
+    .then(async(clicked)=>{
+        if(clicked.customId=='allow'){
+            const EnableRow=new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                .setCustomId('strict')
+                .setLabel('Strict-Mode')
+                .setStyle('SUCCESS'),
+                new MessageButton()
+                .setCustomId('non-strict')
+                .setLabel('Non-Strict')
+                .setStyle('DANGER')
+            )
+            message.channel.send({content:'Use Strict?', components:[EnableRow]})
+            await message.channel.awaitMessageComponent(f)
+            .then(async(click)=>{
+                return await click.customId==='strict'?allow(message, true):allow(message, false)
+            }).catch(err=>console.error(drr))
+        }else disallow(message)
+        return clicked.reply('Done')
+    }).catch((err)=>console.log(err))
+}
 module.exports={
     awaitWelcome,
     awaitChatbot,
     awaitMemberLog,
     awaitmemberCount,
-    awaitRoles
+    awaitRoles,
+    awaitautoMod
 }

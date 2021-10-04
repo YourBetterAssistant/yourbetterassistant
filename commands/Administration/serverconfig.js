@@ -1,6 +1,6 @@
 'use strict';
 
-const { awaitChatbot, awaitWelcome, awaitmemberCount, awaitMemberLog, awaitRoles } = require("../../Constructors/serverconfig")
+const { awaitChatbot, awaitWelcome, awaitmemberCount, awaitMemberLog, awaitRoles, awaitautoMod } = require("../../Constructors/serverconfig")
 const {MessageActionRow, MessageSelectMenu}=require('discord.js')
 module.exports = {
     name: "serverconfig",
@@ -44,6 +44,11 @@ module.exports = {
                         description: 'Roles',
                         value: 'roles',
                     },
+                    {
+                        label: 'AutoMod',
+                        description: 'Enables Automatic Moderation including anti-ghost ping, spam-prevention and much more',
+                        value: 'automod',
+                    },
                 ]),
         );
 
@@ -69,6 +74,9 @@ module.exports = {
             else if(choose.values.toString()=='roles'){
                 await awaitRoles(message)
                 return message.channel.send('Config Done')
+            }
+            else if(choose.values.toString()=='automod'){
+                return await awaitautoMod(message)
             }
 
 
