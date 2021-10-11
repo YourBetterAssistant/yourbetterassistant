@@ -113,23 +113,18 @@ module.exports = async (client, message) => {
           }).then(msg=>msg.delete({timeout: 10000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
         }
         //if the Bot has not enough permissions return error
-        let required_perms = ["SEND_MESSAGES"]
-        let permHas=true
-        for(const perm of required_perms){
-          if(!message.guild.me.permissions.has(perm)){
-            permHas=false
-          }
-        }
-        if(permHas===false){
-          try{ message.react("❌"); }catch{}
-          let embed=new Discord.MessageEmbed()
-          .setColor(ee.wrongcolor)
-          .setFooter(ee.footertext, ee.footericon)
-          .setTitle("❌ Error | I don't have enough Permissions!")
-          .setDescription("Please give me just `ADMINISTRATOR`, because I need it to delete Messages, Create Channel and execute all Admin Commands.\n If you don't want to give me them, then those are the exact Permissions which I need: \n> `" + required_perms.join("`, `") +"`")
-          return message.channel.send({embeds:[embed]
-          })
-        }
+        // let required_perms = ["ADD_REACTIONS","VIEW_CHANNEL","SEND_MESSAGES",
+        // "EMBED_LINKS", "CONNECT", "SPEAK"]
+        // if(!message.guild.me.permissions.has(required_perms)){
+        //   try{ message.react("❌"); }catch{}
+        //   let embed=new Discord.MessageEmbed()
+        //   .setColor(ee.wrongcolor)
+        //   .setFooter(ee.footertext, ee.footericon)
+        //   .setTitle("❌ Error | I don't have enough Permissions!")
+        //   .setDescription("Please give me just `ADMINISTRATOR`, because I need it to delete Messages, Create Channel and execute all Admin Commands.\n If you don't want to give me them, then those are the exact Permissions which I need: \n> `" + required_perms.join("`, `") +"`")
+        //   message.channel.send({embeds:[embed]
+        //   })
+        // }
 
         //run the command with the parameters:  client, message, args, user, text, prefix,
         command.run(client, message, args, message.member, args.join(" "), prefix);
