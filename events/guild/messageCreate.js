@@ -114,7 +114,13 @@ module.exports = async (client, message) => {
         }
         //if the Bot has not enough permissions return error
         let required_perms = ["ADD_REACTIONS","VIEW_CHANNEL","SEND_MESSAGES"]
-        if(!message.guild.me.permissions.has(required_perms)){
+        let permHas=true
+        for(const perm of required_perms){
+          if(!message.guild.me.permissions.has(perm)){
+            permHas=false
+          }
+        }
+        if(permHas===false){
           try{ message.react("❌"); }catch{}
           let embed=new Discord.MessageEmbed()
           .setColor(ee.wrongcolor)
