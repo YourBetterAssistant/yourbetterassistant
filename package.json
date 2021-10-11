@@ -1,6 +1,6 @@
 {
   "name": "bbarevamp",
-  "version": "2.75",
+  "version": "2.75.1",
   "private": "true",
   "description": "YourBetterAssistant, OpenSource Bot That is Amazing!!!",
   "main": "start.js",
@@ -40,6 +40,7 @@
     "djs-meme": "^1.2.8",
     "dotenv": "^10.0.0",
     "ffmpeg-static": "^4.4.0",
+    "https": "^1.0.0",
     "images-scraper": "^6.3.0",
     "l": "^0.6.0",
     "lavaclient": "^4.0.3",
