@@ -1,6 +1,7 @@
 const mongo=require('../botconfig/mongo')
 const economySchema=require('../Schemas/economySchema')
 const {erroHandler:errHandler}=require('../handlers/errorHandler')
+const inventory = require('../Schemas/inventory')
 async function createUser(userID, coins, bank, bs){
     /**
      * @param userID nothing much lol
@@ -8,6 +9,7 @@ async function createUser(userID, coins, bank, bs){
     await mongo().then(async ()=>{
       try{
         await economySchema.findOneAndUpdate({userID:userID}, { userID:userID,coins:coins, bank:bank, bankSpace:bs}, {upsert:true})
+        await inventory.findOneAndUpdate({userId:userID}, {inventory:[]}, {upsert:true})
       }catch(err){errHandler(err)}
     })
     //code
@@ -61,9 +63,11 @@ class economy{
     }
     async deductCoins(userID, coins, message){
         let ua=await economySchema.findOne({userID:userID}) 
-        if(!ua)return await createUser(userID, 10000-coins, 10000, 10000)
+        if(!ua)return await createUser(userID, 10000, 10000, 10000)
         let ec=ua.coins
+        if(ec < coins)return false
         await createUser(userID, ec-coins, ua.bank, ua.bankSpace)
+        return true
     }
     async deposit(userID, coins, message){
         let msg=await message.channel.send('Transaction Processing...')

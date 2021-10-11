@@ -61,14 +61,6 @@ module.exports = async client => {
    return result;
   }
   fs.writeFile('./key.txt',`${makeid(20)}`, (err)=>{if(err)return})
-  async function upload(){
-    await axios.post("https://discordbotlist.com/api/v1/bots/862143828920369172/stats",{
-      guilds:client.guilds.cache.size,
-      users:client.users.cache.size
-    }, {
-      Headers:{Authorization:process.env.DISCORDBOT}
-    }).then(()=>console.log('Posted Stats to discordbotlist')).catch(err=>{throw err})
-  }
   /*client.interactions.forEach(async(inter)=>{
     if(!inter.guild){
       await client.api.applications(client.user.id).commands.post({data: {
@@ -95,15 +87,14 @@ module.exports = async client => {
     }
 
   })*/
-  const commands=[]
   let i=1
   client.interactions.forEach(async(inter)=>{
     //return client.api.applications(client.user.id).commands.set([])
-    if(inter.guild &&!inter.options){
-      client.api.applications(client.user.id).guilds(inter.guild).commands.post({data:{name:inter.name, description:inter.description}})
+    if(inter.guild==true &&!inter.options){
+      client.api.applications(client.user.id).guilds('879927834058043492').commands.post({data:{name:inter.name, description:inter.description}})
     
-    }else if(inter.guild&& inter.options){
-      client.api.applications(client.user.id).guilds(inter.guild).commands.post({data:{name:inter.name, description:inter.description, options:inter.options}})
+    }else if(inter.guild==true&& inter.options){
+      client.api.applications(client.user.id).guilds('879927834058043492').commands.post({data:{name:inter.name, description:inter.description, options:inter.options}})
     }else if(!inter.guild&& inter.options){
       client.api.applications(client.user.id).commands.post({data:{name:inter.name, description:inter.description, options:inter.options}})
     }
@@ -112,7 +103,7 @@ module.exports = async client => {
     }
 
 
-})
+ })
 client.api.application.commands.forEach(item=>console.log(item.name))
 
 }

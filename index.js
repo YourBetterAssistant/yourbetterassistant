@@ -1,24 +1,16 @@
-﻿//Importing all needed Commands
+//Importing all needed Commands
 const Discord = require("discord.js");//this is the official discord.js wrapper for the Discord Api, which we use!
 require('dotenv').config()
 const { Node } =require("lavaclient")
 require('@weky/inlinereply')
-const commandBase=require('./events/guild/messageCreate')
 const { AutoPoster } = require('topgg-autoposter')
-const Levels=require('discord-xp')
-const mongo=require('./botconfig/mongo')
-const mongoose=require('mongoose')
 let token=process.env.TOKEN
-const config=require('./botconfig/config.json')
 const colors = require("colors"); //this Package is used, to change the colors of our Console! (optional and doesnt effect performance)
 const fs = require("fs"); //this package is for reading files and getting their inputs
-
 //Creating the Discord.js Client for This Bot with some default settings ;) and with partials, so you can fetch OLD messages
-const client=new Discord.Client({fetchAllMembers: true, messageCacheMaxSize: 10, disableEveryone: false,partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'],intents:["GUILDS", "GUILD_MESSAGES",'GUILD_MESSAGE_REACTIONS', 'GUILD_VOICE_STATES', 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_BANS', 'GUILD_INVITES']})
+const client=new Discord.Client({fetchAllMembers: true, messageCacheMaxSize: 10000, disableEveryone: true,partials: ['USER' ,'CHANNEL' , 'GUILD_MEMBER' , 'MESSAGE' , 'REACTION'],intents:/*["GUILDS", "GUILD_MESSAGES",'GUILD_MESSAGE_REACTIONS', 'GUILD_VOICE_STATES', 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_BANS', 'GUILD_INVITES']*/[ 'GUILDS' , 'GUILD_MEMBERS' , 'GUILD_BANS' , 'GUILD_INTEGRATIONS' , 'GUILD_WEBHOOKS' , 'GUILD_INVITES' , 'GUILD_VOICE_STATES' , 'GUILD_PRESENCES' , 'GUILD_MESSAGES' , 'GUILD_MESSAGE_REACTIONS', 'GUILD_MESSAGE_TYPING' , 'DIRECT_MESSAGES' , 'DIRECT_MESSAGE_REACTIONS' , 'DIRECT_MESSAGE_TYPING']})
 const ap = AutoPoster(process.env.TOPGGTOKEN, client)
 const clientId = '862143828920369172'
-const testId='858606774658924555'
-const serverID='879927834058043492'
 const info = { host: "192.168.86.200", port: 2333, password: "lavalink" }
 const lavalink = new Node({
     connection: info,
@@ -37,7 +29,6 @@ client.categories = fs.readdirSync("./commands/"); //categories
 client.cooldowns = new Discord.Collection(); //an collection for cooldown commands of each user
 client.interactions=new Discord.Collection();
 client.token=token;
-
 //Loading files, with the client variable like Command Handler, Event Handler, ...
 ["command", "events"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
@@ -47,9 +38,5 @@ ap.on('posted', () => {
 })
 client.ws.on('VOICE_STATE_UPDATE', async (data)=>await lavalink.handleVoiceUpdate(data))
 client.ws.on('VOICE_SERVER_UPDATE', async (data)=>await lavalink.handleVoiceUpdate(data))
-//slash
-let id=clientId||testId
-
 client.login(token);
-
 /** Template by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template */
