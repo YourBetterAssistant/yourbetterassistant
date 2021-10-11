@@ -113,7 +113,7 @@ module.exports = async (client, message) => {
           }).then(msg=>msg.delete({timeout: 10000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
         }
         //if the Bot has not enough permissions return error
-        let required_perms = ["VIEW_CHANNEL","SEND_MESSAGES"]
+        let required_perms = ["SEND_MESSAGES"]
         let permHas=true
         for(const perm of required_perms){
           if(!message.guild.me.permissions.has(perm)){
