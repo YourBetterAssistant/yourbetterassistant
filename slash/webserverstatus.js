@@ -2,7 +2,6 @@ var https = require("https");
 module.exports = {
     name: "webserverstatus",
     description: "Shows Status of https://yourbetterassistant.me",
-    guild:true,
     run:async(client, interaction)=>{
         try{
             https.get({host: "yourbetterassistant.me"}, function(res){
