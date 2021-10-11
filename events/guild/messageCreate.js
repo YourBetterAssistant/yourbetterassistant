@@ -114,7 +114,7 @@ module.exports = async (client, message) => {
         }
         //if the Bot has not enough permissions return error
         let required_perms = ["ADD_REACTIONS","VIEW_CHANNEL","SEND_MESSAGES",
-        "EMBED_LINKS","CONNECT","SPEAK"]
+        "EMBED_LINKS"]
         if(!message.guild.me.permissions.has(required_perms)){
           try{ message.react("❌"); }catch{}
           let embed=new Discord.MessageEmbed()
