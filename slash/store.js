@@ -40,7 +40,6 @@ module.exports = {
             const description=interaction.options.getString('description')
             itemInfo.push({name, price:price.toString(), description})
             const items=await store.findOne({id:'1'})
-            console.log(items)
             if(!items){
                 await store.findOneAndUpdate({id:'1'}, {id:'1', items:[itemInfo[0]]}, {upsert:true})
             }else{
@@ -63,27 +62,22 @@ module.exports = {
             .setColor('BLUE')
             const s=await store.findOne({id:'1'})
             const preinv=await inventory.findOne({userId:interaction.user.id})
-            
-            for(const item of s.items){
-                if(item.name.toLowerCase()!==useritem.toLowerCase()){
+            const item=s.items.find(i=>i.name.toLowerCase()===useritem.toLowerCase())
+                if(!item){
                     realItem=false}
                 else {
                     price.push(s.items.find(i=>i.name.toLowerCase()===useritem.toLowerCase()).price)
                     realItem=true
                     validItem.push(item.name)
-                    console.log(amount)
                     validItem.push(...replicate(validItem, amount-1))
-                    console.log(validItem.length)
                 }
-                continue
-            }
-            console.log(price[0])
             const sucess=await eco.deductCoins(interaction.user.id, price[0]*amount)
             if(sucess===false)return interaction.reply('Insufficent Funds')
             else 
             if(realItem===false){
                 embed
                 .setDescription(`The Item \`${useritem}\` is not a valid item in the store lol`)
+                return interaction.reply({embeds:[embed]})
             }
             else if(amount > 100){
                 return interaction.reply('You Cannot Get More Than 100 of any item at once')
