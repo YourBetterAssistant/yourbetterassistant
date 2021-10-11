@@ -49,7 +49,20 @@ module.exports = {
             itemInfo.length=0
             return interaction.reply(`Added Item \`${name}\`, with price \`${price}YBCs\` with a description of \`${description}\``)
         }
-        else if(interaction.options.getSubcommand()==='add'&&interaction.user.id!=='827388013062389761')return interaction.reply({content:'You Are Not Whitelisted to do this', ephemeral:true})
+        else if(interaction.options.getSubcommand()==='add'&&interaction.user.id!=='827388013062389761'){
+            const name=interaction.options.getString('item')
+            const price=interaction.options.getNumber('price')
+            const description=interaction.options.getString('description')
+            const channel=client.channels.cache.get('885726936314306570')
+            const embed=new MessageEmbed()
+            .setTitle('New Suggested Store Item')
+            .setDescription(`Item \`${name}\`, with price \`${price}YBCs\` with a description of \`${description}\``)
+            .setColor('GOLD')
+            .setAuthor(interaction.user.tag, interaction.user.displayAvatarURL({format:'png', dynamic:true}))
+            .setFooter('GuildID:'+interaction.guild.id)
+            channel.send({embeds:[embed]})
+            return interaction.reply({content:'You Are Not Whitelisted to do this but I will add this as a suggestion', ephemeral:true})
+        }
         else if(interaction.options.getSubcommand()==='buy'){
             let realItem=false
             const validItem=[]
