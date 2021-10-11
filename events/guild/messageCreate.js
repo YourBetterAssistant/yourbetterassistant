@@ -113,8 +113,7 @@ module.exports = async (client, message) => {
           }).then(msg=>msg.delete({timeout: 10000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
         }
         //if the Bot has not enough permissions return error
-        let required_perms = ["ADD_REACTIONS","VIEW_CHANNEL","SEND_MESSAGES",
-        "EMBED_LINKS"]
+        let required_perms = ["ADD_REACTIONS","VIEW_CHANNEL","SEND_MESSAGES"]
         if(!message.guild.me.permissions.has(required_perms)){
           try{ message.react("❌"); }catch{}
           let embed=new Discord.MessageEmbed()
