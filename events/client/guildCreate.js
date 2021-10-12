@@ -3,6 +3,7 @@
 const Discord=require('discord.js')
 const { getPrettyDate } = require('../../handlers/functions')
 module.exports=async(client, guild)=>{
+    await guild.members.fetch({force:true})
     try{}catch(err){return}
     let possibleChannel=['chatting', 'general', 'chat', 'talk', 'speak', 'idk', 'bot-commands', 'bot', 'commands']
     let channel=[]

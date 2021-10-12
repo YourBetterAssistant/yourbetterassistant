@@ -21,6 +21,7 @@ module.exports=async (client, member)=>{
                 logChannel.send({embeds:[embed]})
             setInterval(function () {
               try{
+                await guild.members.fetch({force:true})
                 var memberCount = guild.members.cache.filter(member => !member.user.bot).size;  
                 var memberCountChannel = guild.channels.cache.get(vc);
                 memberCountChannel.setName(`${memberCount} members!`);

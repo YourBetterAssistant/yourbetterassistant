@@ -12,6 +12,7 @@ module.exports=async (client, member)=>{
           await mongo().then(async mongoose=>{
               try{
                 //Look for vc
+                await guild.members.fetch({force:true})
                 let countInfo=await countSchema.findOne({_id:member.guild.id})
                 const vc=countInfo.voiceChannelID
                 setInterval(function () {
