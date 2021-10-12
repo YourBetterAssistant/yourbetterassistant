@@ -33,7 +33,7 @@ module.exports = {
                 interaction.reply({embeds:[embed]})
             }
         }
-        else if(interaction.options.getSubcommand()==='add'&&interaction.user.id==='827388013062389761'){
+        else if(interaction.options.getSubcommand()==='add'&&interaction.user.id==='827388013062389761'||interaction.options.getSubcommand()==='add'&&interaction.user.id==='660665680827514929'){
             const itemInfo=[]
             const name=interaction.options.getString('item')
             const price=interaction.options.getNumber('price')
