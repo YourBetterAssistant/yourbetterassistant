@@ -20,12 +20,12 @@ async function checkAutoMod(message){
 }
 async function forceNewCache(message){
         autoModCache.length=0
-        let result=await autoMod.findOne({guildId:message.guild.id})
-        if(!result.guildId){
-            autoModCache.push({id:message.guild.id, strictmode:'none'})
-        }else{
-            autoModCache.push({id:message.guild.id, strictmode:result.strictMode})
-        }
+        // let result=await autoMod.findOne({guildId:message.guild.id})
+        // if(!result.guildId){
+        //     autoModCache.push({id:message.guild.id, strictmode:'none'})
+        // }else{
+        //     autoModCache.push({id:message.guild.id, strictmode:result.strictMode})
+        // }
     
 }
 exports.checkAutoMod=checkAutoMod

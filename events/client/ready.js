@@ -94,20 +94,19 @@ module.exports = async (client) => {
   client.interactions.forEach(async(inter)=>{
     //return client.api.applications(client.user.id).commands.set([])
     if(inter.guild==true &&!inter.options){
-      client.api.applications(client.user.id).guilds('879927834058043492').commands.post({data:{name:inter.name, description:inter.description}})
+      client.api.applications(client.user.id).guilds('879927834058043492').commands.post({data:{name:inter.name, description:inter.description, default_permission:inter.permissions==false?false:true}})
     
     }else if(inter.guild==true&& inter.options){
-      client.api.applications(client.user.id).guilds('879927834058043492').commands.post({data:{name:inter.name, description:inter.description, options:inter.options}})
+      client.api.applications(client.user.id).guilds('879927834058043492').commands.post({data:{name:inter.name, description:inter.description, options:inter.options,default_permission:inter.permissions==false?false:true}})
     }else if(!inter.guild&& inter.options){
-      client.api.applications(client.user.id).commands.post({data:{name:inter.name, description:inter.description, options:inter.options}})
+      client.api.applications(client.user.id).commands.post({data:{name:inter.name, description:inter.description, options:inter.options, default_permission:inter.permissions==false?false:true}})
     }
     else{
-      await client.api.applications(client.user.id).commands.post({data:{name:inter.name, description:inter.description}})
+      await client.api.applications(client.user.id).commands.post({data:{name:inter.name, description:inter.description, default_permission:inter.permissions==false?false:true}})
     }
 
-
  })
-client.api.application.commands.forEach(item=>console.log(item.name))
+
 
 }
 
