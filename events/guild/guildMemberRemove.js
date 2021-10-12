@@ -19,7 +19,7 @@ module.exports=async (client, member)=>{
                 .addField('Member', `${member}`)
                 .setColor('RANDOM')
                 logChannel.send({embeds:[embed]})
-            setInterval(function () {
+            setInterval(async function () {
               try{
                 await guild.members.fetch({force:true})
                 var memberCount = guild.members.cache.filter(member => !member.user.bot).size;  

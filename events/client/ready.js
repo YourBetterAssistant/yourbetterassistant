@@ -13,7 +13,7 @@ const Levels = require("discord-xp");
 
 const mongo=require('../../botconfig/mongo');
 const { default: axios } = require("axios")
-module.exports = async client => {
+module.exports = async (client) => {
   try{
     const stringlength = 69;
     console.log("\n")
@@ -29,8 +29,11 @@ module.exports = async client => {
   let change
   try{
     change=false
-    client.user.setStatus('dnd');
-    client.user.setActivity(`${client.users.cache.size} users`, {type:'WATCHING'});
+    await client.user.setStatus('dnd');
+    await client.user.setActivity(`${client.users.cache.size} users`, {type:'WATCHING'});
+    setInterval(async()=>{
+      await client.user.setActivity(`${client.users.cache.size} users`, {type:'WATCHING'});
+   }, 600000)
   }catch (e) {
       return console.log(String(e.stack).red);
   }
