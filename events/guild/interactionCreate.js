@@ -12,7 +12,7 @@ module.exports=async(client, interaction)=>{
     else if(interaction.isButton()){
         if(interaction.guild){
             const possibleReaction=await rrSchema.findOne({guildId:interaction.guild.id})
-            if(interaction.message.id===possibleReaction.messageId){
+            if(possibleReaction&&interaction.message.id===possibleReaction.messageId){
                 if(interaction.customId==possibleReaction.role1.name){
                     interaction.guild.roles.fetch()
                     const role=interaction.guild.roles.cache.get(possibleReaction.role1.id)  

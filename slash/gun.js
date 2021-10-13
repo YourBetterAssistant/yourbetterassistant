@@ -6,7 +6,7 @@ module.exports = {
     run:async(client, interaction)=>{
         let user=interaction.options.getUser('user')
         const embed=new MessageEmbed()
-        .setTitle('Who Did This???')
+        .setTitle('Gun')
         .setColor('GREEN')
         if(!user){
             let img=interaction.member.user.displayAvatarURL()
