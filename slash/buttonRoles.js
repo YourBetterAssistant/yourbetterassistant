@@ -4,7 +4,6 @@ const rrSchema = require("../Schemas/rrSchema")
 module.exports = {
     name: "buttonroles",
     description: "Button Roles",
-    guild:true,
     options:[{type:7, name:'channel', description:'The Channel For The Message To Be Sent To', channel_types:[0, 5, 6], required:true}, {type:8, name:'role', description:'Role', required:true}, {type:8, name:'role2', description:'2nd Role'}],
     run:async(client, interaction)=>{
         if(!interaction.member.permissions.has('MANAGE_ROLES')){
