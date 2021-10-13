@@ -202,7 +202,6 @@ async function awaitRoles(message){
         roles.push({label:r.name, description:r.id.toString(), value:r.id.toString()})
     })
     const OwnerRoleId = new MessageActionRow()
-    console.log(roles)
     const Enablerow=new MessageActionRow()
     .addComponents(
         new MessageSelectMenu()
@@ -232,11 +231,12 @@ async function awaitRoles(message){
             fullRoles[0].member=click.values.toString()
             click.followUp(`Added <@&${click.values.toString()}> as a Member Role`)
     })
+    console.log()
     await serverConfSchema.findOneAndUpdate({_id:message.guild.id}, {
         _id:message.guild.id,
-        adminroleID:roles[0].admin,
-        memberroleID:roles[0].member,
-        ownerroleID:roles[0].owner,
+        adminroleID:fullRoles[0].admin,
+        memberroleID:fullRoles[0].member,
+        ownerroleID:fullRoles[0].owner,
     }, {upsert:true})
 }
 async function allow(message, strict){
