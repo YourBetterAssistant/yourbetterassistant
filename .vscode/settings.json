@@ -13,5 +13,6 @@
     ],
     "cSpell.ignoreWords": [
         "userid"
-    ]
+    ],
+    "discord.enabled": true
 }

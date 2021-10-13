@@ -4,7 +4,8 @@ const rrSchema = require("../Schemas/rrSchema")
 module.exports = {
     name: "buttonroles",
     description: "Button Roles",
-    options:[{type:7, name:'channel', description:'The Channel For The Message To Be Sent To', channel_types:[0, 5, 6], required:true}, {type:8, name:'role', description:'Role', required:true}, {type:8, name:'role2', description:'2nd Role'}],
+    guild:true,
+    options:[{type:7, name:'channel', description:'The Channel For The Message To Be Sent To', channel_types:[0, 5, 6], required:true}, {type:8, name:'role', description:'Role', required:true}, {type:8, name:'role2', description:'2nd Role'}, {type:3, name:'message', description:'Message'}],
     run:async(client, interaction)=>{
         if(!interaction.member.permissions.has('MANAGE_ROLES')){
             return interaction.reply({content:'Misisng Perms: `MANAGE_ROLES`', ephemeral:true})
@@ -13,13 +14,14 @@ module.exports = {
         const channel=interaction.options.getChannel('channel')
         const role1=interaction.options.getRole('role')
         const role2=interaction.options?.getRole('role2')
+        const mes=interaction.options?.getString('message')
         const embed= new MessageEmbed()
         .setTitle('Get Your Roles!')
-        .addField('First Role Up For Grabs', `${role1} `)
+        .addField('Role 1', `${role1} `)
         .setColor('FUCHSIA')
-        role2?embed.addField('Second Role up For Grabs', `${role2}`):null
+        role2?embed.addField('Role 2', `${role2}`):null
         const row=new MessageActionRow()
-
+        mes?embed.setDescription(mes):null
         role2?row.addComponents(
             new MessageButton()
             .setLabel(role1.name)
