@@ -6,13 +6,17 @@ let reqStr={
     required:true
 }
 const rrSchema=mongoose.Schema({
-    _id:reqStr,
-    role1:reqStr,
-    role2:reqStr,
-    emoji1:reqStr,
-    emoji2:reqStr,
-    channel:reqStr,
+    guildId:reqStr,
+    role1:{
+        type:Object,
+        required:true
+    },
+    role2:{
+        type:Object,
+        required:true
+    },
+    messageId:reqStr
 }) 
 
 
-module.exports=mongoose.model('rrSchema', rrSchema)
+module.exports=mongoose.model('buttonRoles', rrSchema)
