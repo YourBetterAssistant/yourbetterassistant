@@ -13,7 +13,7 @@ module.exports = {
         const embed= new Discord.MessageEmbed()
         .setTitle('InviteLink')
         .setFooter('YourBetterAssistant')
-        .setURL('https://bit.ly/3hliGsX')
+        .setURL('https://dsc.gg/betterassistant')
         .setColor('AQUA')
         
         
