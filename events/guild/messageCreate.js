@@ -52,7 +52,7 @@ module.exports = async (client, message) => {
         await automod.allCaps()
         await automod.checkSpam()}
     })
-    prefix=guildPrefixes[message.guild.id] || globalPrefix
+    prefix=globalPrefix||guildPrefixes[message.guild.id] //comment ||guildPrefixes[message.guild.id] to be able to only use b!
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
     //if its not that then return
