@@ -15,6 +15,7 @@ module.exports = {
     cooldown: 1,
     usage: "rr",
     run:async (client, message, args)=>{
+        return message.channel.send('Reaction Roles Are Currently Deprecated They Will Be Replaced Very Soon')
         reply('Reply with the channel ID TIMEOUT:10s', true, message)
         let data={
             "GuildID":`${message.guild.id}`,
