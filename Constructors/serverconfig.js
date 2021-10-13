@@ -234,8 +234,8 @@ async function awaitRoles(message){
     })
     await serverConfSchema.findOneAndUpdate({_id:message.guild.id}, {
         _id:message.guild.id,
-        memberroleID:roles[0].member,
         adminroleID:roles[0].admin,
+        memberroleID:roles[0].member,
         ownerroleID:roles[0].owner,
     }, {upsert:true})
 }
