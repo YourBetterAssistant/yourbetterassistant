@@ -104,7 +104,6 @@ const messageUpdate=async(oldMessage, newMessage)=>{
 
 }
 const messageDelete=async(message)=>{
-    if(message.author.bot) return
     let userMentioned=false
     let roleMentioned=false
     const mentionedUsers=[]
