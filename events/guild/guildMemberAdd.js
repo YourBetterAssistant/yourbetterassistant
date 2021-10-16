@@ -4,6 +4,7 @@ module.exports=async (client, member)=>{
         const welcomeSchema=require('../../Schemas/welcomeSchema')
         const logSchema=require('../../Schemas/logSchema')
         const countSchema=require('../../Schemas/countSchema')
+        const joinRoles =require('../../Schemas/onJoin')
         const mongo=require('../../botconfig/mongo')
         const Discord=require('discord.js')
         const onJoin=async member=>{
@@ -41,6 +42,11 @@ module.exports=async (client, member)=>{
                     member.send(`>>> <@!${member.id}> ${text}`)
                   }else{
                   channel.send(`>>> <@!${member.id}> ${text}`)}
+                // add roles if any
+                const role=await joinRoles.findOne({guildId:member.guild.id})
+                if(role){
+                  member.roles.add(role.roleId, 'Joined Server')
+                }
                   
     
               }catch(err){console.log(`Error \n\n\n\n\n ${err.stack}`)}

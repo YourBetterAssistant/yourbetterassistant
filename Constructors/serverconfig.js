@@ -7,6 +7,7 @@ const countSchema = require('../Schemas/countSchema')
 const logSchema=require('../Schemas/logSchema')
 const welcomeSchema = require('../Schemas/welcomeSchema')
 const serverConfSchema = require('../Schemas/serverConfSchema');
+const joinRoles=require('../Schemas/onJoin')
 const autoMod = require('../Schemas/autoMod');
 const awaitWelcome=async(message)=>{
     const f=i=>i.user.id===message.author.id&&i.componentType=='SELECT_MENU'
@@ -201,7 +202,6 @@ async function awaitRoles(message){
         if(i>25)return
         roles.push({label:r.name, description:r.id.toString(), value:r.id.toString()})
     })
-    const OwnerRoleId = new MessageActionRow()
     const Enablerow=new MessageActionRow()
     .addComponents(
         new MessageSelectMenu()
@@ -287,11 +287,40 @@ async function awaitautoMod(message){
         return clicked.reply('Done')
     }).catch((err)=>console.log(err))
 }
+async function awaitJoinRoles(message){
+    const chosenRole=[]
+    const f=f=>f.user.id==message.guild.id
+    const roles=[]   
+    let i=1
+    message.guild.roles.cache.forEach(r=>{
+        i++
+        if(i>25)return
+        roles.push({label:r.name, description:r.id.toString(), value:r.id.toString()})
+    })
+    i=0
+    const Enablerow=new MessageActionRow()
+    .addComponents(
+        new MessageSelectMenu()
+        .setCustomId('roles')
+        .setPlaceholder('null')
+        .addOptions(roles)
+    )
+    message.channel.send({components:[Enablerow], content:'Choose A Role'})
+    await message.channel.awaitMessageComponent(f)
+    .then(async(opt)=>{
+        opt.deferReply()
+        chosenRole.push(opt.values.toString())
+        opt.followUp(`Added <@&${opt.values.toString()}> To be Given To New Members!`)
+    })
+    await joinRoles.findOneAndUpdate({guildId:message.guild.id}, {guildId:message.guild.id, roleId:chosenRole[0]}, {upsert:true})
+    roles.length=0
+}
 module.exports={
     awaitWelcome,
     awaitChatbot,
     awaitMemberLog,
     awaitmemberCount,
     awaitRoles,
-    awaitautoMod
+    awaitautoMod,
+    awaitJoinRoles
 }
