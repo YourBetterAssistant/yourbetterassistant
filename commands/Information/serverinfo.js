@@ -19,7 +19,7 @@ module.exports = {
         let embed=new MessageEmbed()
         .setTitle(`Server Info of ${message.guild.name}`)
         .setColor("DARK_BLUE")
-        .setImage(`https://cdn.discordapp.com/icons/${message.guild.id}/${message.guild.icon}`)
+        .setThumbnail(`https://cdn.discordapp.com/icons/${message.guild.id}/${message.guild.icon}`)
         .addFields({name:'Members', value:message.guild.memberCount.toString(), inline:true },
                    {name:'Owner', value:`<@!${message.guild.ownerId}>`, inline:true},
                    {name:'Humans', value:message.guild.members.cache.filter(m=>!m.user.bot).size.toString(), inline:true},
