@@ -1,7 +1,5 @@
 "use strict";
-let cache=new Map()
-const { delay } = require('../handlers/functions')
-const {MessageActionRow, MessageSelectMenu, MessageButton, Message}=require('discord.js')
+const {MessageActionRow, MessageSelectMenu, MessageButton}=require('discord.js')
 const chatbot = require('../Schemas/chatbot')
 const countSchema = require('../Schemas/countSchema')
 const logSchema=require('../Schemas/logSchema')
@@ -68,7 +66,6 @@ const awaitWelcome=async(message)=>{
 }
 const awaitChatbot=async(message)=>{
     const f=i=>i.user.id===message.author.id&&i.componentType=='SELECT_MENU'
-    const filter=m=>m.author.id==message.author.id
     let channels=[{label:'Disabled', description:'Use this to be disabled', value:'null'}]
                 message.guild.channels.cache.forEach(channel=>{
                     if(channel.type==='GUILD_TEXT'){
@@ -111,7 +108,6 @@ const awaitChatbot=async(message)=>{
 
 async function awaitMemberLog(message){
     const f=i=>i.user.id===message.author.id&&i.componentType=='SELECT_MENU'
-    const filter=m=>m.author.id==message.author.id
     let channels=[{label:'Disabled', description:'Use this to be disabled', value:'null'}]
                 message.guild.channels.cache.forEach(channel=>{
                     if(channel.type==='GUILD_TEXT'){
@@ -153,7 +149,6 @@ async function awaitMemberLog(message){
 }
 async function awaitmemberCount(message){
     const f=i=>i.user.id===message.author.id&&i.componentType=='SELECT_MENU'
-    const filter=m=>m.author.id==message.author.id
     let channels=[{label:'Disabled', description:'Use this to be disabled', value:'null'}]
                 message.guild.channels.cache.forEach(channel=>{
                     if(channel.type==='GUILD_VOICE'){
@@ -194,7 +189,6 @@ async function awaitmemberCount(message){
 }
 async function awaitRoles(message){
     const f=i=>i.user.id===message.author.id&&i.componentType=='SELECT_MENU'
-    const filter=m=>m.author.id==message.author.id
     let roles=[]
     let i=1
     message.guild.roles.cache.forEach(r=>{
@@ -282,7 +276,7 @@ async function awaitautoMod(message){
             await message.channel.awaitMessageComponent(f)
             .then(async(click)=>{
                 return await click.customId==='strict'?allow(message, true):allow(message, false)
-            }).catch(err=>console.error(drr))
+            }).catch((err)=>console.error(err))
         }else disallow(message)
         return clicked.reply('Done')
     }).catch((err)=>console.log(err))

@@ -14,3 +14,4 @@ pm2.txt
 commands/OWNER/removeslash.js
 key.txt
 json.sqlite
+.eslintrc.yml
