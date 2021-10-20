@@ -8,7 +8,7 @@ const {MessageAttachment} = require('discord.js')
 module.exports = async (client) => {
   setInterval(async function() {
     const logs=new MessageAttachment('./logs-0.log', 'Logs.log')
-    client.channels.cache.get('900255068949983282').send({files: [logs], content:'Logs'})
+    client.channels.cache.get('900255068949983282').send({files: [logs], content:'Logs Not Formatted'})
   }, 600000)
   try{
     const stringlength = 69;
