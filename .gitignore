@@ -15,3 +15,5 @@ commands/OWNER/removeslash.js
 key.txt
 json.sqlite
 .eslintrc.yml
+err-0.log
+logs-0.log
