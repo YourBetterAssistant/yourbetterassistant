@@ -11,7 +11,9 @@ async function push(){
         await axios.post(url[0], {content:">>> Uptime For YourBetterAssistant"}, {headers:{'Content-Type':'application/json'}})
     }
 }
-push()
-shell.exec('pm2 start ecosystem.config.js&')
+push().then(()=>{
+    shell.exec('pm2 start ecosystem.config.js&')
+})
+
 process.exit(1)
 
