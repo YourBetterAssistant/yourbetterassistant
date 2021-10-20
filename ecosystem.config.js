@@ -2,7 +2,7 @@
 module.exports = {
     apps : [{
       name   : "YBA",
-      script : "./index.js",
+      script : "./start.js",
       exec_mode:"cluster",
       instances:1,
       out_file:'./logs.log',
