@@ -1,19 +1,15 @@
 'use strict';
-
 //here the event starts
-const config = require("../../botconfig/config.json")
-const loadPrefix=require('../../Utils/prefix-load')
-const {lavacordManager}=require('../../index')
-const Discord=require('discord.js')
 require('dotenv').config()
 const fs=require('fs')
 const mongoose=require('mongoose')
-const welcomeSchema=require('../../Schemas/welcomeSchema')
-const Levels = require("discord-xp");
-
 const mongo=require('../../botconfig/mongo');
-const { default: axios } = require("axios")
+const {MessageAttachment} = require('discord.js')
 module.exports = async (client) => {
+  setInterval(async function() {
+    const logs=new MessageAttachment('./logs-0.log', 'Logs.log')
+    client.channels.cache.get('900255068949983282').send({files: [logs], content:'Logs'})
+  }, 10000)
   try{
     const stringlength = 69;
     console.log("\n")

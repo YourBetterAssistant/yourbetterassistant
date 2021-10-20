@@ -3,16 +3,6 @@
     "typescript.tsserver.log": "normal",
     "markdown.trace": "verbose",
     "kite.loggingLevel": "verbose",
-    "DockerRun.DisableDockerrc": true,
-    "DockerRun.Containers": [],
-    "cSpell.words": [
-        "cooldown",
-        "guildid",
-        "memberpermissions",
-        "serverconf"
-    ],
-    "cSpell.ignoreWords": [
-        "userid"
-    ],
-    "discord.enabled": true
+    "discord.enabled": true,
+    "git.ignoreLimitWarning": true
 }
