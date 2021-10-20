@@ -29,7 +29,7 @@
     "canvacord": "^5.2.3",
     "canvas": "^2.8.0",
     "discord-anti-spam": "^2.5.8",
-    "discord-api-types": "^0.23.1",
+    "discord-api-types": "^0.24.0",
     "discord-together": "^1.1.62",
     "discord-xp": "^1.1.16",
     "discord.js": "^13.0.1",
