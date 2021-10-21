@@ -11,4 +11,3 @@ async function push(){
 }
 push()
 require('./index')
-

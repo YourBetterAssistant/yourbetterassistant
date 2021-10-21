@@ -11,7 +11,7 @@ const fs = require("fs"); //this package is for reading files and getting their 
 const client=new Discord.Client({fetchAllMembers: true, messageCacheMaxSize: 10000, disableEveryone: true,partials: ['USER' ,'CHANNEL' , 'GUILD_MEMBER' , 'MESSAGE' , 'REACTION'],intents:/*["GUILDS", "GUILD_MESSAGES",'GUILD_MESSAGE_REACTIONS', 'GUILD_VOICE_STATES', 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_BANS', 'GUILD_INVITES']*/[ 'GUILDS' , 'GUILD_MEMBERS' , 'GUILD_BANS' , 'GUILD_INTEGRATIONS' , 'GUILD_WEBHOOKS' , 'GUILD_INVITES' , 'GUILD_VOICE_STATES' , 'GUILD_PRESENCES' , 'GUILD_MESSAGES' , 'GUILD_MESSAGE_REACTIONS', 'GUILD_MESSAGE_TYPING' , 'DIRECT_MESSAGES' , 'DIRECT_MESSAGE_REACTIONS' , 'DIRECT_MESSAGE_TYPING']})
 const ap = AutoPoster(process.env.TOPGGTOKEN, client)
 const clientId = '862143828920369172'
-const info = { host: "192.168.86.200", port: 2333, password: "lavalink" }
+const info = { host: "10.23.86.200", port: 2333, password: "lavalink" }
 const lavalink = new Node({
     connection: info,
     sendGatewayPayload: (id, payload) => client.guilds.cache.get(id)?.shard?.send(payload)

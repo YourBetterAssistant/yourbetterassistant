@@ -76,6 +76,7 @@ module.exports = async (client, message) => {
       return;
       }
     //get the command from the collection
+    if(message.content==='ded chat'||message.content==='dead chat')return message.channel.send('Good Eye Why Not Try To Start A Conversation?')
     let command = client.commands.get(cmd);
     //if the command does not exist, try to get it by his alias
     if (!command) command = client.commands.get(client.aliases.get(cmd));
