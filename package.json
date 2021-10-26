@@ -24,7 +24,7 @@
     "@top-gg/sdk": "^3.1.2",
     "@weky/inlinereply": "0.0.0",
     "add": "^2.0.6",
-    "axios": "^0.23.0",
+    "axios": "^0.24.0",
     "badwords": "^1.0.0",
     "canvacord": "^5.2.3",
     "canvas": "^2.8.0",
