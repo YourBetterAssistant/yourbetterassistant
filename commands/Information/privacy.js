@@ -4,7 +4,7 @@ module.exports = {
     description: "Privacy Policy",
     category: "Information",
     memberpermissions:"VIEW_CHANNEL",
-    cooldown: 2,
+    cooldown: 0,
     usage: "privacy",
     run:async(client, message, args)=>{
         const embed=new MessageEmbed()
