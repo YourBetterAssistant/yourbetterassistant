@@ -6,7 +6,7 @@ module.exports = {
     memberpermissions:"VIEW_CHANNEL",
     cooldown: 0,
     usage: "privacy",
-    run:async(client, message, args)=>{
+    run:async(client, message)=>{
         const embed=new MessageEmbed()
         .setTitle('Privacy Policy')
         .addFields({
