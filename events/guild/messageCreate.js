@@ -14,7 +14,7 @@ Levels.setURL(config.mongoPath);
 const {duration}=require('../../handlers/functions');
 const { checkAutoMod, forceAutoCacheMod } = require('../../Utils/checkAutoMod');
 const { autoMod } = require('../../Constructors/autoModUser');
-const deadChat = require('../../Utils/deadChat');
+//const deadChat = require('../../Utils/deadChat');
 
 //here the event starts
 let prefix
@@ -57,7 +57,7 @@ module.exports = async (client, message) => {
         await automod.allCaps()
         await automod.checkSpam()}
     })
-    deadChat(client)
+    //deadChat(client)
     if(message.content.toLowerCase()==='ded chat'||message.content.toLowerCase()==='dead chat')return message.channel.send('Good Eye Why Not Try To Start A Conversation?')
     prefix=guildPrefixes[message.guild.id]||globalPrefix //comment ||guildPrefixes[message.guild.id] to be able to only use b!
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
