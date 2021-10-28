@@ -1,27 +1,20 @@
 "use strict";
-/**
-  * @INFO
-  * Loading all needed File Information Parameters
-*/
-const commandPrefixSchema=require('../../Schemas/prefixSchema')
 const Levels=require('discord-xp')
 const {count}=require('../../Utils/count')
 const {level}=require('../../Utils/level')
 const {check}=require('../../Utils/checkChatChannel')
 const {prefixLoad, newCache}=require('../../Utils/prefix-load')
 let process=require('process')
-const mongo=require('../../botconfig/mongo')
-let countSchema=require('../../Schemas/countSchema')
 const config = require("../../botconfig/config.json"); //loading config file with token and prefix, and settings
 const {prefix:globalPrefix}=require('../../botconfig/config.json')
 const ee = require("../../botconfig/embed.json"); //Loading all embed settings like color footertext and icon ...
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
 const { escapeRegex} = require("../../handlers/functions"); //Loading all needed functions
-const { Mongoose } = require('mongoose');
 Levels.setURL(config.mongoPath);
 const {duration}=require('../../handlers/functions');
 const { checkAutoMod, forceAutoCacheMod } = require('../../Utils/checkAutoMod');
 const { autoMod } = require('../../Constructors/autoModUser');
+const deadChat = require('../../Utils/deadChat');
 
 //here the event starts
 let prefix
@@ -39,6 +32,18 @@ module.exports = async (client, message) => {
     //if the message is on partial fetch it
     if (message.partial) await message.fetch();
     //get the current prefix from the botconfig/config.json
+    if(!message.guild){
+      const embed=new Discord.MessageEmbed()
+      .setTitle('Support DM')
+      .setDescription(message.content)
+      .setFooter(`Asked By ${message.author.username}`)
+      .setColor(ee.color)
+      const owner=await client.users.fetch('827388013062389761')
+      owner.send(message.content+'\nAsked by '+ message.author.tag)
+      const channel=await client.channels.fetch('879949650415722556')
+      channel.send({embeds:[embed]})
+      return message.channel.send('My DMS are for support messages only, the message sent will be forwarded to the owner and to our support server for an answer please join our server at https://discord.gg/h2YfQbKFTR')
+    }
     await prefixLoad(client, guildPrefixes, globalPrefix, message)
     await level(message)
     await count(message)
@@ -52,6 +57,7 @@ module.exports = async (client, message) => {
         await automod.allCaps()
         await automod.checkSpam()}
     })
+    deadChat(client)
     if(message.content.toLowerCase()==='ded chat'||message.content.toLowerCase()==='dead chat')return message.channel.send('Good Eye Why Not Try To Start A Conversation?')
     prefix=guildPrefixes[message.guild.id]||globalPrefix //comment ||guildPrefixes[message.guild.id] to be able to only use b!
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
@@ -111,7 +117,7 @@ module.exports = async (client, message) => {
           .setTitle("❌ Error | You are not allowed to run this command!")
           .setDescription('You Do Not Have The Required Perms!')
           return message.channel.send({embeds:[e]
-          }).then(msg=>msg.delete({timeout: 10000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
+          }).then(msg=>msg.delete({timeout: 10000}).catch(()=>console.log("Couldn't Delete --> Ignore".gray)));
         }
         //if the Bot has not enough permissions return error
         // let required_perms = ["ADD_REACTIONS","VIEW_CHANNEL","SEND_MESSAGES",
@@ -152,7 +158,7 @@ module.exports = async (client, message) => {
     .setTitle(`❌ Unkown command, try: **\`${prefix}help\`**`)
     .setDescription(`To get help on a specific command, type \`${prefix}help [command name]\``)
     return message.channel.send({embeds:[embed]
-    }).then(msg=>msg.delete({timeout: 10000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));}
+    }).then(msg=>msg.delete({timeout: 10000}).catch(()=>console.log("Couldn't Delete --> Ignore".gray)));}
     const randomAmountOfXp = Math.floor(Math.random() * 29) + 1; // Min 1, Max 30
      const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
      if (hasLeveledUp) {
