@@ -57,7 +57,7 @@ module.exports = async (client, message) => {
         await automod.allCaps()
         await automod.checkSpam()}
     })
-    setInterval(deadChat(client), 600000)
+    setInterval(await deadChat(client), 600000)
     if(message.content.toLowerCase()==='ded chat'||message.content.toLowerCase()==='dead chat')return message.channel.send('Good Eye Why Not Try To Start A Conversation?')
     prefix=guildPrefixes[message.guild.id]||globalPrefix //comment ||guildPrefixes[message.guild.id] to be able to only use b!
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
