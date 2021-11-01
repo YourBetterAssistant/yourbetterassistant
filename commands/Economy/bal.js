@@ -38,7 +38,7 @@ module.exports = {
             if(!user){
                 await currency.createUser(member.id, 10000, 10000, 10000)
                 let mony='10,000'
-                message.reply(`A new account has been created for you with a balance of ${mony}YBCs`, true, message)
+                message.reply(`A new account has been created for you with a balance of ${mony}YBCs`)
                 return}
 
             const embed = new Discord.MessageEmbed()
@@ -50,7 +50,7 @@ module.exports = {
                 )
             .setColor('RANDOM')
 
-            reply({embeds:[embed]}, true, message)}
+            message.reply({embeds:[embed]})}
 
     }
   
