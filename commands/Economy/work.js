@@ -1,9 +1,7 @@
 'use strict';
 
 const Discord=require('discord.js')
-const {reply}=require('../../exports')
 const workSchema=require('../../Schemas/workSchema')
-const mongo=require('../../botconfig/mongo')
 const id=require('../../botconfig/id.json')
 const s=require('../../botconfig/salary.json')
 const money=require('../../Constructors/economy')
@@ -18,20 +16,20 @@ module.exports = {
     adminPermOverride: true,
     cooldown: 60*60*1,
     usage: "work",
-    run:async(client, message, args)=>{
+    run:async(client, message)=>{
         let job
-        await mongo().then(async mongoose=>{
           try{
           let j=await workSchema.findOne({
             userID:message.author.id,
           })
           if(!j){
-            reply('You do not have a job here is compensation, 1000YBCs I highly suggest getting one')
-            await economy.addCoins(message.author.id, message.guild.id, '1000')
-            return
-          }
-          job=j.job}catch(err){console.log(" erro smh")}
-        })
+            return message.reply('You do not have a job! Run b!hire')
+          }else
+          job=j.job}
+          catch(err){return message.channel.send('Error Has Occured Try Again Later')}
+        if(!job){
+          message.reply('You do not have a job! Run b!hire')
+        }
         let salary1=s[1]
         let salary2=s[2]
         let salary3=s[3]
@@ -42,6 +40,7 @@ module.exports = {
         .setTitle(`JOB:${job}`)
         .setDescription('Type the word in')
         .addField('Word:',`${possibleJobs[0]}`, true)
+        .setColor('GREEN')
         message.channel.send({embeds:[embed]})
         let sal
         if(job===id[1]){sal=salary1}
@@ -69,7 +68,7 @@ module.exports = {
           }).catch(err=>{
             if(err){
               message.channel.send(`Sed time ran out here is ${randomCoins}YBCs`)
-              economy.addCoins(msg.author.id,randomCoins, message)
+              economy.addCoins(message.author.id,randomCoins, message)
               return console.log(err)
             }
           })

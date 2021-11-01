@@ -14,19 +14,19 @@ module.exports = {
     usage: "ban <member>",
     run:async(client,message, args)=>{
       const cache={}
-      await mongo().then(async (mongoose)=>{
+      await mongo().then(async ()=>{
         try{
           let result=await serverConfSchema.findOne({_id:message.guild.id})
           let admin=result.adminroleID
           cache[message.guild.id]={admin}
-        }finally{mongoose.connection.close()}
+        }catch(err){
+          message.channel.send('Something occured while running the ban command')
+        }
       })
-        const Discord=require('discord.js')
-
             const user = message.mentions.members.first();
             // If we have a user mentioned
             var reason
-            args=reason
+            args[1]=reason
             if (user) {
               // Now we get the member from the user
 

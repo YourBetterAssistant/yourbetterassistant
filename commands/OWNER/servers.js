@@ -1,25 +1,23 @@
 'use strict';
 
 const { MessageEmbed } = require("discord.js");
-const {reply}=require('../../exports')
-
 module.exports = {
     name: "servers",
     aliases: ["guilds", "list-guilds"],
     description: "lists the guild names of all the guilds the bot is in",
-    category: "Information",
+    category: "OWNER",
     memberpermissions:"VIEW_CHANNEL",
     cooldown: 20,
     usage: "servers",
-    run:async(client, message, args)=>{
-        let user=message.author
+    run:async(client, message)=>{
+        if(message.author.id != '827388013062389761')return message.channel.send('This Commnd is Not For You')
         let embed=new MessageEmbed()
         .setTitle('Servers')
         .setColor('RANDOM')
         await client.guilds.cache.forEach(guild=>{
             embed.addField('Server:', `${guild.name}`, true)
         })
-        reply("I have sent a DM as the server name may be explicit \n If you don't recieve the DM make sure your DMs are open", true, message)
+        const user=await client.users.fetch('827388013062389761')
         user.send({embeds:[embed]})
     },
 };

@@ -7,6 +7,7 @@ const welcomeSchema = require('../Schemas/welcomeSchema')
 const serverConfSchema = require('../Schemas/serverConfSchema');
 const joinRoles=require('../Schemas/onJoin')
 const autoMod = require('../Schemas/autoMod');
+const levellingEnabled =require('../Schemas/levellingEnabled')
 const awaitWelcome=async(message)=>{
     const f=i=>i.user.id===message.author.id&&i.componentType=='SELECT_MENU'
     const filter=m=>m.author.id==message.author.id
@@ -309,7 +310,32 @@ async function awaitJoinRoles(message){
     await joinRoles.findOneAndUpdate({guildId:message.guild.id}, {guildId:message.guild.id, roleId:chosenRole[0]}, {upsert:true})
     roles.length=0
 }
+async function awaitLevel(message){
+    const f=f=>f.user.id==message.guild.id
+    const EnableRow=new MessageActionRow()
+    .addComponents(
+        new MessageButton()
+        .setCustomId('allow')
+        .setLabel('Enable')
+        .setStyle('SUCCESS')
+        ,new MessageButton()
+        .setLabel('Disabled')
+        .setCustomId('disallow')
+        .setStyle('DANGER')
+    )
+    message.channel.send({content:'Allow Or Disable Levelling?', components:[EnableRow]})
+    await message.channel.awaitMessageComponent(f)
+    .then(async(click)=>{
+        if(click.customId=='allow'){
+            await levellingEnabled.findOneAndUpdate({guildID:message.guild.id}, {guildID:message.guild.id, enabled:true})
+        }else{
+            await levellingEnabled.deleteOne({guildID:message.guild.id})
+        }
+        return 
+    })
+}
 module.exports={
+    awaitLevel,
     awaitWelcome,
     awaitChatbot,
     awaitMemberLog,

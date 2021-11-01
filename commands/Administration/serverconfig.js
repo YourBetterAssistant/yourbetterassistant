@@ -1,6 +1,6 @@
 'use strict';
 
-const { awaitChatbot, awaitWelcome, awaitmemberCount, awaitMemberLog, awaitRoles, awaitautoMod, awaitJoinRoles } = require("../../Constructors/serverconfig")
+const { awaitChatbot, awaitWelcome, awaitmemberCount, awaitMemberLog, awaitRoles, awaitautoMod, awaitJoinRoles, awaitLevel } = require("../../Constructors/serverconfig")
 const {MessageActionRow, MessageSelectMenu}=require('discord.js')
 module.exports = {
     name: "serverconfig",
@@ -10,9 +10,8 @@ module.exports = {
     memberpermissions:["ADMINISTRATOR"],
     cooldown: 10,
     usage: "serverconf",
-    run:async(client, message, args)=>{
+    run:async(client, message)=>{
         const f=i=>i.user.id===message.author.id&&i.componentType=='SELECT_MENU'
-        const filter=m=>m.author.id==message.author.id
         const row = new MessageActionRow()
         .addComponents(
             new MessageSelectMenu()
@@ -53,6 +52,11 @@ module.exports = {
                         label:'JoinRoles',
                         description:'The Role Immediatly Given After A User Joins',
                         value:'joinrole'
+                    },
+                    {
+                        label:'Levelling',
+                        description:'Enables or Disables Levelling',
+                        value:'level'
                     }
                 ]),
         );
@@ -62,6 +66,9 @@ module.exports = {
         .then(async(choose)=>{
             if(choose.values.toString()=='chatbot'){
                 await awaitChatbot(message)
+                return message.channel.send('Config Done')
+            }else if(choose.values.toString()=='level'){
+                await awaitLevel(message)
                 return message.channel.send('Config Done')
             }
             else if(choose.values.toString()=='wm'){

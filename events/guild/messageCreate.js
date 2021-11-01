@@ -15,7 +15,7 @@ const {duration}=require('../../handlers/functions');
 const { checkAutoMod, forceAutoCacheMod } = require('../../Utils/checkAutoMod');
 const { autoMod } = require('../../Constructors/autoModUser');
 const deadChat = require('../../Utils/deadChat');
-
+const levellingEnabled =require('../../Schemas/levellingEnabled')
 //here the event starts
 let prefix
 module.exports = async (client, message) => {
@@ -45,7 +45,6 @@ module.exports = async (client, message) => {
       return message.channel.send('My DMS are for support messages only, the message sent will be forwarded to the owner and to our support server for an answer please join our server at https://discord.gg/h2YfQbKFTR')
     }
     await prefixLoad(client, guildPrefixes, globalPrefix, message)
-    await level(message)
     await count(message)
     await check(message)
     await checkAutoMod(message).then(async found=>{
@@ -59,6 +58,10 @@ module.exports = async (client, message) => {
     })
     setInterval(async()=>await deadChat(client), 600000)
     if(message.content.toLowerCase()==='ded chat'||message.content.toLowerCase()==='dead chat')return message.channel.send('Good Eye Why Not Try To Start A Conversation?')
+    const levelTrue=await levellingEnabled.findOne({guildID:message.guild.id})
+    if(levelTrue){
+      await level(message)
+    }
     prefix=guildPrefixes[message.guild.id]||globalPrefix //comment ||guildPrefixes[message.guild.id] to be able to only use b!
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
@@ -157,8 +160,9 @@ module.exports = async (client, message) => {
     .setFooter(ee.footertext, ee.footericon)
     .setTitle(`❌ Unkown command, try: **\`${prefix}help\`**`)
     .setDescription(`To get help on a specific command, type \`${prefix}help [command name]\``)
-    return message.channel.send({embeds:[embed]
-    }).then(msg=>msg.delete({timeout: 10000}).catch(()=>console.log("Couldn't Delete --> Ignore".gray)));}
+    const m=await message.channel.send({embeds:[embed]})
+    setTimeout(function(){m.delete()}, 2000)
+  }
     const randomAmountOfXp = Math.floor(Math.random() * 29) + 1; // Min 1, Max 30
      const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
      if (hasLeveledUp) {

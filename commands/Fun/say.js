@@ -1,7 +1,6 @@
 'use strict';
 
 const { MessageEmbed } = require("discord.js");
-const config = require("../../botconfig/config.json");
 const ee = require("../../botconfig/embed.json");
 module.exports = {
     name: "say",
@@ -10,6 +9,7 @@ module.exports = {
     usage: "say <TEXT>",
     description: "Resends your Text",
     run: async (client, message, args, user, text, prefix) => {
+      if(message.mentions.members)return message.channel.send('I am not allowed to Mention Users with this command')
     try{
       if(!args[0])
         return message.channel.send({embeds:new MessageEmbed()
@@ -18,6 +18,7 @@ module.exports = {
             .setTitle(`❌ ERROR | You didn't provided a Text`)
             .setDescription(`Usage: \`${prefix}${this.usage}\``)
         });
+
       message.channel.send(text);
     } catch (e) {
         console.log(String(e.stack).bgRed)
