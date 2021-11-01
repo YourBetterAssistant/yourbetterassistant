@@ -15,7 +15,8 @@ module.exports = {
         if (!args[0])return message.channel.send(':face_exhaling: What am I changing the prefix to? Try again with the prefix this time')
                  let prefix=args[0]
                  // eslint-disable-next-line no-useless-escape
-                 if(message.mentions.channels||message.mentions.members||message.mentions.users||message.mentions.roles||message.mentions.everyone)return message.channel.send('Mentions of any type cannot be used as a prefix')
+                 console.log()
+                 if((message.mentions.channels).first()||(message.mentions.roles).first()||(message.mentions.members).first()||(message.mentions.users).first())return message.channel.send('Mentions of any type cannot be used as a prefix')
                  await prefixSchema.findOneAndUpdate({
                      _id:message.guild.id
                  }, {
