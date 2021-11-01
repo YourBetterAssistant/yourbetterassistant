@@ -12,6 +12,7 @@ const Discord = require("discord.js"); //this is the official discord.js wrapper
 const { escapeRegex} = require("../../handlers/functions"); //Loading all needed functions
 Levels.setURL(config.mongoPath);
 const {duration}=require('../../handlers/functions');
+const unknownCommand = require('../../Schemas/unknownCommand');
 const { checkAutoMod, forceAutoCacheMod } = require('../../Utils/checkAutoMod');
 const { autoMod } = require('../../Constructors/autoModUser');
 const deadChat = require('../../Utils/deadChat');
@@ -61,6 +62,14 @@ module.exports = async (client, message) => {
     const levelTrue=await levellingEnabled.findOne({guildID:message.guild.id})
     if(levelTrue){
       await level(message)
+      const randomAmountOfXp = Math.floor(Math.random() * 29) + 1; // Min 1, Max 30
+      const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
+      if (hasLeveledUp) {
+        const user = await Levels.fetch(message.author.id, message.guild.id);
+        message.channel.send(`${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`);}
+        process.on('uncaughtException', function (err) {
+        console.log('Caught exception: ', err);
+      });
     }
     prefix=guildPrefixes[message.guild.id]||globalPrefix //comment ||guildPrefixes[message.guild.id] to be able to only use b!
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
@@ -155,22 +164,17 @@ module.exports = async (client, message) => {
       }
     }
     else{ //if the command is not found send an info msg
-    let embed=new Discord.MessageEmbed()
-    .setColor(ee.wrongcolor)
-    .setFooter(ee.footertext, ee.footericon)
-    .setTitle(`❌ Unkown command, try: **\`${prefix}help\`**`)
-    .setDescription(`To get help on a specific command, type \`${prefix}help [command name]\``)
-    const m=await message.channel.send({embeds:[embed]})
-    setTimeout(function(){m.delete()}, 2000)
+    const d=await unknownCommand.findOne({guildId:message.guild.id})
+    if(d){
+      let embed=new Discord.MessageEmbed()
+      .setColor(ee.wrongcolor)
+      .setFooter(ee.footertext, ee.footericon)
+      .setTitle(`❌ Unkown command, try: **\`${prefix}help\`**`)
+      .setDescription(`To get help on a specific command, type \`${prefix}help [command name]\``)
+      const m=await message.channel.send({embeds:[embed]})
+      setTimeout(function(){m.delete()}, 2000)
+    }
   }
-    const randomAmountOfXp = Math.floor(Math.random() * 29) + 1; // Min 1, Max 30
-     const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
-     if (hasLeveledUp) {
-       const user = await Levels.fetch(message.author.id, message.guild.id);
-       message.channel.send(`${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`);}
-       process.on('uncaughtException', function (err) {
-        console.log('Caught exception: ', err);
-      });
 
   }catch (e){
     const {erroHandler:err}=require('../../handlers/errorHandler')

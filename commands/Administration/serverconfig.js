@@ -1,6 +1,6 @@
 'use strict';
 
-const { awaitChatbot, awaitWelcome, awaitmemberCount, awaitMemberLog, awaitRoles, awaitautoMod, awaitJoinRoles, awaitLevel } = require("../../Constructors/serverconfig")
+const { awaitChatbot, awaitWelcome, awaitmemberCount, awaitMemberLog, awaitRoles, awaitautoMod, awaitJoinRoles, awaitLevel, enableUnknownCommand } = require("../../Constructors/serverconfig")
 const {MessageActionRow, MessageSelectMenu}=require('discord.js')
 module.exports = {
     name: "serverconfig",
@@ -57,6 +57,11 @@ module.exports = {
                         label:'Levelling',
                         description:'Enables or Disables Levelling',
                         value:'level'
+                    },
+                    {
+                        label:'UnkownCommands',
+                        description:'When a user sends a command not listed a bot sends an error message',
+                        value:'unknown'
                     }
                 ]),
         );
@@ -67,7 +72,11 @@ module.exports = {
             if(choose.values.toString()=='chatbot'){
                 await awaitChatbot(message)
                 return message.channel.send('Config Done')
-            }else if(choose.values.toString()=='level'){
+            }else if(choose.values.toString()=='unknown'){
+                await enableUnknownCommand(message)
+                return message.channel.send('Config Done')
+            }
+            else if(choose.values.toString()=='level'){
                 await awaitLevel(message)
                 return message.channel.send('Config Done')
             }

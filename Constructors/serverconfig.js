@@ -7,7 +7,8 @@ const welcomeSchema = require('../Schemas/welcomeSchema')
 const serverConfSchema = require('../Schemas/serverConfSchema');
 const joinRoles=require('../Schemas/onJoin')
 const autoMod = require('../Schemas/autoMod');
-const levellingEnabled =require('../Schemas/levellingEnabled')
+const levellingEnabled =require('../Schemas/levellingEnabled');
+const unknownCommand = require('../Schemas/unknownCommand');
 const awaitWelcome=async(message)=>{
     const f=i=>i.user.id===message.author.id&&i.componentType=='SELECT_MENU'
     const filter=m=>m.author.id==message.author.id
@@ -327,9 +328,33 @@ async function awaitLevel(message){
     await message.channel.awaitMessageComponent(f)
     .then(async(click)=>{
         if(click.customId=='allow'){
-            await levellingEnabled.findOneAndUpdate({guildID:message.guild.id}, {guildID:message.guild.id, enabled:true})
+            await levellingEnabled.findOneAndUpdate({guildID:message.guild.id}, {guildID:message.guild.id, enabled:true}, {upsert:true})
         }else{
             await levellingEnabled.deleteOne({guildID:message.guild.id})
+        }
+        return 
+    })
+}
+async function enableUnknownCommand(message){
+    const f=f=>f.user.id==message.guild.id
+    const EnableRow=new MessageActionRow()
+    .addComponents(
+        new MessageButton()
+        .setCustomId('allow')
+        .setLabel('Enable')
+        .setStyle('SUCCESS')
+        ,new MessageButton()
+        .setLabel('Disabled')
+        .setCustomId('disallow')
+        .setStyle('DANGER')
+    )
+    message.channel.send({content:'Allow Or Disable Command_Error_Disable?', components:[EnableRow]})
+    await message.channel.awaitMessageComponent(f)
+    .then(async(click)=>{
+        if(click.customId=='allow'){
+            await unknownCommand.findOneAndUpdate({guildId:message.guild.id}, {guildId:message.guild.id}, {upsert:true})
+        }else{
+            await unknownCommand.deleteOne({guildId:message.guild.id})
         }
         return 
     })
@@ -342,5 +367,6 @@ module.exports={
     awaitmemberCount,
     awaitRoles,
     awaitautoMod,
-    awaitJoinRoles
+    awaitJoinRoles,
+    enableUnknownCommand
 }
