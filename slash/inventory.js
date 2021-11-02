@@ -1,21 +1,10 @@
 //@ts-check
 const { MessageEmbed } = require("discord.js")
 const inventory = require("../Schemas/inventory")
-function hasDuplicates(array) {
-    var valuesSoFar = Object.create(null);
-    for (var i = 0; i < array.length; ++i) {
-        var value = array[i];
-        if (value in valuesSoFar) {
-            return true;
-        }
-        valuesSoFar[value] = true;
-    }
-    return false;
-}
 module.exports = {
     name: "inventory",
     description: "Inventory",
-    options:[{name:'list', description:'list your inventory', type:1}],
+    options:[{name:'list', description:'list your inventory', type:1}, {name:'use', description:'Use an item', type:1, options:[{name:'item', description:"Name of the item", type:3}]}],
     run:async(client, interaction)=>{
         const embed=new MessageEmbed()
         if(interaction.options.getSubcommand()==='list'){
@@ -43,5 +32,7 @@ module.exports = {
             // console.log(extractedItems)
             interaction.deferReply().then(()=>interaction.editReply({embeds:[embed]}))
 
+        }else if(interaction.options.getSubcommand()=='use'){
+            interaction.reply('test')
         }
     }}

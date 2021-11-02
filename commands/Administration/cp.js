@@ -26,8 +26,7 @@ module.exports = {
                      upsert:true
                  })
                  message.channel.send(`Changed Prefix to ${prefix}`)
-                 newCache()
-                 
+                 newCache()         
 
 
 

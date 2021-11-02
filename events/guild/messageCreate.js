@@ -53,11 +53,12 @@ module.exports = async (client, message) => {
         await automod.checkProfanity()
         await automod.allCaps()
         await automod.checkSpam()
+        setInterval(async()=>await deadChat(client), 600000)
       }else if(found.strictmode===false){
         await automod.allCaps()
         await automod.checkSpam()}
+        setInterval(async()=>await deadChat(client), 600000)
     })
-    setInterval(async()=>await deadChat(client), 600000)
     if(message.content.toLowerCase()==='ded chat'||message.content.toLowerCase()==='dead chat')return message.channel.send('Good Eye Why Not Try To Start A Conversation?')
     const levelTrue=await levellingEnabled.findOne({guildID:message.guild.id})
     if(levelTrue){

@@ -5,7 +5,7 @@ const { Node } =require("lavaclient")
 require('@weky/inlinereply')
 const { AutoPoster } = require('topgg-autoposter')
 let token=process.env.TOKEN
-const colors = require("colors"); //this Package is used, to change the colors of our Console! (optional and doesnt effect performance)
+require("colors"); //this Package is used, to change the colors of our Console! (optional and doesnt effect performance)
 const fs = require("fs"); //this package is for reading files and getting their inputs
 //Creating the Discord.js Client for This Bot with some default settings ;) and with partials, so you can fetch OLD messages
 const client=new Discord.Client({fetchAllMembers: true, messageCacheMaxSize: 10000, disableEveryone: true,partials: ['USER' ,'CHANNEL' , 'GUILD_MEMBER' , 'MESSAGE' , 'REACTION'],intents:/*["GUILDS", "GUILD_MESSAGES",'GUILD_MESSAGE_REACTIONS', 'GUILD_VOICE_STATES', 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_BANS', 'GUILD_INVITES']*/[ 'GUILDS' , 'GUILD_MEMBERS' , 'GUILD_BANS' , 'GUILD_INTEGRATIONS' , 'GUILD_WEBHOOKS' , 'GUILD_INVITES' , 'GUILD_VOICE_STATES' , 'GUILD_PRESENCES' , 'GUILD_MESSAGES' , 'GUILD_MESSAGE_REACTIONS', 'GUILD_MESSAGE_TYPING' , 'DIRECT_MESSAGES' , 'DIRECT_MESSAGE_REACTIONS' , 'DIRECT_MESSAGE_TYPING']})
@@ -17,7 +17,7 @@ const lavalink = new Node({
     sendGatewayPayload: (id, payload) => client.guilds.cache.get(id)?.shard?.send(payload)
     });
 lavalink.connect(clientId)
-lavalink.once('connect', (c)=>{
+lavalink.once('connect', ()=>{
     console.log('Connected to lavalink \n\n\n')
 })
 //Client variables to use everywhere

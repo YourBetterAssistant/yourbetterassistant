@@ -8,6 +8,10 @@ const store=mongoose.Schema({
     items:{
         type:Array,
         required:true
+    },
+    use:{
+        type:String,
+        required:true
     }
 }) 
 
