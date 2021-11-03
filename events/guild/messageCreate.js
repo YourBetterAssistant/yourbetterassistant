@@ -49,12 +49,12 @@ module.exports = async (client, message) => {
     await count(message)
     await check(message)
     await checkAutoMod(message).then(async found=>{
-      if(found.strictmode===true){
+      if(found.strictmode==='true'){
         await automod.checkProfanity()
         await automod.allCaps()
         await automod.checkSpam()
         setInterval(async()=>await deadChat(client), 600000)
-      }else if(found.strictmode===false){
+      }else if(found.strictmode==='false'){
         await automod.allCaps()
         await automod.checkSpam()}
         setInterval(async()=>await deadChat(client), 600000)
