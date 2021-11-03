@@ -3,7 +3,6 @@ const { newCache } = require("../Utils/prefix-load");
 module.exports = {
   name: "changeprefix",
   description: "Changes The Prefix",
-  guild: true,
   options: [
     { type: 3, name: "prefix", description: "the prefix", required: true },
   ],
