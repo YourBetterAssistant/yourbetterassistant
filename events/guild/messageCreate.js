@@ -1,80 +1,98 @@
 "use strict";
-const Levels=require('discord-xp')
-const {count}=require('../../Utils/count')
-const {level}=require('../../Utils/level')
-const {check}=require('../../Utils/checkChatChannel')
-const {prefixLoad, newCache}=require('../../Utils/prefix-load')
-let process=require('process')
+const Levels = require("discord-xp");
+const { count } = require("../../Utils/count");
+const { level } = require("../../Utils/level");
+const { check } = require("../../Utils/checkChatChannel");
+const { prefixLoad, newCache } = require("../../Utils/prefix-load");
+let process = require("process");
 const config = require("../../botconfig/config.json"); //loading config file with token and prefix, and settings
-const {prefix:globalPrefix}=require('../../botconfig/config.json')
+const { prefix: globalPrefix } = require("../../botconfig/config.json");
 const ee = require("../../botconfig/embed.json"); //Loading all embed settings like color footertext and icon ...
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
-const { escapeRegex} = require("../../handlers/functions"); //Loading all needed functions
+const { escapeRegex } = require("../../handlers/functions"); //Loading all needed functions
 Levels.setURL(config.mongoPath);
-const {duration}=require('../../handlers/functions');
-const unknownCommand = require('../../Schemas/unknownCommand');
-const { checkAutoMod, forceAutoCacheMod } = require('../../Utils/checkAutoMod');
-const { autoMod } = require('../../Constructors/autoModUser');
-const deadChat = require('../../Utils/deadChat');
-const levellingEnabled =require('../../Schemas/levellingEnabled')
+const { duration } = require("../../handlers/functions");
+const unknownCommand = require("../../Schemas/unknownCommand");
+const { checkAutoMod, forceAutoCacheMod } = require("../../Utils/checkAutoMod");
+const { autoMod } = require("../../Constructors/autoModUser");
+const levellingEnabled = require("../../Schemas/levellingEnabled");
 //here the event starts
-let prefix
+let prefix;
 module.exports = async (client, message) => {
-  const automod=new autoMod(message)
-  const guildPrefixes={}
+  const automod = new autoMod(message);
+  const guildPrefixes = {};
   try {
     //if the message is not in a guild (aka in dms), return aka ignore the inputs
     // if the message  author is a bot, return aka ignore the inputs
-    setInterval(newCache,  3600000)
-    setInterval(forceAutoCacheMod,  3600000)
+    setInterval(newCache, 3600000);
+    setInterval(forceAutoCacheMod, 3600000);
     if (message.author.bot) return;
     //if the channel is on partial fetch it
     if (message.channel.partial) await message.channel.fetch();
     //if the message is on partial fetch it
     if (message.partial) await message.fetch();
     //get the current prefix from the botconfig/config.json
-    if(!message.guild){
-      const embed=new Discord.MessageEmbed()
-      .setTitle('Support DM')
-      .setDescription(message.content)
-      .setFooter(`Asked By ${message.author.username}`)
-      .setColor(ee.color)
-      const owner=await client.users.fetch('827388013062389761')
-      owner.send(message.content+'\nAsked by '+ message.author.tag)
-      const channel=await client.channels.fetch('879949650415722556')
-      channel.send({embeds:[embed]})
-      return message.channel.send('My DMS are for support messages only, the message sent will be forwarded to the owner and to our support server for an answer please join our server at https://discord.gg/h2YfQbKFTR')
+    if (!message.guild) {
+      const embed = new Discord.MessageEmbed()
+        .setTitle("Support DM")
+        .setDescription(message.content)
+        .setFooter(`Asked By ${message.author.username}`)
+        .setColor(ee.color);
+      const owner = await client.users.fetch("827388013062389761");
+      owner.send(message.content + "\nAsked by " + message.author.tag);
+      const channel = await client.channels.fetch("879949650415722556");
+      channel.send({ embeds: [embed] });
+      return message.channel.send(
+        "My DMS are for support messages only, the message sent will be forwarded to the owner and to our support server for an answer please join our server at https://discord.gg/h2YfQbKFTR"
+      );
     }
-    await prefixLoad(client, guildPrefixes, globalPrefix, message)
-    await count(message)
-    await check(message)
-    await checkAutoMod(message).then(async found=>{
-      if(found.strictmode==='true'){
-        await automod.checkProfanity()
-        await automod.allCaps()
-        await automod.checkSpam()
-        setInterval(async()=>await deadChat(client), 600000)
-      }else if(found.strictmode==='false'){
-        await automod.allCaps()
-        await automod.checkSpam()}
-        setInterval(async()=>await deadChat(client), 600000)
-    })
-    if(message.content.toLowerCase()==='ded chat'||message.content.toLowerCase()==='dead chat')return message.channel.send('Good Eye Why Not Try To Start A Conversation?')
-    const levelTrue=await levellingEnabled.findOne({guildID:message.guild.id})
-    if(levelTrue){
-      await level(message)
+    await prefixLoad(client, guildPrefixes, globalPrefix, message);
+    await count(message);
+    await check(message);
+    await checkAutoMod(message).then(async (found) => {
+      console.log(found);
+      if (found.strictmode === "true") {
+        await automod.checkProfanity();
+        await automod.allCaps();
+        await automod.checkSpam();
+      } else if (found.strictmode === "false") {
+        await automod.allCaps();
+        await automod.checkSpam();
+      }
+    });
+    if (
+      message.content.toLowerCase() === "ded chat" ||
+      message.content.toLowerCase() === "dead chat"
+    )
+      return message.channel.send(
+        "Good Eye Why Not Try To Start A Conversation?"
+      );
+    const levelTrue = await levellingEnabled.findOne({
+      guildID: message.guild.id,
+    });
+    if (levelTrue) {
+      await level(message);
       const randomAmountOfXp = Math.floor(Math.random() * 29) + 1; // Min 1, Max 30
-      const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
+      const hasLeveledUp = await Levels.appendXp(
+        message.author.id,
+        message.guild.id,
+        randomAmountOfXp
+      );
       if (hasLeveledUp) {
         const user = await Levels.fetch(message.author.id, message.guild.id);
-        message.channel.send(`${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`);}
-        process.on('uncaughtException', function (err) {
-        console.log('Caught exception: ', err);
+        message.channel.send(
+          `${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`
+        );
+      }
+      process.on("uncaughtException", function (err) {
+        console.log("Caught exception: ", err);
       });
     }
-    prefix=guildPrefixes[message.guild.id]||globalPrefix //comment ||guildPrefixes[message.guild.id] to be able to only use b!
+    prefix = guildPrefixes[message.guild.id] || globalPrefix; //comment ||guildPrefixes[message.guild.id] to be able to only use b!
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
-    const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
+    const prefixRegex = new RegExp(
+      `^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`
+    );
     //if its not that then return
     if (!prefixRegex.test(message.content)) return;
     //now define the right prefix either ping or not ping
@@ -84,53 +102,70 @@ module.exports = async (client, message) => {
     //creating the cmd argument by shifting the args by 1
     const cmd = args.shift().toLowerCase();
     //if no cmd added return error
-     if (cmd.length === 0){
-       let embed=new Discord.MessageEmbed()
-       .setColor(ee.color)
-       .setFooter(ee.footertext,ee.footericon)
-       .setTitle(`Hugh? I got pinged? Imma give you some help`)
-       .setDescription(`To see all Commands type: \`${prefix}help\``)
-      if(message.content.startsWith(`<@!${client.user.id}>`))
-        return message.channel.send({embeds:[embed]});
-       
+    if (cmd.length === 0) {
+      let embed = new Discord.MessageEmbed()
+        .setColor(ee.color)
+        .setFooter(ee.footertext, ee.footericon)
+        .setTitle(`Hugh? I got pinged? Imma give you some help`)
+        .setDescription(`To see all Commands type: \`${prefix}help\``);
+      if (message.content.startsWith(`<@!${client.user.id}>`))
+        return message.channel.send({ embeds: [embed] });
+
       return;
-      }
+    }
     //get the command from the collection
     let command = client.commands.get(cmd);
     //if the command does not exist, try to get it by his alias
     if (!command) command = client.commands.get(client.aliases.get(cmd));
     //if the command is now valid
-    if (command){
-        if (!client.cooldowns.has(command.name)) { //if its not in the cooldown, set it too there
-            client.cooldowns.set(command.name, new Discord.Collection());
-        }
-        const now = Date.now(); //get the current time
-        const timestamps = client.cooldowns.get(command.name); //get the timestamp of the last used commands
-        const cooldownAmount = (command.cooldown || config.defaultCommandCooldown) * 1000; //get the cooldownamount of the command, if there is no cooldown there will be automatically 1 sec cooldown, so you cannot spam it^^
-        if (timestamps.has(message.author.id)) { //if the user is on cooldown
-          const expirationTime = timestamps.get(message.author.id) + cooldownAmount; //get the amount of time he needs to wait until he can run the cmd again
-          if (now < expirationTime) { //if he is still on cooldonw
-            const timeLeft = (expirationTime - now); //get the lefttime
-            let embed=new Discord.MessageEmbed()
+    if (command) {
+      if (!client.cooldowns.has(command.name)) {
+        //if its not in the cooldown, set it too there
+        client.cooldowns.set(command.name, new Discord.Collection());
+      }
+      const now = Date.now(); //get the current time
+      const timestamps = client.cooldowns.get(command.name); //get the timestamp of the last used commands
+      const cooldownAmount =
+        (command.cooldown || config.defaultCommandCooldown) * 1000; //get the cooldownamount of the command, if there is no cooldown there will be automatically 1 sec cooldown, so you cannot spam it^^
+      if (timestamps.has(message.author.id)) {
+        //if the user is on cooldown
+        const expirationTime =
+          timestamps.get(message.author.id) + cooldownAmount; //get the amount of time he needs to wait until he can run the cmd again
+        if (now < expirationTime) {
+          //if he is still on cooldonw
+          const timeLeft = expirationTime - now; //get the lefttime
+          let embed = new Discord.MessageEmbed()
             .setColor(ee.wrongcolor)
-            .setFooter(ee.footertext,ee.footericon)
-            .setTitle(`❌ Please wait ${duration(timeLeft)} before reusing the \`${command.name}\` command.`)
-            return message.channel.send({embeds:[embed]});
-             //send an information message
-          }
+            .setFooter(ee.footertext, ee.footericon)
+            .setTitle(
+              `❌ Please wait ${duration(timeLeft)} before reusing the \`${
+                command.name
+              }\` command.`
+            );
+          return message.channel.send({ embeds: [embed] });
+          //send an information message
         }
-        timestamps.set(message.author.id, now); //if he is not on cooldown, set it to the cooldown
-        setTimeout(() => timestamps.delete(message.author.id), cooldownAmount); //set a timeout function with the cooldown, so it gets deleted later on again
-      try{
+      }
+      timestamps.set(message.author.id, now); //if he is not on cooldown, set it to the cooldown
+      setTimeout(() => timestamps.delete(message.author.id), cooldownAmount); //set a timeout function with the cooldown, so it gets deleted later on again
+      try {
         //if Command has specific permission return error
-        if(command.memberpermissions && !message.member.permissions.has(command.memberpermissions)) {
-          let e=new Discord.MessageEmbed()
-          .setColor(ee.wrongcolor)
-          .setFooter(ee.footertext, ee.footericon)
-          .setTitle("❌ Error | You are not allowed to run this command!")
-          .setDescription('You Do Not Have The Required Perms!')
-          return message.channel.send({embeds:[e]
-          }).then(msg=>msg.delete({timeout: 10000}).catch(()=>console.log("Couldn't Delete --> Ignore".gray)));
+        if (
+          command.memberpermissions &&
+          !message.member.permissions.has(command.memberpermissions)
+        ) {
+          let e = new Discord.MessageEmbed()
+            .setColor(ee.wrongcolor)
+            .setFooter(ee.footertext, ee.footericon)
+            .setTitle("❌ Error | You are not allowed to run this command!")
+            .setDescription("You Do Not Have The Required Perms!");
+          return message.channel
+            .send({ embeds: [e] })
+            .then((msg) =>
+              msg
+                .delete({ timeout: 10000 })
+                .catch(() => console.log("Couldn't Delete --> Ignore".gray))
+            );
         }
         //if the Bot has not enough permissions return error
         // let required_perms = ["ADD_REACTIONS","VIEW_CHANNEL","SEND_MESSAGES",
@@ -147,51 +182,62 @@ module.exports = async (client, message) => {
         // }
 
         //run the command with the parameters:  client, message, args, user, text, prefix,
-        command.run(client, message, args, message.member, args.join(" "), prefix);
-      }catch (e) {
-        console.log(String(e.stack).red)
-        let em=new Discord.MessageEmbed()
-        .setColor(ee.wrongcolor)
-        .setFooter(ee.footertext, ee.footericon)
-        .setTitle("❌ Something went wrong while, running the: `" + command.name + "` command")
-        .setDescription(`\`\`\`${e.message}\`\`\``)
-        .addField('Guild:', message.guild.id.toString())
-        .addField('GuildName', message.guild.name)
-        .setTimestamp(new Date())
-        const channel=client.channels.cache.get('889101477421912064')
-        message.channel.send(`Something happened while running \`${command.name}\`, This has been logged and reported to the developers`)
-        return channel.send({embeds:[em]
-        })
+        command.run(
+          client,
+          message,
+          args,
+          message.member,
+          args.join(" "),
+          prefix
+        );
+      } catch (e) {
+        console.log(String(e.stack).red);
+        let em = new Discord.MessageEmbed()
+          .setColor(ee.wrongcolor)
+          .setFooter(ee.footertext, ee.footericon)
+          .setTitle(
+            "❌ Something went wrong while, running the: `" +
+              command.name +
+              "` command"
+          )
+          .setDescription(`\`\`\`${e.message}\`\`\``)
+          .addField("Guild:", message.guild.id.toString())
+          .addField("GuildName", message.guild.name)
+          .setTimestamp(new Date());
+        const channel = client.channels.cache.get("889101477421912064");
+        message.channel.send(
+          `Something happened while running \`${command.name}\`, This has been logged and reported to the developers`
+        );
+        return channel.send({ embeds: [em] });
+      }
+    } else {
+      //if the command is not found send an info msg
+      const d = await unknownCommand.findOne({ guildId: message.guild.id });
+      if (d) {
+        let embed = new Discord.MessageEmbed()
+          .setColor(ee.wrongcolor)
+          .setFooter(ee.footertext, ee.footericon)
+          .setTitle(`❌ Unkown command, try: **\`${prefix}help\`**`)
+          .setDescription(
+            `To get help on a specific command, type \`${prefix}help [command name]\``
+          );
+        const m = await message.channel.send({ embeds: [embed] });
+        setTimeout(function () {
+          m.delete();
+        }, 2000);
       }
     }
-    else{ //if the command is not found send an info msg
-    const d=await unknownCommand.findOne({guildId:message.guild.id})
-    if(d){
-      let embed=new Discord.MessageEmbed()
-      .setColor(ee.wrongcolor)
-      .setFooter(ee.footertext, ee.footericon)
-      .setTitle(`❌ Unkown command, try: **\`${prefix}help\`**`)
-      .setDescription(`To get help on a specific command, type \`${prefix}help [command name]\``)
-      const m=await message.channel.send({embeds:[embed]})
-      setTimeout(function(){m.delete()}, 2000)
-    }
-  }
-
-  }catch (e){
-    const {erroHandler:err}=require('../../handlers/errorHandler')
-    err(e, message)
-
+  } catch (e) {
+    const { erroHandler: err } = require("../../handlers/errorHandler");
+    err(e, message);
   }
   /**
-    * @INFO
-    * Bot Coded by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template
-    * @INFO
-    * Work for Milrato Development | https://milrato.eu
-    * @INFO
-    * Please mention Him / Milrato Development, when using this Code!
-    * @INFO
-  */
-
-   
-}
-
+   * @INFO
+   * Bot Coded by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template
+   * @INFO
+   * Work for Milrato Development | https://milrato.eu
+   * @INFO
+   * Please mention Him / Milrato Development, when using this Code!
+   * @INFO
+   */
+};
