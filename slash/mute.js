@@ -4,7 +4,6 @@ const roles = {};
 module.exports = {
   name: "mute",
   description: "Mute",
-  guild: true,
   options: [
     { name: "user", description: "user", type: 6, required: true },
     {
