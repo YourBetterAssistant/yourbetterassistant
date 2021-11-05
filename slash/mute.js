@@ -77,7 +77,7 @@ module.exports = {
     const embed = new MessageEmbed()
       .setTitle("Mute")
       .setDescription(`${user} was muted by ${interaction.member}`)
-      .addField("Reason:", reason, true)
+      .addField("Reason:", reason?reason:'Not Specified', true)
       .addField(
         "Duration:",
         stringedDuration == "86400000"
