@@ -35,17 +35,17 @@ module.exports = {
     let result = await serverConfSchema.findOne({
       _id: interaction.guild.id,
     });
-    let admin = result.adminroleID;
-    let member = result.memberroleID;
-    let owner = result.ownerroleID;
-    roles[interaction.guild.id] = { admin, member, owner };
-    let memberrole = roles[interaction.guild.id].member;
-    if (!memberrole)
+    if (!result)
       return interaction.reply({
         content:
           "I cannot mute without a member role, please do b!serverconfig to set up `ROLES` so that i can give the user the specified roles for member when their mute is up",
         ephemeral: true,
       });
+    let admin = result.adminroleID;
+    let member = result.memberroleID;
+    let owner = result.ownerroleID;
+    roles[interaction.guild.id] = { admin, member, owner };
+    let memberrole = roles[interaction.guild.id].member;
     if (!interaction.member.permissions.has("MANAGE_ROLES"))
       return interaction.reply({
         content: "Invalid Permissions, Expected Perms `MANAGE_ROLES`",
