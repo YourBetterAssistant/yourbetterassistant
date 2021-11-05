@@ -4,7 +4,7 @@ const roles = {};
 module.exports = {
   name: "unmute",
   description: "unmute",
-  options: [{ name: "user", description: "user", type: 6 }],
+  options: [{ name: "user", description: "user", type: 6,required:true }],
   run: async (client, interaction) => {
     let user = interaction.options.getMember("user");
     let result = await serverConfSchema.findOne({
