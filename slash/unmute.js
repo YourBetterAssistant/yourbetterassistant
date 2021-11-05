@@ -6,7 +6,7 @@ module.exports = {
   description: "unmute",
   options: [{ name: "user", description: "user", type: 6 }],
   run: async (client, interaction) => {
-    let user = interaction.options.getUser("user");
+    let user = interaction.options.getMember("user");
     let result = await serverConfSchema.findOne({
       _id: interaction.guild.id,
     });
