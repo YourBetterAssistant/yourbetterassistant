@@ -30,8 +30,8 @@ module.exports = {
                    {name:'Emojis', value:message.guild.emojis.cache.size.toString(), inline:true},
                    {name:'Stickers', value:message.guild.stickers.cache.size.toString(), inline:true},
                    {name:'Verification Level', value:message.guild.verificationLevel, inline:true},
-                   {name:'Features:', value:'**\n**', inline:false},
-                   {name:'Created At', value:`<t:${Math.floor(message.guild.createdTimestamp/1000)}>`, inline:false}
+                   {name:'Created At', value:`<t:${Math.floor(message.guild.createdTimestamp/1000)}>`, inline:true},
+                   {name:'Features:', value:'**\n**', inline:false}
 
                     )
         let e=1

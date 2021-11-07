@@ -9,8 +9,9 @@
     "url": "https://github.com/NotTimIsReal/bbarevamp"
   },
   "scripts": {
-    "test": "nodemon index.js",
-    "start": "node start.js"
+    "test": "nodemon start.js",
+    "start": "node start.js",
+    "pm2":"pm2 start ecosystem.config.js"
   },
   "author": "NotTimIsReal",
   "license": "MIT",
