@@ -107,7 +107,7 @@ module.exports = async (client, message) => {
         .setColor(ee.color)
         .setFooter(ee.footertext, ee.footericon)
         .setTitle(`Hugh? I got pinged? Imma give you some help`)
-        .setDescription(`To see all Commands type: \`${prefix}help\``);
+        .setDescription(`To see all Commands type: \`/help\``);
       if (message.content.startsWith(`<@!${client.user.id}>`))
         return message.channel.send({ embeds: [embed] });
 
