@@ -45,14 +45,18 @@ module.exports = {
         if (cmd.usage) {
           embed.addField(
             "**Usage**",
-            `\`${client.prefix[message.guild.id]}${cmd.usage}\``
+            `\`${client.prefix[message.guild.id] || config.prefix}${
+              cmd.usage
+            }\``
           );
           embed.setFooter("Syntax: <> = required, [] = optional");
         }
         if (cmd.useage) {
           embed.addField(
             "**Usage**",
-            `\`${client.prefix[message.guild.id]}${cmd.useaage}\``
+            `\`${client.prefix[message.guild.id] || config.prefix}${
+              cmd.useaage
+            }\``
           );
           embed.addField(
             "Your prefix could have been changed, ping the bot to double check!"
@@ -68,7 +72,7 @@ module.exports = {
           .setTitle("HELP MENU 🔰 Commands")
           .setFooter(
             `To see command descriptions and inforamtion, type: ${
-              client.prefix[message.guild.id]
+              client.prefix[message.guild.id] || config.prefix
             }help [CMD NAME]`,
             client.user.displayAvatarURL()
           );
