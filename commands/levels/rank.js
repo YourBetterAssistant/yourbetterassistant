@@ -19,7 +19,7 @@ module.exports = {
     if (!user) return message.channel.send("You don't have a level");
     console.log(target);
     const rank = new canvacord.Rank()
-      .setStatus(target.presence.status) // Build the Rank Card
+      .setStatus(target?.presence ? target.presence.status : "online") // Build the Rank Card
       .setAvatar(target.user.displayAvatarURL({ format: "png", size: 512 }))
       .setCurrentXP(user.xp) // Current User Xp
       .setRequiredXP(Levels.xpFor(user.level + 1)) // We calculate the required Xp for the next level
