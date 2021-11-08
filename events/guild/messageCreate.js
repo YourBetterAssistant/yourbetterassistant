@@ -89,6 +89,7 @@ module.exports = async (client, message) => {
       });
     }
     prefix = guildPrefixes[message.guild.id] || globalPrefix; //comment ||guildPrefixes[message.guild.id] to be able to only use b!
+    client.prefix = guildPrefixes || globalPrefix;
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
     const prefixRegex = new RegExp(
       `^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`
@@ -107,7 +108,9 @@ module.exports = async (client, message) => {
         .setColor(ee.color)
         .setFooter(ee.footertext, ee.footericon)
         .setTitle(`Hugh? I got pinged? Imma give you some help`)
-        .setDescription(`To see all Commands type: \`/help\``);
+        .setDescription(
+          `To see all Commands type: \`${client.prefix[message.guild.id]}help\``
+        );
       if (message.content.startsWith(`<@!${client.user.id}>`))
         return message.channel.send({ embeds: [embed] });
 

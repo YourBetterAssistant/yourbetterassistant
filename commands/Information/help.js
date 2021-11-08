@@ -1,31 +1,29 @@
 const { MessageEmbed } = require("discord.js");
-const config = require("../botconfig/config.json");
-const ee = require("../botconfig/embed.json");
+const config = require("../../botconfig/config.json");
+const ee = require("../../botconfig/embed.json");
 module.exports = {
   name: "help",
-  description: "Shows All Message Commands",
-  options: [
-    {
-      type: 3,
-      name: "command",
-      description: "Shows Information Of Specific Command",
-    },
-  ],
-  run: async (client, interaction) => {
-    const command = interaction.options.getString("command");
+  description: "help command for text commands",
+  category: "Information",
+  guildOnly: true,
+  memberpermissions: "VIEW_CHANNEL",
+  cooldown: 5,
+  usage: "help [command]",
+  run: async (client, message, args) => {
     try {
-      if (command) {
+      if (args[0]) {
         const embed = new MessageEmbed();
         const cmd =
-          client.commands.get(command.toLowerCase()) ||
-          client.commands.get(client.aliases.get(command.toLowerCase()));
+          client.commands.get(args[0].toLowerCase()) ||
+          client.commands.get(client.aliases.get(args[0].toLowerCase()));
+
         if (!cmd) {
           embed
             .setColor(ee.wrongcolor)
             .setDescription(
-              `No Information found for command **${command.toLowerCase()}**`
+              `No Information found for command **${args[0].toLowerCase()}**`
             );
-          return interaction.reply({ embeds: [embed] });
+          return message.reply({ embeds: [embed] });
         }
         if (cmd.name) embed.addField("**Command :**", `\`${cmd.name}\``);
         if (cmd.name)
@@ -47,14 +45,14 @@ module.exports = {
         if (cmd.usage) {
           embed.addField(
             "**Usage**",
-            `\`${client.prefix[interaction.guild.id]}${cmd.usage}\``
+            `\`${client.prefix[message.guild.id]}${cmd.usage}\``
           );
           embed.setFooter("Syntax: <> = required, [] = optional");
         }
         if (cmd.useage) {
           embed.addField(
             "**Usage**",
-            `\`${client.prefix[interaction.guild.id]}${cmd.useage}\``
+            `\`${client.prefix[message.guild.id]}${cmd.useaage}\``
           );
           embed.addField(
             "Your prefix could have been changed, ping the bot to double check!"
@@ -62,7 +60,7 @@ module.exports = {
           embed.setFooter("Syntax: <> = required, [] = optional");
         }
         embed.setColor(ee.color);
-        return interaction.reply({ embeds: [embed] });
+        return message.reply({ embeds: [embed] });
       } else {
         const embed = new MessageEmbed()
           .setColor(ee.color)
@@ -70,7 +68,7 @@ module.exports = {
           .setTitle("HELP MENU 🔰 Commands")
           .setFooter(
             `To see command descriptions and inforamtion, type: ${
-              client.prefix[interaction.guild.id]
+              client.prefix[message.guild.id]
             }help [CMD NAME]`,
             client.user.displayAvatarURL()
           );
@@ -112,7 +110,7 @@ module.exports = {
         } catch (e) {
           console.log(String(e.stack).red);
         }
-        interaction.reply({ embeds: [embed] });
+        message.reply({ embeds: [embed] });
       }
     } catch (e) {
       console.log(String(e.stack).bgRed);
@@ -121,7 +119,7 @@ module.exports = {
         .setFooter(ee.footertext, ee.footericon)
         .setTitle(`❌ ERROR | An error occurred`)
         .setDescription(`\`\`\`${e.stack}\`\`\``);
-      return interaction.reply({ embeds: [embed], ephemeral: true });
+      return message.reply({ embeds: [embed] });
     }
   },
 };
