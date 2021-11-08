@@ -12,6 +12,8 @@ module.exports = {
     },
   ],
   run: async (client, interaction) => {
+    if (!interaction.guild)
+      return interaction.reply("Cannot use this command in dms");
     const command = interaction.options.getString("command");
     try {
       if (command) {
@@ -47,14 +49,18 @@ module.exports = {
         if (cmd.usage) {
           embed.addField(
             "**Usage**",
-            `\`${client.prefix[interaction.guild.id]}${cmd.usage}\``
+            `\`${client.prefix[interaction.guild.id] || config.prefix}${
+              cmd.usage
+            }\``
           );
           embed.setFooter("Syntax: <> = required, [] = optional");
         }
         if (cmd.useage) {
           embed.addField(
             "**Usage**",
-            `\`${client.prefix[interaction.guild.id]}${cmd.useage}\``
+            `\`${client.prefix[interaction.guild.id] || config.prefix}${
+              cmd.useage
+            }\``
           );
           embed.addField(
             "Your prefix could have been changed, ping the bot to double check!"
@@ -70,7 +76,7 @@ module.exports = {
           .setTitle("HELP MENU 🔰 Commands")
           .setFooter(
             `To see command descriptions and inforamtion, type: ${
-              client.prefix[interaction.guild.id]
+              client.prefix[interaction.guild.id] || config.prefix
             }help [CMD NAME]`,
             client.user.displayAvatarURL()
           );
