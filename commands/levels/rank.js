@@ -13,20 +13,21 @@ module.exports = {
   run: async (client, message) => {
     const canvacord = require("canvacord");
 
-    const target = message.mentions.users.first() || message.author; // Grab the target.
+    const target = message.mentions.members.first() || message.member; // Grab the target.
 
     const user = await Levels.fetch(target.id, message.guild.id, true); // Selects the target from the database.
     if (!user) return message.channel.send("You don't have a level");
-
-    const rank = new canvacord.Rank() // Build the Rank Card
-      .setAvatar(target.displayAvatarURL({ format: "png", size: 512 }))
+    console.log(target);
+    const rank = new canvacord.Rank()
+      .setStatus(target.presence.status) // Build the Rank Card
+      .setAvatar(target.user.displayAvatarURL({ format: "png", size: 512 }))
       .setCurrentXP(user.xp) // Current User Xp
       .setRequiredXP(Levels.xpFor(user.level + 1)) // We calculate the required Xp for the next level
       .setRank(user.position) // Position of the user on the leaderboard
       .setLevel(user.level) // Current Level of the user
       .setProgressBar("#FFFFFF")
-      .setUsername(target.username)
-      .setDiscriminator(target.discriminator);
+      .setUsername(target.user.username)
+      .setDiscriminator(target.user.discriminator);
 
     rank.build().then((data) => {
       let attachement = new Discord.MessageAttachment(data, "Rank.png");
