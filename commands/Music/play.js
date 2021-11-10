@@ -16,7 +16,7 @@ module.exports = {
     }
     if (!message.guild.me.voice.channel) {
       return message.channel.send(
-        `I am not in a voice channel do ${client.prefix[message.guild.id]}`
+        `I am not in a voice channel do ${client.prefix[message.guild.id]}join`
       );
     }
     if (message.member.voice.channel.id !== message.guild.me.voice.channel.id)
