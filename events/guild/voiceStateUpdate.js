@@ -7,11 +7,15 @@ module.exports = async (client, oldState, newState) => {
     !newState.channelId
   ) {
     server_queue?.player.stop();
-    server_queue.player.queue.tracks.length = 0;
+    return (server_queue.player.queue.tracks.length = 0);
   } else if (
-    newState.id === client.user.id &&
-    newState.channelId &&
-    !newState.selfDeaf
+    (newState.id === client.user.id &&
+      newState.channelId &&
+      !newState.selfDeaf &&
+      !newState.serverDeaf) ||
+    (newState.id === client.user.id &&
+      newState.channelId &&
+      !newState.serverDeaf)
   ) {
     console.log("Deaf");
     await newState.setDeaf(true);
