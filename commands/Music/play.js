@@ -53,7 +53,7 @@ module.exports = {
       requester: message.author,
     }); // you can pass the requester in the second parameter
     if (!server_queue.player.playing) {
-      server_queue.player.queue.start();
+      server_queue.player.queue.start({ deaf: true });
     }
     let embed = new MessageEmbed()
       .setTitle("Now Playing")
