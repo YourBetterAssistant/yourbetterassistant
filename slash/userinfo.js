@@ -33,14 +33,22 @@ module.exports = {
         "Account Created",
         `<t:${Math.floor(user.createdAt / 1000)}:R>`,
         true
-      )
+      );
+    member.premiumSinceTimestamp
+      ? embed.addField(
+          "Boosting Since",
+          `<t:${member.premiumSinceTimestamp}:R>`,
+          true
+        )
+      : null;
+    embed
       .setColor("LIGHT_GREY")
       .addField(
         "Has `MANAGE_GUILD`",
         `\`${(Number(member.permissions.bitfield) & 0x20) == 0x20}\``,
         true
       )
-      .addField("Bot?", `\`javascript\n${user.bot.toString()}\``, true)
+      .addField("Bot?", `\`${user.bot.toString()}\``, true)
       .addField(
         "Badges",
         `${
