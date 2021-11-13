@@ -37,7 +37,7 @@ module.exports = {
     member.premiumSinceTimestamp
       ? embed.addField(
           "Boosting Since",
-          `<t:${member.premiumSinceTimestamp}:R>`,
+          `<t:${Math.floor(member.premiumSinceTimestamp / 1000)}:R>`,
           true
         )
       : null;
