@@ -37,7 +37,7 @@ const clientId =
   process.env.NODE_ENV === "testing"
     ? "858606774658924555"
     : "862143828920369172";
-const info = { host: "10.23.86.200", port: 2333, password: "lavalink" };
+const info = { host: "10.23.86.27", port: 2333, password: "lavalink" };
 const lavalink = new Node({
   connection: info,
   sendGatewayPayload: (id, payload) =>
