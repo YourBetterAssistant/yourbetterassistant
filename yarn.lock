@@ -1541,14 +1541,6 @@ discord.js@^13.0.1, discord.js@^13.1.0:
     node-fetch "^2.6.1"
     ws "^8.4.0"
 
-djs-games@^2.0.11:
-  version "2.1.10"
-  resolved "https://registry.yarnpkg.com/djs-games/-/djs-games-2.1.10.tgz#9af63f27383921f628f896ab7af4dc08d184d9d7"
-  integrity sha512-dOQolbzJflWHro2l6P0sn68Xl66sqBHLURK+lnZyoKop3D/vCLOfcukTrfOFxQegdXoOubiLxliOKhwNrloSHw==
-  dependencies:
-    node-fetch "^2.6.1"
-    random-unicode-emoji "^1.0.2"
-
 djs-meme@^1.2.8:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/djs-meme/-/djs-meme-1.2.8.tgz#fc5cb80133d9085a6fc08544c2ce5f5a03f15d98"
@@ -3587,11 +3579,6 @@ random-js@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/random-js/-/random-js-2.1.0.tgz#0c03238b0a4f701f7a4c7303036ade3083d8ee14"
   integrity sha512-CRUyWmnzmZBA7RZSVGq0xMqmgCyPPxbiKNLFA5ud7KenojVX2s7Gv+V7eB52beKTPGxWRnVZ7D/tCIgYJJ8vNQ==
-
-random-unicode-emoji@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/random-unicode-emoji/-/random-unicode-emoji-1.0.2.tgz#9b75f45b594f96998db2995f64e85d98407f9708"
-  integrity sha512-ukGtgK8LDByteKas//jzmAytVol5ITbG0H/ipst6qJ+ge/O5poI7syiDTVrTJ6rHpMFSSq/GuXif2xWennYe1A==
 
 raw-body@^2.4.1:
   version "2.4.2"
