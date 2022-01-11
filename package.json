@@ -32,7 +32,7 @@
     "canvas": "^2.8.0",
     "d3-node": "^2.2.3",
     "discord-anti-spam": "^2.5.8",
-    "discord-api-types": "^0.25.2",
+    "discord-api-types": "^0.26.1",
     "discord-together": "^1.1.62",
     "discord-xp": "^1.1.16",
     "discord.js": "^13.0.1",
