@@ -62,7 +62,7 @@
     "weky": "^3.1.6--dev0.5.0",
     "yarn": "^1.22.11",
     "yt-search": "^2.10.0",
-    "ytdl-core": "^4.9.1"
+    "ytdl-core": "^4.10.0"
   },
   "devDependencies": {
     "ascii-table": "0.0.9",
