@@ -21,7 +21,7 @@ async function check(message){
             });
               
           }
-          urlGet(`https://api.affiliateplus.xyz/api/chatbot?message=${message.content}&botname=YourBetterAssistant&ownername=SomeonElsee&user=2`)
+          urlGet(`https://api.udit.tk/api/chatbot?message=${message.content}`)
           return
           
       }}
