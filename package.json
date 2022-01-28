@@ -37,7 +37,7 @@
     "discord.js-akinator": "^3.0.2",
     "discord.js-ghost-ping": "^2.0.3",
     "djs-meme": "^1.2.8",
-    "dotenv": "^11.0.0",
+    "dotenv": "^14.3.2",
     "ffmpeg-static": "^4.4.0",
     "https": "^1.0.0",
     "images-scraper": "^6.3.0",
