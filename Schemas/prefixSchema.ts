@@ -1,16 +1,20 @@
 'use strict';
 
-const mongoose=require('mongoose');
-const commandPrefixSchema=mongoose.Schema({
-    _id:{
-        type:String,
-        required:true
+import mongoose from 'mongoose';
+const commandPrefixSchema=new mongoose.Schema({
+    _id: {
+        type: String,
+        required: true
     },
-    prefix:{
-        type:String,
-        required:true
+    prefix: {
+        type: String,
+        required: true
     }
 }) 
 
-
-module.exports=mongoose.model('guild-prefix', commandPrefixSchema)
+const PrefixSchema=mongoose.model<IprefixSchema>('prefixSchema', commandPrefixSchema)
+export default PrefixSchema
+interface IprefixSchema extends mongoose.Document{
+    _id:string,
+    prefix:string
+}

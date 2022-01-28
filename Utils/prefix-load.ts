@@ -1,6 +1,6 @@
-const commandPrefixSchema = require("../Schemas/prefixSchema");
+import commandPrefixSchema from "../Schemas/prefixSchema";
 const cache = [];
-async function prefixLoad(client, guildPrefixes, globalPrefix) {
+export async function prefixLoad(client, guildPrefixes, globalPrefix) {
   client.cache = cache;
   try {
     /**
@@ -11,7 +11,7 @@ async function prefixLoad(client, guildPrefixes, globalPrefix) {
     for (const guild of client.guilds.cache) {
       let guildID = guild[1].id;
       console.log(cache.length);
-      if (!cache.length <= 0 && cache.length === client.guilds.cache.size) {
+      if (cache.length !== 0 && cache.length === client.guilds.cache.size) {
         console.log("cache");
         let c = cache.find((c) => c.id == guildID);
         guildPrefixes[guildID] = c.prefix;
@@ -33,9 +33,8 @@ async function prefixLoad(client, guildPrefixes, globalPrefix) {
     return;
   }
 }
-async function clearCache() {
+export async function clearCache() {
   cache.length = 0;
 }
 
-exports.prefixLoad = prefixLoad;
-exports.newCache = clearCache;
+

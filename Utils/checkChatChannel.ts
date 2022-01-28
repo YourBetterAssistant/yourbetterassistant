@@ -1,5 +1,5 @@
-const axios= require('axios').default
-const chatBot=require('../Schemas/chatbot')
+import axios from "axios"
+import chatBot from '../Schemas/chatbot'
 async function check(message){
     let check=await chatBot.findOne({guildID:message.guild.id})
     if(check){
@@ -26,4 +26,4 @@ async function check(message){
           
       }}
     }
-exports.check=check
+export default check

@@ -1,6 +1,7 @@
-const autoMod = require("../Schemas/autoMod");
+import { Message } from 'discord.js';
+import autoMod from "../Schemas/autoMod";
 const autoModCache = [];
-async function checkAutoMod(message) {
+export async function checkAutoMod(message:Message) {
   console.log("running");
   let result = await autoModCache.find((i) => i.id == message.guild.id);
   if (!result) {
@@ -21,7 +22,7 @@ async function checkAutoMod(message) {
   console.log(result);
   return result;
 }
-async function forceNewCache() {
+export async function forceNewCache() {
   autoModCache.length = 0;
   // let result=await autoMod.findOne({guildId:message.guild.id})
   // if(!result.guildId){
@@ -30,5 +31,4 @@ async function forceNewCache() {
   //     autoModCache.push({id:message.guild.id, strictmode:result.strictMode})
   // }
 }
-exports.checkAutoMod = checkAutoMod;
-exports.forceAutoCacheMod = forceNewCache;
+

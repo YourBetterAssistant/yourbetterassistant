@@ -1,15 +1,10 @@
 require('dotenv').config()
-const mongoose=require('mongoose')
-const {mongoPath}=require('./config.json')
+import mongoose from 'mongoose'
+import { mongoPath } from 'config.json'
 
-module.exports= async()=>{
+export default async()=>{
 
-    await mongoose.connect(mongoPath,{
-        useNewUrlParser:true,
-        useUnifiedTopology:true,
-        keepAlive:true,
-
-    }).catch(err=>{
+    await mongoose.connect(mongoPath).catch(err=>{
         console.log('error\n\n\n\n\n '+err)
     })
     return mongoose

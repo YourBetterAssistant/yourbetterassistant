@@ -1,25 +1,30 @@
 'use strict';
-
-const mongoose=require('mongoose');
-const economySchema=mongoose.Schema({
-    userID:{
-        type:String,
-        required:true,
-        unique:true
+import mongoose from 'mongoose';
+const economySchema=new mongoose.Schema({
+    userID: {
+        type: String,
+        required: true,
+        unique: true
     },
-    coins:{
-        type:Number,
-        required:true
+    coins: {
+        type: Number,
+        required: true
     },
-    bank:{
-        type:Number,
-        required:true
+    bank: {
+        type: Number,
+        required: true
     },
-    bankSpace:{
-        type:Number,
-        required:true,
+    bankSpace: {
+        type: Number,
+        required: true,
     }
 }) 
 
-
-module.exports=mongoose.model('economySchema', economySchema)
+const EconomySchema=mongoose.model<Ischema>('economySchema', economySchema)
+export default EconomySchema
+interface Ischema extends mongoose.Document{
+    userID:string,
+    coins:number,
+    bank:number,
+    bankSpace:number
+}

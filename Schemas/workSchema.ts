@@ -1,16 +1,20 @@
 'use strict';
 
-const mongoose=require('mongoose');
-const workScehma=mongoose.Schema({
-    userID:{
-        type:String,
-        required:true
+import mongoose from 'mongoose';
+const workScehma=new mongoose.Schema({
+    userID: {
+        type: String,
+        required: true
     },
-    job:{
-        type:String,
-        required:true
+    job: {
+        type: String,
+        required: true
     }
 }) 
 
-
-module.exports=mongoose.model('workSchema', workScehma)
+const WorkSchema=mongoose.model<IworkSchema>('workSchema', workScehma)
+export default WorkSchema
+interface IworkSchema extends mongoose.Document{
+    userID:string,
+    job:string
+}

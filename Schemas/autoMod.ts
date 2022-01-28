@@ -1,16 +1,20 @@
 'use strict';
 
-const mongoose=require('mongoose');
-const automod=mongoose.Schema({
-    guildId:{
-        type:String,
-        required:true
+import mongoose from 'mongoose';
+const automod=new mongoose.Schema({
+    guildId: {
+        type: String,
+        required: true
     },
-    strictMode:{
-        type:Boolean,
-        required:true
+    strictMode: {
+        type: Boolean,
+        required: true
     }
 }) 
+export interface IUser extends mongoose.Document {
+  guildId:string,
+  strictMode:boolean
+};
+const model=mongoose.model<IUser>('autoMod',automod)
 
-
-module.exports=mongoose.model('automod', automod)
+export default model

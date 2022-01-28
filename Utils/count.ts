@@ -1,5 +1,5 @@
-const countSchema=require('../Schemas/countSchema')
-const mongo=require('../botconfig/mongo')
+import countSchema from '../Schemas/countSchema'
+import mongo from '../botconfig/mongo'
 async function count(message){
   try{        
     await mongo().then(async()=>{
@@ -16,6 +16,6 @@ async function count(message){
   )}catch(err){require('../handlers/errorHandler')}}
 
         
-exports.count=count
+export default count
 
     

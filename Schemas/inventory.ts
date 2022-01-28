@@ -1,16 +1,20 @@
 'use strict';
 
-const mongoose=require('mongoose');
-const inventory=mongoose.Schema({
-    userId:{
-        type:String,
-        required:true,
+import mongoose from 'mongoose';
+const inventory=new mongoose.Schema({
+    userId: {
+        type: String,
+        required: true,
     },
-    inventory:{
-        type:Array,
-        required:true,
+    inventory: {
+        type: Array,
+        required: true,
     }
 }) 
 
-
-module.exports=mongoose.model('inventory', inventory)
+const Inventory=mongoose.model<Iinventory>('inventory', inventory)
+export default Inventory
+interface Iinventory extends mongoose.Document{
+    userId:string,
+    inventory:Array<string>
+}

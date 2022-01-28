@@ -1,3 +1,4 @@
+import Levels from "discord-xp"
 async function level(message){
     if(message.author.bot) return
     if(message.guild) return

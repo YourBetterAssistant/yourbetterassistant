@@ -1,7 +1,7 @@
 'use strict';
 
-const mongoose=require('mongoose');
-const countSchema=mongoose.Schema({
+import mongoose from 'mongoose';
+const countSchema=new mongoose.Schema({
     _id:{
         type:String,
         required:true
@@ -13,4 +13,8 @@ const countSchema=mongoose.Schema({
 }) 
 
 
-module.exports=mongoose.model('countSchema', countSchema)
+export default mongoose.model<IcountSchema>('countSchema', countSchema)
+interface IcountSchema extends mongoose.Document{
+    _id:string,
+    voiceChannelID:string
+}

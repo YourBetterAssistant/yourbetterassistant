@@ -1,7 +1,7 @@
 'use strict';
 
-const Discord=require('discord.js')
-function errorHandler(e, message, command?){
+import Discord, { Message } from 'discord.js';
+function errHandler(e:Error, message?:Message, command?:{name:string}){
     let embed=new Discord.MessageEmbed()
     if(!message)return
     if(!message.guild)return console.log(e)
@@ -13,9 +13,9 @@ function errorHandler(e, message, command?){
 
     const channel=message.client.channels.cache.get('889101477421912064')
     message.channel.send(`Something happened while running \`${command?command.name.toString():'null'}\`, This has been logged and reported to the developers`)
-    return channel.send({embeds:[embed]
-    })
+    return channel.isText()?channel.send({embeds:[embed]
+    }):null
 
 
 }
-exports.erroHandler=errorHandler
+export default errHandler

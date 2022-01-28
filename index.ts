@@ -1,17 +1,14 @@
 //Importing all needed Commands
-const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
+import Discord from "discord.js"; //this is the official discord.js wrapper for the Discord Api, which we use!
 require("dotenv").config();
-const lava = require("lavaclient");
+import lava from "lavaclient";
 require("@weky/inlinereply");
-const { AutoPoster } = require("topgg-autoposter");
+import { AutoPoster } from "topgg-autoposter";
 let token = process.env.TOKEN;
 require("colors"); //this Package is used, to change the colors of our Console! (optional and doesnt effect performance)
-const fs = require("fs"); //this package is for reading files and getting their inputs
+import fs from "fs"; //this package is for reading files and getting their inputs
 //Creating the Discord.js Client for This Bot with some default settings ;) and with partials, so you can fetch OLD messages
 const client = new Discord.Client({
-  fetchAllMembers: true,
-  messageCacheMaxSize: 10000,
-  disableEveryone: true,
   partials: ["USER", "CHANNEL", "GUILD_MEMBER", "MESSAGE", "REACTION"],
   intents:
     /*["GUILDS", "GUILD_MESSAGES",'GUILD_MESSAGE_REACTIONS', 'GUILD_VOICE_STATES', 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_BANS', 'GUILD_INVITES']*/ [

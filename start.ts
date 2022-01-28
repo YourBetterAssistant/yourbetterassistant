@@ -1,8 +1,8 @@
 require('dotenv').config()
-const axios=require('axios').default
+import axios from 'axios'
 const url=[]
-const shell=require('shelljs')
-const fs=require('fs')
+import shell from 'shelljs'
+import fs from 'fs'
 url.push(process.env.URL)
 async function push(){
     if(process.env.URL){

@@ -1,7 +1,7 @@
-const mongo=require('../botconfig/mongo')
-const economySchema=require('../Schemas/economySchema')
-const {erroHandler:errHandler}=require('../handlers/errorHandler')
-const inventory = require('../Schemas/inventory')
+import mongo from '../botconfig/mongo'
+import economySchema from '../Schemas/economySchema'
+import errHandler from '../handlers/errorHandler'
+import inventory from '../Schemas/inventory'
 async function createUser(userID, coins, bank, bs){
     /**
      * @param userID nothing much lol
@@ -181,4 +181,4 @@ class economy{
         return done
     }
 }
-module.exports=economy
+export default economy

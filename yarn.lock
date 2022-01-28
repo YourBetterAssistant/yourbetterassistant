@@ -898,7 +898,6 @@ __metadata:
     canvas: ^2.8.0
     colors: ^1.4.0
     d3-node: ^2.2.3
-    discord-anti-spam: ^2.5.8
     discord-api-types: ^0.26.1
     discord-together: ^1.1.62
     discord-xp: ^1.1.16
@@ -2084,13 +2083,6 @@ __metadata:
   version: 0.0.901419
   resolution: "devtools-protocol@npm:0.0.901419"
   checksum: de68331ddfb35b828ad743d939d9237e122f76d4a6cbf1e64f6c6d8e9c2c5cc65a5f1994db0fead90192cca1aa9dbed2ea822a7da7b58104cd041a90e215b9a3
-  languageName: node
-  linkType: hard
-
-"discord-anti-spam@npm:^2.5.8":
-  version: 2.7.0
-  resolution: "discord-anti-spam@npm:2.7.0"
-  checksum: c1a6cb5789911298ea7f05a4f7b41517daaf392bb9c8b2292abb3d7ff80014a26cdf433bd20deea50769ce89124ec2af7d549d0a3939c173ccc3453826bc94df
   languageName: node
   linkType: hard
 
