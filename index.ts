@@ -1,7 +1,7 @@
 //Importing all needed Commands
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
 require("dotenv").config();
-const { Node } = require("lavaclient");
+const lava = require("lavaclient");
 require("@weky/inlinereply");
 const { AutoPoster } = require("topgg-autoposter");
 let token = process.env.TOKEN;
@@ -38,7 +38,7 @@ const clientId =
     ? "858606774658924555"
     : "862143828920369172";
 const info = { host: "10.23.86.27", port: 2333, password: "lavalink" };
-const lavalink = new Node({
+const lavalink = new lava.Node({
   connection: info,
   sendGatewayPayload: (id, payload) =>
     client.guilds.cache.get(id)?.shard?.send(payload),

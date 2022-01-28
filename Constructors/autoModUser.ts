@@ -10,6 +10,9 @@ function isUpperCase(str) {
 }
 
 class autoMod{
+	public message: any;
+	public client: any;
+
     constructor(message){
         this.message=message
         this.client=message.client

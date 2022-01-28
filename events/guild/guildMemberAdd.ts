@@ -15,6 +15,7 @@ module.exports=async (client, member)=>{
                 //Look for vc
                 await guild.members.fetch({force:true})
                 let countInfo=await countSchema.findOne({_id:member.guild.id})
+                if(!countInfo)return
                 const vc=countInfo.voiceChannelID
                 setInterval(function () {
                   var memberCount = guild.members.cache.filter(member => !member.user.bot).size;  

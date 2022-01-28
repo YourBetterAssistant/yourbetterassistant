@@ -43,7 +43,7 @@ class economy{
                         let ua=await economySchema.findOne({userID:userID})
                         let ub=await economySchema.findOne({userID:message.author.id})
                         let ec=ua.coins
-                        await this.addCoins(userID, coins, message)
+                        await this.addCoins(userID, coins)
                         await this.deductCoins(message.author.id, coins, message)
                         
                     })
@@ -61,7 +61,7 @@ class economy{
         let ec=ua.coins
         await economySchema.updateOne({userID:userID}, {coins:ec+coins})
     }
-    async deductCoins(userID, coins, message){
+    async deductCoins(userID, coins, message?){
         let ua=await economySchema.findOne({userID:userID}) 
         if(!ua)return await createUser(userID, 10000, 10000, 10000)
         let ec=ua.coins
@@ -139,7 +139,7 @@ class economy{
     }
     async increaseBankSpace(userID, coins){
         let ua=await economySchema.findOne({userID:userID}) 
-        if(!ua)return await createUser(userID, 10000, 10000, 10000)&& TypeError('no account')
+        if(!ua)return await createUser(userID, 10000, 10000, 10000)
         let ec=ua.coins
         let eb=ua.bankSpace
         await economySchema.updateOne({userID}, {bankSpace:eb+coins})
@@ -166,7 +166,7 @@ class economy{
             message.guild.members.cache.get(result.userID)?similarUsers.push({userID:result.userID, coins:result.coins}):null
             
         })
-        function compare( b, a ) {
+        function compare( b, a? ) {
             if ( a.coins < b.coins ){
               return -1;
             }

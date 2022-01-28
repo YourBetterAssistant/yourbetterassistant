@@ -1,7 +1,7 @@
 'use strict';
 
 const Discord=require('discord.js')
-function errorHandler(e, message, command){
+function errorHandler(e, message, command?){
     let embed=new Discord.MessageEmbed()
     if(!message)return
     if(!message.guild)return console.log(e)
