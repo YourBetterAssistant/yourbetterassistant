@@ -1,4 +1,6 @@
-module.exports = {
+import { Client, CommandInteraction } from "discord.js";
+
+export default {
   name: "clear",
   description: "Mass Clear Messages",
   options: [
@@ -9,14 +11,16 @@ module.exports = {
       required: true,
     },
   ],
-  run: async (client, interaction) => {
-    if (!interaction.member.permissions.has("MANAGE_MESSAGES")) {
+  run: async (client: Client, interaction: CommandInteraction) => {
+    if (
+      !interaction.member?.permissions.toString().includes("MANAGE_MESSAGES")
+    ) {
       return interaction.reply({
         content: "Misisng Perms: `MANAGE_MESSAGES`",
         ephemeral: true,
       });
     }
-    const limit = interaction.options.getNumber("limit");
+    const limit = interaction.options.getNumber("limit") as number;
     if (limit > 100)
       return interaction.reply({
         content: "You can't remove more than 100 messages!",
@@ -29,10 +33,11 @@ module.exports = {
         ephemeral: true,
       });
     try {
-      await interaction.channel.messages
+      await interaction.channel?.messages
         .fetch({ limit })
         .then(async (messages) => {
-          await interaction.channel.bulkDelete(messages);
+          if (interaction.channel?.type === "DM") return;
+          await interaction.channel?.bulkDelete(messages);
         });
     } catch (err) {
       return interaction.reply({

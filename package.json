@@ -7,6 +7,7 @@
     "type": "git",
     "url": "https://github.com/NotTimIsReal/bbarevamp"
   },
+  "types": "./typings/global.d.ts",
   "scripts": {
     "test": "export NODE_ENV=testing; nodemon index.js",
     "start": "export NODE_ENV=development;node start.js",

@@ -52,7 +52,7 @@ client.aliases = new Discord.Collection(); //an collection for all your command-
 client.categories = fs.readdirSync("./commands/"); //categories
 client.cooldowns = new Discord.Collection(); //an collection for cooldown commands of each user
 client.interactions = new Discord.Collection();
-client.token = token;
+client.Token = token;
 //Loading files, with the client variable like Command Handler, Event Handler, ...
 ["command", "events"].forEach((handler) => {
   require(`./handlers/${handler}`)(client);

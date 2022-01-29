@@ -1,18 +1,24 @@
-const { MessageEmbed } = require("discord.js");
-const serverConfSchema = require("../Schemas/serverConfSchema");
-const roles = {};
-module.exports = {
+import {
+  Client,
+  CommandInteraction,
+  GuildMember,
+  MessageEmbed,
+} from "discord.js";
+import serverConfSchema from "../Schemas/serverConfSchema";
+const roles: { [key: string]: any } = {};
+export default {
   name: "unmute",
   description: "unmute",
-  options: [{ name: "user", description: "user", type: 6,required:true }],
-  run: async (client, interaction) => {
-    let user = interaction.options.getMember("user");
+  options: [{ name: "user", description: "user", type: 6, required: true }],
+  run: async (client: Client, interaction: CommandInteraction) => {
+    if (!interaction.guild) return;
+    let user = interaction.options.getMember("user") as GuildMember;
     let result = await serverConfSchema.findOne({
       _id: interaction.guild.id,
     });
-    let admin = result.adminroleID;
-    let member = result.memberroleID;
-    let owner = result.ownerroleID;
+    let admin = result?.adminroleID;
+    let member = result?.memberroleID;
+    let owner = result?.ownerroleID;
     roles[interaction.guild.id] = { admin, member, owner };
     let memberrole = roles[interaction.guild.id].member;
     if (!memberrole)
@@ -21,7 +27,7 @@ module.exports = {
           "I cannot unmute without a member role, please do b!serverconfig to set up `ROLES` so that i can give the user the specified roles for member when their unmute is up",
         ephemeral: true,
       });
-    if (!interaction.member.permissions.has("MANAGE_ROLES"))
+    if (!interaction?.member?.permissions.toString().includes("MANAGE_ROLES"))
       return interaction.reply({
         content: "Invalid Permissions, Expected Perms `MANAGE_ROLES`",
         ephemeral: true,
@@ -37,7 +43,7 @@ module.exports = {
       .setTitle("Unmute")
       .setDescription(`${user}'s mute has ended`)
       .setColor("RANDOM");
-    interaction.channel.send({ embeds: [embed] });
+    interaction?.channel?.send({ embeds: [embed] });
   },
 };
 //https://api.weky.xyz/canvas/whodidthis?image=${img}

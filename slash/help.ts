@@ -1,7 +1,7 @@
-const { MessageEmbed } = require("discord.js");
-const config = require("../botconfig/config.json");
-const ee = require("../botconfig/embed.json");
-module.exports = {
+import { Client, CommandInteraction, MessageEmbed } from "discord.js";
+import config from "../botconfig/config.json";
+import ee from "../botconfig/embed.json";
+export default {
   name: "help",
   description: "Shows All Message Commands",
   options: [
@@ -11,7 +11,7 @@ module.exports = {
       description: "Shows Information Of Specific Command",
     },
   ],
-  run: async (client, interaction) => {
+  run: async (client: Client, interaction: CommandInteraction) => {
     if (!interaction.guild)
       return interaction.reply("Cannot use this command in dms");
     const command = interaction.options.getString("command");
@@ -23,7 +23,7 @@ module.exports = {
           client.commands.get(client.aliases.get(command.toLowerCase()));
         if (!cmd) {
           embed
-            .setColor(ee.wrongcolor)
+            .setColor("RED")
             .setDescription(
               `No Information found for command **${command.toLowerCase()}**`
             );
@@ -55,32 +55,29 @@ module.exports = {
           );
           embed.setFooter("Syntax: <> = required, [] = optional");
         }
-        if (cmd.useage) {
+        if (cmd.usage) {
           embed.addField(
             "**Usage**",
             `\`${client.prefix[interaction.guild.id] || config.prefix}${
-              cmd.useage
+              cmd.usage
             }\``
-          );
-          embed.addField(
-            "Your prefix could have been changed, ping the bot to double check!"
           );
           embed.setFooter("Syntax: <> = required, [] = optional");
         }
-        embed.setColor(ee.color);
+        embed.setColor("#3498db");
         return interaction.reply({ embeds: [embed] });
       } else {
         const embed = new MessageEmbed()
-          .setColor(ee.color)
-          .setThumbnail(client.user.displayAvatarURL())
+          .setColor("#3498db")
+          .setThumbnail(client.user?.displayAvatarURL() || "")
           .setTitle("HELP MENU 🔰 Commands")
           .setFooter(
             `To see command descriptions and inforamtion, type: ${
               client.prefix[interaction.guild.id] || config.prefix
             }help [CMD NAME]`,
-            client.user.displayAvatarURL()
+            client.user?.displayAvatarURL()
           );
-        const commands = (category) => {
+        const commands = (category: string) => {
           return client.commands
             .filter((cmd) => cmd.category === category)
             .map((cmd) => `\`${cmd.name}\``);
@@ -90,7 +87,7 @@ module.exports = {
             const current = client.categories[i];
             const items = commands(current);
             const n = 3;
-            const result = [[], [], []];
+            const result: any[] = [[], [], []];
             const wordsPerLine = Math.ceil(items.length / 3);
             for (let line = 0; line < n; line++) {
               for (let i = 0; i < wordsPerLine; i++) {
@@ -115,15 +112,15 @@ module.exports = {
               true
             );
           }
-        } catch (e) {
-          console.log(String(e.stack).red);
+        } catch (e: any) {
+          console.log(String(e.stack));
         }
         interaction.reply({ embeds: [embed] });
       }
-    } catch (e) {
-      console.log(String(e.stack).bgRed);
+    } catch (e: any) {
+      console.log(String(e.stack));
       let embed = new MessageEmbed()
-        .setColor(ee.wrongcolor)
+        .setColor("#e01e01")
         .setFooter(ee.footertext, ee.footericon)
         .setTitle(`❌ ERROR | An error occurred`)
         .setDescription(`\`\`\`${e.stack}\`\`\``);

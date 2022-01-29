@@ -1,7 +1,14 @@
-const { MessageEmbed } = require("discord.js");
-const serverConfSchema = require("../Schemas/serverConfSchema");
-const roles = {};
-module.exports = {
+import {
+  Client,
+  CommandInteraction,
+  GuildMember,
+  MessageEmbed,
+} from "discord.js";
+import serverConfSchema from "../Schemas/serverConfSchema";
+const roles: {
+  [key: string]: { admin: string; member: string; owner: string };
+} = {};
+export default {
   name: "mute",
   description: "Mute",
   options: [
@@ -22,18 +29,18 @@ module.exports = {
     },
     { name: "reason", description: "reason", type: 3 },
   ],
-  run: async (client, interaction) => {
-    const user = interaction.options.getMember("user");
+  run: async (client: Client, interaction: CommandInteraction) => {
+    const user = interaction.options.getMember("user") as GuildMember;
     const reason = interaction.options.getString("reason");
-    const duration = interaction.options.getNumber("duration");
-    if (interaction.guild.roles.everyone.permissions.has("SEND_MESSAGES"))
+    const duration = interaction.options.getNumber("duration") as number;
+    if (interaction.guild?.roles.everyone.permissions.has("SEND_MESSAGES"))
       return interaction.reply({
         content:
           "The `@everyone` role has the permissions `SEND_MESSAGES` leaving this on will make muting users useless, TO fix this error un-toggle send messages for `@everyone`",
         ephemeral: true,
       });
     let result = await serverConfSchema.findOne({
-      _id: interaction.guild.id,
+      _id: interaction.guild?.id,
     });
     if (!result)
       return interaction.reply({
@@ -44,9 +51,9 @@ module.exports = {
     let admin = result.adminroleID;
     let member = result.memberroleID;
     let owner = result.ownerroleID;
-    roles[interaction.guild.id] = { admin, member, owner };
-    let memberrole = roles[interaction.guild.id].member;
-    if (!interaction.member.permissions.has("MANAGE_ROLES"))
+    roles[interaction.guild?.id!] = { admin, member, owner };
+    let memberrole = roles[interaction.guild?.id!].member;
+    if (!interaction.member?.permissions.toString().includes("MANAGE_ROLES"))
       return interaction.reply({
         content: "Invalid Permissions, Expected Perms `MANAGE_ROLES`",
         ephemeral: true,
@@ -57,27 +64,26 @@ module.exports = {
           "The user who you attempted to mute has the permissions `MANAGE_GUILD` I am not allowed to mute people with such permissions",
         ephemeral: true,
       });
-    let muterole = interaction.guild.roles.cache.find(
+    let muterole = interaction.guild?.roles.cache.find(
       (role) => role.name === "muted"
     );
     if (!muterole) {
-      interaction.guild.roles
+      interaction.guild?.roles
         .create({
-          data: {
-            name: "muted",
-            color: "BLUE",
-            permissions: ["VIEW_CHANNEL"],
-          },
+          name: "muted",
+          color: "BLUE",
+          permissions: ["VIEW_CHANNEL"],
+
           reason: "muted role does not exist",
         })
         .catch(console.error);
     }
-    user.roles.set([muterole]);
-    const stringedDuration = duration.toString();
+    user.roles.set([muterole!]);
+    const stringedDuration = duration?.toString();
     const embed = new MessageEmbed()
       .setTitle("Mute")
       .setDescription(`${user} was muted by ${interaction.member}`)
-      .addField("Reason:", reason?reason:'Not Specified', true)
+      .addField("Reason:", reason ? reason : "Not Specified", true)
       .addField(
         "Duration:",
         stringedDuration == "86400000"
@@ -119,7 +125,7 @@ module.exports = {
           }`
         )
         .setColor("RANDOM");
-      interaction.channel.send({ embeds: [embed] });
+      interaction.channel?.send({ embeds: [embed] });
     }, duration);
   },
 };

@@ -1,10 +1,10 @@
-const { MessageEmbed } = require("discord.js");
+import { Client, CommandInteraction, MessageEmbed } from "discord.js";
 
-module.exports = {
+export default {
   name: "prefix",
   description: "Reminder of what the prefix is",
   options: [],
-  run: async (client, interaction) => {
+  run: async (client: Client, interaction: CommandInteraction) => {
     if (!interaction.guild) return interaction.reply("No prefix for dms");
     const embed = new MessageEmbed()
       .setTitle("Prefix")

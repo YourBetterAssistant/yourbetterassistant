@@ -1,6 +1,11 @@
+import { Client } from "discord.js";
 import commandPrefixSchema from "../Schemas/prefixSchema";
-const cache = [];
-export async function prefixLoad(client, guildPrefixes, globalPrefix) {
+const cache: { id: string; prefix: string }[] = [];
+export async function prefixLoad(
+  client: Client,
+  guildPrefixes: { [key: string]: string | undefined },
+  globalPrefix: string
+) {
   client.cache = cache;
   try {
     /**
@@ -14,7 +19,7 @@ export async function prefixLoad(client, guildPrefixes, globalPrefix) {
       if (cache.length !== 0 && cache.length === client.guilds.cache.size) {
         console.log("cache");
         let c = cache.find((c) => c.id == guildID);
-        guildPrefixes[guildID] = c.prefix;
+        guildPrefixes[guildID] = c?.prefix;
       } else {
         console.log("new info");
         const result = await commandPrefixSchema.findOne({ _id: guildID });
@@ -28,7 +33,7 @@ export async function prefixLoad(client, guildPrefixes, globalPrefix) {
       }
       console.log(guildPrefixes);
     }
-  } catch (err) {
+  } catch (err: any) {
     console.log(`An error occured \n\n\n\n\n\n\n ${err.stack}`);
     return;
   }
@@ -36,5 +41,3 @@ export async function prefixLoad(client, guildPrefixes, globalPrefix) {
 export async function clearCache() {
   cache.length = 0;
 }
-
-
