@@ -1,16 +1,19 @@
-'use strict';
+"use strict";
 
-const mongoose=require('mongoose');
-const logSchema=mongoose.Schema({
-    _id:{
-        type:String,
-        required:true
-    },
-    channelID:{
-        type:String,
-        required:true
-    }
-}) 
+import mongoose from "mongoose";
+const logSchema = new mongoose.Schema({
+  _id: {
+    type: String,
+    required: true,
+  },
+  channelID: {
+    type: String,
+    required: true,
+  },
+});
 
-
-module.exports=mongoose.model('logSchema', logSchema)
+export default mongoose.model<IlogSchema>("logSchema", logSchema);
+interface IlogSchema extends mongoose.Document {
+  _id: string;
+  channelID: string;
+}

@@ -1,16 +1,22 @@
-'use strict';
+"use strict";
 
-const mongoose=require('mongoose');
-const levellingEnabled=mongoose.Schema({
-    guildID:{
-        type:String,
-        required:true
-    },
-    enabled:{
-        type:Boolean,
-        required:true
-    }
-}) 
+import mongoose from "mongoose";
+const levellingEnabled = new mongoose.Schema({
+  guildID: {
+    type: String,
+    required: true,
+  },
+  enabled: {
+    type: Boolean,
+    required: true,
+  },
+});
 
-
-module.exports=mongoose.model('levellingEnabled', levellingEnabled)
+export default mongoose.model<IlevellingEnabled>(
+  "levellingEnabled",
+  levellingEnabled
+);
+interface IlevellingEnabled extends mongoose.Document {
+  guildID: string;
+  enabled: boolean;
+}

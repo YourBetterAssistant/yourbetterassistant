@@ -35,3 +35,7 @@ type command = {
   usage: string;
   run: (client: Client, interaction: CommandInteraction) => void;
 };
+declare module "@felipebutcher/node-os-info" {
+  type cpu = (cpu: number) => void;
+  type mem = (memory: number) => void;
+}

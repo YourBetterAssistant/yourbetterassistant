@@ -1,7 +1,7 @@
 "use strict";
-const { duration, delay } = require("../handlers/functions");
-const osInfo = require("@felipebutcher/node-os-info");
-const packageJson = require("../package.json");
+import * as funcs from "../handlers/functions";
+const osinfo = require("@felipebutcher/node-os-info");
+import packageJson from "../package.json";
 import Discord, { Client, CommandInteraction } from "discord.js";
 export default {
   name: "botinfo",
@@ -40,7 +40,6 @@ export default {
       embed.addField("Memory Used", `${Math.round(memory * 100)}%`, true);
     });
     await interaction.deferReply();
-    delay(2000);
     await interaction.editReply({ embeds: [embed] });
   },
 };

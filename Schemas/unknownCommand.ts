@@ -1,11 +1,16 @@
-'use strict';
-const mongoose=require('mongoose');
-const unknownCommand=mongoose.Schema({
-    guildId:{
-        type:String,
-        required:true
-    }
-}) 
+"use strict";
+import mongoose from "mongoose";
+const unknownCommand = new mongoose.Schema({
+  guildId: {
+    type: String,
+    required: true,
+  },
+});
 
-
-module.exports=mongoose.model('unknownCommand', unknownCommand)
+export default mongoose.model<IunknownCommand>(
+  "unknownCommand",
+  unknownCommand
+);
+interface IunknownCommand extends mongoose.Document {
+  guildId: string;
+}
