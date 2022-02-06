@@ -30,7 +30,7 @@ export default {
           },
           { upsert: true }
         );
-      newCache();
+      clearCache();
       return interaction.reply(`Changed The Prefix To ${prefix}`);
     } else
       return interaction.reply({

@@ -22,12 +22,12 @@ export default mongoose.model<IbuttonRoles>("buttonRoles", rrSchema);
 interface IbuttonRoles extends mongoose.Document {
   guildId: string;
   role1: {
-    roleId: string;
-    roleName: string;
+    name: string;
+    id: string;
   };
   role2: {
-    roleId: string;
-    roleName: string;
+    name: string;
+    id: string;
   };
   messageId: string;
 }
