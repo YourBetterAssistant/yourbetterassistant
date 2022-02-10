@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.7.0",
-    "@discordjs/rest": "^0.2.0-canary.0",
+    "@discordjs/rest": "^0.3.0-dev.1644408653.fe11ff5",
     "@discordjs/voice": "^0.8.0",
     "@felipebutcher/node-os-info": "^0.0.6",
     "@lavaclient/queue": "^2.0.6",
