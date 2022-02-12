@@ -17,3 +17,4 @@ json.sqlite
 err-0.log
 logs-0.log
 .prettierrc
+dist

@@ -1,9 +1,8 @@
 //Importing all needed Commands
 import Discord from "discord.js"; //this is the official discord.js wrapper for the Discord Api, which we use!
 require("dotenv").config();
-import lava from "lavaclient";
+import { Node } from "lavaclient";
 require("@weky/inlinereply");
-import { AutoPoster } from "topgg-autoposter";
 let token = process.env.TOKEN;
 require("colors"); //this Package is used, to change the colors of our Console! (optional and doesnt effect performance)
 import fs from "fs"; //this package is for reading files and getting their inputs
@@ -28,14 +27,13 @@ const client = new Discord.Client({
       "DIRECT_MESSAGE_TYPING",
     ],
 });
-const ap = AutoPoster(process.env.TOPGGTOKEN, client);
 
 const clientId =
   process.env.NODE_ENV === "testing"
     ? "858606774658924555"
     : "862143828920369172";
-const info = { host: "10.23.86.27", port: 2333, password: "lavalink" };
-const lavalink = new lava.Node({
+const info = { host: "10.23.86.202", port: 2333, password: "lavalink" };
+const lavalink = new Node({
   connection: info,
   sendGatewayPayload: (id, payload) =>
     client.guilds.cache.get(id)?.shard?.send(payload),
@@ -56,9 +54,6 @@ client.Token = token;
 //Loading files, with the client variable like Command Handler, Event Handler, ...
 ["command", "events"].forEach((handler) => {
   require(`./handlers/${handler}`)(client);
-});
-ap.on("posted", () => {
-  console.log("Posted stats to Top.gg!");
 });
 client.ws.on(
   "VOICE_STATE_UPDATE",
