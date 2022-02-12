@@ -1,5 +1,5 @@
-const { exec } = require("child_process");
-const { MessageEmbed } = require("discord.js");
+import { exec } from "child_process";
+import { Client, Message, MessageEmbed } from "discord.js";
 module.exports = {
   name: "sys-eval",
   description: "OWNER",
@@ -7,7 +7,7 @@ module.exports = {
   memberpermissions: ["VIEW_CHANNEL"],
   cooldown: 20,
   usage: "systemeval <eval>",
-  run: async (client, message, args) => {
+  run: async (client: Client, message: Message, args: string[]) => {
     if (message.author.id !== "827388013062389761")
       return message.channel.send("You are not the owner of this bot!");
     else

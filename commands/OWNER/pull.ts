@@ -1,7 +1,9 @@
-"use strict";
+import { Message } from "discord.js";
+import { Client } from "discord.js";
+("use strict");
 
-const { exec } = require("child_process");
-const { reply } = require("../../exports");
+import { exec } from "child_process";
+import { reply } from "../../exports";
 module.exports = {
   name: "pull",
   description: "pulls the latest version of this code from github",
@@ -9,7 +11,7 @@ module.exports = {
   memberpermissions: "VIEW_CHANNEL",
   cooldown: 2,
   usage: "pull",
-  run: async (client, message) => {
+  run: async (client: Client, message: Message) => {
     let ownerId = "827388013062389761";
     if (message.author.id !== ownerId) {
       message.channel.send("You cannot pull");
@@ -24,7 +26,7 @@ module.exports = {
     });
 
     message.reply("Do you want me to reboot");
-    let filter = (m) => m.author.id === message.author.id;
+    let filter = (m: Message) => m.author.id === message.author.id;
     message.channel
       .awaitMessages({
         filter,
@@ -32,9 +34,9 @@ module.exports = {
         time: 10000,
         errors: ["time"],
       })
-      .then((msg) => {
-        msg = msg.first();
-        if (msg.content.startsWith("yes")) {
+      .then((m) => {
+        const msg = m.first();
+        if (msg?.content.startsWith("yes")) {
           exec("pm2 restart 0");
         } else {
           return message.channel.send("Cancelled");
