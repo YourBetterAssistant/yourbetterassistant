@@ -27,7 +27,7 @@ export default async (client: Client, member: GuildMember) => {
           var memberCount = guild?.members.cache.filter(
             (member) => !member.user.bot
           ).size;
-          var memberCountChannel = guild?.channels.cache.get(vc);
+          var memberCountChannel = guild?.channels.cache.get(vc!);
           memberCountChannel?.setName(`${memberCount} members!`);
         } catch (err) {
           return;

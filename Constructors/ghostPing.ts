@@ -1,7 +1,7 @@
 import { MessageEmbed, Collection, Message } from "discord.js";
 // const m=new Message()
 // m.mentions.users.sizr
-const messageUpdate = async (oldMessage: any, newMessage: any) => {
+export const messageUpdate = async (oldMessage: any, newMessage: any) => {
   if (oldMessage.author.bot) return;
   const membermention = [];
   const rolemention = [];
@@ -139,7 +139,7 @@ const messageUpdate = async (oldMessage: any, newMessage: any) => {
   embed.setColor("GREEN").setTimestamp(new Date());
   newMessage.channel.send({ embeds: [embed] });
 };
-const messageDelete = async (message: any) => {
+export const messageDelete = async (message: any) => {
   let userMentioned = false;
   let roleMentioned = false;
   const mentionedUsers = [];
@@ -199,8 +199,4 @@ const messageDelete = async (message: any) => {
   );
   embed.setColor("GREEN").setTimestamp(new Date());
   message.channel.send({ embeds: [embed] });
-};
-module.exports = {
-  messageDelete,
-  messageUpdate,
 };
