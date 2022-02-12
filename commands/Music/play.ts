@@ -1,7 +1,7 @@
 "use strict";
 
 require("@lavaclient/queue/register");
-const { MessageEmbed } = require("discord.js");
+import { Client, Message, MessageEmbed } from "discord.js";
 module.exports = {
   name: "play",
   description: "plays music",
@@ -9,14 +9,16 @@ module.exports = {
   memberpermissions: ["CONNECT", "SPEAK"],
   cooldown: 5,
   usage: "play <song>",
-  run: async (client, message, args) => {
-    const voice_channel = message.member.voice.channel;
+  run: async (client: Client, message: Message, args: string[]) => {
+    const voice_channel = message.member?.voice.channel;
     if (!voice_channel) {
       return message.channel.send("You need to be in a voice channel");
     }
-    if (!message.guild.me.voice.channel) {
+    if (!message.guild?.me?.voice.channel) {
       return message.channel.send(
-        `I am not in a voice channel do ${client.prefix[message.guild.id]}join`
+        `I am not in a voice channel do ${
+          client.prefix[message.guild?.id!]
+        }join`
       );
     }
     if (message.member.voice.channel.id !== message.guild.me.voice.channel.id)
@@ -35,7 +37,7 @@ module.exports = {
       const queue_constructor = {
         voice_channel: message.member.voice.channel,
         player,
-        songs: [],
+        songs: [] as any[],
       };
       //Add our key and value pair into the global queue. We then use this to get our server queue.
       client.queue.set(message.guild.id, queue_constructor);

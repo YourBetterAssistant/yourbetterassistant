@@ -1,8 +1,8 @@
 "use strict";
 
-const { MessageEmbed } = require("discord.js");
+import { Client, Message, MessageEmbed } from "discord.js";
 
-module.exports = {
+export default {
   name: "queue",
   aliases: ["q"],
   description: "Shows the current queue",
@@ -12,15 +12,17 @@ module.exports = {
   adminPermOverride: true,
   cooldown: 5,
   usage: "queue",
-  run: async (client, message) => {
-    const server_queue = client.queue.get(message.guild.id);
+  run: async (client: Client, message: Message, args: string[]) => {
+    const server_queue = client.queue.get(message.guild?.id!);
     if (!server_queue)
       return message.channel.send(
         "This server does not have a queue, start playing music to use this command"
       );
-    if (!message.member.voice.channel.id === message.guild.me.voice.channel.id)
+    if (
+      message.member?.voice.channel?.id !== message.guild?.me?.voice.channel?.id
+    )
       return message.channel.send(
-        `Join <#${message.guild.me.voice.channel.id}> to use this command `
+        `Join <#${message.guild?.me?.voice.channel?.id}> to use this command `
       );
     let embed = new MessageEmbed()
       .setTitle("Queue")
@@ -40,7 +42,7 @@ module.exports = {
         `${server_queue.player.queue.tracks[0].title}`
       );
     }
-    server_queue.player.queue.tracks.forEach((track) =>
+    server_queue.player.queue.tracks.forEach((track: any) =>
       embed.addField(`Song ${i++}`, `${track.title}`, true)
     );
     console.log(!server_queue.player.queue.current);
