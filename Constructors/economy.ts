@@ -171,8 +171,7 @@ class economy {
     await createUser(userID, coins, bank, bs);
   }
   async findUser(userID: string) {
-    let results = await economySchema.findOne({ userID: userID });
-    return results;
+    return await economySchema.findOne({ userID: userID });
   }
   async generateLeaderboard(amount: number, message: Message) {
     const filter = {};
