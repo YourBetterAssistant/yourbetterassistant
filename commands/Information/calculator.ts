@@ -1,7 +1,9 @@
 "use strict";
 
-const { Calculator } = require("weky");
-module.exports = {
+import { Client, Message } from "discord.js";
+
+import { Calculator } from "weky";
+export default {
   name: "calculator",
   description: "Spawns Calaculator",
   category: "Information",
@@ -9,7 +11,7 @@ module.exports = {
   memberpermissions: "VIEW_CHANNEL",
   cooldown: 5,
   usage: "calculator",
-  run: async (client, message) => {
+  run: async (client: Client, message: Message) => {
     await Calculator({
       message: message,
       embed: {
