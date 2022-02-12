@@ -2,7 +2,7 @@
 
 import Discord, { Client, Guild } from "discord.js";
 import funcs from "../../handlers/functions";
-module.exports = async (client: Client, guild: Guild) => {
+export default async (client: Client, guild: Guild) => {
   await guild.members.fetch({ force: true });
   try {
   } catch (err) {

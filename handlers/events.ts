@@ -1,14 +1,14 @@
 "use strict";
 
+import { Client } from "discord.js";
 import fs from "fs";
 const ascii = require("ascii-table");
 let table = new ascii("Events");
 table.setHeading("Events", "Load status");
-import commandBase from "../events/guild/messageCreate";
-const allevents = [];
-module.exports = async (client) => {
+const allevents: any[] = [];
+module.exports = async (client: Client) => {
   try {
-    const load_dir = (dir) => {
+    const load_dir = (dir: string) => {
       const event_files = fs
         .readdirSync(`./events/${dir}`)
         .filter((file) => file.endsWith(".js"));
@@ -23,7 +23,7 @@ module.exports = async (client) => {
     for (let i = 0; i < allevents.length; i++) {
       try {
         table.addRow(allevents[i], "Ready");
-      } catch (e) {
+      } catch (e: any) {
         console.log(String(e.stack).red);
       }
     }
@@ -33,59 +33,31 @@ module.exports = async (client) => {
       console.log("\n");
       console.log(
         `     ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓`
-          .bold.brightGreen
+          .green.bold
       );
       console.log(
-        `     ┃ `.bold.brightGreen +
+        `     ┃ `.green.bold +
           " ".repeat(-1 + stringlength - ` ┃ `.length) +
-          "┃".bold.brightGreen
+          "┃".green.bold
       );
       console.log(
-        `     ┃ `.bold.brightGreen +
-          `Welcome to SERVICE HANDLER!`.bold.brightGreen +
+        `| Welcome to SERVICE HANDLER!`.green.bold +
           " ".repeat(
             -1 +
               stringlength -
               ` ┃ `.length -
               `Welcome to SERVICE HANDLER!`.length
           ) +
-          "┃".bold.brightGreen
+          "┃".green.bold
       );
       console.log(
-        `     ┃ `.bold.brightGreen +
-          `  /-/ By https://milrato.eu /-/`.bold.brightGreen +
-          " ".repeat(
-            -1 +
-              stringlength -
-              ` ┃ `.length -
-              `  /-/ By https://milrato.eu /-/`.length
-          ) +
-          "┃".bold.brightGreen
-      );
-      console.log(
-        `     ┃ `.bold.brightGreen +
+        `     ┃ `.green.bold +
           " ".repeat(-1 + stringlength - ` ┃ `.length) +
-          "┃".bold.brightGreen
-      );
-      console.log(
-        `     ┃ `.bold.brightGreen +
-          `  /-/ Discord: Tomato#6966 /-/`.bold.brightGreen +
-          " ".repeat(
-            -1 +
-              stringlength -
-              ` ┃ `.length -
-              `  /-/ By Discord: Tomato#6966 /-/`.length
-          ) +
-          "   ┃".bold.brightGreen
-      );
-      console.log(
-        `     ┃ `.bold.brightGreen +
-          " ".repeat(-1 + stringlength - ` ┃ `.length) +
-          "┃".bold.brightGreen
+          "┃".green.bold
       );
       console.log(
         `     ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛`
-          .bold.brightGreen
+          .green.bold
       );
     } catch {
       /* */
@@ -95,34 +67,33 @@ module.exports = async (client) => {
       console.log("\n");
       console.log(
         `     ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓`
-          .bold.yellow
+          .yellow.bold
       );
       console.log(
-        `     ┃ `.bold.yellow +
+        `     ┃ `.yellow.bold +
           " ".repeat(-1 + stringlength2 - ` ┃ `.length) +
-          "┃".bold.yellow
+          "┃".yellow.bold
       );
       console.log(
-        `     ┃ `.bold.yellow +
-          `Logging into the BOT...`.bold.yellow +
+        `| Logging into the BOT...`.yellow.bold +
           " ".repeat(
             -1 + stringlength2 - ` ┃ `.length - `Logging into the BOT...`.length
           ) +
-          "┃".bold.yellow
+          "┃".yellow.bold
       );
       console.log(
-        `     ┃ `.bold.yellow +
+        `     ┃ `.yellow.bold +
           " ".repeat(-1 + stringlength2 - ` ┃ `.length) +
-          "┃".bold.yellow
+          "┃".yellow.bold
       );
       console.log(
         `     ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛`
-          .bold.yellow
+          .yellow.bold
       );
     } catch {
       /* */
     }
-  } catch (e) {
+  } catch (e: any) {
     console.log(String(e.stack).bgRed);
   }
 };

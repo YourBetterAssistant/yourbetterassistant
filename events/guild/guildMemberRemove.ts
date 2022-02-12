@@ -1,20 +1,20 @@
 "use strict";
 
 import { Client, GuildMember, TextChannel } from "discord.js";
+import countSchema from "../../Schemas/countSchema";
 
+import logSchema from "../../Schemas/logSchema";
+import mongo from "../../botconfig/mongo";
+import Discord from "discord.js";
 export default async (client: Client, member: GuildMember) => {
-  const countSchema = require("../../Schemas/countSchema");
-  const guild = client.guilds.cache.get(member.guild.id);
-  const logSchema = require("../../Schemas/logSchema");
-  const mongo = require("../../botconfig/mongo");
-  const Discord = require("discord.js");
   await mongo().then(async () => {
     try {
+      const guild = client.guilds.cache.get(member.guild.id);
       let countInfo = await countSchema.findOne({ _id: member.guild.id });
-      const vc = countInfo.voiceChannelID;
+      const vc = countInfo?.voiceChannelID;
       let logInfo = await logSchema.findOne({ _id: member.guild.id });
-      let logChannelID = logInfo.channelID;
-      const logChannel = member.guild.channels.cache.get(logChannelID);
+      let logChannelID = logInfo?.channelID;
+      const logChannel = member.guild.channels.cache.get(logChannelID!);
       let embed = new Discord.MessageEmbed()
         .setTitle("Member Left")
         .setDescription("Goodbye person hope we see you again")

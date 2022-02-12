@@ -1,14 +1,14 @@
 "use strict";
 
 import { Client, GuildMember, TextChannel } from "discord.js";
+import welcomeSchema from "../../Schemas/welcomeSchema";
+import logSchema from "../../Schemas/logSchema";
+import countSchema from "../../Schemas/countSchema";
+import joinRoles from "../../Schemas/onJoin";
+import mongo from "../../botconfig/mongo";
+import Discord from "discord.js";
 
-module.exports = async (client: Client, member: GuildMember) => {
-  const welcomeSchema = require("../../Schemas/welcomeSchema");
-  const logSchema = require("../../Schemas/logSchema");
-  const countSchema = require("../../Schemas/countSchema");
-  const joinRoles = require("../../Schemas/onJoin");
-  const mongo = require("../../botconfig/mongo");
-  const Discord = require("discord.js");
+export default async (client: Client, member: GuildMember) => {
   const onJoin = async (member: GuildMember) => {
     console.log("Join");
     const guild = client.guilds.cache.get(member.guild.id);
@@ -29,8 +29,8 @@ module.exports = async (client: Client, member: GuildMember) => {
         //Member log
         console.log("pls");
         let logInfo = await logSchema.findOne({ _id: member.guild.id });
-        let logChannelID = logInfo.channelID;
-        const logChannel = member.guild.channels.cache.get(logChannelID);
+        let logChannelID = logInfo?.channelID;
+        const logChannel = member.guild.channels.cache.get(logChannelID!);
         let embed = new Discord.MessageEmbed()
           .setTitle("New Member")
           .setDescription(`Our Newest Member!`)
@@ -40,10 +40,10 @@ module.exports = async (client: Client, member: GuildMember) => {
         //Start the Welcome Message
 
         let info = await welcomeSchema.findOne({ _id: member.guild.id });
-        let channelID = info.channelID;
-        let text = info.text;
-        let option = info.DM;
-        const channel = member.guild.channels.cache.get(channelID);
+        let channelID = info?.channelID;
+        let text = info?.text;
+        let option = info?.DM;
+        const channel = member.guild.channels.cache.get(channelID!);
         if (option === "true") {
           member.send(`>>> <@!${member.id}> ${text}`);
         } else {
