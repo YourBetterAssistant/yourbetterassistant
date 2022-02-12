@@ -1,7 +1,7 @@
 "use strict";
 
-const Levels = require("discord-xp");
-const { MessageEmbed } = require("discord.js");
+import Levels from "discord-xp";
+import { Client, Message, MessageEmbed } from "discord.js";
 module.exports = {
   name: "leaderboard",
   description: "Shows the leaderboard",
@@ -10,8 +10,11 @@ module.exports = {
   memberpermissions: "VIEW_CHANNEL",
   cooldown: 2,
   usage: "leaderboard",
-  run: async (client, message) => {
-    const rawLeaderboard = await Levels.fetchLeaderboard(message.guild.id, 10); // We grab top 10 users with most xp in the current server.
+  run: async (client: Client, message: Message) => {
+    const rawLeaderboard = await Levels.fetchLeaderboard(
+      message.guild?.id!,
+      10
+    ); // We grab top 10 users with most xp in the current server.
 
     if (rawLeaderboard.length < 1)
       return message.reply("Nobody's in leaderboard yet.");
