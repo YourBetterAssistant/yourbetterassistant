@@ -1,7 +1,7 @@
 "use strict";
 
 //here the event starts
-export default () => {
+module.exports = () => {
   console.log(`You have been disconnected at ${new Date()}.`.red);
 };
 

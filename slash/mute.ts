@@ -8,7 +8,7 @@ import serverConfSchema from "../Schemas/serverConfSchema";
 const roles: {
   [key: string]: { admin: string; member: string; owner: string };
 } = {};
-export default {
+module.exports = {
   name: "mute",
   description: "Mute",
   options: [

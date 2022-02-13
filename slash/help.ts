@@ -1,7 +1,7 @@
 import { Client, CommandInteraction, MessageEmbed } from "discord.js";
 import config from "../botconfig/config.json";
 import ee from "../botconfig/embed.json";
-export default {
+module.exports = {
   name: "help",
   description: "Shows All Message Commands",
   options: [

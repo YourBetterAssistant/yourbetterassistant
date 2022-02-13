@@ -1,7 +1,7 @@
 import prefixSchema from "../Schemas/prefixSchema";
 import { clearCache } from "../Utils/prefix-load";
 import { Client, CommandInteraction, MessageMentions } from "discord.js";
-export default {
+module.exports = {
   name: "changeprefix",
   description: "Changes The Prefix",
   options: [

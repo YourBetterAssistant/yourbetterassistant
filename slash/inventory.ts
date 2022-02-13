@@ -1,7 +1,7 @@
 //@ts-check
 import { Client, CommandInteraction, MessageEmbed } from "discord.js";
 import inventory from "../Schemas/inventory";
-export default {
+module.exports = {
   name: "inventory",
   description: "Inventory",
   options: [

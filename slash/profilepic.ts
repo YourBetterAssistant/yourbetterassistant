@@ -1,6 +1,6 @@
 "use strict";
 import Discord, { Client, CommandInteraction } from "discord.js";
-export default {
+module.exports = {
   name: "profilepic",
   description: "Sends photo of profile pic",
   options: [{ name: "user", description: "user", type: 6 }],

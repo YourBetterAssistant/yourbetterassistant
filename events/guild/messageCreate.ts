@@ -9,7 +9,7 @@ import config from "../../botconfig/config.json"; //loading config file with tok
 import { prefix as globalPrefix } from "../../botconfig/config.json";
 import ee from "../../botconfig/embed.json"; //Loading all embed settings like color footertext and icon ...
 import Discord, { Client, Message, TextChannel } from "discord.js"; //this is the official discord.js wrapper for the Discord Api, which we use!
-import * as funcs from "../../handlers/functions"; //Loading all needed functions
+import funcs from "../../handlers/functions"; //Loading all needed functions
 Levels.setURL(config.mongoPath);
 import unknownCommand from "../../Schemas/unknownCommand";
 import {
@@ -20,7 +20,7 @@ import autoMod from "../../Constructors/autoModUser";
 import levellingEnabled from "../../Schemas/levellingEnabled";
 //here the event starts
 let prefix;
-export default async (client: Client, message: Message) => {
+module.exports = async (client: Client, message: Message) => {
   const automod = new autoMod(message);
   const guildPrefixes: { [key: string]: string } = {};
   try {
@@ -94,7 +94,7 @@ export default async (client: Client, message: Message) => {
     client.prefix = guildPrefixes || globalPrefix;
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
     const prefixRegex = new RegExp(
-      `^(<@!?${client.user?.id}>|${funcs.default.escapeRegex(prefix)})\\s*`
+      `^(<@!?${client.user?.id}>|${funcs.escapeRegex(prefix)})\\s*`
     );
     //if its not that then return
     if (!prefixRegex.test(message.content)) return;
@@ -145,7 +145,7 @@ export default async (client: Client, message: Message) => {
             .setColor("RED")
             .setFooter(ee.footertext, ee.footericon)
             .setTitle(
-              `❌ Please wait ${funcs.default.duration(
+              `❌ Please wait ${funcs.duration(
                 timeLeft
               )} before reusing the \`${command.name}\` command.`
             );
@@ -169,7 +169,7 @@ export default async (client: Client, message: Message) => {
             .setTitle("❌ Error | You are not allowed to run this command!")
             .setDescription("You Do Not Have The Required Perms!");
           return message.channel.send({ embeds: [e] }).then((msg) => {
-            delay(1000);
+            funcs.delay(1000);
             msg.delete().catch(() => console.log("Couldn't Delete --> Ignore"));
           });
         }

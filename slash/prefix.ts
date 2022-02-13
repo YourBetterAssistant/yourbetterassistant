@@ -1,6 +1,6 @@
 import { Client, CommandInteraction, MessageEmbed } from "discord.js";
 
-export default {
+module.exports = {
   name: "prefix",
   description: "Reminder of what the prefix is",
   options: [],

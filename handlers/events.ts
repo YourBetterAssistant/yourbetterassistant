@@ -1,6 +1,9 @@
-// "use strict";
-
-module.exports = function (client) {
+import { readdirSync } from "fs";
+import { Client } from "discord.js";
+import Table from "cli-table";
+const table = new Table();
+table.push(["Event".cyan, "Loaded".red]);
+module.exports = function (client: Client) {
   console.log(client);
 };
 // import { Client } from "discord.js";

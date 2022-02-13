@@ -4,7 +4,7 @@ import {
   Interaction,
   MessageEmbed,
 } from "discord.js";
-export default {
+module.exports = {
   name: "whodidthis",
   description: "Who did this",
   options: [{ name: "user", description: "user", type: 6 }],

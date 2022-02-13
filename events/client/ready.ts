@@ -5,7 +5,7 @@ import "colors";
 import fs from "fs";
 import mongo from "../../botconfig/mongo";
 import { Client, MessageAttachment, TextChannel } from "discord.js";
-export default async (client: Client) => {
+module.exports = async (client: Client) => {
   setInterval(async function () {
     const logs = new MessageAttachment("./logs-0.log", "Logs.log");
     (client.channels.cache?.get("900255068949983282") as TextChannel)?.send({

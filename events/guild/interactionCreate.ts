@@ -5,7 +5,7 @@ import Discord, {
   Client,
   GuildMemberRoleManager,
 } from "discord.js";
-export default async (client: Client, interaction: Interaction) => {
+module.exports = async (client: Client, interaction: Interaction) => {
   if (interaction.isCommand()) {
     let cmd = client.interactions.get(interaction.commandName);
     if (!cmd) return;
