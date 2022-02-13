@@ -1,7 +1,7 @@
 "use strict";
 
 import Discord, { Client, Message } from "discord.js";
-export default {
+module.exports = {
   name: "profilepic",
   category: "Fun",
   cooldown: 1,

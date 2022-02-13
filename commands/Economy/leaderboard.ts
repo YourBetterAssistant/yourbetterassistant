@@ -4,7 +4,7 @@ import money from "../../Constructors/economy";
 import funcs from "../../handlers/functions";
 import { Client, GuildMember, Message, MessageEmbed } from "discord.js";
 const currency = new money();
-export default {
+module.exports = {
   name: "rich",
   description: "Currency Leaderboard first q0",
   category: "Economy",

@@ -3,7 +3,7 @@
 import { Client, Message, MessageEmbed } from "discord.js";
 import { MessageMentions } from "discord.js";
 import ee from "../../botconfig/embed.json";
-export default {
+module.exports = {
   name: "say",
   category: "Fun",
   cooldown: 2,

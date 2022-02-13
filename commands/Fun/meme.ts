@@ -2,7 +2,7 @@
 
 const gottem = require("djs-meme");
 import Discord, { Client, Message } from "discord.js";
-export default {
+module.exports = {
   name: "meme",
   description: "sends a meme",
   category: "Fun",

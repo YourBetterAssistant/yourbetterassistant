@@ -4,7 +4,7 @@ import { Client, Message, MessageEmbed } from "discord.js";
 import funcs from "../../handlers/functions";
 import economySchema from "../../Schemas/economySchema";
 
-export default {
+module.exports = {
   name: "daily",
   description: "Get your daily YBCs",
   category: "Economy",

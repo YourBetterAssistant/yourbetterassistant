@@ -1,6 +1,6 @@
 import { Client, Message, MessageEmbed } from "discord.js";
 
-export default {
+module.exports = {
   name: "previous",
   description: "Plays the previous song",
   category: "Music",

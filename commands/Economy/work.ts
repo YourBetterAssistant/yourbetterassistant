@@ -7,7 +7,7 @@ import s from "../../botconfig/salary.json";
 import money from "../../Constructors/economy";
 import { default as axios } from "axios";
 const economy = new money();
-export default {
+module.exports = {
   name: "work",
   description: "work ",
   category: "Economy",

@@ -1,5 +1,5 @@
 import { Client, Message, MessageEmbed } from "discord.js";
-export default {
+module.exports = {
   name: "privacy",
   description: "Privacy Policy",
   category: "Information",

@@ -2,7 +2,7 @@
 
 import { Client, Message } from "discord.js";
 import { Sudo } from "weky";
-export default {
+module.exports = {
   name: "sudo",
   aliases: ["imitate"],
   description: "makes a webhook of the defined user",

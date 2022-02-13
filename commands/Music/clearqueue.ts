@@ -1,6 +1,6 @@
 import { Client, Message } from "discord.js";
 
-export default {
+module.exports = {
   name: "clearqueue",
   description: "Clears The Queue",
   category: "Music",

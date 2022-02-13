@@ -2,7 +2,7 @@
 
 import { Client, Message, MessageEmbed } from "discord.js";
 
-export default {
+module.exports = {
   name: "queue",
   aliases: ["q"],
   description: "Shows the current queue",

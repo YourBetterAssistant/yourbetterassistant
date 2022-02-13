@@ -3,7 +3,7 @@
 import { Client, Message, MessageEmbed, MessageFlags } from "discord.js";
 import { reply, hiremongo } from "../../exports";
 import id from "../../botconfig/id.json";
-export default {
+module.exports = {
   name: "hire",
   description: "get a job",
   category: "Economy",

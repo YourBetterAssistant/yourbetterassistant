@@ -2,7 +2,7 @@
 
 import { Client, Message } from "discord.js";
 import { reply } from "../../exports";
-export default {
+module.exports = {
   name: "support",
   description: "Sends support server link",
   category: "Information",

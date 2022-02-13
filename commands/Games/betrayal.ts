@@ -3,7 +3,7 @@
 import { DiscordTogether } from "discord-together";
 import { Message } from "discord.js";
 import { reply } from "../../exports";
-export default {
+module.exports = {
   name: "betrayal",
   description: "Play betrayal with your buds",
   category: "Games",

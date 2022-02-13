@@ -2,7 +2,7 @@ import { Client, Message, MessageEmbed } from "discord.js";
 import funcs from "../../handlers/functions";
 const osInfo = require("@felipebutcher/node-os-info");
 //@ts-check
-export default {
+module.exports = {
   name: "neofetch",
   description: "Shows Information About The Bot's Hardware",
   category: "Information",

@@ -8,7 +8,7 @@ const random = new Random(); // uses the nativeMath engine
 let heads = 1;
 let tails = 0;
 const value = Math.floor(Math.random());
-export default {
+module.exports = {
   name: "coinflip",
   aliases: ["ht", "th"],
   description: "flips a coin",

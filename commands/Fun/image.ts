@@ -10,7 +10,7 @@ const google = new Scraper({
   safe: true,
   userAgent: "YBA",
 });
-export default {
+module.exports = {
   name: "image",
   description: "displays an image searched from the web",
   category: "Fun",

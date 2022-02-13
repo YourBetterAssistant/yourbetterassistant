@@ -5,7 +5,7 @@ import serverConfSchema from "../../Schemas/serverConfSchema";
 
 import { reply } from "../../exports";
 import { Client, Message } from "discord.js";
-export default {
+module.exports = {
   name: "kick",
   description: "kicks people",
   category: "Administration",

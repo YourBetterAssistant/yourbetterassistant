@@ -3,7 +3,7 @@
 import { Client, Message } from "discord.js";
 import { reply } from "../../exports";
 const djsGames = require("djs-games");
-export default {
+module.exports = {
   name: "gtn",
   aliases: ["guessthenumber"],
   description: "guess the number game",

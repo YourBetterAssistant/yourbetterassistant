@@ -2,7 +2,7 @@
 
 import { Client, Message } from "discord.js";
 import { reply } from "../../exports";
-export default {
+module.exports = {
   name: "fasttyper",
   aliases: ["typer"],
   description: "typer game",

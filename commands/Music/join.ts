@@ -2,7 +2,7 @@
 
 import { Client, Message } from "discord.js";
 
-export default {
+module.exports = {
   name: "join",
   description: "Joins a voice channel",
   category: "Music",

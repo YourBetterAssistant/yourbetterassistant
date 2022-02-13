@@ -48,7 +48,7 @@ type command = {
   cooldown: number;
   memberpermissions: string;
   usage: string;
-  run: (client: Client, interaction: CommandInteraction) => void;
+  run: (client: Client, message: Message) => void;
 };
 declare module "@felipebutcher/node-os-info" {
   type cpu = (cpu: number) => void;
