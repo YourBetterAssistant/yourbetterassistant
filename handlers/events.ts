@@ -4,8 +4,25 @@ import Table from "cli-table";
 const table = new Table();
 table.push(["Event".cyan, "Loaded".red]);
 module.exports = function (client: Client) {
-  console.log(client);
+  function loadDir(dir: string) {
+    const files = readdirSync(`dist/events/${dir}`).filter((file) =>
+      file.endsWith(".js")
+    );
+    for (const file of files) {
+      const event = require(`../events/${dir}/${file}`);
+      const eventName = file.split(".")[0];
+      try {
+        client.on(eventName, (...args: any[]) => event(client, ...args));
+        table.push([eventName.green, "Yes".green]);
+      } catch (err: any) {
+        table.push([eventName.red, `${err.stack}`.red]);
+      }
+    }
+  }
+  ["client", "guild"].forEach((dir) => loadDir(dir));
+  console.log(table.toString());
 };
+
 // import { Client } from "discord.js";
 // import fs from "fs";
 // const ascii = require("ascii-table");

@@ -2,6 +2,7 @@
 import Discord from "discord.js"; //this is the official discord.js wrapper for the Discord Api, which we use!
 require("dotenv").config();
 import { Node } from "lavaclient";
+import mongo from "./botconfig/mongo";
 require("@weky/inlinereply");
 let token = process.env.TOKEN;
 require("colors"); //this Package is used, to change the colors of our Console! (optional and doesnt effect performance)
@@ -42,6 +43,14 @@ lavalink.connect(clientId);
 lavalink.once("connect", () => {
   console.log("Connected to lavalink \n\n\n");
 });
+mongo()
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err: any) => {
+    console.log(err.stack);
+    process.exit(1);
+  });
 //Client variables to use everywhere
 client.lavalink = lavalink;
 client.queue = new Map();

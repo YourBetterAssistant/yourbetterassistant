@@ -188,7 +188,7 @@ module.exports = async (client: Client, message: Message) => {
         // }
 
         //run the command with the parameters:  client, message, args, user, text, prefix,
-        command.run(client, message);
+        command.run(client, message, args);
       } catch (e: any) {
         console.log(String(e.stack));
         let em = new Discord.MessageEmbed()

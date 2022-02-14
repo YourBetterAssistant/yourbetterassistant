@@ -15,6 +15,7 @@ export async function prefixLoad(
 
     for (const guild of client.guilds.cache) {
       let guildID = guild[1].id;
+      console.log(guildID);
       console.log(cache.length);
       if (cache.length !== 0 && cache.length === client.guilds.cache.size) {
         console.log("cache");

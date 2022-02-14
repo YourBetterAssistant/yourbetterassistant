@@ -63,6 +63,7 @@ module.exports = {
         embed.setColor("BLUE");
         return message.reply({ embeds: [embed] });
       } else {
+        console.log("test");
         const embed = new MessageEmbed()
           .setColor("BLUE")
           .setThumbnail(client.user?.displayAvatarURL()!)
