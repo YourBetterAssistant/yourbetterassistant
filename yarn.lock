@@ -45,10 +45,6 @@
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/@discordjs/collection/-/collection-0.1.6.tgz#9e9a7637f4e4e0688fd8b2b5c63133c91607682c"
 
-"@discordjs/collection@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@discordjs/collection/-/collection-0.3.2.tgz#3c271dd8a93dad89b186d330e24dbceaab58424a"
-
 "@discordjs/collection@^0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@discordjs/collection/-/collection-0.4.0.tgz#b6488286a1cc7b41b644d7e6086f25a1c1e6f837"
@@ -82,14 +78,14 @@
     "@discordjs/node-pre-gyp" "^0.4.2"
     node-addon-api "^4.2.0"
 
-"@discordjs/rest@^0.2.0-canary.0":
-  version "0.2.0-canary.0"
-  resolved "https://registry.yarnpkg.com/@discordjs/rest/-/rest-0.2.0-canary.0.tgz#5ac955614453d02808c4df35a5cfb28d146566b2"
+"@discordjs/rest@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@discordjs/rest/-/rest-0.3.0.tgz#89e06a42b168c91598891d6bf860353e28fba5d2"
   dependencies:
-    "@discordjs/collection" "^0.3.2"
+    "@discordjs/collection" "^0.4.0"
     "@sapphire/async-queue" "^1.1.9"
-    "@sapphire/snowflake" "^3.0.0"
-    discord-api-types "^0.25.2"
+    "@sapphire/snowflake" "^3.0.1"
+    discord-api-types "^0.26.1"
     form-data "^4.0.0"
     node-fetch "^2.6.5"
     tslib "^2.3.1"
@@ -176,7 +172,7 @@
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@sapphire/async-queue/-/async-queue-1.2.0.tgz#7a56afd318101d338433d7180ebd6af349243268"
 
-"@sapphire/snowflake@^3.0.0":
+"@sapphire/snowflake@^3.0.1":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@sapphire/snowflake/-/snowflake-3.1.0.tgz#1c2d9781d3b1de0bcb02b7079898947ce754d394"
 
@@ -1234,10 +1230,6 @@ detect-libc@^2.0.0:
 devtools-protocol@0.0.901419:
   version "0.0.901419"
   resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.901419.tgz#79b5459c48fe7e1c5563c02bd72f8fec3e0cebcd"
-
-discord-api-types@^0.25.2:
-  version "0.25.2"
-  resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.25.2.tgz#e50ed152e6d48fe7963f5de1002ca6f2df57c61b"
 
 discord-api-types@^0.26.0, discord-api-types@^0.26.1:
   version "0.26.1"
