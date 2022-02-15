@@ -43,14 +43,6 @@ lavalink.connect(clientId);
 lavalink.once("connect", () => {
   console.log("Connected to lavalink \n\n\n");
 });
-mongo()
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((err: any) => {
-    console.log(err.stack);
-    process.exit(1);
-  });
 //Client variables to use everywhere
 client.lavalink = lavalink;
 client.queue = new Map();

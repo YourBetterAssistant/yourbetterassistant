@@ -76,7 +76,7 @@ module.exports = async (client: Client) => {
     try {
       console.log("Connected!");
     } catch (err: any) {
-      console.log(`Breh error \n\n ${err.stack}`);
+      console.log(`error \n\n ${err.stack}`);
     }
   });
 
