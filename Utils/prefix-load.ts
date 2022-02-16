@@ -7,6 +7,7 @@ export async function prefixLoad(
   globalPrefix: string
 ) {
   client.cache = cache;
+  console.log(await commandPrefixSchema.find());
   try {
     /**
      * @param client
