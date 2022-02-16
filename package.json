@@ -24,7 +24,7 @@
     "@lavalink/encoding": "^0.1.2",
     "@top-gg/sdk": "^3.1.2",
     "@weky/inlinereply": "0.0.0",
-    "axios": "^0.25.0",
+    "axios": "^0.26.0",
     "badwords": "^1.0.0",
     "better-redddit": "^1.2.6",
     "canvacord": "^5.2.3",
