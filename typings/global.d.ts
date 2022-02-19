@@ -1,4 +1,4 @@
-import { Collection } from "discord.js";
+import { Collection, PermissionResolvable } from "discord.js";
 import { Node } from "lavaclient";
 
 module "discord.js" {
@@ -46,7 +46,7 @@ type command = {
   aliases: string[];
   category: string;
   cooldown: number;
-  memberpermissions: string;
+  memberpermissions: PermissionResolvable;
   usage: string;
   run: (client: Client, message: Message, args: string[]) => void;
 };
