@@ -19,7 +19,7 @@ module.exports = {
       return;
     }
 
-    let link = "https://www.github.com/NotTimIsReal/bbarevamp";
+    let link = "https://www.github.com/NotTimIsReal/yourbetterassistant";
     reply(`Pulling from **${link}**`, true, message);
     exec(`git pull ${link}`, (err) => {
       if (err) return message.reply(`Error: \`\`\`${err.stack}\`\`\``);
