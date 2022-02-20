@@ -4,7 +4,7 @@ import { Client, Message } from "discord.js";
 
 import { MessageEmbed } from "discord.js";
 const ee = require("../../botconfig/embed.json");
-export default {
+module.exports = {
   name: "embed",
   category: "Fun",
   aliases: ["say-embed"],

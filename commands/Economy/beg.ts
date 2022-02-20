@@ -3,7 +3,7 @@
 import { Client, Message } from "discord.js";
 import money from "../../Constructors/economy";
 const economy = new money();
-export default {
+module.exports = {
   name: "beg",
   description: "beg for YBCs",
   category: "Economy",

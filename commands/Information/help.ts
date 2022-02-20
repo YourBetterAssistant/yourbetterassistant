@@ -1,7 +1,7 @@
 import { Client, Message, MessageEmbed } from "discord.js";
 import config from "../../botconfig/config.json";
 import ee from "../../botconfig/embed.json";
-export default {
+module.exports = {
   name: "help",
   description: "help command for text commands",
   category: "Information",
@@ -63,6 +63,7 @@ export default {
         embed.setColor("BLUE");
         return message.reply({ embeds: [embed] });
       } else {
+        console.log("test");
         const embed = new MessageEmbed()
           .setColor("BLUE")
           .setThumbnail(client.user?.displayAvatarURL()!)

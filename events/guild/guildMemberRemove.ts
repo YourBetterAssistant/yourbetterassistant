@@ -6,7 +6,7 @@ import countSchema from "../../Schemas/countSchema";
 import logSchema from "../../Schemas/logSchema";
 import mongo from "../../botconfig/mongo";
 import Discord from "discord.js";
-export default async (client: Client, member: GuildMember) => {
+module.exports = async (client: Client, member: GuildMember) => {
   await mongo().then(async () => {
     try {
       const guild = client.guilds.cache.get(member.guild.id);

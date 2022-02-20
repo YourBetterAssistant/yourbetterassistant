@@ -1,7 +1,7 @@
 "use strict";
 
 import Discord, { Client, Message } from "discord.js";
-export default {
+module.exports = {
   name: "weather",
   description: "Shows the weather of a country",
   category: "Fun",

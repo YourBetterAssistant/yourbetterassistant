@@ -2,7 +2,7 @@
 
 import { Client, Message } from "discord.js";
 
-export default {
+module.exports = {
   name: "serverconfig",
   description: "DEPRECATED USE WEBSITE",
   category: "Administration",

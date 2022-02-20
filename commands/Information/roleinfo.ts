@@ -1,6 +1,6 @@
 import { Client, Message, MessageEmbed } from "discord.js";
 
-export default {
+module.exports = {
   name: "roleinfo",
   description: "Shows Information About a Role",
   category: "Information",

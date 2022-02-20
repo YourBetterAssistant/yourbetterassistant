@@ -4,7 +4,7 @@ import { Message, Client } from "discord.js";
 import money from "../../Constructors/economy";
 const currency = new money();
 import { reply } from "../../exports";
-export default {
+module.exports = {
   name: "donate",
   aliases: ["give"],
   description: "donate your YBCs to someone else",

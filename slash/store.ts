@@ -15,7 +15,7 @@ function replicate(arr: string | any[], times: number) {
   for (var i = 0; i < rl; i++) res[i] = arr[i % al];
   return res;
 }
-export default {
+module.exports = {
   name: "store",
   description: "Store",
   options: [

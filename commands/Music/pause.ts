@@ -1,7 +1,7 @@
 import { Client, Message } from "discord.js";
 ("use strict");
 
-export default {
+module.exports = {
   name: "pause",
   description: "Pauses the song",
   category: "Music",

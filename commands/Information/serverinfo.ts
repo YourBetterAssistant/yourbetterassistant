@@ -3,7 +3,7 @@
 import { Client, Message, MessageEmbed } from "discord.js";
 import funcs from "../../handlers/functions";
 
-export default {
+module.exports = {
   name: "serverinfo",
   description: "shows an in-depth result of the server",
   category: "Information",

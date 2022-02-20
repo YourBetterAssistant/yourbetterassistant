@@ -3,7 +3,7 @@
 import puppeteer from "puppeteer";
 import Discord, { Client, Message } from "discord.js";
 import fs from "fs";
-export default {
+module.exports = {
   name: "screenie",
   description: "Take a screenshot of a website",
   category: "Fun",

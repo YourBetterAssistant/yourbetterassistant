@@ -3,5 +3,6 @@ declare namespace NodeJS {
     TOKEN: string;
     URL: string;
     TOPGGTOKEN: string;
+    APISECRET: string;
   }
 }

@@ -2,6 +2,7 @@
 import Discord from "discord.js"; //this is the official discord.js wrapper for the Discord Api, which we use!
 require("dotenv").config();
 import { Node } from "lavaclient";
+import mongo from "./botconfig/mongo";
 require("@weky/inlinereply");
 let token = process.env.TOKEN;
 require("colors"); //this Package is used, to change the colors of our Console! (optional and doesnt effect performance)
@@ -32,7 +33,7 @@ const clientId =
   process.env.NODE_ENV === "testing"
     ? "858606774658924555"
     : "862143828920369172";
-const info = { host: "10.23.86.202", port: 2333, password: "lavalink" };
+const info = { host: "10.23.86.27", port: 2333, password: "lavalink" };
 const lavalink = new Node({
   connection: info,
   sendGatewayPayload: (id, payload) =>
@@ -52,9 +53,10 @@ client.cooldowns = new Discord.Collection(); //an collection for cooldown comman
 client.interactions = new Discord.Collection();
 client.Token = token;
 //Loading files, with the client variable like Command Handler, Event Handler, ...
-["command", "events"].forEach((handler) => {
-  require(`./handlers/${handler}`)(client);
+["events", "command"].forEach(async (handler) => {
+  await require(`./handlers/${handler}`)(client);
 });
+
 client.ws.on(
   "VOICE_STATE_UPDATE",
   async (data) => await lavalink.handleVoiceUpdate(data)

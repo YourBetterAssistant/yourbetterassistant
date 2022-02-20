@@ -5,7 +5,7 @@ import {
   MessageEmbed,
   UserFlagsString,
 } from "discord.js";
-export default {
+module.exports = {
   name: "userinfo",
   description: "Shows Information Of A Member In The Server",
   options: [{ type: 6, name: "user", description: "The User", required: true }],

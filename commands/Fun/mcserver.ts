@@ -2,7 +2,7 @@
 
 import util from "minecraft-server-util";
 import Discord, { Client, Message } from "discord.js";
-export default {
+module.exports = {
   name: "mcserver",
   aliases: ["miencraft", "server"],
   description: "Display stats bout teh server you asked for",

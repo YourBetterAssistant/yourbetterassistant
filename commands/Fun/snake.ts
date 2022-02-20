@@ -3,7 +3,7 @@
 import { Client, Message } from "discord.js";
 import { reply } from "../../exports";
 
-export default {
+module.exports = {
   name: "snake",
   description: "snake game",
   category: "Fun",

@@ -1,6 +1,6 @@
 import { Client, CommandInteraction } from "discord.js";
 import https from "https";
-export default {
+module.exports = {
   name: "webserverstatus",
   description: "Shows Status of https://yourbetterassistant.me",
   run: async (client: Client, interaction: CommandInteraction) => {

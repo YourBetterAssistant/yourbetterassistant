@@ -4,7 +4,7 @@ import Discord, { Client, Message } from "discord.js";
 import money from "../../Constructors/economy";
 const currency = new money();
 import { reply } from "../../exports";
-export default {
+module.exports = {
   name: "deposit",
   aliases: ["dep"],
   description: "deposits YMCs to the bank",

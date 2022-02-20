@@ -1,5 +1,5 @@
 import { Client, CommandInteraction, MessageEmbed } from "discord.js";
-export default {
+module.exports = {
   name: "robert",
   description: "robert",
   options: [{ name: "user", description: "user", type: 6 }],

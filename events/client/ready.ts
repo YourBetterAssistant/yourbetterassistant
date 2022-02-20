@@ -5,7 +5,8 @@ import "colors";
 import fs from "fs";
 import mongo from "../../botconfig/mongo";
 import { Client, MessageAttachment, TextChannel } from "discord.js";
-export default async (client: Client) => {
+import axios from "axios";
+module.exports = async (client: Client) => {
   setInterval(async function () {
     const logs = new MessageAttachment("./logs-0.log", "Logs.log");
     (client.channels.cache?.get("900255068949983282") as TextChannel)?.send({
@@ -76,7 +77,7 @@ export default async (client: Client) => {
     try {
       console.log("Connected!");
     } catch (err: any) {
-      console.log(`Breh error \n\n ${err.stack}`);
+      console.log(`error \n\n ${err.stack}`);
     }
   });
 
@@ -93,35 +94,6 @@ export default async (client: Client) => {
     }
     return result;
   }
-  fs.writeFile("./key.txt", `${makeid(20)}`, (err) => {
-    if (err) return;
-  });
-  /*client.interactions.forEach(async(inter)=>{
-    if(!inter.guild){
-      await client.api.applications(client.user.id).commands.post({data: {
-        name: inter.name,
-        description: inter.description||'undefined',
-      }})
-    }else if(inter.guild){
-      await client.api.applications(client.user.id).guilds(inter.guild).commands.post({data: {
-        name: inter.name,
-        description: inter.description||'undefined',
-      }})
-    }else if(inter.options&&!inter.guild){
-      await client.api.applications(client.user.id).commands.post({data: {
-        name: inter.name,
-        description: inter.description||'undefined',
-        options:inter.options
-      }})
-    }else if(inter.options&&inter.guild){
-      await client.api.applications(client.user.id).guilds(inter.guild).commands.post({data: {
-        name: inter.name,
-        description: inter.description||'undefined',
-        options:inter.options
-      }})
-    }
-
-  })*/
   let i = 1;
   client.interactions.forEach(async (inter) => {
     //return client.api.applications(client.user.id).commands.set([])
@@ -167,6 +139,15 @@ export default async (client: Client) => {
       });
     }
   });
+  await axios
+    .post("https://api.yourbetterassistant.me/api/bot/stats/update", {
+      secret: process.env.APISECRET,
+      commands: Array.from(client.commands),
+      interaction: Array.from(client.interactions),
+    })
+    .then(() => {
+      console.log("Posted Stats To Backend");
+    });
 };
 
 /** Template by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template */

@@ -1,6 +1,6 @@
 import { Client } from "discord.js";
 
-export default async (client: Client, oldState: any, newState: any) => {
+module.exports = async (client: Client, oldState: any, newState: any) => {
   const server_queue = client.queue.get(oldState.guild.id);
   if (
     server_queue &&

@@ -9,7 +9,7 @@ import config from "../../botconfig/config.json"; //loading config file with tok
 import { prefix as globalPrefix } from "../../botconfig/config.json";
 import ee from "../../botconfig/embed.json"; //Loading all embed settings like color footertext and icon ...
 import Discord, { Client, Message, TextChannel } from "discord.js"; //this is the official discord.js wrapper for the Discord Api, which we use!
-import * as funcs from "../../handlers/functions"; //Loading all needed functions
+import funcs from "../../handlers/functions"; //Loading all needed functions
 Levels.setURL(config.mongoPath);
 import unknownCommand from "../../Schemas/unknownCommand";
 import {
@@ -20,7 +20,7 @@ import autoMod from "../../Constructors/autoModUser";
 import levellingEnabled from "../../Schemas/levellingEnabled";
 //here the event starts
 let prefix;
-export default async (client: Client, message: Message) => {
+module.exports = async (client: Client, message: Message) => {
   const automod = new autoMod(message);
   const guildPrefixes: { [key: string]: string } = {};
   try {
@@ -39,7 +39,7 @@ export default async (client: Client, message: Message) => {
         .setTitle("Support DM")
         .setDescription(message.content)
         .setFooter(`Asked By ${message.author.username}`)
-        .setColor("#3498db");
+        .setColor("RED");
       const owner = await client.users.fetch("827388013062389761");
       owner.send(message.content + "\nAsked by " + message.author.tag);
       const channel = (await client.channels.fetch(
@@ -86,31 +86,27 @@ export default async (client: Client, message: Message) => {
           `${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`
         );
       }
-      process.on("uncaughtException", function (err: any) {
-        console.log("Caught exception: ", err);
-      });
     }
     prefix = guildPrefixes[message.guild.id] || globalPrefix; //comment ||guildPrefixes[message.guild.id] to be able to only use b!
     client.prefix = guildPrefixes || globalPrefix;
     //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
     const prefixRegex = new RegExp(
-      `^(<@!?${client.user?.id}>|${funcs.default.escapeRegex(prefix)})\\s*`
+      `^(<@!?${client.user?.id}>|${funcs.escapeRegex(prefix)})\\s*`
     );
     //if its not that then return
     if (!prefixRegex.test(message.content)) return;
     //now define the right prefix either ping or not ping
-    const matchedPrefix = message.content.match(prefixRegex);
+    const [_null, matchedPrefix] = message.content.match(
+      prefixRegex
+    ) as RegExpMatchArray;
     //create the arguments with sliceing of of the rightprefix length
-    const args = message.content
-      .slice(matchedPrefix?.length)
-      .trim()
-      .split(/ +/);
+    const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
     //creating the cmd argument by shifting the args by 1
     const cmd = args.shift()?.toLowerCase();
     //if no cmd added return error
-    if (cmd?.length === 0) {
+    if (cmd?.length! === 0) {
       let embed = new Discord.MessageEmbed()
-        .setColor("#3498db")
+        .setColor("BLUE")
         .setFooter(ee.footertext, ee.footericon)
         .setTitle(`Hugh? I got pinged? Imma give you some help`)
         .setDescription(
@@ -133,7 +129,7 @@ export default async (client: Client, message: Message) => {
       }
       const now = Date.now(); //get the current time
       const timestamps = client.cooldowns.get(command.name); //get the timestamp of the last used commands
-      const cooldownAmount = (command.cooldown || 1) * 1000; //get the cooldownamount of the command, if there is no cooldown there will be automatically 1 sec cooldown, so you cannot spam it^^
+      const cooldownAmount = (command.cooldown || 2) * 1000; //get the cooldownamount of the command, if there is no cooldown there will be automatically 1 sec cooldown, so you cannot spam it^^
       if (timestamps.has(message.author.id)) {
         //if the user is on cooldown
         const expirationTime =
@@ -145,7 +141,7 @@ export default async (client: Client, message: Message) => {
             .setColor("RED")
             .setFooter(ee.footertext, ee.footericon)
             .setTitle(
-              `❌ Please wait ${funcs.default.duration(
+              `❌ Please wait ${funcs.duration(
                 timeLeft
               )} before reusing the \`${command.name}\` command.`
             );
@@ -159,19 +155,20 @@ export default async (client: Client, message: Message) => {
         //if Command has specific permission return error
         if (
           command.memberpermissions &&
-          !message.member?.permissions
-            .toArray()
-            .find((s) => s === command?.memberpermissions)
+          !message.member?.permissions.has(command.memberpermissions)
         ) {
           let e = new Discord.MessageEmbed()
             .setColor("RED")
             .setFooter(ee.footertext, ee.footericon)
             .setTitle("❌ Error | You are not allowed to run this command!")
             .setDescription("You Do Not Have The Required Perms!");
-          return message.channel.send({ embeds: [e] }).then((msg) => {
-            delay(1000);
-            msg.delete().catch(() => console.log("Couldn't Delete --> Ignore"));
-          });
+          return message.channel.send({ embeds: [e] }).then((msg) =>
+            setTimeout(() => {
+              msg
+                .delete()
+                .catch(() => console.log("Couldn't Delete --> Ignore".gray));
+            }, 1000)
+          );
         }
         //if the Bot has not enough permissions return error
         // let required_perms = ["ADD_REACTIONS","VIEW_CHANNEL","SEND_MESSAGES",
@@ -188,9 +185,9 @@ export default async (client: Client, message: Message) => {
         // }
 
         //run the command with the parameters:  client, message, args, user, text, prefix,
-        command.run(client, message);
+        command.run(client, message, args);
       } catch (e: any) {
-        console.log(String(e.stack));
+        console.log(String(e.stack).red);
         let em = new Discord.MessageEmbed()
           .setColor("RED")
           .setFooter(ee.footertext, ee.footericon)
@@ -209,7 +206,7 @@ export default async (client: Client, message: Message) => {
         message.channel.send(
           `Something happened while running \`${command.name}\`, This has been logged and reported to the developers`
         );
-        return channel.send({ embeds: [em] });
+        return channel?.send({ embeds: [em] });
       }
     } else {
       //if the command is not found send an info msg

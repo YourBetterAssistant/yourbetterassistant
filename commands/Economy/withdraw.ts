@@ -3,7 +3,7 @@
 import { Client, Message } from "discord.js";
 import money from "../../Constructors/economy";
 const economy = new money();
-export default {
+module.exports = {
   name: "withdraw",
   aliases: ["with"],
   description: "withdraw money",
@@ -16,7 +16,7 @@ export default {
     //if(isNaN(args[0])) return message.channel.send('That is not a real number')
     let coins = args[0];
     let user = message.author;
-    reply(`Withdrawing ${coins}YMCs from the bank!`, true, message);
+    message.reply(`Withdrawing ${coins}YMCs from the bank!`);
     if (coins === "all") {
       await economy.withdraw(user.id, coins, message);
       return;

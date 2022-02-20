@@ -3,7 +3,7 @@
 import { Client, Message, MessageEmbed } from "discord.js";
 import ee from "../../botconfig/embed.json";
 import funcs from "../../handlers/functions";
-export default {
+module.exports = {
   name: "uptime",
   category: "Information",
   aliases: [""],

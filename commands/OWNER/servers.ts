@@ -1,7 +1,7 @@
 "use strict";
 
 import { Client, Message, MessageEmbed } from "discord.js";
-export default {
+module.exports = {
   name: "servers",
   aliases: ["guilds", "list-guilds"],
   description: "lists the guild names of all the guilds the bot is in",

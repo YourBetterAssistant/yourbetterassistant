@@ -8,7 +8,7 @@ import joinRoles from "../../Schemas/onJoin";
 import mongo from "../../botconfig/mongo";
 import Discord from "discord.js";
 
-export default async (client: Client, member: GuildMember) => {
+module.exports= async (client: Client, member: GuildMember) => {
   const onJoin = async (member: GuildMember) => {
     console.log("Join");
     const guild = client.guilds.cache.get(member.guild.id);

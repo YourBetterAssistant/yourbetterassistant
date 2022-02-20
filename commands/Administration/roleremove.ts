@@ -2,7 +2,7 @@
 
 import { Client, Message } from "discord.js";
 
-export default {
+module.exports = {
   name: "roleremove",
   description: "remove roles to users",
   category: "Administration",

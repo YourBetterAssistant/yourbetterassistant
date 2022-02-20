@@ -1,7 +1,7 @@
 "use strict";
 
 import { Client, CommandInteraction, MessageEmbed } from "discord.js";
-export default {
+module.exports = {
   name: "rifle",
   description: "rifle",
   options: [{ name: "user", description: "user", type: 6 }],

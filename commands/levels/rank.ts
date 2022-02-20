@@ -2,7 +2,7 @@
 
 import Levels from "discord-xp";
 import Discord, { Client, Message } from "discord.js";
-export default {
+module.exports = {
   name: "rank",
   description: "Shows the rank of the user",
   category: "levels",

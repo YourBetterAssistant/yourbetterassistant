@@ -2,7 +2,7 @@ import { Message, Client } from "discord.js";
 
 const GhostPing = require("../../Constructors/ghostPing");
 const { checkAutoMod } = require("../../Utils/checkAutoMod");
-export default async (client: Client, message: Message) => {
+module.exports = async (client: Client, message: Message) => {
   await checkAutoMod(message).then(
     async (found: { strictmode: "true" | "false" }) => {
       console.log(found);

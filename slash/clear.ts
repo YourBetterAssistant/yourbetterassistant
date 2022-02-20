@@ -1,6 +1,6 @@
 import { Client, CommandInteraction } from "discord.js";
 
-export default {
+module.exports = {
   name: "clear",
   description: "Mass Clear Messages",
   options: [

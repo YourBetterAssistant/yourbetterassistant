@@ -3,7 +3,7 @@ import { Client, CommandInteraction, TextChannel } from "discord.js";
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 const rrSchema = require("../Schemas/rrSchema");
 
-export default {
+module.exports = {
   name: "buttonroles",
   description: "Button Roles",
   options: [

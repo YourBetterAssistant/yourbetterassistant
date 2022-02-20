@@ -2,7 +2,7 @@
 
 import { Client, Message } from "discord.js";
 const akinator = require("discord.js-akinator");
-export default {
+module.exports = {
   name: "akinator",
   aliases: ["aki"],
   description: "Akinator",

@@ -2,7 +2,7 @@ import { GuildMember, User } from "discord.js";
 ("use strict");
 
 import { Client, CommandInteraction, MessageEmbed } from "discord.js";
-export default {
+module.exports = {
   name: "saveone",
   description: "Save One",
   options: [{ name: "user", description: "user", type: 6 }],

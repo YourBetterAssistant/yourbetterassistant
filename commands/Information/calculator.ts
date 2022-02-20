@@ -3,7 +3,7 @@
 import { Client, Message } from "discord.js";
 
 import { Calculator } from "weky";
-export default {
+module.exports = {
   name: "calculator",
   description: "Spawns Calaculator",
   category: "Information",

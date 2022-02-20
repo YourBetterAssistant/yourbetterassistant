@@ -6,7 +6,7 @@ import {
 } from "discord.js";
 import serverConfSchema from "../Schemas/serverConfSchema";
 const roles: { [key: string]: any } = {};
-export default {
+module.exports = {
   name: "unmute",
   description: "unmute",
   options: [{ name: "user", description: "user", type: 6, required: true }],
