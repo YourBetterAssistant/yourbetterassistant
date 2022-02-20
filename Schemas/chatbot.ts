@@ -12,7 +12,7 @@ const chatBot = new mongoose.Schema({
   },
 });
 
-export default mongoose.model<Ichatbot>("chatbots", chatBot);
+export default mongoose.model<Ichatbot>("chatbot", chatBot);
 interface Ichatbot {
   guildID: string;
   channelID: string;
