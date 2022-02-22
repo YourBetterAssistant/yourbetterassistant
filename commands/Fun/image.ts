@@ -6,6 +6,8 @@ import Scraper from "images-scraper";
 const google = new Scraper({
   puppeteer: {
     executablePath: "/usr/bin/chromium",
+     headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   },
   safe: true,
   userAgent: "YBA",
