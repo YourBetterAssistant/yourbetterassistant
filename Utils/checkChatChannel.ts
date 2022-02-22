@@ -12,8 +12,7 @@ async function check(message: Message) {
           .get(url)
           .then(function (response: any) {
             // handle success
-            let c = message.guild?.channels.cache.get(ch) as TextChannel;
-            c.send(response.data.message);
+            message.reply(response.data.message);
           })
           .catch(function (error: any) {
             // handle error
@@ -21,7 +20,9 @@ async function check(message: Message) {
           })
           .then(function () {});
       }
-      urlGet(`https://api.udit.tk/api/chatbot?message=${message.content}`);
+      urlGet(
+        `https://chatbot.yourbetterassistant.me/?message=${message.content}`
+      );
       return;
     }
   }
