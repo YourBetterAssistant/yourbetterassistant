@@ -12,7 +12,7 @@ const logSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model<IlogSchema>("logSchema", logSchema);
+export default mongoose.model<IlogSchema>("logschemas", logSchema);
 interface IlogSchema extends mongoose.Document {
   _id: string;
   channelID: string;
