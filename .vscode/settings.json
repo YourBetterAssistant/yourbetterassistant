@@ -1,8 +1,15 @@
 {
-    "files.autoSave": "onWindowChange",
-    "typescript.tsserver.log": "normal",
-    "markdown.trace": "verbose",
-    "kite.loggingLevel": "verbose",
-    "discord.enabled": true,
-    "git.ignoreLimitWarning": true
+  "files.autoSave": "onWindowChange",
+  "typescript.tsserver.log": "normal",
+  "markdown.trace": "verbose",
+  "kite.loggingLevel": "verbose",
+  "discord.enabled": true,
+  "git.ignoreLimitWarning": true,
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "eslint.nodePath": ".yarn/sdks",
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }

@@ -129,20 +129,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@eslint/eslintrc@npm:1.1.0"
+"@eslint/eslintrc@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@eslint/eslintrc@npm:1.2.1"
   dependencies:
     ajv: ^6.12.4
     debug: ^4.3.2
     espree: ^9.3.1
     globals: ^13.9.0
-    ignore: ^4.0.6
+    ignore: ^5.2.0
     import-fresh: ^3.2.1
     js-yaml: ^4.1.0
     minimatch: ^3.0.4
     strip-json-comments: ^3.1.1
-  checksum: 784aa2157e2808b52bbbaf1d1cfca9a6ba0b2faaa3696eb7a1229d4b357400fbd8a6aa09a16e7ae0868ea075d3a8f365cf5928b6d05a1df47f40a1167423a4fa
+  checksum: 1f797b9f94d71b965992cf6c44e3bcb574643014fd1e3d4862d25056bd5568f59c488461a7e9a1c1758ca7f0def5d3cb69c3d8b38581bcf4a53af74371243797
   languageName: node
   linkType: hard
 
@@ -762,12 +762,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.26.0":
-  version: 0.26.0
-  resolution: "axios@npm:0.26.0"
+"axios@npm:^0.26.1":
+  version: 0.26.1
+  resolution: "axios@npm:0.26.1"
   dependencies:
     follow-redirects: ^1.14.8
-  checksum: d7a8b898f4157bedeb2e06c03b16133b91b354c041205bea732ce58b7a21f373d22057b0eea0d482838145ce6ff482b359750d9bcb8dd19d45e3928e3c65c280
+  checksum: d9eb58ff4bc0b36a04783fc9ff760e9245c829a5a1052ee7ca6013410d427036b1d10d04e7380c02f3508c5eaf3485b1ae67bd2adbfec3683704745c8d7a6e1a
   languageName: node
   linkType: hard
 
@@ -803,40 +803,40 @@ __metadata:
     "@lavalink/encoding": ^0.1.2
     "@types/cli-table": ^0.3.0
     "@weky/inlinereply": 0.0.0
-    axios: ^0.26.0
+    axios: ^0.26.1
     badwords: ^1.0.0
     better-redddit: ^1.2.6
     canvacord: ^5.2.3
-    canvas: ^2.9.0
+    canvas: ^2.9.1
     cli-table: ^0.3.11
     colors: ^1.4.0
     d3-node: ^2.2.3
-    discord-together: ^1.3.25
+    discord-together: ^1.3.3
     discord-xp: ^1.1.16
     discord.js: ^13.6.0
-    discord.js-akinator: ^3.3.3
+    discord.js-akinator: ^3.4.2
     discord.js-ghost-ping: ^2.1.2
     djs-games: ^2.1.10
     djs-meme: ^1.2.8
     dotenv: ^16.0.0
-    eslint: ^8.9.0
+    eslint: ^8.12.0
     https: ^1.0.0
     images-scraper: ^6.4.0
     lavaclient: ^4.0.8-rc.2
-    libsodium-wrappers: ^0.7.9
+    libsodium-wrappers: ^0.7.10
     math: ^0.0.3
     minecraft-server-util: ^5.2.9
-    mongoose: ^6.2.2
+    mongoose: ^6.2.8
     ms: ^2.1.3
     nodemon: ^2.0.15
     random-js: ^2.1.0
-    spotify-url-info: ^2.2.5
-    typescript: ^4.5.5
+    spotify-url-info: ^3.0.0
+    typescript: 4.4.4
     weather-api-data: ^1.0.8
     weather-js: ^2.0.0
     weky: ^3.1.8
     yt-search: ^2.10.3
-    ytdl-core: ^4.10.1
+    ytdl-core: ^4.11.0
   languageName: unknown
   linkType: soft
 
@@ -1064,7 +1064,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"canvas@npm:^2.2.0, canvas@npm:^2.8.0, canvas@npm:^2.9.0":
+"canvas@npm:^2.2.0, canvas@npm:^2.8.0":
   version: 2.9.0
   resolution: "canvas@npm:2.9.0"
   dependencies:
@@ -1073,6 +1073,18 @@ __metadata:
     node-gyp: latest
     simple-get: ^3.0.3
   checksum: 376ccd47340a46c04d5cabafd6feb1b7ae82c92dc3ae6db68c9cbac17ec1c43d2bf6aab60019690e9d49bf40b41bee3e4e0a8901f39b53e993789698e77e2699
+  languageName: node
+  linkType: hard
+
+"canvas@npm:^2.9.1":
+  version: 2.9.1
+  resolution: "canvas@npm:2.9.1"
+  dependencies:
+    "@mapbox/node-pre-gyp": ^1.0.0
+    nan: ^2.15.0
+    node-gyp: latest
+    simple-get: ^3.0.3
+  checksum: 0175067df9eaa591113605441c150ffe7d5196a3273559b0aadfe56854e8353ea99eb3c56c9347c76e54a4781c88dd24662268a0f86500e69b608d5b1e9e6801
   languageName: node
   linkType: hard
 
@@ -1382,15 +1394,6 @@ __metadata:
   version: 1.0.3
   resolution: "core-util-is@npm:1.0.3"
   checksum: 9de8597363a8e9b9952491ebe18167e3b36e7707569eed0ebf14f8bba773611376466ae34575bca8cfe3c767890c859c74056084738f09d4e4a6f902b2ad7d99
-  languageName: node
-  linkType: hard
-
-"cross-fetch@npm:~3.1.4":
-  version: 3.1.5
-  resolution: "cross-fetch@npm:3.1.5"
-  dependencies:
-    node-fetch: 2.6.7
-  checksum: f6b8c6ee3ef993ace6277fd789c71b6acf1b504fd5f5c7128df4ef2f125a429e29cd62dc8c127523f04a5f2fa4771ed80e3f3d9695617f441425045f505cf3bb
   languageName: node
   linkType: hard
 
@@ -1968,7 +1971,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-together@npm:^1.3.25":
+"discord-together@npm:^1.3.3":
   version: 1.3.25
   resolution: "discord-together@npm:1.3.25"
   dependencies:
@@ -1987,14 +1990,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js-akinator@npm:^3.3.3":
-  version: 3.4.0
-  resolution: "discord.js-akinator@npm:3.4.0"
+"discord.js-akinator@npm:^3.4.2":
+  version: 3.4.2
+  resolution: "discord.js-akinator@npm:3.4.2"
   dependencies:
     "@vitalets/google-translate-api": ^7.0.0
     aki-api: ^6.0.8
-    discord.js: ^13.1.0
-  checksum: 624cbed73b1b51b85f52eafd4898335f3035585f73c80728bcf1676d105878b00dffadedf53d793fd8334606681bb2f5f5e66a80cc0756c8721cd97293b8ca9d
+    discord.js: ^13.6.0
+  checksum: 6b4909526cd05cec086d2ad1acb9cd606edc3c6e0e32467d6e05265c6c0c607a150d52e5538ce9d970257c48e78b66aeb1135dc164dcb1c76d32448737cc06b8
   languageName: node
   linkType: hard
 
@@ -2309,11 +2312,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.9.0":
-  version: 8.9.0
-  resolution: "eslint@npm:8.9.0"
+"eslint@npm:^8.12.0":
+  version: 8.12.0
+  resolution: "eslint@npm:8.12.0"
   dependencies:
-    "@eslint/eslintrc": ^1.1.0
+    "@eslint/eslintrc": ^1.2.1
     "@humanwhocodes/config-array": ^0.9.2
     ajv: ^6.10.0
     chalk: ^4.0.0
@@ -2350,7 +2353,7 @@ __metadata:
     v8-compile-cache: ^2.0.3
   bin:
     eslint: bin/eslint.js
-  checksum: 8efecdb9752ee6cb4d2787a14e00cbeab29562ed95dd71c6f3f8ac410426a067d5aa659416d2290e46ca44bc5607e6a6e6c62f814694d8639f80666f522022a7
+  checksum: 111bf9046b7a463049788dd00d7f4cd91e024029982352dff4811ce5dfa8cb1136aa127cd8a7a91508234d3e1b4fb6f638a1f5ef9ea08b1af93a18703a4a8dc1
   languageName: node
   linkType: hard
 
@@ -3030,13 +3033,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore@npm:^4.0.6":
-  version: 4.0.6
-  resolution: "ignore@npm:4.0.6"
-  checksum: 248f82e50a430906f9ee7f35e1158e3ec4c3971451dd9f99c9bc1548261b4db2b99709f60ac6c6cac9333494384176cc4cc9b07acbe42d52ac6a09cad734d800
-  languageName: node
-  linkType: hard
-
 "ignore@npm:^5.2.0":
   version: 5.2.0
   resolution: "ignore@npm:5.2.0"
@@ -3475,12 +3471,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"libsodium-wrappers@npm:^0.7.9":
-  version: 0.7.9
-  resolution: "libsodium-wrappers@npm:0.7.9"
+"libsodium-wrappers@npm:^0.7.10":
+  version: 0.7.10
+  resolution: "libsodium-wrappers@npm:0.7.10"
   dependencies:
     libsodium: ^0.7.0
-  checksum: b5b1b9e1b4aa5662e07df244934125f9e3cd2ba7fe0ec45191a5ffc822d22f4d2f6e09e42d91c30c4f48ca0c7f810a176fdf5e32eed6722d7d82a2a719459f56
+  checksum: 294ac098895a15f99e65431c62478f149e9e5cbbcd1fa1b41e832b65e0ead63856cc964b3b7c14447a48701e3334661dea9223442834ae7dd0d34285991616cd
   languageName: node
   linkType: hard
 
@@ -3704,7 +3700,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"miniget@npm:^4.0.0, miniget@npm:^4.2.2":
+"miniget@npm:^4.2.2":
   version: 4.2.2
   resolution: "miniget@npm:4.2.2"
   checksum: 577a7826cbf521b8ecb31906b3dce55c61b35398318a461f3484681572287208b7ec5a40de7b0bf0b7738f21630d015cc39ba3edcfb69146565f1528ff957612
@@ -3934,18 +3930,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongoose@npm:^6.2.2":
-  version: 6.2.2
-  resolution: "mongoose@npm:6.2.2"
+"mongoose@npm:^6.2.8":
+  version: 6.2.8
+  resolution: "mongoose@npm:6.2.8"
   dependencies:
     bson: ^4.2.2
     kareem: 2.3.4
     mongodb: 4.3.1
     mpath: 0.8.4
     mquery: 4.0.2
-    ms: 2.1.2
-    sift: 13.5.2
-  checksum: 1de9b053b8f33e0e9a6a5698c329525455f6af21657d63ff91fd8c8a74ee50e7b7bda3484b1607cab52406e7770b02f91ab2b4f656c1975527d762fa48cab837
+    ms: 2.1.3
+    sift: 16.0.0
+  checksum: 238fab1829d220d9fae8c8b5c923fabbbeaf0a9784bc6ae2c79241a11b1a8d9707702758939359f5096d1e005bfa1afa61db0d063a3d365cf41b31eaa4080daf
   languageName: node
   linkType: hard
 
@@ -3992,7 +3988,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ms@npm:^2.0.0, ms@npm:^2.1.1, ms@npm:^2.1.3":
+"ms@npm:2.1.3, ms@npm:^2.0.0, ms@npm:^2.1.1, ms@npm:^2.1.3":
   version: 2.1.3
   resolution: "ms@npm:2.1.3"
   checksum: aa92de608021b242401676e35cfa5aa42dd70cbdc082b916da7fb925c542173e36bce97ea3e804923fe92c0ad991434e4a38327e15a1b5b5f945d66df615ae6d
@@ -4068,7 +4064,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:2.6.7, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.5":
+"node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.5":
   version: 2.6.7
   resolution: "node-fetch@npm:2.6.7"
   dependencies:
@@ -4938,6 +4934,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sift@npm:16.0.0":
+  version: 16.0.0
+  resolution: "sift@npm:16.0.0"
+  checksum: 88d5754afe16fbaf4274223e492f4aa382c44070bc63b84b9dcfe0f16f65ff64361c4e642b2ae65dfe33a85170a6ecc378ca44487302a88835f58fe152e62894
+  languageName: node
+  linkType: hard
+
 "signal-exit@npm:^3.0.0, signal-exit@npm:^3.0.2":
   version: 3.0.7
   resolution: "signal-exit@npm:3.0.7"
@@ -5041,14 +5044,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"spotify-url-info@npm:^2.2.5":
-  version: 2.2.5
-  resolution: "spotify-url-info@npm:2.2.5"
+"spotify-url-info@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "spotify-url-info@npm:3.0.0"
   dependencies:
-    cross-fetch: ~3.1.4
     himalaya: ~1.1.0
     spotify-uri: ~2.2.0
-  checksum: ac34bc86bd29faacdf7eedd48935a04d21a978242561ace8186150d6827f98ccd97a3fe8b5b024b54a16b781594fc1b35afb04b612d806c821f1caadff8557a3
+  checksum: 02c1cb2bc6f8623888d800e5002a99afb5539e914aa84db186996b981dc93fb3a6a084d40444a6b81134767a3925b082010bbfe20f30caebeaad5733b1d70a30
   languageName: node
   linkType: hard
 
@@ -5477,23 +5479,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.5.5":
-  version: 4.5.5
-  resolution: "typescript@npm:4.5.5"
+"typescript@npm:4.4.4":
+  version: 4.4.4
+  resolution: "typescript@npm:4.4.4"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 506f4c919dc8aeaafa92068c997f1d213b9df4d9756d0fae1a1e7ab66b585ab3498050e236113a1c9e57ee08c21ec6814ca7a7f61378c058d79af50a4b1f5a5e
+  checksum: 89ecb8436bb48ef5594d49289f5f89103071716b6e4844278f4fb3362856e31203e187a9c76d205c3f0b674d221a058fd28310dbcbcf5d95e9a57229bb5203f1
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.5.5#~builtin<compat/typescript>":
-  version: 4.5.5
-  resolution: "typescript@patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"
+"typescript@patch:typescript@4.4.4#~builtin<compat/typescript>":
+  version: 4.4.4
+  resolution: "typescript@patch:typescript@npm%3A4.4.4#~builtin<compat/typescript>::version=4.4.4&hash=493e53"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: c05c318d79c690f101d7ffb34cd6c7d6bbd884d3af9cefe7749ad0cd6be43c7082f098280982ca945dcba23fde34a08fed9602bb26540936baf8c0520727d3ba
+  checksum: bd629ad0da4a15d79aaad56baf3ee7d96f6a181760d430ae77f8c5325df7bffd9edee57544a3970e3651e8b796fe03a5838a7eb39c6d46cc3866c0b23d36a0dd
   languageName: node
   linkType: hard
 
@@ -5917,14 +5919,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ytdl-core@npm:^4.10.1":
-  version: 4.10.1
-  resolution: "ytdl-core@npm:4.10.1"
+"ytdl-core@npm:^4.11.0":
+  version: 4.11.0
+  resolution: "ytdl-core@npm:4.11.0"
   dependencies:
     m3u8stream: ^0.8.6
-    miniget: ^4.0.0
+    miniget: ^4.2.2
     sax: ^1.1.3
-  checksum: 31f79758be7dbc37629711d3b0e1a68131b73e73d0cfbe490982f25620d01893810142aa6464420ea05993d40657523fc2565e3bf346227f66bdb8233fe8a780
+  checksum: 1ebe546da39e2a55fea6544d290f92f722416b77bb9c84322d5ca08394fb00642c6cf832ccac2feec12e9189a009af90e8185a96772e84c94599841ded21bd65
   languageName: node
   linkType: hard
 

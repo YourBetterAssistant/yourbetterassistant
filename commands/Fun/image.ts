@@ -5,11 +5,15 @@ import Discord, { Client, Message } from "discord.js";
 import Scraper from "images-scraper";
 const google = new Scraper({
   puppeteer: {
+    //@ts-ignore
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
     executablePath: "/usr/bin/chromium",
   },
   safe: true,
   userAgent: "YBA",
 });
+//@ts-check
 module.exports = {
   name: "image",
   description: "displays an image searched from the web",
