@@ -11,7 +11,7 @@
   "scripts": {
     "test": "export NODE_ENV=testing; nodemon index.js",
     "start": "export NODE_ENV=development;node start.js",
-    "start:prod": "pm2 start dist/ecosystem.config.js",
+    "start:prod": "pm2 start dist/start.js",
     "build": "rm -rf dist;tsc"
   },
   "author": "NotTimIsReal",
