@@ -12,7 +12,7 @@
     "test": "export NODE_ENV=testing; nodemon index.js",
     "start": "export NODE_ENV=development;node start.js",
     "start:prod": "pm2 start dist/ecosystem.config.js",
-    "build": "tsc"
+    "build": "rm -rf dist;tsc"
   },
   "author": "NotTimIsReal",
   "license": "MIT",
