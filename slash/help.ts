@@ -41,11 +41,7 @@ module.exports = {
           );
         if (cmd.cooldown)
           embed.addField("**Cooldown**", `\`${cmd.cooldown} Seconds\``);
-        else
-          embed.addField(
-            "**Cooldown**",
-            `\`${config.defaultCommandCooldown}\``
-          );
+        else embed.addField("**Cooldown**", `\`2 Seconds\``);
         if (cmd.usage) {
           embed.addField(
             "**Usage**",

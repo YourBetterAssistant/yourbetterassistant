@@ -8,9 +8,9 @@ module.exports = {
     { type: 3, name: "prefix", description: "the prefix", required: true },
   ],
   run: async (client: Client, interaction: CommandInteraction) => {
-    const isAdmin = () =>
-      (interaction.memberPermissions?.bitfield.toString() & 0x20) == 0x20;
-    const prefix = interaction.options.getString("prefix");
+    const isAdmin: boolean =
+      interaction.memberPermissions?.has("ADMINISTRATOR")!;
+    const prefix: string = interaction.options.getString("prefix")!;
     if (
       MessageMentions.USERS_PATTERN.test(prefix!) ||
       MessageMentions.ROLES_PATTERN.test(prefix!) ||
@@ -18,7 +18,7 @@ module.exports = {
     ) {
       return interaction.reply("Mentions are not allowed to be prefixes");
     }
-    if (isAdmin()) {
+    if (isAdmin) {
       if (prefix === "b!") {
         await prefixSchema.deleteOne({ _id: interaction.guild?.id });
         clearCache();

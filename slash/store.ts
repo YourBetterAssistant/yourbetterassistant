@@ -73,11 +73,16 @@ module.exports = {
       (interaction.options.getSubcommand() === "add" &&
         interaction.user.id === "660665680827514929")
     ) {
-      const itemInfo = [];
+      const itemInfo: { name: string; price: string; description: string }[] =
+        [];
       const name = interaction.options.getString("item");
       const price = interaction.options.getNumber("price");
       const description = interaction.options.getString("description");
-      itemInfo.push({ name, price: price?.toString(), description });
+      itemInfo.push({
+        name: name!,
+        price: price?.toString()!,
+        description: description!,
+      });
       const items = await store.findOne({ id: "1" });
       if (!items) {
         await store.findOneAndUpdate(
