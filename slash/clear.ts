@@ -12,9 +12,7 @@ module.exports = {
     },
   ],
   run: async (client: Client, interaction: CommandInteraction) => {
-    if (
-      !interaction.member?.permissions.toString().includes("MANAGE_MESSAGES")
-    ) {
+    if (!interaction.memberPermissions?.has("MANAGE_MESSAGES")) {
       return interaction.reply({
         content: "Misisng Perms: `MANAGE_MESSAGES`",
         ephemeral: true,

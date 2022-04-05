@@ -4,5 +4,6 @@ declare namespace NodeJS {
     URL: string;
     TOPGGTOKEN: string;
     APISECRET: string;
+    BINGAPIKEY: string;
   }
 }
