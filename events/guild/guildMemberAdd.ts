@@ -7,10 +7,10 @@ import countSchema from "../../Schemas/countSchema";
 import joinRoles from "../../Schemas/onJoin";
 import mongo from "../../botconfig/mongo";
 import Discord from "discord.js";
-
-module.exports= async (client: Client, member: GuildMember) => {
+import Logger from "../../lib/logger";
+module.exports = async (client: Client, member: GuildMember) => {
+  const logger = new Logger("Events - GuildMemberAdd");
   const onJoin = async (member: GuildMember) => {
-    console.log("Join");
     const guild = client.guilds.cache.get(member.guild.id);
     await mongo().then(async () => {
       try {
@@ -27,7 +27,6 @@ module.exports= async (client: Client, member: GuildMember) => {
           memberCountChannel?.setName(`${memberCount} members!`);
         }, 1000);
         //Member log
-        console.log("pls");
         let logInfo = await logSchema.findOne({ _id: member.guild.id });
         let logChannelID = logInfo?.channelID;
         const logChannel = member.guild.channels.cache.get(logChannelID!);
@@ -55,7 +54,7 @@ module.exports= async (client: Client, member: GuildMember) => {
           member.roles.add(role.roleId, "Joined Server");
         }
       } catch (err: any) {
-        console.log(`Error \n\n\n\n\n ${err.stack}`);
+        logger.error(`${err.stack}`);
       }
     });
   };

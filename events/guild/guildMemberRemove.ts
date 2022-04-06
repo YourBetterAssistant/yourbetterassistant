@@ -2,11 +2,12 @@
 
 import { Client, GuildMember, TextChannel } from "discord.js";
 import countSchema from "../../Schemas/countSchema";
-
+import Logger from "../../lib/logger";
 import logSchema from "../../Schemas/logSchema";
 import mongo from "../../botconfig/mongo";
 import Discord from "discord.js";
 module.exports = async (client: Client, member: GuildMember) => {
+  const logger = new Logger("Events - GuildMemberRemove");
   await mongo().then(async () => {
     try {
       const guild = client.guilds.cache.get(member.guild.id);
@@ -34,7 +35,7 @@ module.exports = async (client: Client, member: GuildMember) => {
         }
       }, 1000);
     } catch (err: any) {
-      console.log(err.stack);
+      logger.error(err.stack);
     }
   });
 };

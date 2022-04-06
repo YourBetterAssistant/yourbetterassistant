@@ -3,6 +3,7 @@
 import { Client, Message, MessageEmbed } from "discord.js";
 import { MessageMentions } from "discord.js";
 import ee from "../../botconfig/embed.json";
+import Logger from "../../lib/logger";
 module.exports = {
   name: "say",
   category: "Fun",
@@ -10,6 +11,7 @@ module.exports = {
   usage: "say <TEXT>",
   description: "Resends your Text",
   run: async (client: Client, message: Message, args: string[]) => {
+    const logger = new Logger("Commands - Say");
     const text = args[0];
     try {
       if (!args[0])
@@ -30,7 +32,7 @@ module.exports = {
 
       message.channel.send(text);
     } catch (e: any) {
-      console.log(String(e.stack).bgRed);
+      logger.error(String(e.stack));
       return message.channel.send({
         embeds: [
           new MessageEmbed()

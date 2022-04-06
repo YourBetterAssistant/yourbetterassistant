@@ -19,7 +19,6 @@ module.exports = async (client: Client, oldState: any, newState: any) => {
       newState.channelId &&
       !newState.serverDeaf)
   ) {
-    console.log("Deaf");
     await newState.setDeaf(true);
     await newState.setMute(false);
   }

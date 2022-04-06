@@ -3,6 +3,7 @@ import Levels from "discord-xp";
 import count from "../../Utils/count";
 import level from "../../Utils/level";
 import check from "../../Utils/checkChatChannel";
+import Logger from "../../lib/logger";
 import { prefixLoad, clearCache as newCache } from "../../Utils/prefix-load";
 let process = require("process");
 import config from "../../botconfig/config.json"; //loading config file with token and prefix, and settings
@@ -21,6 +22,7 @@ import levellingEnabled from "../../Schemas/levellingEnabled";
 //here the event starts
 let prefix;
 module.exports = async (client: Client, message: Message) => {
+  const logger = new Logger("Events - MessageCreate");
   const automod = new autoMod(message);
   const guildPrefixes: { [key: string]: string } = {};
   try {
@@ -54,7 +56,6 @@ module.exports = async (client: Client, message: Message) => {
     await count(message);
     await check(message);
     await checkAutoMod(message).then(async (found) => {
-      console.log(found);
       if (found?.strictmode === "true") {
         await automod.checkProfanity();
         await automod.allCaps();
@@ -166,7 +167,7 @@ module.exports = async (client: Client, message: Message) => {
             setTimeout(() => {
               msg
                 .delete()
-                .catch(() => console.log("Couldn't Delete --> Ignore".gray));
+                .catch(() => logger.error("Couldn't Delete --> Ignore"));
             }, 1000)
           );
         }
@@ -187,7 +188,7 @@ module.exports = async (client: Client, message: Message) => {
         //run the command with the parameters:  client, message, args, user, text, prefix,
         command.run(client, message, args);
       } catch (e: any) {
-        console.log(String(e.stack).red);
+        logger.error(e.stack);
         let em = new Discord.MessageEmbed()
           .setColor("RED")
           .setFooter(ee.footertext, ee.footericon)

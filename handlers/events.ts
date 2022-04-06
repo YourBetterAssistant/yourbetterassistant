@@ -1,8 +1,9 @@
 import { readdirSync } from "fs";
 import { Client } from "discord.js";
 import Table from "cli-table";
+import color from "chalk";
 const table = new Table();
-table.push(["Event".cyan, "Loaded".red]);
+table.push([color.redBright("Event"), color.redBright("Loaded")]);
 module.exports = function (client: Client) {
   function loadDir(dir: string) {
     const files = readdirSync(`dist/events/${dir}`).filter((file) =>
@@ -13,9 +14,12 @@ module.exports = function (client: Client) {
       const eventName = file.split(".")[0];
       try {
         client.on(eventName, (...args: any[]) => event(client, ...args));
-        table.push([eventName.green, "Yes".green]);
+        table.push([color.green(eventName), color.green("Yes")]);
       } catch (err: any) {
-        table.push([eventName.red, `${err.stack}`.red]);
+        table.push([
+          color.redBright(eventName),
+          color.redBright(`${err.stack}`),
+        ]);
       }
     }
   }

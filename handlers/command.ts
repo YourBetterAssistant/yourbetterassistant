@@ -1,22 +1,26 @@
 "use strict";
 
 import { Client, Message } from "discord.js";
-
+import color from "chalk";
 import { readdirSync } from "fs";
 import Table from "cli-table";
-import path from "path";
+import logger from "../lib/logger";
 import { command, interaction } from "../typings/global";
 const commandtable = new Table();
 const slashtable = new Table();
 module.exports = async function (client: Client) {
-  console.log("Starting Command Handler... \n".cyan.bold);
+  const Logger = new logger("Handler - Command");
+  Logger.info(color.bold(color.green("Starting Command Handler... \n")));
   commandtable.push([
-    "Command".green.bold,
-    "Category".green.bold,
-    "Description".green.bold,
+    color.bold(color.green("Command")),
+    color.bold(color.green("Category")),
+    color.bold(color.green("Description")),
   ]);
-  slashtable.push(["Slash-Command".red.bold, "Description".red]);
-  console.log("Text-Commands".cyan);
+  slashtable.push([
+    color.bold(color.red("Slash-Command")),
+    color.bold(color.red("Description")),
+  ]);
+  Logger.log(color.cyan("Text-Commands"));
   readdirSync("dist/commands/").forEach((dir: string) => {
     const commands = readdirSync(`./dist/commands/${dir}/`).filter((file) =>
       file.endsWith(".js")
@@ -25,9 +29,9 @@ module.exports = async function (client: Client) {
       const command: command = require(`../commands/${dir}/${file}`);
       const commandName = command.name;
       commandtable.push([
-        commandName.toString().blue,
-        dir.bgCyan.black,
-        command.description.toString().red,
+        color.blue(commandName.toString()),
+        color.bgCyan(dir),
+        color.red(command.description.toString()),
       ]);
       client.commands.set(commandName, command);
       continue;
@@ -35,11 +39,14 @@ module.exports = async function (client: Client) {
   });
   console.log(commandtable.toString() + "\n");
 
-  console.log("Slash-Commands".blue);
+  Logger.log(color.blue("Slash-Commands"));
   const commands = readdirSync("dist/slash");
   for (const file of commands) {
     const command: interaction = require(`../slash/${file}`);
-    slashtable.push([command.name.blue, command.description.yellow]);
+    slashtable.push([
+      color.blue(command.name),
+      color.yellow(command.description),
+    ]);
     client.interactions.set(command.name, command);
   }
   console.log(slashtable.toString());

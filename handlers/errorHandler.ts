@@ -1,10 +1,12 @@
 "use strict";
 
 import Discord, { Message } from "discord.js";
-function errHandler(e: Error, message?: Message, command?: { name: string }) {
+import Logger from "../lib/logger";
+function errHandler(e: any, message?: Message, command?: { name: string }) {
+  const logger = new Logger("Handler - ErrorHandler");
   let embed = new Discord.MessageEmbed();
   if (!message) return;
-  if (!message.guild) return console.log(e);
+  if (!message.guild) return logger.error(e);
   embed
     .addField("Guild:", message.guild.id.toString())
     .addField("GuildName", message.guild.name)

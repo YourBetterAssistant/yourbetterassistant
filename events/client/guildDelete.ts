@@ -10,7 +10,6 @@ import welcome from "../../Schemas/welcomeSchema";
 import mongo from "../../botconfig/mongo";
 import { Client, Guild } from "discord.js";
 module.exports = async (client: Client, guild: Guild) => {
-  console.log(guild.id);
   await mongo().then(async () => {
     try {
       await chatbot.findOneAndRemove({ guildID: guild.id });

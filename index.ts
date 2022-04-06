@@ -2,10 +2,9 @@
 import Discord from "discord.js"; //this is the official discord.js wrapper for the Discord Api, which we use!
 require("dotenv").config();
 import { Node } from "lavaclient";
-import mongo from "./botconfig/mongo";
+import Logger from "./lib/logger";
 require("@weky/inlinereply");
 let token = process.env.TOKEN;
-require("colors"); //this Package is used, to change the colors of our Console! (optional and doesnt effect performance)
 import fs from "fs"; //this package is for reading files and getting their inputs
 //Creating the Discord.js Client for This Bot with some default settings ;) and with partials, so you can fetch OLD messages
 const client = new Discord.Client({
@@ -41,9 +40,10 @@ const lavalink = new Node({
 });
 lavalink.connect(clientId);
 lavalink.once("connect", () => {
-  console.log("Connected to lavalink \n\n\n");
+  logger.log("Lavalink Connected!");
 });
 //Client variables to use everywhere
+const logger = new Logger("main");
 client.lavalink = lavalink;
 client.queue = new Map();
 client.commands = new Discord.Collection(); //an collection (like a digital map(database)) for all your commands

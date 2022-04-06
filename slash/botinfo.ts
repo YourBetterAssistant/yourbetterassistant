@@ -7,7 +7,6 @@ module.exports = {
   name: "botinfo",
   description: "Shows Bot Info",
   run: async (client: Client, interaction: CommandInteraction) => {
-    console.log("works");
     const version = [];
     version.push(packageJson.version);
     let embed = new Discord.MessageEmbed()
