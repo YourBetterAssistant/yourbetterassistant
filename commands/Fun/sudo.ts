@@ -14,7 +14,6 @@ module.exports = {
     if (!args[0]) return message.reply("Who is the user?");
     if (!args[1]) return message.reply("What is the message?");
     const member = message.mentions.members?.first();
-    console.log(message.content.split(""));
     if (
       message.content.split(" ")[0] ===
       (`<@!${client.user?.id}>` || `<@${client.user?.id}>`)

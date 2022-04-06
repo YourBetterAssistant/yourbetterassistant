@@ -23,7 +23,6 @@ module.exports = {
         );
       message.channel.send({ embeds: [embed] });
     } catch (e: any) {
-      console.log(String(e.stack).bgRed);
       let embed = new MessageEmbed()
         .setColor("RED")
         .setFooter(ee.footertext, ee.footericon)

@@ -41,13 +41,10 @@ module.exports = {
       };
       //Add our key and value pair into the global queue. We then use this to get our server queue.
       client.queue.set(message.guild.id, queue_constructor);
-      server_queue;
-      console.log("hello");
       queue_constructor.songs.push(`${results.tracks[0].track}`);
     } else {
       client.queue.get(message.guild.id).songs.push(results.tracks[0].track);
     }
-    console.log(client.queue);
     if (!server_queue) {
       server_queue = client.queue.get(message.guild.id);
     }

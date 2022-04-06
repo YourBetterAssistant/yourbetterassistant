@@ -23,7 +23,7 @@ module.exports = {
     let uv = message.guild?.members.cache.get(user.id);
     uv?.roles.remove(rolguild!).catch((err) => {
       message.channel.send("An error happened");
-      return console.log(err);
+      return;
     });
     message.channel.send("Roles changed");
   },

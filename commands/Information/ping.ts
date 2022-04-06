@@ -33,7 +33,6 @@ module.exports = {
         msg.edit({ embeds: [em] });
       });
     } catch (e: any) {
-      console.log(String(e.stack).bgRed);
       let embed = new MessageEmbed()
         .setColor("RED")
         .setFooter(ee.footertext, ee.footericon)

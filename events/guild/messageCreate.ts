@@ -21,8 +21,8 @@ import autoMod from "../../Constructors/autoModUser";
 import levellingEnabled from "../../Schemas/levellingEnabled";
 //here the event starts
 let prefix;
+const logger = new Logger("Events - MessageCreate");
 module.exports = async (client: Client, message: Message) => {
-  const logger = new Logger("Events - MessageCreate");
   const automod = new autoMod(message);
   const guildPrefixes: { [key: string]: string } = {};
   try {

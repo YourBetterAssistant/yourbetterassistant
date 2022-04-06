@@ -8,8 +8,8 @@ import joinRoles from "../../Schemas/onJoin";
 import mongo from "../../botconfig/mongo";
 import Discord from "discord.js";
 import Logger from "../../lib/logger";
+const logger = new Logger("Events - GuildMemberAdd");
 module.exports = async (client: Client, member: GuildMember) => {
-  const logger = new Logger("Events - GuildMemberAdd");
   const onJoin = async (member: GuildMember) => {
     const guild = client.guilds.cache.get(member.guild.id);
     await mongo().then(async () => {

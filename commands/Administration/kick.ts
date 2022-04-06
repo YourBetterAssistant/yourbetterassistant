@@ -54,7 +54,6 @@ module.exports = {
             // either due to missing permissions or role hierarchy
             reply("I was unable to kick the member", true, message);
             // Log the error
-            console.error(err);
           });
       } else {
         // The mentioned user isn't in this guild

@@ -193,7 +193,6 @@ class economy {
     }
 
     let done = similarUsers.sort(compare);
-    console.log(done);
     return done;
   }
 }

@@ -15,7 +15,6 @@ module.exports = {
     let ownerId = "827388013062389761";
     if (message.author.id !== ownerId) {
       message.channel.send("You cannot pull");
-      console.log("bruh");
       return;
     }
     await reply("Restarting", true, message);

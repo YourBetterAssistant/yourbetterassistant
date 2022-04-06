@@ -17,7 +17,6 @@ module.exports = {
 
     const user = await Levels.fetch(target?.id!, message.guild?.id!, true); // Selects the target from the database.
     if (!user) return message.channel.send("You don't have a level");
-    console.log(target);
     const rank = new canvacord.Rank()
       .setStatus(target?.presence ? target.presence.status : "online") // Build the Rank Card
       .setAvatar(target?.user.displayAvatarURL({ format: "png", size: 512 }))

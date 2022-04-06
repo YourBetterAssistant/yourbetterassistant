@@ -1,6 +1,8 @@
 import { Client, Message, MessageEmbed } from "discord.js";
 import config from "../../botconfig/config.json";
 import ee from "../../botconfig/embed.json";
+import Logger from "../../lib/logger";
+const logger = new Logger("Commands - Help");
 module.exports = {
   name: "help",
   description: "help command for text commands",
@@ -59,7 +61,6 @@ module.exports = {
         embed.setColor("BLUE");
         return message.reply({ embeds: [embed] });
       } else {
-        console.log("test");
         const embed = new MessageEmbed()
           .setColor("BLUE")
           .setThumbnail(client.user?.displayAvatarURL()!)
@@ -106,12 +107,12 @@ module.exports = {
             );
           }
         } catch (e: any) {
-          console.log(String(e.stack).red);
+          logger.error(String(e.stack));
         }
         message.reply({ embeds: [embed] });
       }
     } catch (e: any) {
-      console.log(String(e.stack).bgRed);
+      logger.error(String(e.stack));
       let embed = new MessageEmbed()
         .setColor("RED")
         .setFooter(ee.footertext, ee.footericon)

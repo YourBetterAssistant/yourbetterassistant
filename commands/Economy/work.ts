@@ -38,7 +38,6 @@ module.exports = {
     await axios
       .get("https://random-word-api.herokuapp.com/word?number=1")
       .then((val) => possibleJobs.push(val.data.toString()));
-    console.log(possibleJobs[0]);
     let embed = new Discord.MessageEmbed()
       .setTitle(`JOB:${job}`)
       .setDescription("Type the word in")
@@ -65,7 +64,6 @@ module.exports = {
       .then(async (m) => {
         const msg = m.first();
         if (msg?.content === possibleJobs[0]) {
-          console.log("k");
           msg?.channel.send(`CORRECT YOU HAVE EARNT ${sal}YBCs`);
           economy.addCoins(msg?.author.id!, parseInt(sal));
           return;
@@ -79,7 +77,6 @@ module.exports = {
         if (err) {
           message.channel.send(`Sed time ran out here is ${randomCoins}YBCs`);
           economy.addCoins(message.author.id, randomCoins);
-          return console.log(err);
         }
       });
   },

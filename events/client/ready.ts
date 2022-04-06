@@ -5,8 +5,8 @@ import logger from "../../lib/logger";
 import mongo from "../../botconfig/mongo";
 import { Client, MessageAttachment, TextChannel } from "discord.js";
 import axios from "axios";
+const Logger = new logger("Events - Ready");
 module.exports = async (client: Client) => {
-  const Logger = new logger("Events - Ready");
   try {
     Logger.log(`Logged into ${client.user?.tag}`, true);
   } catch {

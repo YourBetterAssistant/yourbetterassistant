@@ -45,7 +45,6 @@ module.exports = {
     server_queue.player.queue.tracks.forEach((track: any) =>
       embed.addField(`Song ${i++}`, `${track.title}`, true)
     );
-    console.log(!server_queue.player.queue.current);
     server_queue.player.queue.tracks.length === 0 &&
     !server_queue.player.queue.current
       ? message.reply("Nothing is in the queue")

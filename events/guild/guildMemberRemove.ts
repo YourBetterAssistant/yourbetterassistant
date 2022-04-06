@@ -6,8 +6,8 @@ import Logger from "../../lib/logger";
 import logSchema from "../../Schemas/logSchema";
 import mongo from "../../botconfig/mongo";
 import Discord from "discord.js";
+const logger = new Logger("Events - GuildMemberRemove");
 module.exports = async (client: Client, member: GuildMember) => {
-  const logger = new Logger("Events - GuildMemberRemove");
   await mongo().then(async () => {
     try {
       const guild = client.guilds.cache.get(member.guild.id);

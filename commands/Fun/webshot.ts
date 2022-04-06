@@ -52,10 +52,5 @@ module.exports = {
       .setImage("attachment://picture.png")
       .setColor("GREEN");
     message.channel.send({ embeds: [embed], files: [p] });
-    setTimeout(function () {
-      fs.unlink("./images/example.png", (err) => {
-        if (err) return console.log(err);
-      });
-    }, 1000);
   },
 };

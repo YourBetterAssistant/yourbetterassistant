@@ -19,7 +19,6 @@ module.exports = {
   run: async (client: Client, message: Message, args: string[]) => {
     await value;
     if (message.author.bot) return;
-    console.log(value);
     if (value === heads) {
       const embed = new Discord.MessageEmbed()
         .setTitle("You Got Heads!")
