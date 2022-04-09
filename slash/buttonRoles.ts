@@ -1,8 +1,7 @@
 import { Client, CommandInteraction, TextChannel } from "discord.js";
 
-const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
-const rrSchema = require("../Schemas/rrSchema");
-
+import { MessageEmbed, MessageActionRow, MessageButton } from "discord.js";
+import rrSchema from "../Schemas/rrSchema";
 module.exports = {
   name: "buttonroles",
   description: "Button Roles",
@@ -39,8 +38,8 @@ module.exports = {
     role2
       ? row.addComponents(
           new MessageButton()
-            .setLabel(role1?.name)
-            .setCustomId(role1?.name)
+            .setLabel(role1?.name!)
+            .setCustomId(role1?.name!)
             .setStyle("PRIMARY"),
           new MessageButton()
             .setLabel(role2.name)
@@ -49,29 +48,29 @@ module.exports = {
         )
       : row.addComponents(
           new MessageButton()
-            .setLabel(role1?.name)
-            .setCustomId(role1?.name)
+            .setLabel(role1?.name!)
+            .setCustomId(role1?.name!)
             .setStyle("PRIMARY")
         );
     const message = await channel?.send({ embeds: [embed], components: [row] });
     role2
       ? await rrSchema.findOneAndUpdate(
-          { guildId: interaction.guild?.id },
+          { guildId: interaction.guild?.id! },
           {
-            guildId: interaction.guild?.id,
-            role1: { name: role1?.name, id: role1?.id },
-            role2: { name: role2.name, id: role2.id },
-            messageId: message.id,
+            guildId: interaction.guild?.id as string,
+            messageId: message.id as string,
+            role1: { name: role1?.name!, id: role1?.id! },
+            role2: { name: role2?.name!, id: role2?.id! },
           },
           { upsert: true }
         )
       : await rrSchema.findOneAndUpdate(
           { guildId: interaction.guild?.id },
           {
-            guildId: interaction.guild?.id,
-            role1: { name: role1?.name, id: role1?.id },
-            role2: null,
-            messageId: message.id,
+            guildId: interaction.guild?.id as string,
+            role1: { name: role1?.name!, id: role1?.id! },
+            role2: undefined,
+            messageId: message.id!,
           },
           { upsert: true }
         );
