@@ -19,7 +19,7 @@ module.exports = {
     { type: 3, name: "message", description: "Message" },
   ],
   run: async (client: Client, interaction: CommandInteraction) => {
-    if (!interaction.member?.permissions.toString().includes("MANAGE_ROLES")) {
+    if (!interaction.memberPermissions?.has("MANAGE_ROLES")) {
       return interaction.reply({
         content: "Misisng Perms: `MANAGE_ROLES`",
         ephemeral: true,
