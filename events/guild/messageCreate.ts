@@ -4,6 +4,7 @@ import count from "../../Utils/count";
 import level from "../../Utils/level";
 import check from "../../Utils/checkChatChannel";
 import Logger from "../../lib/logger";
+import Trainer from "../../lib/trainer";
 import { prefixLoad, clearCache as newCache } from "../../Utils/prefix-load";
 let process = require("process");
 import config from "../../botconfig/config.json"; //loading config file with token and prefix, and settings
@@ -52,6 +53,7 @@ module.exports = async (client: Client, message: Message) => {
         "My DMS are for support messages only, the message sent will be forwarded to the owner and to our support server for an answer please join our server at https://discord.gg/h2YfQbKFTR"
       );
     }
+    Trainer(message.content);
     await prefixLoad(client, guildPrefixes, globalPrefix);
     await count(message);
     await check(message);

@@ -7,7 +7,6 @@ export async function prefixLoad(
   globalPrefix: string
 ) {
   client.cache = cache;
-  console.log(await commandPrefixSchema.find());
   try {
     /**
      * @param client
@@ -16,14 +15,10 @@ export async function prefixLoad(
 
     for (const guild of client.guilds.cache) {
       let guildID = guild[1].id;
-      console.log(guildID);
-      console.log(cache.length);
       if (cache.length !== 0 && cache.length === client.guilds.cache.size) {
-        console.log("cache");
         let c = cache.find((c) => c.id == guildID);
         guildPrefixes[guildID] = c?.prefix;
       } else {
-        console.log("new info");
         const result = await commandPrefixSchema.findOne({ _id: guildID });
         if (result) {
           guildPrefixes[guildID] = result.prefix;
@@ -33,10 +28,8 @@ export async function prefixLoad(
           cache.push({ id: guildID, prefix: globalPrefix });
         }
       }
-      console.log(guildPrefixes);
     }
   } catch (err: any) {
-    console.log(`An error occured \n\n\n\n\n\n\n ${err.stack}`);
     return;
   }
 }

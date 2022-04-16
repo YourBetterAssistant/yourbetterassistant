@@ -13,15 +13,17 @@ module.exports = {
         {
           name: "What Data Do We Collect?",
           value:
-            "The Data The Bot Collects is only your username and userid we don't collect any other data that includes you ",
+            "The Data The Bot Collects is only your username and userid we don't collect any other data that includes you. Behind the scenes we also store all messages you send anonymously meaning that your username will not be shown with the message sent. ",
         },
         {
           name: "Why Do You Need This Data?",
-          value: "We require this data to defer your data from others",
+          value:
+            "We require this data to defer your data from others and to also train out chatbot with conversations",
         },
         {
           name: "How Do You Use This Data?",
-          value: "We use it for certain commands like levels or richlist",
+          value:
+            "We use it for certain commands like levels or richlist and also for training the chatbot which can be toggled on or off in the website, https://yourbetterassistant.me",
         },
         {
           name: "Other then discord or the users of this bot who else do you share the data with?",
@@ -38,7 +40,7 @@ module.exports = {
             "To have data removed dm me I'll delete it no questions asked ",
         }
       )
-      .setFooter("Subject To Change VALID AS OF: 26/10/2021")
+      .setFooter("Subject To Change VALID AS OF: 17/4/2022")
       .setColor("GREYPLE");
     message.channel.send({ embeds: [embed] });
   },
