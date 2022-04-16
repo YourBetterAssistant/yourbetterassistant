@@ -15,7 +15,7 @@ setInterval(async () => {
     }
   );
   logger.info(`Trained ${toBeTrained.length} messages`);
-}, 1000 * 60);
+}, 1000 * 60 * 60);
 export default function Trainer(message: string) {
   toBeTrained.push(message);
 }
