@@ -18,7 +18,7 @@
   "author": "NotTimIsReal",
   "license": "MIT",
   "dependencies": {
-    "@discordjs/opus": "^0.7.0",
+    "@discordjs/opus": "^0.8.0",
     "@discordjs/voice": "^0.8.0",
     "@felipebutcher/node-os-info": "^0.0.6",
     "@lavaclient/queue": "^2.0.6",
