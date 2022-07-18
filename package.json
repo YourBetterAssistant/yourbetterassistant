@@ -44,7 +44,7 @@
     "djs-meme": "^1.2.8",
     "dotenv": "^16.0.0",
     "https": "^1.0.0",
-    "lavaclient": "^4.0.8-rc.2",
+    "lavaclient": "^4.0.10",
     "libsodium-wrappers": "^0.7.10",
     "math": "^0.0.3",
     "minecraft-server-util": "^5.2.9",
