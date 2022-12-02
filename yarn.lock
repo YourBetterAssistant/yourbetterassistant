@@ -2,7 +2,7 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 5
+  version: 6
   cacheKey: 8
 
 "@canvacord/assets@npm:^2.0.5":
@@ -937,7 +937,7 @@ __metadata:
     discord-xp: ^1.1.16
     discord.js: ^13.6.0
     discord.js-akinator: ^3.4.2
-    discord.js-ghost-ping: ^2.1.2
+    discord.js-ghost-ping: ^3.0.0
     djs-games: ^2.1.10
     djs-meme: ^1.2.8
     dotenv: ^16.0.0
@@ -2151,10 +2151,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js-ghost-ping@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "discord.js-ghost-ping@npm:2.1.2"
-  checksum: 1ec7d9c4bce23b9c72174620f2666145a509155111b792e2f8c1d47ca8f89dd32a6453d9703e4c29a273ee37f575de887c81e6dff028935c45b4847c1dca2416
+"discord.js-ghost-ping@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "discord.js-ghost-ping@npm:3.0.0"
+  checksum: 05c78df1307792afb54b700b550d7f4caaac741ddd0a35bbbe415178f2a6f713f3ca4669212ea0ccd7f474603278d15c3a981f377a3a33a71cd7dcbd0af27624
   languageName: node
   linkType: hard
 
@@ -5896,11 +5896,11 @@ __metadata:
 
 "typescript@patch:typescript@4.4.4#~builtin<compat/typescript>":
   version: 4.4.4
-  resolution: "typescript@patch:typescript@npm%3A4.4.4#~builtin<compat/typescript>::version=4.4.4&hash=493e53"
+  resolution: "typescript@patch:typescript@npm%3A4.4.4#~builtin<compat/typescript>::version=4.4.4&hash=a1c5e5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: bd629ad0da4a15d79aaad56baf3ee7d96f6a181760d430ae77f8c5325df7bffd9edee57544a3970e3651e8b796fe03a5838a7eb39c6d46cc3866c0b23d36a0dd
+  checksum: 3d1b04449662193544b81d055479d03b4c5dca95f1a82f8922596f089d894c9fefbe16639d1d9dfe26a7054419645530cef44001bc17aed1fe1eb3c237e9b3c7
   languageName: node
   linkType: hard
 
